@@ -2,8 +2,9 @@
 desktop.ini
 /artifacts
 /[Dd]ocs/
-.wlt
-.dwlt
+*.wlt
+*.dwlt
+*.vsconfig
 
 # Unity files
 /[Ll]ibrary/
