@@ -13,8 +13,6 @@ public class PickUpSystem : MonoBehaviour
     Transform dropPoint;
 
 
-
-
     void Start()
     {
         stats = GetComponent<PlayerStats>();
