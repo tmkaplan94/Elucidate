@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class handles the interactions of players and objects in game.
+ * 
+ * 
+ * Author: Grant Reed
+ * Date: 1/12/2022
+ */
 public class PickUpSystem : MonoBehaviour
 {
     PlayerStats stats;

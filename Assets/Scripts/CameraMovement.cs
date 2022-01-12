@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * 
+ * 
+ * 
+ * Author: Grant Reed
+ * Date: 1/12/2022
+ */
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
     Transform playerTransform;
     Transform targetLocation;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        //Updates the camera rig position every frame based on player position.
+        //currently there's no damping or any fun stuff happening.
         transform.position = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
     }
 }
