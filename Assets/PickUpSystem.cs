@@ -34,6 +34,7 @@ public class PickUpSystem : MonoBehaviour
     private void PickupWeapon(GameObject newWeapon)
     {
         stats.EquipWeapon(newWeapon);
+        newWeapon.transform.parent = hand;
     }
 
 }
