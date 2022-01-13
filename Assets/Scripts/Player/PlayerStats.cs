@@ -13,7 +13,7 @@ using UnityEngine;
  * Contributors:
  * 
  */
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IDamageable<float>
 {
     [SerializeField]
     private float health;
@@ -53,7 +53,7 @@ public class PlayerStats : MonoBehaviour
         currentWeapon = wep;
     }
 
-    void Kill()
+    public void Kill()
     {
 
     }
