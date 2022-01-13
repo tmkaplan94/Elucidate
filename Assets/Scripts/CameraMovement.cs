@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * 
- * 
+ * version: 1.0
+ * Date: 1/12/2022
+ * Description: Controls the movement of the main camera in a scene.
+ * Notes:
+ * Currently a player transform must be added in the inspector.
+ * This will eventually be changed when multiplayer is added.
  * 
  * Author: Grant Reed
- * Date: 1/12/2022
+ * Contributers:
+ * 
  */
 public class CameraMovement : MonoBehaviour
 {

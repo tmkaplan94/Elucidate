@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * This class handles the interactions of players and objects in game.
+ * version: 1.0
+ * Date: 1/12/2022
+ * Description: This class handles the interactions of players and interactible objects in game.
+ * Summary: Weapons and items can be picked up from the game world
+ *          Doing so drops whatever the player is currently holding to the ground.
+ * Notes: Items and Weapons are the only interactable objects currently
  * 
  * 
  * Author: Grant Reed
- * Date: 1/12/2022
+ * Contributers:
+ * 
  */
 public class PickUpSystem : MonoBehaviour
 {

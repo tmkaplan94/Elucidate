@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /**
- * 
- * This class holds all of the information about a player game object, such as health, move speed, current
- * weapons and items, etc.
- * 
- * Author: Grant Reed
+ * version 1.0
  * Date: 1/12/2022
+ * Description: This class holds all of the information about a player game object, such as 
+ *              health, move speed, current weapons and items, etc.
+ * 
+ * Notes: This class has getters and setters for each of its adjustable fields in game.
+ *          This is how player states are actually changed in game.
+ * Author: Grant Reed
+ * Contributors:
+ * 
  */
 public class PlayerStats : MonoBehaviour
 {
