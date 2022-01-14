@@ -38,7 +38,6 @@ public class PickUpSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        print(other.tag);
         if (Input.GetButton("Interact"))
         {
             if (other.transform.CompareTag(weaponTag))
@@ -65,6 +64,7 @@ public class PickUpSystem : MonoBehaviour
         newWeapon.transform.parent = hand;
         newWeapon.transform.position = hand.position;
         newWeapon.transform.rotation = hand.rotation;
+        newWeapon.GetComponent<WeaponFiring>().enabled = true;
     }
 
     private void PickupItem(GameObject newItem)
@@ -88,6 +88,7 @@ public class PickUpSystem : MonoBehaviour
     }
     private void DropCurrentWeapon()
     {
+        stats.CurrentWeapon.GetComponent<WeaponFiring>().enabled = false;
         stats.CurrentWeapon.transform.parent = null;
         stats.CurrentWeapon.transform.position = dropPoint.transform.position;
         stats.CurrentWeapon.GetComponent<Rigidbody>().isKinematic = false;

@@ -83,6 +83,6 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
 
     public void Kill()
     {
-
+        print("dead");
     }
 }
