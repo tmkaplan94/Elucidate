@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * version: 1.0
+ * version: 0.8
  * Date: 1/12/2022
  * Description: This class handles the interactions of players and interactible objects in game.
  * Summary: Weapons and items can be picked up from the game world
@@ -17,35 +17,85 @@ using UnityEngine;
  */
 public class PickUpSystem : MonoBehaviour
 {
-    PlayerStats stats;
-    string itemTag = "Item";
-    string weaponTag = "Weapon";
+    private PlayerStats stats;
+    private string itemTag = "Item";
+    private string weaponTag = "Weapon";
+    private Transform playerTransform;
+
     [SerializeField]
-    Transform hand;
+    private LayerMask pickUpsLayer;
     [SerializeField]
-    Transform dropPoint;
+    private Transform hand;
+    [SerializeField]
+    private Transform dropPoint;
 
 
     void Start()
     {
         stats = GetComponent<PlayerStats>();
+        playerTransform = GetComponent<Transform>();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag(weaponTag))
+        print(other.tag);
+        if (Input.GetButton("Interact"))
         {
-            if (Input.GetButtonDown("Interact"))
+            if (other.transform.CompareTag(weaponTag))
             {
-                PickupWeapon(other.gameObject);
+                DropCurrentWeapon();
+                PickupWeapon(other.transform.parent.gameObject);
+            }
+            else if (other.transform.CompareTag(itemTag))
+            {
+                PickupItem(other.gameObject);
             }
         }
-    }  
+    }
     
     private void PickupWeapon(GameObject newWeapon)
     {
-        stats.EquipWeapon(newWeapon);
+        stats.CurrentWeapon = newWeapon;
+        BoxCollider[] cols = newWeapon.GetComponentsInChildren<BoxCollider>();
+        foreach (BoxCollider col in cols)
+        {
+            col.enabled = false;
+        }
+        newWeapon.GetComponent<Rigidbody>().isKinematic = true;
         newWeapon.transform.parent = hand;
+        newWeapon.transform.position = hand.position;
+        newWeapon.transform.rotation = hand.rotation;
     }
 
+    private void PickupItem(GameObject newItem)
+    {
+        stats.CurrentItem = newItem;
+        
+        newItem.GetComponent<BoxCollider>().enabled = false;
+        newItem.GetComponent<Rigidbody>().isKinematic = true;
+        newItem.transform.parent = hand;
+        newItem.transform.position = hand.position;
+        newItem.transform.rotation = hand.rotation;
+        
+    }
+
+    private void DropCurrentItem()
+    {
+        stats.CurrentItem.transform.parent = null;
+        stats.CurrentItem.transform.position = dropPoint.position;
+        stats.CurrentItem.GetComponent<Rigidbody>().isKinematic = false;
+        stats.CurrentItem.GetComponent<BoxCollider>().enabled = true;
+    }
+    private void DropCurrentWeapon()
+    {
+        stats.CurrentWeapon.transform.parent = null;
+        stats.CurrentWeapon.transform.position = dropPoint.transform.position;
+        stats.CurrentWeapon.GetComponent<Rigidbody>().isKinematic = false;
+        BoxCollider[] cols = stats.CurrentWeapon.GetComponentsInChildren<BoxCollider>();
+        foreach (BoxCollider col in cols)
+        {
+            col.enabled = true;
+        }
+
+    }
 }

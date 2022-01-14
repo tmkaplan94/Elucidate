@@ -18,15 +18,15 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     [SerializeField]
     private float health;
     //These are serialized just for testing purposes.
+    
+    private GameObject currentItem;
     [SerializeField]
-    GameObject currentWeapon;
-    [SerializeField]
-    GameObject item;
-
+    private GameObject currentWeapon;
     [SerializeField]
     private float moveSpeed;
-    
-    
+    [SerializeField]
+    private float pickupRange;
+
     public float MoveSpeed
     {
         get
@@ -38,6 +38,39 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
             this.moveSpeed = value;
         }
     }
+    public GameObject CurrentWeapon
+    {
+        get
+        {
+            return this.currentWeapon;
+        }
+        set
+        {
+            this.currentWeapon = value;
+        }
+    }
+    public GameObject CurrentItem
+    {
+        get
+        {
+            return this.currentItem;
+        }
+        set
+        {
+            this.currentItem = value;
+        }
+    }
+    public float PickUpRange
+    {
+        get
+        {
+            return this.pickupRange;
+        }
+        set
+        {
+            this.pickupRange = value;
+        }
+    }
 
     public void TakeDamage(float damage)
     {
@@ -46,11 +79,6 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
         {
             Kill();
         }
-    }
-
-    public void EquipWeapon(GameObject wep)
-    {
-        currentWeapon = wep;
     }
 
     public void Kill()
