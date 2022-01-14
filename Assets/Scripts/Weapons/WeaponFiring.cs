@@ -1,7 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * version 1.0
+ * Date: 1/13/2022
+ * Description: This class handles the instantiating of bullets and accelerating them.
+ * 
+ * Notes: I presume this script will likely be overhaulled completely once the damage system
+ *          is decided on and complete.
+ * Author: Grant Reed
+ * Contributors:
+ * 
+ */
 public class WeaponFiring : MonoBehaviour
 {
 

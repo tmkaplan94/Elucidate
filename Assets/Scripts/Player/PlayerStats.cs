@@ -9,6 +9,12 @@ using UnityEngine;
  * 
  * Notes: This class has getters and setters for each of its adjustable fields in game.
  *          This is how player states are actually changed in game.
+ *          There is a lot of communication between this class and all other classes in the game,
+ *          so great care needs to be taken when changing something in it.
+ *        
+ * TODO: A lot of change needs to happen with damage and pickups which will require a lot of
+ *      change with how this class handles those things as well.
+ *        
  * Author: Grant Reed
  * Contributors:
  * 

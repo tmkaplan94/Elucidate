@@ -9,7 +9,8 @@ using UnityEngine;
  * Summary: Weapons and items can be picked up from the game world
  *          Doing so drops whatever the player is currently holding to the ground.
  * Notes: Items and Weapons are the only interactable objects currently
- * 
+ *        
+ * TODO: This class has a lot of repeat code, need to convert it to templates to make things simpler.
  * 
  * Author: Grant Reed
  * Contributers:
