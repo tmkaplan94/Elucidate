@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /**
+ * version: 1.0
+ * Date: 1/12/2022
+ * Description: This class takes input from the player and adjusts the players game object accordingly.
+ * Summary: The player can move on the xz plane and rotates along the y axis toward the mouse 
+ *          position. Currently, a ray is sent from the camera to the xz plane to determine the 
+ *          mouse position in world space.
+ * Notes: The rigidbody movePosition function is used for movement and the 
+ *          Transform lookat function is used for player aim
+ *          Im not sure yet what side effects those functions might have.
  * 
- * This class takes input from the player and adjusts the players game object accordingly.
  * 
  * Author: Grant Reed
- * Date: 1/12/2022
+ * Contributors:
+ * 
  */
 public class PlayerMovement : MonoBehaviour
 {
