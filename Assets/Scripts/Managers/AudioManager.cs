@@ -17,6 +17,8 @@ using UnityEditor.Audio;
 
 public class AudioManager : Singleton<AudioManager>
 {
+    public Sound[] _sounds;
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -12,9 +12,14 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
+[System.Serializable]
 public class Sound : ScriptableObject
 {
-
+    public string _name;
+    public AudioClip _clip;
+    [Range(0, 1)] public float _volume;
+    [Range(0, 1)] public float _pitch;
 }
