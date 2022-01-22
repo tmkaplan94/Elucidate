@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         Plane groundPlane = new Plane(Vector3.up, transform.position);
         float rayLength;
         groundPlane.Raycast(cameraRay, out rayLength);
-        
+
         target = cameraRay.GetPoint(rayLength);
         target.y = transform.position.y;
 

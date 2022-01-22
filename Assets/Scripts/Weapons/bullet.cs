@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 /**
  * version 1.0
@@ -16,9 +17,19 @@ public class bullet : MonoBehaviour
 {
     [SerializeField]
     private float damage;
+
+    private PhotonView view;
+
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+    }
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<IDamageable<float>>().TakeDamage(damage);
-        Destroy(gameObject);
+        if (view.IsMine)
+        {
+            other.GetComponent<IDamageable<float>>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }

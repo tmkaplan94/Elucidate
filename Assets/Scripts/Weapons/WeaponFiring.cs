@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 /**
  * version 1.0
  * Date: 1/13/2022
@@ -22,16 +23,25 @@ public class WeaponFiring : MonoBehaviour
     [SerializeField]
     private float bulletSpeed;
 
+    private PhotonView view;
+
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (view.IsMine)
         {
-            Shoot();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
         }
+    }
+    private void OnEnable()
+    {
+        view = GetComponentInParent<PhotonView>();   
     }
     private void Shoot()
     {
-        GameObject newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
+        GameObject newBullet = PhotonNetwork.Instantiate(bullet.name, firePoint.position, firePoint.rotation);
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * bulletSpeed);
         Destroy(newBullet, 2.0f);
     }
