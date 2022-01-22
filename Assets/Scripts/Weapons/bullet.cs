@@ -15,8 +15,7 @@ using Photon.Pun;
  */
 public class bullet : MonoBehaviour
 {
-    [SerializeField]
-    private float damage;
+    public float damage;
 
     private PhotonView view;
 
