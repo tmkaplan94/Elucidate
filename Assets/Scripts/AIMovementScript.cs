@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIMovementScript : MonoBehaviour
 {
@@ -8,12 +9,23 @@ public class AIMovementScript : MonoBehaviour
     public float RotationSpeed = 100f;
     public bool IsConstantlyWalking = true;
 
+    public float DetectRadius = 10f;
+    public Transform Target;
+
+    public Transform firepoint;
+    public GameObject Bullet;
+    public float BulletSpeed = 1000f;
+    public int ShootingSpeed = 40;
+    private int ShootingCount = 0;
+
+
     private bool isWandering = false;
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
     private bool isWalking = false;
 
     Rigidbody rb;
+    NavMeshAgent agent;
 
 
     private void Start()
@@ -23,8 +35,36 @@ public class AIMovementScript : MonoBehaviour
         {
             isWalking = true;
         }
+        agent = GetComponent<NavMeshAgent>();
+
     }
     private void Update()
+    {
+        float distance = Vector3.Distance(Target.position, transform.position);
+        if (distance <= DetectRadius)
+        {
+            ActionChasing(distance);
+        }
+        else
+        {
+            ActionWandering();
+        }
+    }
+    void ActionChasing(float distance)
+    {
+        agent.SetDestination(Target.position);
+        if (distance <= agent.stoppingDistance)
+        {
+            FaceTarget();
+            if (ShootingCount >= ShootingSpeed)
+            {
+                Shoot();
+                ShootingCount = 0;
+            }
+            ShootingCount += 1;
+        }
+    }
+    void ActionWandering()
     {
         if (isWandering == false)
         {
@@ -81,4 +121,22 @@ public class AIMovementScript : MonoBehaviour
         }
         isWandering = false;
     }
+    void FaceTarget()
+    {
+        Vector3 direction = (Target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+    void Shoot()
+    {
+        GameObject newBullet = Instantiate(Bullet, firepoint.position, firepoint.rotation);
+        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * BulletSpeed);
+        Destroy(newBullet, 2.0f);
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, DetectRadius);
+    }
+    
 }
