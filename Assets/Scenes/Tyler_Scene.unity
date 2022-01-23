@@ -524,7 +524,7 @@ MonoBehaviour:
   sounds:
   - name: Background
     clip: {fileID: 8300000, guid: edc0cfc715fe7cb4d8cb0c17e83710cc, type: 3}
-    group: {fileID: 0}
+    group: {fileID: -7758348665130653962, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 1
     pitch: 1
     spatial: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
     loop: 1
   - name: Shoot
     clip: {fileID: 8300000, guid: ff7708ae4a6a99846b0aa68e0a8d0118, type: 3}
-    group: {fileID: 0}
+    group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 1
     pitch: 1
     spatial: 1
