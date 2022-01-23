@@ -25,5 +25,4 @@ public class Weapon : ScriptableObject
     public float bulletDamage;
 
     public GameObject bullet;
-    
 }

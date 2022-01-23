@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+//using Photon.Pun;
 
 /**
  * version 1.0
@@ -17,18 +17,18 @@ public class bullet : MonoBehaviour
 {
     public float damage;
 
-    private PhotonView view;
+    //private PhotonView view;
 
     private void Start()
     {
-        view = GetComponent<PhotonView>();
+        //view = GetComponent<PhotonView>();
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (view.IsMine)
-        {
+       // if (view.IsMine)
+        //{
             other.GetComponent<IDamageable<float>>().TakeDamage(damage);
             Destroy(gameObject);
-        }
+        //}
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+//using Photon.Pun;
 /**
  * version 1.1
  * Date: 1/13/2022
@@ -22,28 +22,28 @@ public class WeaponFiring : MonoBehaviour
     [SerializeField]
     private Weapon weaponType;
 
-    private PhotonView view;
+   // private PhotonView view;
     private float nextFireTime = 0.0f;
 
     void Update()
     {
-        if (view.IsMine)
-        {
+        /*if (view.IsMine)
+        {*/
             if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
             {
                 Shoot();
                 //converts rounds per minute to fire rate per second.
                 nextFireTime = Time.time + 1.0f/ (weaponType.rpm / 60.0f);
             }
-        }
+       //}
     }
     private void OnEnable()
     {
-        view = GetComponentInParent<PhotonView>();   
+        //view = GetComponentInParent<PhotonView>();   
     }
     private void Shoot()
     {
-        GameObject newBullet = PhotonNetwork.Instantiate(weaponType.bullet.name, firePoint.position, firePoint.rotation);
+        GameObject newBullet = /*PhotonNetwork.*/Instantiate(weaponType.bullet, firePoint.position, firePoint.rotation);
         newBullet.transform.localScale *= weaponType.bulletSizeScale;
         newBullet.GetComponent<bullet>().damage = weaponType.bulletDamage;
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.bulletVelocity);

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+//using Photon.Pun;
 /**
  * version: 1.0
  * Date: 1/12/2022
@@ -28,35 +28,35 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private PlayerStats stats;
 
-    private PhotonView view;
+    //private PhotonView view;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         stats = GetComponent<PlayerStats>();
         moveSpeed = stats.MoveSpeed;
-        view = GetComponent<PhotonView>();
+        //view = GetComponent<PhotonView>();
     }
 
     void Update()
     {
-        if (view.IsMine)
-        {
+        //if (view.IsMine)
+       // {
             //Getting input from player every frame.
             moveX = Input.GetAxisRaw("Horizontal");
             moveZ = Input.GetAxisRaw("Vertical");
             lookDir = GetLookAtTarget();
-        }
+       // }
     }
 
     private void FixedUpdate()
     {
-        if (view.IsMine)
-        {
+       // if (view.IsMine)
+        //{
             //actually moving player here.
             Move();
             Aim();
-        }
+        //}
     }
 
     /*
