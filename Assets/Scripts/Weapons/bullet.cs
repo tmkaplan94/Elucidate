@@ -16,9 +16,30 @@ public class bullet : MonoBehaviour
 {
     [SerializeField]
     private float damage;
+
     private void OnTriggerEnter(Collider other)
     {
         other.GetComponent<IDamageable<float>>().TakeDamage(damage);
         Destroy(gameObject);
     }
+
+    void Update()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            bulletLight();
+        }
+    }
+    
+    private void bulletLight()
+    {
+        GameObject lightGO = new GameObject("Bullet Light");
+        Light light = lightGO.AddComponent<Light>();
+        light.type = LightType.Point;
+        light.range = 10.0f;
+        light.intensity = 1.0f;
+        lightGO.transform.position = gameObject.transform.position;
+        Destroy(lightGO);
+    }
+
 }
