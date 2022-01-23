@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using Photon.Pun;
 /**
- * version 1.0
+ * version 1.1
  * Date: 1/13/2022
  * Description: This class handles the instantiating of bullets and accelerating them.
  * 
- * Notes: I presume this script will likely be overhaulled completely once the damage system
- *          is decided on and complete.
+ * Notes: 1.0 Added basic firing functionality.
+ * 1.1 added basic network behavior to be improved on as well as scriptable object compatibility.
+ *        
  * Author: Grant Reed
- * Contributors: Loc Trinh
+ * Contributors:
  * 
- * EDIT: Now is able to emit muzzleflash when a weapon shoots.
  */
 public class WeaponFiring : MonoBehaviour
 {
@@ -19,37 +20,33 @@ public class WeaponFiring : MonoBehaviour
     [SerializeField]
     private Transform firePoint;
     [SerializeField]
-    private GameObject bullet;
-    [SerializeField]
-    private float bulletSpeed;
-    [SerializeField]
-    public float lightRange = 10.0f;
-    [SerializeField]
-    public float lightIntensity = 2.0f;
+    private Weapon weaponType;
+
+   // private PhotonView view;
+    private float nextFireTime = 0.0f;
+
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
-        }
+        /*if (view.IsMine)
+        {*/
+            if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
+            {
+                Shoot();
+                //converts rounds per minute to fire rate per second.
+                nextFireTime = Time.time + 1.0f/ (weaponType.rpm / 60.0f);
+            }
+       //}
+    }
+    private void OnEnable()
+    {
+        //view = GetComponentInParent<PhotonView>();   
     }
     private void Shoot()
     {
-        GameObject newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
-        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * bulletSpeed);
-        muzzleFlash();
-        Destroy(newBullet, 0.5f);
-    }
-
-    private void muzzleFlash()
-    {
-        GameObject newLight = new GameObject("Muzzle Flash");
-        Light lightComp = newLight.AddComponent<Light>();
-        lightComp.type = LightType.Point;
-        lightComp.color = Color.yellow;
-        lightComp.range = lightRange;
-        lightComp.intensity = lightIntensity;
-        newLight.transform.position = firePoint.position;
-        Destroy(newLight, 0.1f);
+        GameObject newBullet = /*PhotonNetwork.*/Instantiate(weaponType.bullet, firePoint.position, firePoint.rotation);
+        newBullet.transform.localScale *= weaponType.bulletSizeScale;
+        newBullet.GetComponent<bullet>().damage = weaponType.bulletDamage;
+        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.bulletVelocity);
+        Destroy(newBullet, 2.0f);
     }
 }

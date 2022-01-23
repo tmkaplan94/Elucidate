@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using Photon.Pun;
 
 /**
  * version 1.0
@@ -14,32 +15,20 @@ using UnityEngine;
  */
 public class bullet : MonoBehaviour
 {
-    [SerializeField]
-    private float damage;
+    public float damage;
 
+    //private PhotonView view;
+
+    private void Start()
+    {
+        //view = GetComponent<PhotonView>();
+    }
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<IDamageable<float>>().TakeDamage(damage);
-        Destroy(gameObject);
+       // if (view.IsMine)
+        //{
+            other.GetComponent<IDamageable<float>>().TakeDamage(damage);
+            Destroy(gameObject);
+        //}
     }
-
-    void Update()
-    {
-        if (gameObject.activeInHierarchy)
-        {
-            bulletLight();
-        }
-    }
-    
-    private void bulletLight()
-    {
-        GameObject lightGO = new GameObject("Bullet Light");
-        Light light = lightGO.AddComponent<Light>();
-        light.type = LightType.Point;
-        light.range = 10.0f;
-        light.intensity = 1.0f;
-        lightGO.transform.position = gameObject.transform.position;
-        Destroy(lightGO);
-    }
-
 }
