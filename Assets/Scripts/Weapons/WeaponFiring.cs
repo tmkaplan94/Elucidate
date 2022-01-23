@@ -9,9 +9,10 @@ using UnityEngine;
  * 
  * Notes: 1.0 Added basic firing functionality.
  * 1.1 added basic network behavior to be improved on as well as scriptable object compatibility.
+ * EDIT: Added muzzle flash for light effect
  *        
  * Author: Grant Reed
- * Contributors:
+ * Contributors: Loc Trinh
  * 
  */
 public class WeaponFiring : MonoBehaviour
