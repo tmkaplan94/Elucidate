@@ -21,6 +21,10 @@ public class WeaponFiring : MonoBehaviour
     private Transform firePoint;
     [SerializeField]
     private Weapon weaponType;
+    [SerializeField]
+    private float lightRange;
+    [SerializeField]
+    private float lightIntensity;
 
    // private PhotonView view;
     private float nextFireTime = 0.0f;
@@ -47,6 +51,18 @@ public class WeaponFiring : MonoBehaviour
         newBullet.transform.localScale *= weaponType.bulletSizeScale;
         newBullet.GetComponent<bullet>().damage = weaponType.bulletDamage;
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.bulletVelocity);
+		muzzleFlash();
         Destroy(newBullet, 2.0f);
+    }
+    private void muzzleFlash()
+    {
+        GameObject muzzle = new GameObject("Muzzle Flash");
+        Light muzzleLight = muzzle.AddComponent<Light>();
+        muzzleLight.type = LightType.Point;
+        muzzleLight.color = Color.yellow;
+        muzzleLight.range = lightRange;
+        muzzleLight.intensity = lightIntensity;
+        muzzleLight.transform.position = firePoint.position;
+        Destroy(muzzle, 0.1f);
     }
 }

@@ -31,4 +31,5 @@ public class bullet : MonoBehaviour
             Destroy(gameObject);
         //}
     }
+    
 }

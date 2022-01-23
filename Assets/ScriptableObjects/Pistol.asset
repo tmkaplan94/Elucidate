@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   prefabName: Pistol
-  rpm: 400
+  rpm: 200
   bulletVelocity: 300
   bulletSizeScale: 2
   bulletDamage: 15
