@@ -24,7 +24,7 @@ public class Sound
     public AudioMixerGroup group;
     [Range(0, 1)] public float volume;
     [Range(0.1f, 3)] public float pitch;
-    [Range(0, 1)] public float spatial;
+    public bool spatial;
     public bool mute;
     public bool awake;
     public bool loop;

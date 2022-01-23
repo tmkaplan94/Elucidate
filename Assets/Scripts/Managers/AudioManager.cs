@@ -45,7 +45,14 @@ public class AudioManager : Singleton<AudioManager>
         source.outputAudioMixerGroup = s.group;
         source.volume = s.volume;
         source.pitch = s.pitch;
-        source.spatialBlend = s.spatial;
+        if (s.spatial)
+        {
+            source.spatialBlend = 1;
+        }
+        else
+        {
+            source.spatialBlend = 0;
+        }
         source.mute = s.mute;
         source.playOnAwake = s.awake;
         source.loop = s.loop;

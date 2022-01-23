@@ -20,7 +20,7 @@ public class TestAudio : MonoBehaviour
     {
         if (Input.GetKeyDown(_keyCode))
         {
-            _audioManager.Play(_audioSource, gameObject.name);
+            _audioManager.Play(_audioSource, "Test");
         }
     }
 
