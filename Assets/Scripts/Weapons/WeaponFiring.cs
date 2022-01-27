@@ -55,6 +55,7 @@ public class WeaponFiring : MonoBehaviour
 		muzzleFlash();
         Destroy(newBullet, 2.0f);
     }
+	// The muzzleFlash method will create a muzzle flash object emitting a yellow light at the location the gun shoots briefly, then destroy itself. 
     private void muzzleFlash()
     {
         GameObject muzzle = new GameObject("Muzzle Flash");
