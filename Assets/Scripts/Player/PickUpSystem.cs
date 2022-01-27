@@ -13,10 +13,10 @@ using UnityEngine;
  * TODO: This class has a lot of repeat code, need to convert it to templates to make things simpler.
  * 
  * Author: Grant Reed
- * Contributers:
+ * Contributers: Loc Trinh
  * 
  */
-public class PickUpSystem : MonoBehaviour
+public class PickUpSystem : Subject
 {
     private PlayerStats stats;
     private string itemTag = "Item";
@@ -52,6 +52,22 @@ public class PickUpSystem : MonoBehaviour
             }
         }
     }
+	// When weapon get touched by player, notify the observer to display UI
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.transform.CompareTag(weaponTag))
+		{
+			Notify(1);
+		}
+	}
+	// When player leaves, notify the observer to turn off UI
+	private void OnTriggerExit(Collider other)
+	{
+		if(other.transform.CompareTag(weaponTag))
+		{
+			Notify(0);
+		}
+	}
     
     private void PickupWeapon(GameObject newWeapon)
     {
