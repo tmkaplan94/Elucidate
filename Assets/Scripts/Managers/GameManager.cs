@@ -21,56 +21,60 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    private GameObject _titleMenu;
-    private GameObject _mainMenu;
-    private GameObject _optionsMenu;
-    
+    public GameEvent CurrentStatus;
+
+    private void OnEnable()
+    {
+        throw new NotImplementedException();
+    }
+
     private void Start()
     {
-        GetMenuObjects();
-        SetDefaultMenus();
+        throw new NotImplementedException();
     }
 
-    #region TitleScene Functions
-
-    public void PlayGame()
+    private void OnDisable()
     {
-        SceneManager.LoadScene(1);
+        throw new NotImplementedException();
     }
 
-    public void QuitGame()
-    {
-        Debug.Log("Quit successfully");
-        Application.Quit();
-    }
+    #region Event Functions
 
-    private void GetMenuObjects()
+    private void TitleEvent()
     {
-        _titleMenu = GameObject.Find("Title Menu");
-        _mainMenu = GameObject.Find("Main Menu");
-        _optionsMenu = GameObject.Find("Options Menu");
+        
     }
     
-    private void SetDefaultMenus()
+    private void CountdownEvent()
     {
-        _titleMenu.SetActive(true);
-        _mainMenu.SetActive(false);
-        _optionsMenu.SetActive(false);
-    }
-
-    public void ActivateMainMenu()
-    {
-        _titleMenu.SetActive(false);
-        _mainMenu.SetActive(true);
-        _optionsMenu.SetActive(false);
-    }
-
-    public void ActivateOptionsMenu()
-    {
-        _titleMenu.SetActive(false);
-        _mainMenu.SetActive(false);
-        _optionsMenu.SetActive(true);
+        
     }
     
+    private void StartEvent()
+    {
+        
+    }
+    
+    private void PauseEvent()
+    {
+        
+    }
+    
+    private void ResumeEvent()
+    {
+        
+    }
+    
+    private void FinishEvent()
+    {
+        
+    }
+    
+    private void QuitEvent()
+    {
+        
+    }
+
     #endregion
+    
 }
