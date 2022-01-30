@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameEventBus : MonoBehaviour
+public abstract class EventBus<T> : MonoBehaviour
 {
     private static readonly
-        IDictionary<GameEvent, UnityEvent> Events = new Dictionary<GameEvent, UnityEvent>();
+        IDictionary<T, UnityEvent> Events = new Dictionary<T, UnityEvent>();
 
-    public static void Subscribe(GameEvent eventType, UnityAction listener)
+    public static void Subscribe(T eventType, UnityAction listener)
     {
         UnityEvent thisEvent;
         
@@ -24,7 +25,7 @@ public class GameEventBus : MonoBehaviour
         }
     }
 
-    public static void Unsubscribe(GameEvent eventType, UnityAction listener)
+    public static void Unsubscribe(T eventType, UnityAction listener)
     {
         UnityEvent thisEvent;
 
@@ -34,7 +35,7 @@ public class GameEventBus : MonoBehaviour
         }
     }
 
-    public static void Publish(GameEvent eventType)
+    public static void Publish(T eventType)
     {
         UnityEvent thisEvent;
 
