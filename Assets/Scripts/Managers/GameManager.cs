@@ -21,29 +21,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    private DateTime _sessionStartTime;
-    private DateTime _sessionEndTime;
-
     private GameObject _titleMenu;
     private GameObject _mainMenu;
     private GameObject _optionsMenu;
     
     private void Start()
     {
-        _sessionStartTime = DateTime.Now;
-        Debug.Log("Game session start @: " + _sessionStartTime);
-        
         GetMenuObjects();
         SetDefaultMenus();
-    }
-
-    private void OnApplicationQuit()
-    {
-        _sessionEndTime = DateTime.Now;
-        TimeSpan timeDifference = _sessionEndTime - _sessionStartTime;
-        
-        Debug.Log("Game session ended @: " + _sessionEndTime);
-        Debug.Log("Game session lasted: " + timeDifference);
     }
 
     #region TitleScene Functions
