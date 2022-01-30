@@ -21,60 +21,81 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public GameEvent CurrentStatus;
+    private GameEvent _currentStatus;
+
+    public GameEvent GetCurrentStatus()
+    {
+        return _currentStatus;
+    }
 
     private void OnEnable()
     {
-        throw new NotImplementedException();
+        GameEventBus.Subscribe(GameEvent.TITLE, TitleEvent);
+        GameEventBus.Subscribe(GameEvent.COUNTDOWN, CountdownEvent);
+        GameEventBus.Subscribe(GameEvent.START, StartEvent);
+        GameEventBus.Subscribe(GameEvent.PAUSE, PauseEvent);
+        GameEventBus.Subscribe(GameEvent.RESUME, ResumeEvent);
+        GameEventBus.Subscribe(GameEvent.FINISH, FinishEvent);
+        GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
     }
 
     private void Start()
     {
-        throw new NotImplementedException();
+        _currentStatus = GameEvent.TITLE;
     }
 
     private void OnDisable()
     {
-        throw new NotImplementedException();
+        GameEventBus.Unsubscribe(GameEvent.TITLE, TitleEvent);
+        GameEventBus.Unsubscribe(GameEvent.COUNTDOWN, CountdownEvent);
+        GameEventBus.Unsubscribe(GameEvent.START, StartEvent);
+        GameEventBus.Unsubscribe(GameEvent.PAUSE, PauseEvent);
+        GameEventBus.Unsubscribe(GameEvent.RESUME, ResumeEvent);
+        GameEventBus.Unsubscribe(GameEvent.FINISH, FinishEvent);
+        GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
     }
 
-    #region Event Functions
+    #region Private Event Functions
 
     private void TitleEvent()
     {
-        
+        _currentStatus = GameEvent.TITLE;
+        SceneManager.LoadScene(0);
     }
     
     private void CountdownEvent()
     {
-        
+        _currentStatus = GameEvent.COUNTDOWN;
     }
     
     private void StartEvent()
     {
-        
+        _currentStatus = GameEvent.START;
+        SceneManager.LoadScene(1);
     }
     
     private void PauseEvent()
     {
-        
+        _currentStatus = GameEvent.PAUSE;
     }
     
     private void ResumeEvent()
     {
-        
+        _currentStatus = GameEvent.RESUME;
     }
     
     private void FinishEvent()
     {
-        
+        _currentStatus = GameEvent.FINISH;
     }
     
     private void QuitEvent()
     {
-        
+        _currentStatus = GameEvent.QUIT;
+        Debug.Log("Quit successfully");
+        Application.Quit();
     }
 
     #endregion
-    
+
 }
