@@ -21,9 +21,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    private GameEvent _currentStatus;
+    private static GameEvent _currentStatus;
 
-    public GameEvent GetCurrentStatus()
+    public static GameEvent CurrentStatus()
     {
         return _currentStatus;
     }
@@ -42,6 +42,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         _currentStatus = GameEvent.TITLE;
+        Debug.Log("Current game status: " + _currentStatus);
     }
 
     private void OnDisable()
@@ -61,32 +62,38 @@ public class GameManager : Singleton<GameManager>
     {
         _currentStatus = GameEvent.TITLE;
         SceneManager.LoadScene(0);
+        Debug.Log("Current game status: " + _currentStatus);
     }
     
     private void CountdownEvent()
     {
         _currentStatus = GameEvent.COUNTDOWN;
+        Debug.Log("Current game status: " + _currentStatus);
     }
     
     private void StartEvent()
     {
         _currentStatus = GameEvent.START;
         SceneManager.LoadScene(1);
+        Debug.Log("Current game status: " + _currentStatus);
     }
     
     private void PauseEvent()
     {
         _currentStatus = GameEvent.PAUSE;
+        Debug.Log("Current game status: " + _currentStatus);
     }
     
     private void ResumeEvent()
     {
         _currentStatus = GameEvent.RESUME;
+        Debug.Log("Current game status: " + _currentStatus);
     }
     
     private void FinishEvent()
     {
         _currentStatus = GameEvent.FINISH;
+        Debug.Log("Current game status: " + _currentStatus);
     }
     
     private void QuitEvent()
