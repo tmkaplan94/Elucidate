@@ -6,9 +6,9 @@ using UnityEngine.Events;
 public class GameEventBus : MonoBehaviour
 {
     private static readonly
-        IDictionary<GameEventType, UnityEvent> Events = new Dictionary<GameEventType, UnityEvent>();
+        IDictionary<GameEvent, UnityEvent> Events = new Dictionary<GameEvent, UnityEvent>();
 
-    public static void Subscribe(GameEventType eventType, UnityAction listener)
+    public static void Subscribe(GameEvent eventType, UnityAction listener)
     {
         UnityEvent thisEvent;
         
@@ -24,7 +24,7 @@ public class GameEventBus : MonoBehaviour
         }
     }
 
-    public static void Unsubscribe(GameEventType eventType, UnityAction listener)
+    public static void Unsubscribe(GameEvent eventType, UnityAction listener)
     {
         UnityEvent thisEvent;
 
@@ -34,7 +34,7 @@ public class GameEventBus : MonoBehaviour
         }
     }
 
-    public static void Publish(GameEventType eventType)
+    public static void Publish(GameEvent eventType)
     {
         UnityEvent thisEvent;
 

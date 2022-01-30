@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameEventType
+public enum GameEvent
 {
-    TITLE, COUNTDOWN, START, PAUSE, FINISH, QUIT
+    TITLE, COUNTDOWN, START, PAUSE, RESUME, FINISH, QUIT
 }
