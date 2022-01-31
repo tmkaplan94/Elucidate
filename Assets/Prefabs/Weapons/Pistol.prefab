@@ -73,7 +73,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6828003175341134086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.61, y: 0, z: 0}
+  m_LocalPosition: {x: 145.81165, y: 1.0194365, z: 218.23648}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
   - {fileID: 4754882157634783511}
@@ -173,6 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4754882157634783511}
   weaponType: {fileID: 11400000, guid: 4253370d256efdc44a394a4f943fff2e, type: 2}
+  lightRange: 0
+  lightIntensity: 0
 --- !u!1 &6870077819018999733
 GameObject:
   m_ObjectHideFlags: 0
