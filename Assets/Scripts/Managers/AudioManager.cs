@@ -1,31 +1,27 @@
 /*
- * Version - 1.0
- * Date - 01/22/2022
- * Description - AudioManager managers all audio sources.
+ * Version - 1.1
+ * Date - 01/27/2022
+ * Description - AudioManager manages/plays all audio sources.
  * Summary
  *  - AudioManager extends Singleton, which extends MonoBehavior.
- *  - contains a varying list of all sound sources
- *  - responsible for finding and playing them
+ *  - contains a varying list of all sounds
+ *  - all objects rely on AudioManager to play audio
  * 
  * Author - Tyler Kaplan
- * Contributors
- *  - 
+ * Contributors - 
  */
-
 using System;
 using UnityEngine;
-using UnityEditor.Audio;
 
 public class AudioManager : Singleton<AudioManager>
 {
     public Sound[] sounds;
     
-    // Play the background theme.
-    public void Start()
-    {
-        Play(GameObject.Find("Main Camera").GetComponent<AudioSource>(), "Background");
-    }
-    
+    // // Play the background theme.
+    // public void Start()
+    // {
+    //     Play(GameObject.Find("Speakers").GetComponent<AudioSource>(), "Background Music");
+    // }
 
     // Play the given AudioSource with parameters based on AudioManager.
     public void Play(AudioSource source, string name)
@@ -36,7 +32,7 @@ public class AudioManager : Singleton<AudioManager>
         // Print a warning and return if no Sound is found
         if (s == null)
         {
-            Debug.LogWarning("Cannot find " + name + " Sound in AudioManager!");
+            Debug.LogError("No \"" + name + "\" Sound exists in AudioManager");
             return;
         }
         
