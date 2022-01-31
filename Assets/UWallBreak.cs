@@ -12,12 +12,6 @@ public class UWallBreak : MonoBehaviour, IDamageable <float>
         currHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(float dmg)
     {
         

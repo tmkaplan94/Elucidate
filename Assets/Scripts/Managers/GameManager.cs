@@ -56,6 +56,8 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Unsubscribe(GameEvent.PAUSE, PauseEvent);
         GameEventBus.Unsubscribe(GameEvent.RESUME, ResumeEvent);
         GameEventBus.Unsubscribe(GameEvent.WIN, WinEvent);
+        GameEventBus.Unsubscribe(GameEvent.LOSS, LossEvent);
+        GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
         GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
     }
 
@@ -73,7 +75,7 @@ public class GameManager : Singleton<GameManager>
         enemyCount--;
         if(enemyCount <= 0)
         {
-            WinEvent();
+            GameEventBus.Publish(GameEvent.WIN);
         }
     }
     

@@ -25,7 +25,7 @@ public class bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-       // if (view.IsMine)
+        // if (view.IsMine)
         //{
             other.GetComponent<IDamageable<float>>().TakeDamage(damage);
             Destroy(gameObject);

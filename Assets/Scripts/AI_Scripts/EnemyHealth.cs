@@ -38,6 +38,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable <float>
 
     public void Kill()
     {
+        GameEventBus.Publish(GameEvent.ENEMYKILLED);
         Destroy(gameObject);
     }
 
