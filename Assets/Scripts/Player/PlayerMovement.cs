@@ -47,6 +47,18 @@ public class PlayerMovement : MonoBehaviour
             moveZ = Input.GetAxisRaw("Vertical");
             lookDir = GetLookAtTarget();
        // }
+
+       if (Input.GetKeyDown(KeyCode.P))
+       {
+           if (GameManager.CurrentStatus() == GameEvent.START || GameManager.CurrentStatus() == GameEvent.RESUME)
+           {
+               GameEventBus.Publish(GameEvent.PAUSE);
+           }
+           else if (GameManager.CurrentStatus() == GameEvent.PAUSE)
+           {
+               GameEventBus.Publish(GameEvent.RESUME);
+           }
+       }
     }
 
     private void FixedUpdate()

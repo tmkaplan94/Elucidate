@@ -13,7 +13,7 @@ using UnityEngine;
  * 
  */
 
-[CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObjects/Weapon")]
+[CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObject/Weapon")]
 public class Weapon : ScriptableObject
 {
     public string prefabName;
