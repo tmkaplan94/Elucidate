@@ -33,9 +33,11 @@ public class PlayAudioSource : MonoBehaviour
         {
             Debug.LogError("No AudioManager exists in Scene");
             return;
-        }
-        
-        
+        }   
+    }
+
+    public void Play()
+    {
         // AudioSource needs to rely on AudioManager to play audio
         _audioManager.GetComponent<AudioManager>().Play(_audioSource, _name);
     }
