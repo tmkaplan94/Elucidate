@@ -89,13 +89,20 @@ public class GameManager : Singleton<GameManager>
     {
         _currentStatus = GameEvent.START;
         SceneManager.LoadScene(1);
-        foreach (var bot in FindObjectsOfType<AIStats>())
-        {
-            enemyCount++;
-        }
+
         Debug.Log("Current game status: " + _currentStatus);
     }
-    
+
+    /*************** FIX BEFORE WEDNESDAY *******************/
+    private void OnLevelWasLoaded(int level)
+    {
+        if(level == 1)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            enemyCount = enemies.Length;
+        }
+        Debug.Log(enemyCount);
+    }
     private void PauseEvent()
     {
         _currentStatus = GameEvent.PAUSE;
