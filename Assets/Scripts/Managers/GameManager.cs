@@ -22,6 +22,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     private static GameEvent _currentStatus;
+    private int enemyCount = 0;
 
     public static GameEvent CurrentStatus()
     {
@@ -37,6 +38,7 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Subscribe(GameEvent.RESUME, ResumeEvent);
         GameEventBus.Subscribe(GameEvent.WIN, WinEvent);
         GameEventBus.Subscribe(GameEvent.LOSS, LossEvent);
+        GameEventBus.Subscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
         GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
     }
 
@@ -54,7 +56,6 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Unsubscribe(GameEvent.PAUSE, PauseEvent);
         GameEventBus.Unsubscribe(GameEvent.RESUME, ResumeEvent);
         GameEventBus.Unsubscribe(GameEvent.WIN, WinEvent);
-        GameEventBus.Unsubscribe(GameEvent.LOSS, LossEvent);
         GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
     }
 
@@ -65,6 +66,15 @@ public class GameManager : Singleton<GameManager>
         _currentStatus = GameEvent.TITLE;
         SceneManager.LoadScene(0);
         Debug.Log("Current game status: " + _currentStatus);
+    }
+
+    private void EnemyKilledEvent()
+    {
+        enemyCount--;
+        if(enemyCount <= 0)
+        {
+            WinEvent();
+        }
     }
     
     private void CountdownEvent()
@@ -77,6 +87,10 @@ public class GameManager : Singleton<GameManager>
     {
         _currentStatus = GameEvent.START;
         SceneManager.LoadScene(1);
+        foreach (var bot in FindObjectsOfType<AIStats>())
+        {
+            enemyCount++;
+        }
         Debug.Log("Current game status: " + _currentStatus);
     }
     
@@ -99,7 +113,7 @@ public class GameManager : Singleton<GameManager>
     }
     private void LossEvent()
     {
-        _currentStatus = GameEvent.LOSS;
+        SceneManager.LoadScene(2);
         Debug.Log("Current game status: " + _currentStatus);
     }
 

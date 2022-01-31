@@ -15,6 +15,7 @@ public class MenuManager : Singleton<MenuManager>
 
     private void OnEnable()
     {
+        GameEventBus.Subscribe(GameEvent.TITLE, SetDefaultMenus);
         GameEventBus.Subscribe(GameEvent.START, DeactivateTitleMenus);
         GameEventBus.Subscribe(GameEvent.PAUSE, ActivatePauseMenu);
         GameEventBus.Subscribe(GameEvent.RESUME, DeactivatePauseMenus);
@@ -35,6 +36,7 @@ public class MenuManager : Singleton<MenuManager>
         GameEventBus.Unsubscribe(GameEvent.RESUME, DeactivatePauseMenus);
         GameEventBus.Unsubscribe(GameEvent.WIN, ActivateWinMenu);
         GameEventBus.Unsubscribe(GameEvent.LOSS, ActivateLossMenu);
+        GameEventBus.Unsubscribe(GameEvent.TITLE, SetDefaultMenus);
     }
 
     private void SetDefaultMenus()
@@ -45,6 +47,7 @@ public class MenuManager : Singleton<MenuManager>
         _pauseMenu.SetActive(false);
         _pauseOptionsMenu.SetActive(false);
         _winMenu.SetActive(false);
+        _lossMenu.SetActive(false);
         
         float r = _backgroundImage.color.r;
         float g = _backgroundImage.color.g;

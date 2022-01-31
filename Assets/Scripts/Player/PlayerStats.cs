@@ -35,6 +35,7 @@ public class PlayerStats : Subject, IDamageable<float>
     [SerializeField]
     private float pickupRange;
 
+    #region Getters/Setters
     public float MaxHealth
     {
         get
@@ -101,6 +102,7 @@ public class PlayerStats : Subject, IDamageable<float>
             this.pickupRange = value;
         }
     }
+    #endregion
 
     private void Start()
     {
@@ -120,5 +122,6 @@ public class PlayerStats : Subject, IDamageable<float>
     public void Kill()
     {
         print("dead");
+        GameEventBus.Publish(GameEvent.LOSS);
     }
 }
