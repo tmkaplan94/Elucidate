@@ -1215,6 +1215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractObserver
       objectReference: {fileID: 0}
+    - target: {fileID: 4348373678595877869, guid: ef2cbd63f75c21d4dbaa31d70b44c152, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4491567070949763373, guid: ef2cbd63f75c21d4dbaa31d70b44c152, type: 3}
       propertyPath: uiSubject
       value: 

@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: AutoRifle
   m_EditorClassIdentifier: 
   prefabName: AutoRifle
-  rpm: 400
+  rpm: 500
   bulletVelocity: 500
   bulletSizeScale: 1
   bulletDamage: 10
+  muzzleFlashColor: {r: 0, g: 0, b: 0, a: 0}
+  muzzleFlashRange: 0
+  muzzleFlashIntensity: 0
+  muzzleFlashLightType: 0
   bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
