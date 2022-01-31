@@ -21,71 +21,88 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    private DateTime _sessionStartTime;
-    private DateTime _sessionEndTime;
+    private static GameEvent _currentStatus;
 
-    private GameObject _titleMenu;
-    private GameObject _mainMenu;
-    private GameObject _optionsMenu;
-    
+    public static GameEvent CurrentStatus()
+    {
+        return _currentStatus;
+    }
+
+    private void OnEnable()
+    {
+        GameEventBus.Subscribe(GameEvent.TITLE, TitleEvent);
+        GameEventBus.Subscribe(GameEvent.COUNTDOWN, CountdownEvent);
+        GameEventBus.Subscribe(GameEvent.START, StartEvent);
+        GameEventBus.Subscribe(GameEvent.PAUSE, PauseEvent);
+        GameEventBus.Subscribe(GameEvent.RESUME, ResumeEvent);
+        GameEventBus.Subscribe(GameEvent.FINISH, FinishEvent);
+        GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
+    }
+
     private void Start()
     {
-        _sessionStartTime = DateTime.Now;
-        Debug.Log("Game session start @: " + _sessionStartTime);
-        
-        GetMenuObjects();
-        SetDefaultMenus();
+        _currentStatus = GameEvent.TITLE;
+        Debug.Log("Current game status: " + _currentStatus);
     }
 
-    private void OnApplicationQuit()
+    private void OnDisable()
     {
-        _sessionEndTime = DateTime.Now;
-        TimeSpan timeDifference = _sessionEndTime - _sessionStartTime;
-        
-        Debug.Log("Game session ended @: " + _sessionEndTime);
-        Debug.Log("Game session lasted: " + timeDifference);
+        GameEventBus.Unsubscribe(GameEvent.TITLE, TitleEvent);
+        GameEventBus.Unsubscribe(GameEvent.COUNTDOWN, CountdownEvent);
+        GameEventBus.Unsubscribe(GameEvent.START, StartEvent);
+        GameEventBus.Unsubscribe(GameEvent.PAUSE, PauseEvent);
+        GameEventBus.Unsubscribe(GameEvent.RESUME, ResumeEvent);
+        GameEventBus.Unsubscribe(GameEvent.FINISH, FinishEvent);
+        GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
     }
 
-    #region TitleScene Functions
+    #region Private Event Functions
 
-    public void PlayGame()
+    private void TitleEvent()
     {
+        _currentStatus = GameEvent.TITLE;
+        SceneManager.LoadScene(0);
+        Debug.Log("Current game status: " + _currentStatus);
+    }
+    
+    private void CountdownEvent()
+    {
+        _currentStatus = GameEvent.COUNTDOWN;
+        Debug.Log("Current game status: " + _currentStatus);
+    }
+    
+    private void StartEvent()
+    {
+        _currentStatus = GameEvent.START;
         SceneManager.LoadScene(1);
+        Debug.Log("Current game status: " + _currentStatus);
     }
-
-    public void QuitGame()
+    
+    private void PauseEvent()
     {
+        _currentStatus = GameEvent.PAUSE;
+        Debug.Log("Current game status: " + _currentStatus);
+    }
+    
+    private void ResumeEvent()
+    {
+        _currentStatus = GameEvent.RESUME;
+        Debug.Log("Current game status: " + _currentStatus);
+    }
+    
+    private void FinishEvent()
+    {
+        _currentStatus = GameEvent.FINISH;
+        Debug.Log("Current game status: " + _currentStatus);
+    }
+    
+    private void QuitEvent()
+    {
+        _currentStatus = GameEvent.QUIT;
         Debug.Log("Quit successfully");
         Application.Quit();
     }
 
-    private void GetMenuObjects()
-    {
-        _titleMenu = GameObject.Find("Title Menu");
-        _mainMenu = GameObject.Find("Main Menu");
-        _optionsMenu = GameObject.Find("Options Menu");
-    }
-    
-    private void SetDefaultMenus()
-    {
-        _titleMenu.SetActive(true);
-        _mainMenu.SetActive(false);
-        _optionsMenu.SetActive(false);
-    }
-
-    public void ActivateMainMenu()
-    {
-        _titleMenu.SetActive(false);
-        _mainMenu.SetActive(true);
-        _optionsMenu.SetActive(false);
-    }
-
-    public void ActivateOptionsMenu()
-    {
-        _titleMenu.SetActive(false);
-        _mainMenu.SetActive(false);
-        _optionsMenu.SetActive(true);
-    }
-    
     #endregion
+
 }

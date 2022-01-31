@@ -1,0 +1,4 @@
+public enum GameEvent
+{
+    TITLE, COUNTDOWN, START, PAUSE, RESUME, FINISH, QUIT
+}
