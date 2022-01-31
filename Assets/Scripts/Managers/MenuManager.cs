@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,14 +10,16 @@ public class MenuManager : Singleton<MenuManager>
     [SerializeField] private GameObject _mainOptionsMenu;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _pauseOptionsMenu;
-    [SerializeField] private GameObject _finishMenu;
+    [SerializeField] private GameObject _winMenu;
+    [SerializeField] private GameObject _lossMenu;
 
     private void OnEnable()
     {
         GameEventBus.Subscribe(GameEvent.START, DeactivateTitleMenus);
         GameEventBus.Subscribe(GameEvent.PAUSE, ActivatePauseMenu);
         GameEventBus.Subscribe(GameEvent.RESUME, DeactivatePauseMenus);
-        GameEventBus.Subscribe(GameEvent.FINISH, ActivateFinishMenu);
+        GameEventBus.Subscribe(GameEvent.WIN, ActivateWinMenu);
+        GameEventBus.Subscribe(GameEvent.LOSS, ActivateLossMenu);
     }
 
     private void Start()
@@ -34,7 +33,8 @@ public class MenuManager : Singleton<MenuManager>
         GameEventBus.Unsubscribe(GameEvent.START, DeactivateTitleMenus);
         GameEventBus.Unsubscribe(GameEvent.PAUSE, ActivatePauseMenu);
         GameEventBus.Unsubscribe(GameEvent.RESUME, DeactivatePauseMenus);
-        GameEventBus.Unsubscribe(GameEvent.FINISH, ActivateFinishMenu);
+        GameEventBus.Unsubscribe(GameEvent.WIN, ActivateWinMenu);
+        GameEventBus.Unsubscribe(GameEvent.LOSS, ActivateLossMenu);
     }
 
     private void SetDefaultMenus()
@@ -44,7 +44,7 @@ public class MenuManager : Singleton<MenuManager>
         _mainOptionsMenu.SetActive(false);
         _pauseMenu.SetActive(false);
         _pauseOptionsMenu.SetActive(false);
-        _finishMenu.SetActive(false);
+        _winMenu.SetActive(false);
         
         float r = _backgroundImage.color.r;
         float g = _backgroundImage.color.g;
@@ -98,9 +98,14 @@ public class MenuManager : Singleton<MenuManager>
         _pauseOptionsMenu.SetActive(false);
     }
 
-    public void ActivateFinishMenu()
+    public void ActivateWinMenu()
     {
-        _finishMenu.SetActive(true);
+        _winMenu.SetActive(true);
+    }
+
+    public void ActivateLossMenu()
+    {
+        _lossMenu.SetActive(true);
     }
 
     #endregion

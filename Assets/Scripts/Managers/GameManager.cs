@@ -35,7 +35,8 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Subscribe(GameEvent.START, StartEvent);
         GameEventBus.Subscribe(GameEvent.PAUSE, PauseEvent);
         GameEventBus.Subscribe(GameEvent.RESUME, ResumeEvent);
-        GameEventBus.Subscribe(GameEvent.FINISH, FinishEvent);
+        GameEventBus.Subscribe(GameEvent.WIN, WinEvent);
+        GameEventBus.Subscribe(GameEvent.LOSS, LossEvent);
         GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
     }
 
@@ -52,7 +53,8 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Unsubscribe(GameEvent.START, StartEvent);
         GameEventBus.Unsubscribe(GameEvent.PAUSE, PauseEvent);
         GameEventBus.Unsubscribe(GameEvent.RESUME, ResumeEvent);
-        GameEventBus.Unsubscribe(GameEvent.FINISH, FinishEvent);
+        GameEventBus.Unsubscribe(GameEvent.WIN, WinEvent);
+        GameEventBus.Unsubscribe(GameEvent.LOSS, LossEvent);
         GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
     }
 
@@ -90,12 +92,17 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Current game status: " + _currentStatus);
     }
     
-    private void FinishEvent()
+    private void WinEvent()
     {
-        _currentStatus = GameEvent.FINISH;
+        _currentStatus = GameEvent.WIN;
         Debug.Log("Current game status: " + _currentStatus);
     }
-    
+    private void LossEvent()
+    {
+        _currentStatus = GameEvent.LOSS;
+        Debug.Log("Current game status: " + _currentStatus);
+    }
+
     private void QuitEvent()
     {
         _currentStatus = GameEvent.QUIT;
