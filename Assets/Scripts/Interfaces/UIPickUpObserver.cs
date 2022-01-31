@@ -16,16 +16,18 @@ using TMPro;
  */
 
 public class UIPickUpObserver : Observer
-{	
+{
 	[SerializeField]
 	private GameObject text;
-	
+
+	private const int notify_InteractUION = 1;
+	private const int notify_InteractUIOFF = 0;
 	void OnEnable()
 	{
-		
+
 		// Subscribes WhenNotified function to delegate _notify
 		uiSubject._notify += WhenNotified;
-		
+
 	}
 	void OnDisable()
 	{
@@ -33,15 +35,15 @@ public class UIPickUpObserver : Observer
 		uiSubject._notify -= WhenNotified;
 	}
 	// When WhenNotified is called, UI actions will happen
-    public override void WhenNotified(int val)
+	public override void WhenNotified(int val)
 	{
-		if (val == 1)
+		if (val == notify_InteractUION)
 		{
 			// turn on UI
 			text.SetActive(true);
-			
+
 		}
-		if (val == 0)
+		if (val == notify_InteractUIOFF)
 		{
 			// turn off UI
 			text.SetActive(false);

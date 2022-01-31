@@ -17,8 +17,8 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
-    Transform playerTransform;
-    Transform targetLocation;
+    private Transform playerTransform;
+    private Transform targetLocation;
 
     void Update()
     {

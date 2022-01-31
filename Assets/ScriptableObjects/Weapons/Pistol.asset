@@ -17,4 +17,8 @@ MonoBehaviour:
   bulletVelocity: 300
   bulletSizeScale: 2
   bulletDamage: 15
+  muzzleFlashColor: {r: 0.745283, g: 0.39352205, b: 0, a: 0}
+  muzzleFlashRange: 2
+  muzzleFlashIntensity: 40
+  muzzleFlashLightType: 2
   bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}

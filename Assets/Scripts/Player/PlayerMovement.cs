@@ -41,33 +41,21 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //if (view.IsMine)
-       // {
-            //Getting input from player every frame.
-            moveX = Input.GetAxisRaw("Horizontal");
-            moveZ = Input.GetAxisRaw("Vertical");
-            lookDir = GetLookAtTarget();
-       // }
-
-       if (Input.GetKeyDown(KeyCode.P))
-       {
-           if (GameManager.CurrentStatus() == GameEvent.START || GameManager.CurrentStatus() == GameEvent.RESUME)
-           {
-               GameEventBus.Publish(GameEvent.PAUSE);
-           }
-           else if (GameManager.CurrentStatus() == GameEvent.PAUSE)
-           {
-               GameEventBus.Publish(GameEvent.RESUME);
-           }
-       }
+        // {
+        //Getting input from player every frame.
+        moveX = Input.GetAxisRaw("Horizontal");
+        moveZ = Input.GetAxisRaw("Vertical");
+        lookDir = GetLookAtTarget();
+        // }
     }
 
     private void FixedUpdate()
     {
-       // if (view.IsMine)
+        // if (view.IsMine)
         //{
-            //actually moving player here.
-            Move();
-            Aim();
+        //actually moving player here.
+        Move();
+        Aim();
         //}
     }
 

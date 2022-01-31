@@ -9,8 +9,8 @@ using UnityEngine;
  * 
  * Notes: This class has getters and setters for each of its adjustable fields in game.
  *          This is how player states are actually changed in game.
- *          There is a lot of communication between this class and all other classes in the game,
- *          so great care needs to be taken when changing something in it.
+ *          There is a lot of communication between this class and many other classes about the player in game,
+ *          This is the main 
  *        
  * TODO: A lot of change needs to happen with damage and pickups which will require a lot of
  *      change with how this class handles those things as well.
@@ -19,12 +19,14 @@ using UnityEngine;
  * Contributors:
  * 
  */
-public class PlayerStats : MonoBehaviour, IDamageable<float>
+
+public class PlayerStats : Subject, IDamageable<float>
 {
     [SerializeField]
     private float health;
-    //These are serialized just for testing purposes.
-    
+    [SerializeField]
+    private float maxHealth;
+
     private GameObject currentItem;
     [SerializeField]
     private GameObject currentWeapon;
@@ -33,6 +35,28 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     [SerializeField]
     private float pickupRange;
 
+    public float MaxHealth
+    {
+        get
+        {
+            return this.maxHealth;
+        }
+        set
+        {
+            this.maxHealth = value;
+        }
+    }
+    public float Health
+    {
+        get
+        {
+            return this.health;
+        }
+        set
+        {
+            this.health = value;
+        }
+    }
     public float MoveSpeed
     {
         get
@@ -78,13 +102,19 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
         }
     }
 
+    private void Start()
+    {
+        health = maxHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if(health <= 0f)
+        if (health <= 0f)
         {
             Kill();
         }
+        Notify((int)damage);
     }
 
     public void Kill()

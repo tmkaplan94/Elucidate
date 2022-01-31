@@ -11,6 +11,7 @@ using UnityEngine;
  * Notes: Items and Weapons are the only interactable objects currently
  *        
  * TODO: This class has a lot of repeat code, need to convert it to templates to make things simpler.
+ *       This class is dependent on PlayerStats which is unnecessary and i hate it.
  * 
  * Author: Grant Reed
  * Contributers: Loc Trinh
@@ -29,6 +30,10 @@ public class PickUpSystem : Subject
     private Transform hand;
     [SerializeField]
     private Transform dropPoint;
+
+    private const int notify_InteractUION = 1;
+    private const int notify_InteractUIOFF = 0;
+    private const int notify_WeaponUI = 3;
 
 
     void Start()
@@ -52,23 +57,23 @@ public class PickUpSystem : Subject
             }
         }
     }
-	// When weapon get touched by player, notify the observer to display UI
-	private void OnTriggerEnter(Collider other)
-	{
-		if(other.transform.CompareTag(weaponTag))
-		{
-			Notify(1);
-		}
-	}
-	// When player leaves, notify the observer to turn off UI
-	private void OnTriggerExit(Collider other)
-	{
-		if(other.transform.CompareTag(weaponTag))
-		{
-			Notify(0);
-		}
-	}
-    
+    // When weapon get touched by player, notify the observer to display UI
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag(weaponTag))
+        {
+            Notify(notify_InteractUION);
+        }
+    }
+    // When player leaves, notify the observer to turn off UI
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.CompareTag(weaponTag))
+        {
+            Notify(notify_InteractUIOFF);
+        }
+    }
+
     private void PickupWeapon(GameObject newWeapon)
     {
         stats.CurrentWeapon = newWeapon;
@@ -82,18 +87,22 @@ public class PickUpSystem : Subject
         newWeapon.transform.position = hand.position;
         newWeapon.transform.rotation = hand.rotation;
         newWeapon.GetComponent<WeaponFiring>().enabled = true;
+        if (_notify != null)
+        {
+            Notify(notify_WeaponUI);
+        }
     }
 
     private void PickupItem(GameObject newItem)
     {
         stats.CurrentItem = newItem;
-        
+
         newItem.GetComponent<BoxCollider>().enabled = false;
         newItem.GetComponent<Rigidbody>().isKinematic = true;
         newItem.transform.parent = hand;
         newItem.transform.position = hand.position;
         newItem.transform.rotation = hand.rotation;
-        
+
     }
 
     private void DropCurrentItem()
@@ -114,6 +123,6 @@ public class PickUpSystem : Subject
         {
             col.enabled = true;
         }
-
+        Notify(notify_InteractUIOFF);
     }
 }
