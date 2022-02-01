@@ -38,7 +38,7 @@ public class PlayAudioSource : MonoBehaviour
 
     public void Play()
     {
-        // AudioSource needs to rely on AudioManager to play audio
-        _audioManager.GetComponent<AudioManager>().Play(_audioSource, _name);
+        // AudioSource needs to rely on AudioManager configurations
+        _audioManager.GetComponent<AudioManager>().ConfigureAudio(_audioSource, _name);
     }
 }

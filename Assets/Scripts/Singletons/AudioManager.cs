@@ -16,15 +16,9 @@ using UnityEngine;
 public class AudioManager : Singleton<AudioManager>
 {
     public Sound[] sounds;
-    
-    // // Play the background theme.
-    // public void Start()
-    // {
-    //     Play(GameObject.Find("Speakers").GetComponent<AudioSource>(), "Background Music");
-    // }
 
-    // Play the given AudioSource with parameters based on AudioManager.
-    public void Play(AudioSource source, string name)
+    // Configure and play the given AudioSource with parameters based on AudioManager.
+    public void ConfigureAudio(AudioSource source, string name)
     {
         // Find Sound in AudioManager based on name parameter
         Sound s = Array.Find(sounds, sound => sound.name == name);
