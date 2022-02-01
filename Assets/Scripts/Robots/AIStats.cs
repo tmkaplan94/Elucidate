@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AIStats", menuName = "ScriptableObjects/AIStats")]
+[CreateAssetMenu(fileName = "AIStats", menuName = "ScriptableObject/AIStats")]
 public class AIStats : ScriptableObject
 {
     public AI_State CurrentState;

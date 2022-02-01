@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RuntimeSet<T> : ScriptableObject
+public abstract class SpecialList<T> : ScriptableObject
 {
     public List<T> Items = new List<T>();
 

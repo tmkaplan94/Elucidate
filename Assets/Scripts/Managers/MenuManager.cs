@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class MenuManager : Singleton<MenuManager>
 {
-    [SerializeField] private GameObject _menuCanvas;
     [SerializeField] private Image _backgroundImage;
     [SerializeField] private GameObject _titleMenu;
     [SerializeField] private GameObject _mainMenu;
@@ -25,7 +24,6 @@ public class MenuManager : Singleton<MenuManager>
 
     private void Start()
     {
-        DontDestroyOnLoad(_menuCanvas);
         SetDefaultMenus();
     }
 
