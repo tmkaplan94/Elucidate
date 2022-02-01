@@ -118,10 +118,12 @@ public class GameManager : Singleton<GameManager>
     private void WinEvent()
     {
         _currentStatus = GameEvent.WIN;
+        SceneManager.LoadScene(2);
         Debug.Log("Current game status: " + _currentStatus);
     }
     private void LossEvent()
     {
+        _currentStatus = GameEvent.LOSS;
         SceneManager.LoadScene(2);
         Debug.Log("Current game status: " + _currentStatus);
     }
