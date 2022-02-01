@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ using UnityEngine;
  * Edit: made muzzle flash use scriptable object values.
  *        
  * Author: Grant Reed
- * Contributors: Loc Trinh
+ * Contributors: Loc Trinh, Tyler Kaplan
  * 
  */
 public class WeaponFiring : MonoBehaviour
@@ -23,11 +24,15 @@ public class WeaponFiring : MonoBehaviour
     private Transform firePoint;
     [SerializeField]
     private Weapon weaponType;
-    [SerializeField]
-    private PlayAudioSource playAudio;
 
+    private PlayAudioSource _audio;
     // private PhotonView view;
     private float nextFireTime = 0.0f;
+
+    private void Start()
+    {
+        _audio = GetComponent<PlayAudioSource>();
+    }
 
     void Update()
     {
@@ -52,7 +57,7 @@ public class WeaponFiring : MonoBehaviour
         newBullet.GetComponent<bullet>().damage = weaponType.bulletDamage;
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.bulletVelocity);
         muzzleFlash();
-        playAudio.Play();
+        _audio.Play();
         Destroy(newBullet, 2.0f);
     }
     // The muzzleFlash method will create a muzzle flash object emitting a yellow light at the location the gun shoots briefly, then destroy itself. 
