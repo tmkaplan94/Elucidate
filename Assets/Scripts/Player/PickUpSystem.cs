@@ -1,82 +1,79 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Grant Reed
+ * Contributors: Loc Trinh
+ * Description: This class handles the interactions of players and interactable objects in game.
+ *
+ * Weapons and items can be picked up from the game world.
+ * Doing so drops whatever the player is currently holding to the ground.
+ * Items and Weapons are the only interactable objects currently
+ * Has a lot of repeat code, need to convert it to templates to make things simpler.
+ * Dependent on PlayerStats which is unnecessary, need to fix.
+ */
 using UnityEngine;
 
-/**
- * version: 0.8
- * Date: 1/12/2022
- * Description: This class handles the interactions of players and interactible objects in game.
- * Summary: Weapons and items can be picked up from the game world
- *          Doing so drops whatever the player is currently holding to the ground.
- * Notes: Items and Weapons are the only interactable objects currently
- *        
- * TODO: This class has a lot of repeat code, need to convert it to templates to make things simpler.
- *       This class is dependent on PlayerStats which is unnecessary and i hate it.
- * 
- * Author: Grant Reed
- * Contributers: Loc Trinh
- * 
- */
 public class PickUpSystem : Subject
 {
-    private PlayerStats stats;
-    private string itemTag = "Item";
-    private string weaponTag = "Weapon";
-    private Transform playerTransform;
+    // const tags and flags for the pickup system
+    private const string ItemTag = "Item";
+    private const string WeaponTag = "Weapon";
+    private const int NotifyInteractUIOff = 0;
+    private const int NotifyInteractUIOn = 1;
+    private const int NotifyWeaponUI = 3;
 
-    [SerializeField]
-    private LayerMask pickUpsLayer;
-    [SerializeField]
-    private Transform hand;
-    [SerializeField]
-    private Transform dropPoint;
-
-    private const int notify_InteractUION = 1;
-    private const int notify_InteractUIOFF = 0;
-    private const int notify_WeaponUI = 3;
-
+    // editor exposed fields
+    [SerializeField] private LayerMask pickUpsLayer;
+    [SerializeField] private Transform hand;
+    [SerializeField] private Transform dropPoint;
+    
+    // private fields
+    private PlayerStats _stats;
+    private Transform _playerTransform;
 
     void Start()
     {
-        stats = GetComponent<PlayerStats>();
-        playerTransform = GetComponent<Transform>();
+        // cache needed components
+        _stats = GetComponent<PlayerStats>();
+        _playerTransform = GetComponent<Transform>();
     }
 
+    // enables player to interact/pickup item or weapon if in range
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetButton("Interact"))
         {
-            if (other.transform.CompareTag(weaponTag))
+            if (other.transform.CompareTag(WeaponTag))
             {
                 DropCurrentWeapon();
                 PickupWeapon(other.transform.parent.gameObject);
             }
-            else if (other.transform.CompareTag(itemTag))
+            else if (other.transform.CompareTag(ItemTag))
             {
                 PickupItem(other.gameObject);
             }
         }
     }
-    // When weapon get touched by player, notify the observer to display UI
+    // notify the observer to display UI when in range of weapon
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag(weaponTag))
+        if (other.transform.CompareTag(WeaponTag))
         {
-            Notify(notify_InteractUION);
+            Notify(NotifyInteractUIOn);
         }
     }
-    // When player leaves, notify the observer to turn off UI
+    
+    // notify the observer to turn off UI when leaving range of weapon
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag(weaponTag))
+        if (other.transform.CompareTag(WeaponTag))
         {
-            Notify(notify_InteractUIOFF);
+            Notify(NotifyInteractUIOff);
         }
     }
 
+    // picks up a new weapon
     private void PickupWeapon(GameObject newWeapon)
     {
-        stats.CurrentWeapon = newWeapon;
+        _stats.CurrentWeapon = newWeapon;
         BoxCollider[] cols = newWeapon.GetComponentsInChildren<BoxCollider>();
         foreach (BoxCollider col in cols)
         {
@@ -89,13 +86,14 @@ public class PickUpSystem : Subject
         newWeapon.GetComponent<WeaponFiring>().enabled = true;
         if (_notify != null)
         {
-            Notify(notify_WeaponUI);
+            Notify(NotifyWeaponUI);
         }
     }
 
+    // picks up a new item
     private void PickupItem(GameObject newItem)
     {
-        stats.CurrentItem = newItem;
+        _stats.CurrentItem = newItem;
 
         newItem.GetComponent<BoxCollider>().enabled = false;
         newItem.GetComponent<Rigidbody>().isKinematic = true;
@@ -105,24 +103,27 @@ public class PickUpSystem : Subject
 
     }
 
+    // drops current item
     private void DropCurrentItem()
     {
-        stats.CurrentItem.transform.parent = null;
-        stats.CurrentItem.transform.position = dropPoint.position;
-        stats.CurrentItem.GetComponent<Rigidbody>().isKinematic = false;
-        stats.CurrentItem.GetComponent<BoxCollider>().enabled = true;
+        _stats.CurrentItem.transform.parent = null;
+        _stats.CurrentItem.transform.position = dropPoint.position;
+        _stats.CurrentItem.GetComponent<Rigidbody>().isKinematic = false;
+        _stats.CurrentItem.GetComponent<BoxCollider>().enabled = true;
     }
+    
+    // drops current weapon
     private void DropCurrentWeapon()
     {
-        stats.CurrentWeapon.GetComponent<WeaponFiring>().enabled = false;
-        stats.CurrentWeapon.transform.parent = null;
-        stats.CurrentWeapon.transform.position = dropPoint.transform.position;
-        stats.CurrentWeapon.GetComponent<Rigidbody>().isKinematic = false;
-        BoxCollider[] cols = stats.CurrentWeapon.GetComponentsInChildren<BoxCollider>();
+        _stats.CurrentWeapon.GetComponent<WeaponFiring>().enabled = false;
+        _stats.CurrentWeapon.transform.parent = null;
+        _stats.CurrentWeapon.transform.position = dropPoint.transform.position;
+        _stats.CurrentWeapon.GetComponent<Rigidbody>().isKinematic = false;
+        BoxCollider[] cols = _stats.CurrentWeapon.GetComponentsInChildren<BoxCollider>();
         foreach (BoxCollider col in cols)
         {
             col.enabled = true;
         }
-        Notify(notify_InteractUIOFF);
+        Notify(NotifyInteractUIOff);
     }
 }

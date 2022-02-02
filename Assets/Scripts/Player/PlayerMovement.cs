@@ -1,51 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-//using Photon.Pun;
-/**
- * version: 1.0
- * Date: 1/12/2022
- * Description: This class takes input from the player and adjusts the players game object accordingly.
- * Summary: The player can move on the xz plane and rotates along the y axis toward the mouse 
- *          position. Currently, a ray is sent from the camera to the xz plane to determine the 
- *          mouse position in world space.
- * Notes: The rigidbody movePosition function is used for movement and the 
- *          Transform lookat function is used for player aim
- *          Im not sure yet what side effects those functions might have.
- * 
- * 
+/*
  * Author: Grant Reed
  * Contributors:
+ * Description: This class takes input from the player and adjusts the player game object accordingly.
  * 
+ * The player can move on the xz plane and rotates along the y axis toward the mouse position.
+ * Currently, a ray is sent from the camera to the xz plane to determine the mouse position in world space.
+ * The rigidbody movePosition function is used for movement and the Transform look-at function is used for player aim.
  */
+using UnityEngine;
+//using Photon.Pun;
+
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-
-    private float moveSpeed;
-
-    private float moveX, moveZ;
-    private Vector3 lookDir;
-    private Rigidbody rb;
-    private PlayerStats stats;
-
-    //private PhotonView view;
+    // private fields
+    private Camera _camera;
+    private Vector3 _lookDirection;
+    private PlayerStats _stats;
+    private Rigidbody _rigidbody;
+    private Vector3 _position;
+    private float _moveSpeed;
+    private float _moveX;
+    private float _moveZ;
+    //private PhotonView _view;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        stats = GetComponent<PlayerStats>();
-        moveSpeed = stats.MoveSpeed;
-        //view = GetComponent<PhotonView>();
+        // cache needed components
+        _camera = Camera.main;
+        _stats = GetComponent<PlayerStats>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _position = transform.position;
+        //_view = GetComponent<PhotonView>();
+        
+        // get move speed based on PlayerStats.cs
+        _moveSpeed = _stats.MoveSpeed;
     }
 
     void Update()
     {
         //if (view.IsMine)
         // {
-        //Getting input from player every frame.
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveZ = Input.GetAxisRaw("Vertical");
-        lookDir = GetLookAtTarget();
+        
+        // get input from player every frame
+        _moveX = Input.GetAxisRaw("Horizontal");
+        _moveZ = Input.GetAxisRaw("Vertical");
+        _lookDirection = GetLookAtTarget();
+        
         // }
     }
 
@@ -53,48 +54,47 @@ public class PlayerMovement : MonoBehaviour
     {
         // if (view.IsMine)
         //{
-        //actually moving player here.
+        
+        // apply move and aim independent of framerate
         Move();
         Aim();
+        
         //}
     }
 
-    /*
-     *Casts a ray from the camera to the ground plane at the position of the mouse in screen space
-     *to determine where the player should be looking. 
-     */
-    Vector3 GetLookAtTarget()
-    {
-        Vector3 target;
-        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, transform.position);
-        float rayLength;
-        groundPlane.Raycast(cameraRay, out rayLength);
 
-        target = cameraRay.GetPoint(rayLength);
-        target.y = transform.position.y;
+    // Cast a ray from camera to the ground at the position of the mouse in screen space.
+    private Vector3 GetLookAtTarget()
+    {
+        Ray cameraRay = _camera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, transform.position);
+        
+        groundPlane.Raycast(cameraRay, out float rayLength);
+
+        Vector3 target = cameraRay.GetPoint(rayLength);
+        target.y = _position.y;
 
         return target;
     }
-    /*
-     * Moves the player's rigidbody based on input.*/
+    
+    // Moves the player's rigidbody based on input.
     private void Move()
     {
         Vector3 movement;
-        movement.x = moveX;
-        movement.z = moveZ;
+        movement.x = _moveX;
+        movement.z = _moveZ;
         movement.y = 0f;
-        //This ensures that the player always moves at the same speed (moveSpeed).
+        // This ensures that the player always moves at the same _moveSpeed).
         if (movement.magnitude > 0f)
         {
             movement.Normalize();
-            movement *= moveSpeed * Time.deltaTime;
-            rb.MovePosition(rb.position + movement);
+            movement *= _moveSpeed * Time.deltaTime;
+            _rigidbody.MovePosition(_rigidbody.position + movement);
         }
     }
-    //Points the player transform in the direction of lookDir.
+    // Points the player transform in the direction of _lookDirection.
     private void Aim()
     {
-        transform.LookAt(lookDir);
+        transform.LookAt(_lookDirection);
     }
 }

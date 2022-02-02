@@ -1,25 +1,17 @@
 /*
- * Version - 1.0
- * Date - 01/10/2022
- * Description - Singleton ensures only one instance of an object and/or component.
- * Summary
- *  - This implementation of the Singleton design pattern uses lazy initialization,
- *    ensuring system resources are only consumed when absolutely necessary.
- *  - It is not currently thread safe.
- *  - Class is templated, so that it can be used with any object/component.
+ * Author: Tyler Kaplan
+ * Contributors:
+ * Description: Singleton ensures only one instance of an object or component.
  * 
- * Author - Tyler Kaplan
- * Contributors
- *  - 
+ * This implementation of the Singleton design pattern uses lazy initialization,
+ * ensuring system resources are only consumed when absolutely necessary.
+ * It is not currently thread safe.
+ * Class is templated, so that it can be used with any object/component.
  */
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> :
-    MonoBehaviour where T : Component
+public class Singleton<T> : MonoBehaviour where T : Component
 {
     // private field; the one and only instance of type T
     private static T _instance;

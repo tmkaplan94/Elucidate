@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-/**
- * version: 1.0
- * Date: 1/27/2022
- * Description: Observer abstract class to override if there will be multiple Observer. 
- *			    WhenNotified is used to perform an action if a Subject goes through an interaction. 
- *          
- * Notes: Using delegates to implement Observer Pattern. 
- *        
- * 
+/*
  * Author: Loc Trinh
  * Contributors: Grant Reed
- * 
+ * Description: Observer, often mistaken for pub/sub, established one-to-many relationships.
+ *
+ * Observer implements loose coupling of data. Less abstract and more concrete,
+ * pattern is useful when systems are obviously tied together.
+ * Observer is abstract class to override if there will be multiple Observer. 
+ * WhenNotified is used to perform an action if a Subject goes through an interaction. 
  */
+
+using UnityEngine;
 
 public abstract class Observer : MonoBehaviour
 {

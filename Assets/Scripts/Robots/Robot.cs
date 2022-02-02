@@ -1,6 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Ryan Hipple, from Unite Austin 2017
+ * Contributors: Tyler Kaplan
+ * Description: Robot will automatically add/remove itself to/from specified RobotList.
+ *
+ * Count used for debugging purposes.
+ */
 using UnityEngine;
 
 public class Robot : MonoBehaviour
