@@ -43534,8 +43534,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7758348665130653962, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
   m_audioClip: {fileID: 8300000, guid: d14f069f53c37f34ba584bc6297aeb1b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.15
-  m_Pitch: 0.9
+  m_Volume: 0.1
+  m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -43578,7 +43578,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.125
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
