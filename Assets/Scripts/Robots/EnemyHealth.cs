@@ -7,7 +7,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable <float>
 {
     public float currentHealth = 1;
     public float maxHealth = 1;
-
     public GameObject healthBarUI = null;
     public Slider healthSlider;
 

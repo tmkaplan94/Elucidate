@@ -5,49 +5,23 @@ using UnityEngine.AI;
 
 public class AIMovementScript : MonoBehaviour
 {
-    /*
-    [SerializeField]
-    private float MovementSpeed;
-    [SerializeField]
-    private float RotationSpeed = 100f;
-    [SerializeField]
-    private bool IsConstantlyWalking;
-    [SerializeField]
-    private AI_State CurrentState;
-
-    [SerializeField]
-    private float DetectRadius = 10f;
-    
-    */
     [SerializeField]
     private Transform Target;
     [SerializeField]
     private AIShooting Shooting;
     [SerializeField]
     private AIStats stats;
-
-    /*
-    public Transform firepoint;
-    public GameObject Bullet;
-    public float BulletSpeed = 1000f;
-    public int ShootingSpeed = 35;
-    private int ShootingCount = 0;
-    */
-
     private bool isWandering = false;
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
     private bool isWalking = false;
-
     Rigidbody rb;
     NavMeshAgent agent;
-
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        switch (stats.CurrentState)
+        switch (stats.CurrentState)//Set the walking mode, depending on the AI_State
         {
             case AIStats.AI_State.Wandering:
                 {
@@ -60,8 +34,6 @@ public class AIMovementScript : MonoBehaviour
                 {
                     stats.IsConstantlyWalking = false;
                     isWalking = stats.IsConstantlyWalking;
-                    //stats.DetectRadius *= 2;
-                    //isWalking = true;
                     break;
                 }
 
@@ -69,8 +41,6 @@ public class AIMovementScript : MonoBehaviour
                 {
                     stats.IsConstantlyWalking = true;
                     isWalking = stats.IsConstantlyWalking;
-                    //stats.MovementSpeed *= 2.5f;
-                    //stats.DetectRadius /= 2;
                     break;
                 }
 
@@ -78,109 +48,21 @@ public class AIMovementScript : MonoBehaviour
                 {
                     stats.IsConstantlyWalking = true;
                     isWalking = stats.IsConstantlyWalking;
-                    //stats.MovementSpeed *= 2;
                     break;
                 }
 
             case AIStats.AI_State.Camping:
                 {
                     stats.IsConstantlyWalking = false;
-                    //stats.ShootingSpeed /= 0.25f;
-                    //stats.MovementSpeed /= 0.66f;
-                    //stats.DetectRadius *= 5;
                     agent.stoppingDistance = stats.DetectRadius - 5;
                     break;
                 }
         }
 
     }
-    private void FixedUpdate()
-    {/*
-        float distance = Vector3.Distance(stats.Target.position, transform.position);
-        
-        switch (stats.CurrentState)
-        {
-            case AIStats.AI_State.Wandering:
-                {
-                    stats.IsConstantlyWalking = true;
-                    isWalking = stats.IsConstantlyWalking;
-                    if (distance <= stats.DetectRadius)
-                    {
-                        ActionChasing(distance);
-                    }
-                    else
-                    {
-                        ActionWandering();
-                    }
-                    break;
-                }
-            
-            case AIStats.AI_State.Patroling:
-                {
-                    stats.IsConstantlyWalking = false;
-                    isWalking = stats.IsConstantlyWalking;
-                    stats.DetectRadius *= 2;
-                    //isWalking = true;
-                    if (distance <= stats.DetectRadius)
-                    {
-                        ActionChasing(distance);
-                    }
-                    else
-                    {
-                        ActionWandering();
-                    }
-                    stats.DetectRadius /= 2;
-                    break;
-                }
-
-            case AIStats.AI_State.Sprinting:
-                {
-                    stats.IsConstantlyWalking = true;
-                    isWalking = stats.IsConstantlyWalking;
-                    stats.MovementSpeed *= 2.5f;
-                    stats.DetectRadius /= 2;
-                    if (distance <= stats.DetectRadius)
-                    {
-                        ActionChasing(distance);
-                    }
-                    else
-                    {
-                        ActionWandering();
-                    }
-                    stats.MovementSpeed /= 2.5f;
-                    stats.DetectRadius *= 2;
-                    break;
-                }
-
-            case AIStats.AI_State.RunNGuning:
-                {
-                    stats.IsConstantlyWalking = true; 
-                    isWalking = stats.IsConstantlyWalking;
-                    stats.MovementSpeed *= 2;
-                    int RandomShooting = Random.Range(1, 10);
-                    if (RandomShooting > 5)
-                    {
-                        Shooting.Fire();
-                    }
-                    if (distance <= stats.DetectRadius)
-                    {
-                        ActionChasing(distance);
-                    }
-                    else
-                    {
-                        ActionWandering();
-                    }
-                    stats.MovementSpeed /= 2;
-                    break;
-                }
-
-            case stats.AI_State.Camping:
-                {
-                    stats.IsConstantlyWalking = false;
-                    break;
-                }
-        }
-        */
+    private void FixedUpdate()//Check if player is nearby
+                              //if in range, shoot, otherwise wander
+    {
         float distance = Vector3.Distance(Target.position, transform.position);
         if (stats.CurrentState == AIStats.AI_State.RunNGuning)
         {
@@ -199,7 +81,8 @@ public class AIMovementScript : MonoBehaviour
             ActionWandering();
         }
     }
-    void ActionChasing(float distance)
+    void ActionChasing(float distance)//Chasing player that is in range
+                                      //shoot once close enough
     {
         agent.SetDestination(Target.position);
         if (distance <= agent.stoppingDistance)
@@ -208,7 +91,7 @@ public class AIMovementScript : MonoBehaviour
             Shooting.Fire();
         }
     }
-    void ActionWandering()
+    void ActionWandering()//Mindlessly wander, time and degrees of turns are random
     {
         if (isWandering == false)
         {
@@ -227,7 +110,7 @@ public class AIMovementScript : MonoBehaviour
             rb.transform.position += transform.forward * stats.MovementSpeed;
         }
     }
-    IEnumerator Wander()
+    IEnumerator Wander()//Works with function above
     {
         int RotationTime = Random.Range(1, 3);
         int RoationWait =  Random.Range(1, 3);
@@ -265,33 +148,15 @@ public class AIMovementScript : MonoBehaviour
         }
         isWandering = false;
     }
-    void FaceTarget()
+    void FaceTarget()//Face target to aim properly
     {
         Vector3 direction = (Target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
-    /*
-    void Shoot()
-    {
-        GameObject newBullet = Instantiate(Bullet, firepoint.position, firepoint.rotation);
-        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * BulletSpeed);
-        Destroy(newBullet, 2.0f);
-    }
-    */
-    void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()//Used only to see/test range of AI
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stats.DetectRadius);
     }
-
-    /*public enum AI_State
-    {
-        Wandering,
-        Patroling,
-        Sprinting,
-        RunNGuning,
-        Camping
-    }
-    */
 }

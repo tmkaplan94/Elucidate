@@ -13,22 +13,7 @@ public class AIShooting : MonoBehaviour
     [SerializeField]
     private float BulletSpeed = 1000f;
     private float ShootingCount = 0;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
-    public void Fire()
+    public void Fire()//Made to have a specific firerate
     {
         if (ShootingCount >= stats.ShootingSpeed)
         {
@@ -37,8 +22,7 @@ public class AIShooting : MonoBehaviour
         }
         ShootingCount += 1;
     }
-
-    void Shoot()
+    void Shoot()//Actually fires teh bullet, Code made by Grant.
     {
         GameObject newBullet = Instantiate(Bullet, firepoint.position, firepoint.rotation);
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * BulletSpeed);
