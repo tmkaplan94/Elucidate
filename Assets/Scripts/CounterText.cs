@@ -6,27 +6,39 @@ using TMPro;
 
 public class CounterText : MonoBehaviour
 {
-    [SerializeField] private RobotSpecialList RobotList;
     private TextMeshProUGUI TMPtext;
+    private int enemyCount = 0;
     
     private void OnEnable()
     {
-        GameEventBus.Subscribe(GameEvent.ENEMYKILLED, UpdateText);
+        GameEventBus.Subscribe(GameEvent.ENEMYKILLED, SubtractCount);
+        GameEventBus.Subscribe(GameEvent.ENEMYADDED, AddCount);
         TMPtext = GetComponent<TextMeshProUGUI>();
-    }
-
-    private void Start()
-    {
-        UpdateText();
     }
 
     private void OnDisable()
     {
         GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, UpdateText);
+        GameEventBus.Unsubscribe(GameEvent.ENEMYADDED, UpdateText);
+    }
+
+    private void AddCount()
+    {
+        enemyCount++;
+        UpdateText();
+    }
+    private void SubtractCount()
+    {
+        enemyCount--;
+        UpdateText();
+        if(enemyCount <= 0)
+        {
+            GameEventBus.Publish(GameEvent.WIN);
+        }
     }
 
     private void UpdateText()
     {
-        TMPtext.text = "Enemies: " + RobotList.Count();
+        TMPtext.text = "Enemies: " + enemyCount;
     }
 }

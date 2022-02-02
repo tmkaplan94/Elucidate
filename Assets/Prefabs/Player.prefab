@@ -43,8 +43,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 15
+  m_Intensity: 5
+  m_Range: 20
   m_SpotAngle: 20
   m_InnerSpotAngle: 2
   m_CookieSize: 10
@@ -321,8 +321,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
-  m_Range: 10
+  m_Intensity: 3
+  m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1229,9 +1229,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractObserver
       objectReference: {fileID: 0}
+    - target: {fileID: 4348373678595877867, guid: ef2cbd63f75c21d4dbaa31d70b44c152, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4348373678595877869, guid: ef2cbd63f75c21d4dbaa31d70b44c152, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4491567070949763373, guid: ef2cbd63f75c21d4dbaa31d70b44c152, type: 3}
       propertyPath: uiSubject
@@ -1251,6 +1255,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1811399680997931015}
     m_Modifications:
+    - target: {fileID: 316682701486598345, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 363881290730738629, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
       propertyPath: m_Enabled
       value: 1

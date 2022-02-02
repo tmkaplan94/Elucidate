@@ -16,8 +16,7 @@ public class EnemyHealth : Subject, IDamageable <float>
     {
         currentHealth = maxHealth;
         healthSlider.value = CalculateHealth();
-
-
+        GameEventBus.Publish(GameEvent.ENEMYADDED);
     }
 
     // Update is called once per frame

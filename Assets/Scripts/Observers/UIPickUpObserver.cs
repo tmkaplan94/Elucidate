@@ -24,7 +24,6 @@ public class UIPickUpObserver : Observer
 	private const int notify_InteractUIOFF = 0;
 	void OnEnable()
 	{
-
 		// Subscribes WhenNotified function to delegate _notify
 		uiSubject._notify += WhenNotified;
 

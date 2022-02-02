@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Rocket
   m_EditorClassIdentifier: 
   prefabName: Rocket
-  rpm: 30
-  bulletVelocity: 600
+  rpm: 60
+  bulletVelocity: 800
   bulletSizeScale: 5
   bulletDamage: 100
   muzzleFlashColor: {r: 0, g: 0, b: 0, a: 0}
