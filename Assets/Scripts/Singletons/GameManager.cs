@@ -22,7 +22,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     private static GameEvent _currentStatus;
-    private int enemyCount = 0;
+    [SerializeField] private RobotSpecialList RobotList;
 
     public static GameEvent CurrentStatus()
     {
@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Subscribe(GameEvent.RESUME, ResumeEvent);
         GameEventBus.Subscribe(GameEvent.WIN, WinEvent);
         GameEventBus.Subscribe(GameEvent.LOSS, LossEvent);
-        GameEventBus.Subscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
+        //GameEventBus.Subscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
         GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
     }
 
@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Unsubscribe(GameEvent.RESUME, ResumeEvent);
         GameEventBus.Unsubscribe(GameEvent.WIN, WinEvent);
         GameEventBus.Unsubscribe(GameEvent.LOSS, LossEvent);
-        GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
+        //GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
         GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
     }
 
@@ -72,8 +72,9 @@ public class GameManager : Singleton<GameManager>
 
     private void EnemyKilledEvent()
     {
-        enemyCount--;
-        if(enemyCount <= 0)
+        // OLD
+        RobotList.Pop();
+        if(RobotList.Count() < 0)
         {
             GameEventBus.Publish(GameEvent.WIN);
         }
@@ -96,12 +97,12 @@ public class GameManager : Singleton<GameManager>
     /*************** FIX BEFORE WEDNESDAY *******************/
     private void OnLevelWasLoaded(int level)
     {
-        if(level == 1)
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            enemyCount = enemies.Length;
-        }
-        Debug.Log(enemyCount);
+        // if(level == 1)
+        // {
+        //     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //     enemyCount = enemies.Length;
+        // }
+        //Debug.Log(enemyCount);
     }
     private void PauseEvent()
     {

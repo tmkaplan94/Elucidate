@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Robot : MonoBehaviour
 {
-    public RobotRuntimeSet RobotList;
-
+    [SerializeField] private RobotSpecialList RobotList;
+    private int count = 0;
     private void OnEnable()
     {
         RobotList.Add(this);
+        count++;
+        Debug.Log(count);
     }
 
     private void OnDisable()

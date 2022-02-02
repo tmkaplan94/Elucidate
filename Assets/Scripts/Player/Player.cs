@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public PlayerRuntimeSet PlayerList;
+    [SerializeField] private PlayerSpecialList PlayerList;
 
     private void OnEnable()
     {

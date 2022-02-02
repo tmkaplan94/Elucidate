@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 1827883863963763974}
   - component: {fileID: 1827883863963763973}
   - component: {fileID: 1273625718}
+  - component: {fileID: -1799266810706544581}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Player
@@ -564,6 +565,19 @@ MonoBehaviour:
   firepoint: {fileID: 587287249}
   Bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
   BulletSpeed: 1000
+--- !u!114 &-1799266810706544581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827883863963763980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a07d8b593763a34c8b1c35df1020100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RobotList: {fileID: 11400000, guid: 760919886a918224db1b00b5ce958fbd, type: 2}
 --- !u!1 &1827883864838009758
 GameObject:
   m_ObjectHideFlags: 0

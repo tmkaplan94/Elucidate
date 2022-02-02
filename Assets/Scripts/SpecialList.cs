@@ -22,4 +22,17 @@ public abstract class SpecialList<T> : ScriptableObject
             Items.Remove(item);
         }
     }
+    
+    public void Pop()
+    {
+        if (Count() > 0)
+        {
+            Items.RemoveAt(Count() - 1);
+        }
+    }
+
+    public int Count()
+    {
+        return Items.Count;
+    }
 }

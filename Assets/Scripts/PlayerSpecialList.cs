@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Players", menuName = "ScriptableObject/SpecialListSet/Players")]
 
-public class PlayerRuntimeSet : SpecialList<Player>
+public class PlayerSpecialList : SpecialList<Player>
 {
 
 }

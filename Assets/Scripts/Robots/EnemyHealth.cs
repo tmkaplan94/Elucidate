@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealth : MonoBehaviour, IDamageable <float>
+public class EnemyHealth : Subject, IDamageable <float>
 {
     public float currentHealth = 1;
     public float maxHealth = 1;
@@ -40,6 +40,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable <float>
     {
         GameEventBus.Publish(GameEvent.ENEMYKILLED);
         Destroy(gameObject);
+        Debug.Log("I died!");
     }
 
     public void TakeDamage(float damage)

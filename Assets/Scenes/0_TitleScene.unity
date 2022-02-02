@@ -2888,6 +2888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0fa8bc64bfb98a4ebcc4be79a2123e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RobotList: {fileID: 11400000, guid: 760919886a918224db1b00b5ce958fbd, type: 2}
 --- !u!4 &851120078
 Transform:
   m_ObjectHideFlags: 0
@@ -4380,7 +4381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440149c48b7ad26468ebeae5fa90a4b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuCanvas: {fileID: 717981109}
   _backgroundImage: {fileID: 682372955}
   _titleMenu: {fileID: 421302209}
   _mainMenu: {fileID: 785037466}

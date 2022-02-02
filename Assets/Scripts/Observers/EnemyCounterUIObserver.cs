@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using TMPro;
 
 public class EnemyCounterUIObserver : Observer
 {
-    GameObject[] enemies;
+    [SerializeField] private RobotSpecialList RobotList;
+    
     private TextMeshProUGUI text;
     private const int notify_EnemyUI = 2;
     
@@ -22,10 +24,9 @@ public class EnemyCounterUIObserver : Observer
 
     public override void WhenNotified(int val)
     {
-        if(val == notify_EnemyUI)
-        { 
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            text.text = "Enemies: " + enemies.Length.ToString();
-        }     
+        // if(val == notify_EnemyUI)
+        // {
+        //     text.text = "Enemies: " + RobotList.Count();
+        // } 
     }
 }
