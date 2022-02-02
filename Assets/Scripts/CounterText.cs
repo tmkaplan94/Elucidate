@@ -31,10 +31,6 @@ public class CounterText : MonoBehaviour
     {
         enemyCount--;
         UpdateText();
-        if(enemyCount <= 0)
-        {
-            GameEventBus.Publish(GameEvent.WIN);
-        }
     }
 
     private void UpdateText()
