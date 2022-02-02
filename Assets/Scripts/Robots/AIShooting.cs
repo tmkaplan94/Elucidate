@@ -13,20 +13,14 @@ public class AIShooting : MonoBehaviour
     [SerializeField]
     private float BulletSpeed = 1000f;
     private float ShootingCount = 0;
+    private PlayAudioSource _audio;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _audio = gameObject.GetComponent<PlayAudioSource>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     public void Fire()
     {
@@ -43,5 +37,6 @@ public class AIShooting : MonoBehaviour
         GameObject newBullet = Instantiate(Bullet, firepoint.position, firepoint.rotation);
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * BulletSpeed);
         Destroy(newBullet, 2.0f);
+        _audio.Play();
     }
 }

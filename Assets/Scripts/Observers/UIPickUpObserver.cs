@@ -26,7 +26,6 @@ public class UIPickUpObserver : Observer
 	{
 		// Subscribes WhenNotified function to delegate _notify
 		uiSubject._notify += WhenNotified;
-
 	}
 	void OnDisable()
 	{

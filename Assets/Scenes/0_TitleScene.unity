@@ -2690,12 +2690,12 @@ MonoBehaviour:
     mute: 0
     awake: 0
     loop: 1
-  - name: LazerShoot
+  - name: LaserShoot
     clip: {fileID: 8300000, guid: 1ffa8692870bd6b41a07217327ee7e1a, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
-    volume: 0.1
-    pitch: 0.67
-    spatial: 0
+    volume: 1
+    pitch: 1
+    spatial: 1
     mute: 0
     awake: 0
     loop: 0
@@ -2888,7 +2888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0fa8bc64bfb98a4ebcc4be79a2123e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RobotList: {fileID: 11400000, guid: 760919886a918224db1b00b5ce958fbd, type: 2}
 --- !u!4 &851120078
 Transform:
   m_ObjectHideFlags: 0
