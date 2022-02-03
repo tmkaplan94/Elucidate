@@ -1,41 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Brian Caballero
+ * Contributors:
+ * Description: Deals with enemy shooting.
+ */
 using UnityEngine;
 
+[RequireComponent(typeof(PlayAudioSource))]
 public class AIShooting : MonoBehaviour
 {
-    [SerializeField]
-    private AIStats stats;
-    [SerializeField]
-    private Transform firepoint;
-    [SerializeField]
-    private GameObject Bullet;
-    [SerializeField]
-    private float BulletSpeed = 1000f;
-    private float ShootingCount = 0;
+    // editor exposed fields
+    [SerializeField] private AIStats stats;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private float bulletSpeed;
+    
+    // private fields
+    private Transform _firePoint;
     private PlayAudioSource _audio;
+    private float _shootingCount;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        _firePoint = transform.GetChild(3).GetChild(0).transform;
         _audio = gameObject.GetComponent<PlayAudioSource>();
+        _shootingCount = 0;
     }
 
+    // regulates shooting speed
     public void Fire()
     {
-        if (ShootingCount >= stats.ShootingSpeed)
+        if (_shootingCount >= stats.shootingSpeed)
         {
             Shoot();
-            ShootingCount = 0;
+            _shootingCount = 0;
         }
-        ShootingCount += 1;
+        _shootingCount += 1;
     }
 
-    void Shoot()
+    // instantiates a projectile, adds a force, and plays a sound
+    private void Shoot()
     {
-        GameObject newBullet = Instantiate(Bullet, firepoint.position, firepoint.rotation);
-        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * BulletSpeed);
+        GameObject newBullet = Instantiate(bullet, _firePoint.position, _firePoint.rotation);
+        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * bulletSpeed);
         Destroy(newBullet, 2.0f);
         _audio.Play();
     }

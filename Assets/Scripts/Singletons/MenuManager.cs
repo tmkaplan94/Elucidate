@@ -1,8 +1,14 @@
+/*
+ * Author: Tyler Kaplan
+ * Contributors:
+ * Description: AudioManager configures and plays all sound at specified audio source.
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuManager : Singleton<MenuManager>
 {
+    // canvas items needed to control different menus
     [SerializeField] private Image _backgroundImage;
     [SerializeField] private GameObject _titleMenu;
     [SerializeField] private GameObject _mainMenu;
@@ -12,6 +18,7 @@ public class MenuManager : Singleton<MenuManager>
     [SerializeField] private GameObject _winMenu;
     [SerializeField] private GameObject _lossMenu;
 
+    // subscribe to game events to display certain menus
     private void OnEnable()
     {
         GameEventBus.Subscribe(GameEvent.TITLE, SetDefaultMenus);
@@ -27,6 +34,7 @@ public class MenuManager : Singleton<MenuManager>
         SetDefaultMenus();
     }
 
+    // unsubscribe from game events that display certain menus
     private void OnDisable()
     {
         GameEventBus.Unsubscribe(GameEvent.START, DeactivateTitleMenus);
@@ -37,6 +45,7 @@ public class MenuManager : Singleton<MenuManager>
         GameEventBus.Unsubscribe(GameEvent.TITLE, SetDefaultMenus);
     }
 
+    // sets title scene menu on, and turns all others off
     private void SetDefaultMenus()
     {
         _titleMenu.SetActive(true);
@@ -52,7 +61,8 @@ public class MenuManager : Singleton<MenuManager>
         float b = _backgroundImage.color.b;
         _backgroundImage.color = new Color(r, g, b, 255);
     }
-
+    
+    // toggles the proper menus on and off
     #region Public Menu Functions
 
     public void ActivateMainMenu()
@@ -110,7 +120,8 @@ public class MenuManager : Singleton<MenuManager>
     }
 
     #endregion
-
+    
+    // functions needed for OnClick events
     #region Public GameEvent Functions
 
     public void PlayGame()
