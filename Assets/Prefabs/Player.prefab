@@ -618,7 +618,6 @@ GameObject:
   - component: {fileID: -4894384122771066231}
   - component: {fileID: 8161060602880937806}
   - component: {fileID: -9029554910136566010}
-  - component: {fileID: -6548717943086390558}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -735,11 +734,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11f225260a132544b8ff97be9e2124a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   maxHealth: 100
-  currentWeapon: {fileID: 6828003175341134086, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
   moveSpeed: 10
   pickupRange: 10
+  currentWeapon: {fileID: 6828003175341134086, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
+  currentItem: {fileID: 0}
 --- !u!114 &1811399681661353721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,19 +836,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811399681661353713}
   m_Enabled: 1
---- !u!114 &-6548717943086390558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811399681661353713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0df0787f92926a49a2188c9940b75cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RobotList: {fileID: 11400000, guid: 760919886a918224db1b00b5ce958fbd, type: 2}
 --- !u!1 &9180390734654542929
 GameObject:
   m_ObjectHideFlags: 0

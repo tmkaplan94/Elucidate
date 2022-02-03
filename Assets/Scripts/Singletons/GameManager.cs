@@ -1,21 +1,10 @@
 /*
- * Version - 1.0
- * Date - 01/10/2022
- * Description - GameManager controls the flow of the game.
- * Summary
- *  - GameManager extends Singleton, which extends MonoBehavior.
- *  - Currently, it manages the scene transitions from TitleScene to LevelOne.
- *  - Session duration is captured to test that Singleton design is working,
- *    ie. the GameManager persists across scene transitions
- * 
- * Author - Tyler Kaplan
- * Contributors
- *  - 
+ * Author: Tyler Kaplan
+ * Contributors: Grant Reed
+ * Description: GameManager controls and maintains the flow of the game.
+ *
+ * GameManager extends Singleton, which extends MonoBehavior.
  */
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +17,7 @@ public class GameManager : Singleton<GameManager>
         return _currentStatus;
     }
 
+    // subscribe all event functions to game events
     private void OnEnable()
     {
         GameEventBus.Subscribe(GameEvent.TITLE, TitleEvent);
@@ -42,12 +32,14 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
     }
 
+    // initially set the game status
     private void Start()
     {
         _currentStatus = GameEvent.TITLE;
         Debug.Log("Current game status: " + _currentStatus);
     }
 
+    // unsubscribe all event functions fromk game events
     private void OnDisable()
     {
         GameEventBus.Unsubscribe(GameEvent.TITLE, TitleEvent);
@@ -62,6 +54,7 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
     }
 
+    // event functions update the current game status and dictate the behaviors that happen on event
     #region Private Event Functions
 
     private void TitleEvent()

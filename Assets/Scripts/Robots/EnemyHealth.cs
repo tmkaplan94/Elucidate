@@ -1,39 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Brian Caballero
+ * Contributors: Grant Reed
+ * Description: Displays and updates enemy health above their heads.
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyHealth : Subject, IDamageable <float>
 {
-    public float currentHealth = 1;
-    public float maxHealth = 1;
-    public GameObject healthBarUI = null;
-    public Slider healthSlider;
+    // editor exposed fields
+    [SerializeField] private float maxHealth;
+    [SerializeField] private GameObject healthBarUI;
+    [SerializeField] private Slider healthSlider;
+    
+    // private fields
+    private float _currentHealth;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        currentHealth = maxHealth;
+        _currentHealth = maxHealth;
         healthSlider.value = CalculateHealth();
         GameEventBus.Publish(GameEvent.ENEMYADDED);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         
         healthSlider.value = CalculateHealth();
-        if (currentHealth < maxHealth)
+        if (_currentHealth < maxHealth)
         {
             healthBarUI.SetActive(true);
         }
         
-        if (currentHealth > maxHealth)
+        if (_currentHealth > maxHealth)
         {
-            currentHealth = maxHealth;
+            _currentHealth = maxHealth;
         }
     }
 
+    // IDamagable method to decrement _health, calls Die() if _health reaches 0.
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+        if (_currentHealth <= 0)
+        {
+            Kill();
+        }
+    }
+    
+    // IDamageable method to die if _health has reached 0.
     public void Kill()
     {
         GameEventBus.Publish(GameEvent.ENEMYKILLED);
@@ -41,17 +56,9 @@ public class EnemyHealth : Subject, IDamageable <float>
         Debug.Log("I died!");
     }
 
-    public void TakeDamage(float damage)
+    // Calculate and return health.
+    private float CalculateHealth()
     {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Kill();
-        }
-    }
-
-    float CalculateHealth()
-    {
-        return currentHealth / maxHealth;
+        return _currentHealth / maxHealth;
     }
 }

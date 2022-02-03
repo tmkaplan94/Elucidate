@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+/*
+ * Author: Tyler Kaplan
+ * Contributors:
+ * Description: Creates an event bus for game events.
+ */
 
-public class GameEventBus : EventBus<GameEvent>
-{
-    
-}
+public class GameEventBus : EventBus<GameEvent> { }
