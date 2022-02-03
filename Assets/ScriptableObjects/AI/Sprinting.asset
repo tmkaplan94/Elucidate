@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Sprinting
   m_EditorClassIdentifier: 
-  CurrentState: 2
-  MovementSpeed: 0.3
-  RotationSpeed: 100
-  IsConstantlyWalking: 1
-  DetectRadius: 5
-  ShootingSpeed: 30
+  currentState: 2
+  movementSpeed: 0.3
+  rotationSpeed: 100
+  isConstantlyWalking: 1
+  detectRadius: 5
+  shootingSpeed: 30

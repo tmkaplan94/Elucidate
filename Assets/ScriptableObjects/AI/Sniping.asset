@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Sniping
   m_EditorClassIdentifier: 
-  CurrentState: 4
-  MovementSpeed: 0.06
-  RotationSpeed: 100
-  IsConstantlyWalking: 0
-  DetectRadius: 35
-  ShootingSpeed: 30
+  currentState: 4
+  movementSpeed: 0.06
+  rotationSpeed: 100
+  isConstantlyWalking: 0
+  detectRadius: 35
+  shootingSpeed: 30

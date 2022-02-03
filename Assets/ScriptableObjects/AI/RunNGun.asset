@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: RunNGun
   m_EditorClassIdentifier: 
-  CurrentState: 3
-  MovementSpeed: 0.28
-  RotationSpeed: 100
-  IsConstantlyWalking: 1
-  DetectRadius: 10
-  ShootingSpeed: 30
+  currentState: 3
+  movementSpeed: 0.28
+  rotationSpeed: 100
+  isConstantlyWalking: 1
+  detectRadius: 10
+  shootingSpeed: 30
