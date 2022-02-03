@@ -1,7 +1,7 @@
 /*
  * Author: Brian Caballero
  * Contributors: Grant Reed
- * Description: 
+ * Description: Displays and updates enemy health above their heads.
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,17 +9,16 @@ using UnityEngine.UI;
 public class EnemyHealth : Subject, IDamageable <float>
 {
     // editor exposed fields
+    [SerializeField] private float maxHealth;
+    [SerializeField] private GameObject healthBarUI;
+    [SerializeField] private Slider healthSlider;
     
     // private fields
-    
-    public float currentHealth = 1;
-    public float maxHealth = 1;
-    public GameObject healthBarUI = null;
-    public Slider healthSlider;
-    
+    private float _currentHealth;
+
     void Start()
     {
-        currentHealth = maxHealth;
+        _currentHealth = maxHealth;
         healthSlider.value = CalculateHealth();
         GameEventBus.Publish(GameEvent.ENEMYADDED);
     }
@@ -28,17 +27,28 @@ public class EnemyHealth : Subject, IDamageable <float>
     {
         
         healthSlider.value = CalculateHealth();
-        if (currentHealth < maxHealth)
+        if (_currentHealth < maxHealth)
         {
             healthBarUI.SetActive(true);
         }
         
-        if (currentHealth > maxHealth)
+        if (_currentHealth > maxHealth)
         {
-            currentHealth = maxHealth;
+            _currentHealth = maxHealth;
         }
     }
 
+    // IDamagable method to decrement _health, calls Die() if _health reaches 0.
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+        if (_currentHealth <= 0)
+        {
+            Kill();
+        }
+    }
+    
+    // IDamageable method to die if _health has reached 0.
     public void Kill()
     {
         GameEventBus.Publish(GameEvent.ENEMYKILLED);
@@ -46,17 +56,9 @@ public class EnemyHealth : Subject, IDamageable <float>
         Debug.Log("I died!");
     }
 
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Kill();
-        }
-    }
-
+    // Calculate and return health.
     float CalculateHealth()
     {
-        return currentHealth / maxHealth;
+        return _currentHealth / maxHealth;
     }
 }

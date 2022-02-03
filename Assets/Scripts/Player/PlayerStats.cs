@@ -14,8 +14,6 @@ using UnityEngine;
 
 public class PlayerStats : Subject, IDamageable<float>
 {
-    // const tags and flags for the pickup system
-    
     // editor exposed fields
     [SerializeField] private float maxHealth;
     [SerializeField] private float moveSpeed;

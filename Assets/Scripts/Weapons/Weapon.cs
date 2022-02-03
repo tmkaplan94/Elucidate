@@ -1,17 +1,9 @@
-using UnityEngine;
-
-/**
- * version 1.0
- * Date: 1/22/2022
- * Description: Defines information needed for Weapon objects
- * 
- * Notes: 1.0 Added basic information for a family of objects.
- *
- *        
+/*
  * Author: Grant Reed
  * Contributors:
- * 
+ * Description: Defines information needed to create ScriptableObject weapons from editor.
  */
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObject/Weapon")]
 public class Weapon : ScriptableObject

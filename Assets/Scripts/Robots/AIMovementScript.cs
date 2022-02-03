@@ -40,40 +40,40 @@ public class AIMovementScript : MonoBehaviour
         _isWalking = false;
         
         // Set the walking mode, depending on the AIState.
-        switch (stats.CurrentState)
+        switch (stats.currentState)
         {
-            case AIStats.AIState.Wandering:
+            case AIState.Wandering:
                 {
-                    stats.IsConstantlyWalking = true;
-                    _isWalking = stats.IsConstantlyWalking;
+                    stats.isConstantlyWalking = true;
+                    _isWalking = stats.isConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AIState.Patrolling:
+            case AIState.Patrolling:
                 {
-                    stats.IsConstantlyWalking = false;
-                    _isWalking = stats.IsConstantlyWalking;
+                    stats.isConstantlyWalking = false;
+                    _isWalking = stats.isConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AIState.Sprinting:
+            case AIState.Sprinting:
                 {
-                    stats.IsConstantlyWalking = true;
-                    _isWalking = stats.IsConstantlyWalking;
+                    stats.isConstantlyWalking = true;
+                    _isWalking = stats.isConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AIState.RunNGun:
+            case AIState.RunNGun:
                 {
-                    stats.IsConstantlyWalking = true;
-                    _isWalking = stats.IsConstantlyWalking;
+                    stats.isConstantlyWalking = true;
+                    _isWalking = stats.isConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AIState.Camping:
+            case AIState.Camping:
                 {
-                    stats.IsConstantlyWalking = false;
-                    _navMeshAgent.stoppingDistance = stats.DetectRadius - 5;
+                    stats.isConstantlyWalking = false;
+                    _navMeshAgent.stoppingDistance = stats.detectRadius - 5;
                     break;
                 }
         }
@@ -84,7 +84,7 @@ public class AIMovementScript : MonoBehaviour
     private void FixedUpdate()
     {
         float distance = Vector3.Distance(_target.position, transform.position);
-        if (stats.CurrentState == AIStats.AIState.RunNGun)
+        if (stats.currentState == AIState.RunNGun)
         {
             int randomShooting = Random.Range(1, 10);
             if (randomShooting > 5)
@@ -92,7 +92,7 @@ public class AIMovementScript : MonoBehaviour
                 _shooting.Fire();
             }
         }
-        if (distance <= stats.DetectRadius)
+        if (distance <= stats.detectRadius)
         {
             ActionChasing(distance);
         }
@@ -122,15 +122,15 @@ public class AIMovementScript : MonoBehaviour
         }
         if (_isRotatingRight == true)
         {
-            transform.Rotate(transform.up * Time.deltaTime * stats.RotationSpeed);
+            transform.Rotate(transform.up * Time.deltaTime * stats.rotationSpeed);
         }
         if (_isRotatingLeft == true)
         {
-            transform.Rotate(transform.up * Time.deltaTime * -stats.RotationSpeed);
+            transform.Rotate(transform.up * Time.deltaTime * -stats.rotationSpeed);
         }
         if (_isWalking == true)
         {
-            _rigidbody.transform.position += transform.forward * stats.MovementSpeed;
+            _rigidbody.transform.position += transform.forward * stats.movementSpeed;
         }
     }
     
@@ -145,7 +145,7 @@ public class AIMovementScript : MonoBehaviour
 
 
         _isWandering = true;
-        if (stats.IsConstantlyWalking == true)
+        if (stats.isConstantlyWalking == true)
         {
             yield return new WaitForSeconds(0);
             yield return new WaitForSeconds(walkTime);
@@ -186,6 +186,6 @@ public class AIMovementScript : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats.DetectRadius);
+        Gizmos.DrawWireSphere(transform.position, stats.detectRadius);
     }
 }

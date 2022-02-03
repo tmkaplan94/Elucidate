@@ -1,14 +1,7 @@
 /*
- * Version - 1.1
- * Date - 01/27/2022
- * Description - AudioManager manages/plays all audio sources.
- * Summary
- *  - AudioManager extends Singleton, which extends MonoBehavior.
- *  - contains a varying list of all sounds
- *  - all objects rely on AudioManager to play audio
- * 
- * Author - Tyler Kaplan
- * Contributors - 
+ * Author: Tyler Kaplan
+ * Contributors:
+ * Description: AudioManager configures and plays all sound at specified audio source.
  */
 using System;
 using UnityEngine;

@@ -1,18 +1,12 @@
 /*
- * Version - 1.0
- * Date - 01/22/2022
- * Description - Sound is a custom class used by the AudioManager.
- * Summary
- *  - Sound has parameters for easy edit in AudioManager.
- * 
- * Author - Tyler Kaplan
- * Contributors
- *  - 
+ * Author: Tyler Kaplan
+ * Contributors:
+ * Description: Sound is a custom class used by the AudioManager.
+ *
+ * Sound has parameters for easy edit in AudioManager.
  */
-
 using UnityEngine;
 using UnityEngine.Audio;
-
 
 [System.Serializable]
 public class Sound

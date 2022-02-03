@@ -28,7 +28,7 @@ public class AIShooting : MonoBehaviour
     // regulates shooting speed
     public void Fire()
     {
-        if (_shootingCount >= stats.ShootingSpeed)
+        if (_shootingCount >= stats.shootingSpeed)
         {
             Shoot();
             _shootingCount = 0;

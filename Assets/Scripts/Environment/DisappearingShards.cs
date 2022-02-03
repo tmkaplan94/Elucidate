@@ -1,44 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Alex Pham
+ * Contributors:
+ * Description: Displays animation for disappearing shards.
+ */
 using UnityEngine;
 
 public class DisappearingShards : MonoBehaviour
 {
-    public float desiredAlpha;
-    public float currAlpha;
-    public float timeRemaining = 1.2f;
-    Material[] currMaterial;
-    float disappearTime;
-
-    private Color currColor1;
-    private Color currColor2;
-
-    // Start is called before the first frame update
+    // private fields
+    private Material[] _currentMaterials;
+    private Color _insideMeshColor;
+    private Color _outsideMeshColor;
+    private float _currentAlpha;
+    private float _desiredAlpha;
+    private float _timeRemaining;
+    private float _disappearTime;
+    
     void Start()
     {
-        currMaterial = GetComponent<Renderer>().materials;
-        currColor1 = currMaterial[0].color;
-        currColor2 = currMaterial[1].color;
-        disappearTime = timeRemaining - .1f;
+        _currentMaterials = GetComponent<Renderer>().materials;
+        _insideMeshColor = _currentMaterials[0].color;
+        _outsideMeshColor = _currentMaterials[1].color;
+        _currentAlpha = 1;
+        _desiredAlpha = 0;
+        _timeRemaining = 1.2f;
+        _disappearTime = _timeRemaining - .1f;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        timeRemaining -= Time.deltaTime;
-        if (timeRemaining <= 0)
+        _timeRemaining -= Time.deltaTime;
+        if (_timeRemaining <= 0)
         {
             destroyParent();
         }
-        if (timeRemaining <= disappearTime )
+        if (_timeRemaining <= _disappearTime )
         {
             GetComponent<MeshCollider>().isTrigger = true;
         }
-        currAlpha = Mathf.MoveTowards(currAlpha, desiredAlpha, 1.0f * Time.deltaTime);
-        currColor1.a = currAlpha;
-        currColor2.a = currAlpha;
-        currMaterial[0].color = currColor1;
-        currMaterial[1].color = currColor2;
+        _currentAlpha = Mathf.MoveTowards(_currentAlpha, _desiredAlpha, 1.0f * Time.deltaTime);
+        _insideMeshColor.a = _currentAlpha;
+        _outsideMeshColor.a = _currentAlpha;
+        _currentMaterials[0].color = _insideMeshColor;
+        _currentMaterials[1].color = _outsideMeshColor;
     }
 
     void destroyParent()

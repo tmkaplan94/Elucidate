@@ -1,14 +1,8 @@
 /*
- * Version - 1.0
- * Date - 01/29/2022
- * Description - Plays named audio on Start.
- * Summary
- * 
- * Author - Tyler Kaplan
- * Contributors - 
+ * Author: Tyler Kaplan
+ * Contributors: 
+ * Description: Sends named audio with source to AudioManager to configure and play.
  */
-
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -36,9 +30,9 @@ public class PlayAudioSource : MonoBehaviour
         }   
     }
 
+    // AudioSource needs to rely on AudioManager configurations
     public void Play()
     {
-        // AudioSource needs to rely on AudioManager configurations
         _audioManager.GetComponent<AudioManager>().ConfigureAudio(_audioSource, _name);
     }
 }

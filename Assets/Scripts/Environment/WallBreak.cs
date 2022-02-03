@@ -1,31 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Alex Pham
+ * Contributors:
+ * Description: Provides health stat to breakable wall.
+ */
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WallBreak : MonoBehaviour, IDamageable <float>
 {
-    public GameObject wallShattered;
-    public float currHealth = 1;
-    public float maxHealth = 1;
-    public float minHealth = 1;
-    // Start is called before the first frame update
+    // editor exposed fields
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float minHealth;
+    [SerializeField] private GameObject wallShattered;
+    
+    // private fields
+    private float _currentHealth;
+    
     void Start()
     {
+        _currentHealth = maxHealth;
+        
         //get a random number from 20 to 35 for wall health
         maxHealth = Random.Range(minHealth, maxHealth);
-        currHealth = maxHealth;
+        _currentHealth = maxHealth;
     }
 
-
+    // IDamagable method to decrement _currentHealth, calls Die() if _health reaches 0.
     public void TakeDamage(float dmg)
     {
-        currHealth -= dmg;
-        if (currHealth <= 0)
+        _currentHealth -= dmg;
+        if (_currentHealth <= 0)
         {
             Kill();
         }
     }
 
+    // IDamageable method to break wall if _health has reached 0.
     public void Kill()
     {
         gameObject.SetActive(false);
