@@ -15,14 +15,12 @@ using UnityEngine;
 public class PlayerStats : Subject, IDamageable<float>
 {
     // editor exposed fields
+    [SerializeField] private float _health;
     [SerializeField] private float maxHealth;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float pickupRange;
     [SerializeField] private GameObject currentWeapon;
-    [SerializeField] private GameObject currentItem;
-    
-    // private fields
-    private float _health;
+    //[SerializeField] private GameObject currentItem;
     
     #region Properties
     
@@ -49,11 +47,6 @@ public class PlayerStats : Subject, IDamageable<float>
     public GameObject CurrentWeapon
     {
         get => currentWeapon;
-        set => currentWeapon = value;
-    }
-    public GameObject CurrentItem
-    {
-        get => currentItem;
         set => currentWeapon = value;
     }
 

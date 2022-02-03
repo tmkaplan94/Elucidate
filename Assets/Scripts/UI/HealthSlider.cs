@@ -12,17 +12,17 @@ public class HealthSlider : Observer
     [SerializeField] private Slider slider;
     [SerializeField] private PlayerStats stats;
 
-    // subscribes to observer
+    // subscribes to subject
     private void OnEnable()
     {
-        stats._notify += WhenNotified;
+        uiSubject._notify += WhenNotified;
         UpdateValue();
     }
-    
-    // unsubscribes from observer
+
+    // unsubscribes from subject
     private void OnDisable()
     {
-        stats._notify -= WhenNotified;
+        uiSubject._notify -= WhenNotified;
     }
 
     // function to be called when notified

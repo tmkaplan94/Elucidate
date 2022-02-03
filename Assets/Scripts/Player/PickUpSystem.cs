@@ -46,10 +46,6 @@ public class PickUpSystem : Subject
                 DropCurrentWeapon();
                 PickupWeapon(other.transform.parent.gameObject);
             }
-            else if (other.transform.CompareTag(ItemTag))
-            {
-                PickupItem(other.gameObject);
-            }
         }
     }
     
@@ -89,28 +85,6 @@ public class PickUpSystem : Subject
         {
             Notify(NotifyWeaponUI);
         }
-    }
-
-    // picks up a new item
-    private void PickupItem(GameObject newItem)
-    {
-        _stats.CurrentItem = newItem;
-
-        newItem.GetComponent<BoxCollider>().enabled = false;
-        newItem.GetComponent<Rigidbody>().isKinematic = true;
-        newItem.transform.parent = hand;
-        newItem.transform.position = hand.position;
-        newItem.transform.rotation = hand.rotation;
-
-    }
-
-    // drops current item
-    private void DropCurrentItem()
-    {
-        _stats.CurrentItem.transform.parent = null;
-        _stats.CurrentItem.transform.position = dropPoint.position;
-        _stats.CurrentItem.GetComponent<Rigidbody>().isKinematic = false;
-        _stats.CurrentItem.GetComponent<BoxCollider>().enabled = true;
     }
     
     // drops current weapon
