@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using TMPro;
-/**
- * version: 0.8
- * Date: 1/27/2022
- * Description: The UISystem is an Observer that will observe any object that it subscribes to. Then it will display UI based on
- *				that subject.
- *
- * Notes: 
- * 
+
+/*
  * Author: Loc Trinh
  * Contributors: Grant Reed
- * 
+ * Description: The UISystem is an Observer that will observe any object that it subscribes to. Then it will display UI based on
+ *				that subject.
  */
 
 public class UIPickUpObserver : Observer
@@ -20,6 +13,7 @@ public class UIPickUpObserver : Observer
 	[SerializeField]
 	private GameObject text;
 
+	//Defining event constants to check against when notified.
 	private const int notify_InteractUION = 1;
 	private const int notify_InteractUIOFF = 0;
 	void OnEnable()

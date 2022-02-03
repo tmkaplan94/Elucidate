@@ -17,12 +17,6 @@ public class WeaponFiring : MonoBehaviour
     // private fields
     private PlayAudioSource _audio;
     private float _nextFireTime;
-    // private PhotonView view;
-
-    // private void OnEnable()
-    // {
-    //     //view = GetComponentInParent<PhotonView>();   
-    // }
     
     private void Start()
     {

@@ -12,9 +12,6 @@ public class Bullet : MonoBehaviour
 {
     // editor exposed fields
     [SerializeField] private float damage;
-
-    // private fields
-    //private PhotonView _view;
     
     // properties
     public float Damage
@@ -23,18 +20,10 @@ public class Bullet : MonoBehaviour
         set => damage = value;
     }
 
-    // private void Start()
-    // {
-    //     _view = GetComponent<PhotonView>();
-    // }
-    
     private void OnTriggerEnter(Collider other)
     {
-        // if (view.IsMine)
-        //{
             other.GetComponent<IDamageable<float>>().TakeDamage(damage);
             Destroy(gameObject);
-        //}
     }
     
 }
