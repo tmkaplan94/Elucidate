@@ -16,7 +16,7 @@ public class DisappearingShards : MonoBehaviour
     private float _timeRemaining;
     private float _disappearTime;
     
-    void Start()
+    private void Start()
     {
         _currentMaterials = GetComponent<Renderer>().materials;
         _insideMeshColor = _currentMaterials[0].color;
@@ -27,7 +27,7 @@ public class DisappearingShards : MonoBehaviour
         _disappearTime = _timeRemaining - .1f;
     }
     
-    void Update()
+    private void Update()
     {
         _timeRemaining -= Time.deltaTime;
         if (_timeRemaining <= 0)
@@ -45,7 +45,7 @@ public class DisappearingShards : MonoBehaviour
         _currentMaterials[1].color = _outsideMeshColor;
     }
 
-    void destroyParent()
+    private void destroyParent()
     {
         Destroy(transform.parent.gameObject);
     }

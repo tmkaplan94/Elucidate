@@ -103,7 +103,7 @@ public class AIMovementScript : MonoBehaviour
     }
     
     // Chasing player that is in range shoot once close enough
-    void ActionChasing(float distance)
+    private void ActionChasing(float distance)
     {
         _navMeshAgent.SetDestination(_target.position);
         if (distance <= _navMeshAgent.stoppingDistance)
@@ -114,7 +114,7 @@ public class AIMovementScript : MonoBehaviour
     }
     
     // mindlessly wander, time and degrees of turns are random
-    void ActionWandering()
+    private void ActionWandering()
     {
         if (_isWandering == false)
         {
@@ -135,7 +135,7 @@ public class AIMovementScript : MonoBehaviour
     }
     
     // Works with function above.
-    IEnumerator Wander()
+    private IEnumerator Wander()
     {
         int rotationTime = Random.Range(1, 3);
         int rotationWait =  Random.Range(1, 3);
@@ -175,7 +175,7 @@ public class AIMovementScript : MonoBehaviour
     }
     
     // Face target to aim properly
-    void FaceTarget()
+    private void FaceTarget()
     {
         Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
@@ -183,7 +183,7 @@ public class AIMovementScript : MonoBehaviour
     }
     
     // Used only to see/test range of AI
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stats.detectRadius);

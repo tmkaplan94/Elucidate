@@ -30,7 +30,7 @@ public class WeaponFiring : MonoBehaviour
         _nextFireTime = 0.0f;
     }
 
-    void Update()
+    private void Update()
     {
         /*if (view.IsMine)
         {*/
@@ -52,13 +52,13 @@ public class WeaponFiring : MonoBehaviour
         newBullet.transform.localScale *= weaponType.bulletSizeScale;
         newBullet.GetComponent<Bullet>().Damage = weaponType.bulletDamage;
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.bulletVelocity);
-        muzzleFlash();
+        MuzzleFlash();
         _audio.Play();
         Destroy(newBullet, 2.0f);
     }
     
-    // The muzzleFlash method will create a muzzle flash object emitting a yellow light at the location the gun shoots briefly, then destroy itself. 
-    private void muzzleFlash()
+    // The MuzzleFlash method will create a muzzle flash object emitting a yellow light at the location the gun shoots briefly, then destroy itself. 
+    private void MuzzleFlash()
     {
         GameObject muzzle = new GameObject("Muzzle Flash");
         Light muzzleFlashLight = muzzle.AddComponent<Light>();

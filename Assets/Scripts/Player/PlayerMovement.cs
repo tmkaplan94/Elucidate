@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private float _moveZ;
     //private PhotonView _view;
 
-    void Start()
+    private void Start()
     {
         // cache needed components
         _camera = Camera.main;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         _moveSpeed = _stats.MoveSpeed;
     }
 
-    void Update()
+    private void Update()
     {
         //if (view.IsMine)
         // {

@@ -6,7 +6,7 @@
 
 public interface IDamageable<T>
 {
-    void TakeDamage(T damage);
-    void Kill();
+    public void TakeDamage(T damage);
+    public void Kill();
 }
 

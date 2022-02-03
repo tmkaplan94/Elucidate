@@ -8,7 +8,6 @@
  * It is not currently thread safe.
  * Class is templated, so that it can be used with any object/component.
  */
-
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Component

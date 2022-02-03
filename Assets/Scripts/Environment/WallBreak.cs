@@ -16,7 +16,7 @@ public class WallBreak : MonoBehaviour, IDamageable <float>
     // private fields
     private float _currentHealth;
     
-    void Start()
+    private void Start()
     {
         _currentHealth = maxHealth;
         

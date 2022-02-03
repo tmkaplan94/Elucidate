@@ -8,7 +8,6 @@
  * To use, Subscribe() should be called in OnEnable() and
  * Unsubscribe() needs to be called per every Subscribe() in OnDisable(). (don't forget)
  */
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;

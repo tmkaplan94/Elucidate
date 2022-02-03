@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour
     // editor exposed fields
     [SerializeField] private Transform playerTransform;
     
-    void Update()
+    private void Update()
     {
         transform.position = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
     }

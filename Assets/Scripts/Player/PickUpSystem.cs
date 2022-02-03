@@ -29,7 +29,7 @@ public class PickUpSystem : Subject
     private PlayerStats _stats;
     private Transform _playerTransform;
 
-    void Start()
+    private void Start()
     {
         // cache needed components
         _stats = GetComponent<PlayerStats>();
@@ -52,6 +52,7 @@ public class PickUpSystem : Subject
             }
         }
     }
+    
     // notify the observer to display UI when in range of weapon
     private void OnTriggerEnter(Collider other)
     {

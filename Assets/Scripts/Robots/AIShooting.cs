@@ -18,7 +18,7 @@ public class AIShooting : MonoBehaviour
     private PlayAudioSource _audio;
     private float _shootingCount;
 
-    void Start()
+    private void Start()
     {
         _firePoint = transform.GetChild(3).GetChild(0).transform;
         _audio = gameObject.GetComponent<PlayAudioSource>();
@@ -37,7 +37,7 @@ public class AIShooting : MonoBehaviour
     }
 
     // instantiates a projectile, adds a force, and plays a sound
-    void Shoot()
+    private void Shoot()
     {
         GameObject newBullet = Instantiate(bullet, _firePoint.position, _firePoint.rotation);
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * bulletSpeed);

@@ -16,14 +16,14 @@ public class EnemyHealth : Subject, IDamageable <float>
     // private fields
     private float _currentHealth;
 
-    void Start()
+    private void Start()
     {
         _currentHealth = maxHealth;
         healthSlider.value = CalculateHealth();
         GameEventBus.Publish(GameEvent.ENEMYADDED);
     }
     
-    void Update()
+    private void Update()
     {
         
         healthSlider.value = CalculateHealth();
@@ -57,7 +57,7 @@ public class EnemyHealth : Subject, IDamageable <float>
     }
 
     // Calculate and return health.
-    float CalculateHealth()
+    private float CalculateHealth()
     {
         return _currentHealth / maxHealth;
     }
