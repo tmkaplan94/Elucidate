@@ -29,28 +29,34 @@ public class PlayerStats : Subject, IDamageable<float>
     #region Properties
     
     public float MaxHealth
-    { 
-        get; set;
+    {
+        get => maxHealth;
+        set => maxHealth = value;
     }
     public float Health
     {
-        get; set;
+        get => _health;
+        set => _health = value;
     }
     public float MoveSpeed
     {
-        get; set;
+        get => moveSpeed;
+        set => moveSpeed = value;
     }
     public float PickUpRange
     {
-        get; set;
+        get => pickupRange;
+        set => pickupRange = value;
     }
     public GameObject CurrentWeapon
     {
-        get; set;
+        get => currentWeapon;
+        set => currentWeapon = value;
     }
     public GameObject CurrentItem
     {
-        get; set;
+        get => currentItem;
+        set => currentWeapon = value;
     }
 
     #endregion

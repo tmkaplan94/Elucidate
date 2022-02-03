@@ -1,23 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Brian Caballero
+ * Contributors:
+ * Description: Enables designer to create new AIStat ScriptableObject.
+ */
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AIStats", menuName = "ScriptableObject/AIStats")]
 public class AIStats : ScriptableObject
 {
-    public AI_State CurrentState;
+    public AIState CurrentState;
     public float MovementSpeed;
     public float RotationSpeed;
     public bool IsConstantlyWalking;
     public float DetectRadius;
     public float ShootingSpeed;
 
-    public enum AI_State
+    public enum AIState
     {
         Wandering,
-        Patroling,
+        Patrolling,
         Sprinting,
-        RunNGuning,
+        RunNGun,
         Camping
     }
 }

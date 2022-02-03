@@ -6,8 +6,6 @@ using TMPro;
 
 public class EnemyCounterUIObserver : Observer
 {
-    [SerializeField] private RobotSpecialList RobotList;
-    
     private TextMeshProUGUI text;
     private const int notify_EnemyUI = 2;
     

@@ -1,24 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Brian Caballero
+ * Contributors: Grant Reed
+ * Description: 
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyHealth : Subject, IDamageable <float>
 {
+    // editor exposed fields
+    
+    // private fields
+    
     public float currentHealth = 1;
     public float maxHealth = 1;
     public GameObject healthBarUI = null;
     public Slider healthSlider;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         currentHealth = maxHealth;
         healthSlider.value = CalculateHealth();
         GameEventBus.Publish(GameEvent.ENEMYADDED);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         

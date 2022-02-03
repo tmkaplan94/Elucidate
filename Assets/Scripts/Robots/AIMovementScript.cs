@@ -1,75 +1,95 @@
+/*
+ * Author: Brian Caballero
+ * Contributors:
+ * Description: Deals with all enemy behaviors.
+ */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AIShooting))]
 public class AIMovementScript : MonoBehaviour
 {
-    [SerializeField]
-    private Transform Target;
-    [SerializeField]
-    private AIShooting Shooting;
-    [SerializeField]
-    private AIStats stats;
-    private bool isWandering = false;
-    private bool isRotatingLeft = false;
-    private bool isRotatingRight = false;
-    private bool isWalking = false;
-    Rigidbody rb;
-    NavMeshAgent agent;
+    // editor exposed fields
+    [SerializeField] private AIStats stats;
+    
+    // private fields
+    private Rigidbody _rigidbody;
+    private AIShooting _shooting;
+    private Transform _target;
+    private NavMeshAgent _navMeshAgent;
+    private bool _isWandering;
+    private bool _isRotatingLeft;
+    private bool _isRotatingRight;
+    private bool _isWalking;
+
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        agent = GetComponent<NavMeshAgent>();
-        switch (stats.CurrentState)//Set the walking mode, depending on the AI_State
+        // cache needed components
+        _rigidbody = GetComponent<Rigidbody>();
+        _shooting = GetComponent<AIShooting>();
+        _target = GameObject.Find("Player").transform;
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        
+        // initialize booleans
+        _isWandering = false;
+        _isRotatingLeft = false;
+        _isRotatingRight = false;
+        _isWalking = false;
+        
+        // Set the walking mode, depending on the AIState.
+        switch (stats.CurrentState)
         {
-            case AIStats.AI_State.Wandering:
+            case AIStats.AIState.Wandering:
                 {
                     stats.IsConstantlyWalking = true;
-                    isWalking = stats.IsConstantlyWalking;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AI_State.Patroling:
+            case AIStats.AIState.Patrolling:
                 {
                     stats.IsConstantlyWalking = false;
-                    isWalking = stats.IsConstantlyWalking;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AI_State.Sprinting:
+            case AIStats.AIState.Sprinting:
                 {
                     stats.IsConstantlyWalking = true;
-                    isWalking = stats.IsConstantlyWalking;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AI_State.RunNGuning:
+            case AIStats.AIState.RunNGun:
                 {
                     stats.IsConstantlyWalking = true;
-                    isWalking = stats.IsConstantlyWalking;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
-            case AIStats.AI_State.Camping:
+            case AIStats.AIState.Camping:
                 {
                     stats.IsConstantlyWalking = false;
-                    agent.stoppingDistance = stats.DetectRadius - 5;
+                    _navMeshAgent.stoppingDistance = stats.DetectRadius - 5;
                     break;
                 }
         }
 
     }
-    private void FixedUpdate()//Check if player is nearby
-                              //if in range, shoot, otherwise wander
+    
+    // Check if player is in range to shoot, otherwise wander
+    private void FixedUpdate()
     {
-        float distance = Vector3.Distance(Target.position, transform.position);
-        if (stats.CurrentState == AIStats.AI_State.RunNGuning)
+        float distance = Vector3.Distance(_target.position, transform.position);
+        if (stats.CurrentState == AIStats.AIState.RunNGun)
         {
-            int RandomShooting = Random.Range(1, 10);
-            if (RandomShooting > 5)
+            int randomShooting = Random.Range(1, 10);
+            if (randomShooting > 5)
             {
-                Shooting.Fire();
+                _shooting.Fire();
             }
         }
         if (distance <= stats.DetectRadius)
@@ -81,80 +101,89 @@ public class AIMovementScript : MonoBehaviour
             ActionWandering();
         }
     }
-    void ActionChasing(float distance)//Chasing player that is in range
-                                      //shoot once close enough
+    
+    // Chasing player that is in range shoot once close enough
+    void ActionChasing(float distance)
     {
-        agent.SetDestination(Target.position);
-        if (distance <= agent.stoppingDistance)
+        _navMeshAgent.SetDestination(_target.position);
+        if (distance <= _navMeshAgent.stoppingDistance)
         {
             FaceTarget();
-            Shooting.Fire();
+            _shooting.Fire();
         }
     }
-    void ActionWandering()//Mindlessly wander, time and degrees of turns are random
+    
+    // mindlessly wander, time and degrees of turns are random
+    void ActionWandering()
     {
-        if (isWandering == false)
+        if (_isWandering == false)
         {
             StartCoroutine(Wander());
         }
-        if (isRotatingRight == true)
+        if (_isRotatingRight == true)
         {
             transform.Rotate(transform.up * Time.deltaTime * stats.RotationSpeed);
         }
-        if (isRotatingLeft == true)
+        if (_isRotatingLeft == true)
         {
             transform.Rotate(transform.up * Time.deltaTime * -stats.RotationSpeed);
         }
-        if (isWalking == true)
+        if (_isWalking == true)
         {
-            rb.transform.position += transform.forward * stats.MovementSpeed;
+            _rigidbody.transform.position += transform.forward * stats.MovementSpeed;
         }
     }
-    IEnumerator Wander()//Works with function above
+    
+    // Works with function above.
+    IEnumerator Wander()
     {
-        int RotationTime = Random.Range(1, 3);
-        int RoationWait =  Random.Range(1, 3);
-        int RoationDirection = Random.Range(1, 3);
-        int WalkWait = Random.Range(1, 3);
-        int WalkTime = Random.Range(1, 3);
+        int rotationTime = Random.Range(1, 3);
+        int rotationWait =  Random.Range(1, 3);
+        int rotationDirection = Random.Range(1, 3);
+        int walkWait = Random.Range(1, 3);
+        int walkTime = Random.Range(1, 3);
 
 
-        isWandering = true;
+        _isWandering = true;
         if (stats.IsConstantlyWalking == true)
         {
             yield return new WaitForSeconds(0);
-            yield return new WaitForSeconds(WalkTime);
+            yield return new WaitForSeconds(walkTime);
         }
         else
         {
-            yield return new WaitForSeconds(WalkWait);
-            isWalking = true;
-            yield return new WaitForSeconds(WalkTime);
-            isWalking = false;
+            yield return new WaitForSeconds(walkWait);
+            _isWalking = true;
+            yield return new WaitForSeconds(walkTime);
+            _isWalking = false;
         }
 
-        yield return new WaitForSeconds(RoationWait);
-        if (RoationDirection == 1)
+        yield return new WaitForSeconds(rotationWait);
+        if (rotationDirection == 1)
         {
-            isRotatingRight = true;
-            yield return new WaitForSeconds(RotationTime);
-            isRotatingRight = false;
+            _isRotatingRight = true;
+            yield return new WaitForSeconds(rotationTime);
+            _isRotatingRight = false;
         }
-        if (RoationDirection == 2)
+        if (rotationDirection == 2)
         {
-            isRotatingLeft = true;
-            yield return new WaitForSeconds(RotationTime);
-            isRotatingLeft = false;
+            _isRotatingLeft = true;
+            yield return new WaitForSeconds(rotationTime);
+            _isRotatingLeft = false;
         }
-        isWandering = false;
+        _isWandering = false;
     }
-    void FaceTarget()//Face target to aim properly
+    
+    // Face target to aim properly
+    void FaceTarget()
     {
-        Vector3 direction = (Target.position - transform.position).normalized;
+        Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
-    void OnDrawGizmosSelected()//Used only to see/test range of AI
+    
+    // Used only to see/test range of AI
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stats.DetectRadius);
