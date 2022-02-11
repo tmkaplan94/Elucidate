@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/0_TitleScene.unity
     guid: 1e76c3101dddf6948b8a75a383d46dba
   - enabled: 1
+    path: Assets/Scenes/Load.unity
+    guid: 0830cdb145c20fa4c84e735966e7376e
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 5579f1bea96cc84418fccd17bd0528fd
+  - enabled: 1
     path: Assets/Scenes/1_LevelOne.unity
     guid: 3b5b85944b1d06f4d9b2f4365ba2f461
   - enabled: 1
     path: Assets/Scenes/2_EndScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Load.unity
-    guid: 0830cdb145c20fa4c84e735966e7376e
-  - enabled: 0
-    path: Assets/Scenes/Lobby.unity
-    guid: 5579f1bea96cc84418fccd17bd0528fd
   - enabled: 0
     path: Assets/Scenes/Junk.unity
     guid: 91573b96eddb58343849b02c576f53dd

@@ -10,11 +10,20 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    // editor exposed fields
-    [SerializeField] private Transform playerTransform;
-    
-    private void Update()
+
+
+    [SerializeField] private float _offX;
+    [SerializeField] private float _height;
+    [SerializeField] private float _offZ;
+
+    private bool follow;
+
+
+    private void Start()
     {
-        transform.position = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
+        
     }
+
+    private 
+
 }

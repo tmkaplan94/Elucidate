@@ -8,7 +8,7 @@
  * The rigidbody movePosition function is used for movement and the Transform look-at function is used for player aim.
  */
 using UnityEngine;
-//using Photon.Pun;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private float _moveSpeed;
     private float _moveX;
     private float _moveZ;
-    //private PhotonView _view;
+    private PhotonView _view;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         _stats = GetComponent<PlayerStats>();
         _rigidbody = GetComponent<Rigidbody>();
         _position = transform.position;
-        //_view = GetComponent<PhotonView>();
+        _view = GetComponent<PhotonView>();
         
         // get move speed based on PlayerStats.cs
         _moveSpeed = _stats.MoveSpeed;
@@ -39,27 +39,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //if (view.IsMine)
-        // {
-        
+        if (_view.IsMine)
+        {
         // get input from player every frame
         _moveX = Input.GetAxisRaw("Horizontal");
         _moveZ = Input.GetAxisRaw("Vertical");
         _lookDirection = GetLookAtTarget();
         
-        // }
+        }
     }
 
     private void FixedUpdate()
     {
-        // if (view.IsMine)
-        //{
+        if (_view.IsMine)
+        {
         
         // apply move and aim independent of framerate
         Move();
         Aim();
         
-        //}
+        }
     }
 
 
