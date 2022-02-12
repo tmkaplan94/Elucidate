@@ -32,8 +32,8 @@ public class WeaponFiring : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time >= _nextFireTime)
         {
             Shoot();
-            // converts rounds per minute to fire rate per second.
-            _nextFireTime = Time.time + 1.0f / (weaponType.rpm / 60.0f);
+            // sets the next time the player is able to shoot based on rounds per second.
+            _nextFireTime = Time.time + 1.0f / weaponType.RoundsPerSecond;
         }
         
         //}
@@ -42,10 +42,10 @@ public class WeaponFiring : MonoBehaviour
     // shoots bullet
     private void Shoot()
     {
-        GameObject newBullet = /*PhotonNetwork.*/Instantiate(weaponType.bullet, firePoint.position, firePoint.rotation);
-        newBullet.transform.localScale *= weaponType.bulletSizeScale;
-        newBullet.GetComponent<Bullet>().Damage = weaponType.bulletDamage;
-        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.bulletVelocity);
+        GameObject newBullet = /*PhotonNetwork.*/Instantiate(weaponType.Bullet, firePoint.position, firePoint.rotation);
+        newBullet.transform.localScale *= weaponType.BulletSizeScale;
+        newBullet.GetComponent<Bullet>().Damage = weaponType.BulletDamage;
+        newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.BulletVelocity);
         MuzzleFlash();
         _audio.Play();
         Destroy(newBullet, 2.0f);
@@ -56,10 +56,10 @@ public class WeaponFiring : MonoBehaviour
     {
         GameObject muzzle = new GameObject("Muzzle Flash");
         Light muzzleFlashLight = muzzle.AddComponent<Light>();
-        muzzleFlashLight.type = weaponType.muzzleFlashLightType;
-        muzzleFlashLight.color = weaponType.muzzleFlashColor;
-        muzzleFlashLight.range = weaponType.muzzleFlashRange;
-        muzzleFlashLight.intensity = weaponType.muzzleFlashIntensity;
+        muzzleFlashLight.type = weaponType.MuzzleFlashLightType;
+        muzzleFlashLight.color = weaponType.MuzzleFlashColor;
+        muzzleFlashLight.range = weaponType.MuzzleFlashRange;
+        muzzleFlashLight.intensity = weaponType.MuzzleFlashIntensity;
         muzzleFlashLight.transform.position = firePoint.position;
         Destroy(muzzle, 0.1f);
     }

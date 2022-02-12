@@ -10,8 +10,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // editor exposed fields
-    [SerializeField] private float damage;
+    private float damage;
     
     // properties
     public float Damage

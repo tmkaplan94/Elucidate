@@ -24,6 +24,6 @@ public class CameraMovement : MonoBehaviour
         
     }
 
-    private 
+   
 
 }
