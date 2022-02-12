@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0a0215e9ec92d48b5ef2ba833c91b1, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  prefabName: Pistol
-  rpm: 200
-  bulletVelocity: 600
-  bulletSizeScale: 2
-  bulletDamage: 15
-  muzzleFlashColor: {r: 0.745283, g: 0.39352205, b: 0, a: 0}
-  muzzleFlashRange: 2
-  muzzleFlashIntensity: 40
-  muzzleFlashLightType: 2
-  bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
+  _prefabName: Pistol
+  _roundsPerSecond: 2
+  _bulletVelocity: 600
+  _bulletSizeScale: 1
+  _bulletDamage: 10
+  _muzzleFlashColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0}
+  _muzzleFlashRange: 1
+  _muzzleFlashIntensity: 0.25
+  _muzzleFlashLightType: 0
+  _bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}

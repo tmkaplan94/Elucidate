@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0a0215e9ec92d48b5ef2ba833c91b1, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: 
-  prefabName: SMG
-  rpm: 1000
-  bulletVelocity: 800
-  bulletSizeScale: 1
-  bulletDamage: 15
-  muzzleFlashColor: {r: 0, g: 0, b: 0, a: 0}
-  muzzleFlashRange: 0
-  muzzleFlashIntensity: 0
-  muzzleFlashLightType: 0
-  bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
+  _prefabName: SMG
+  _roundsPerSecond: 3
+  _bulletVelocity: 1000
+  _bulletSizeScale: 1
+  _bulletDamage: 10
+  _muzzleFlashColor: {r: 0.7924528, g: 0.76553935, b: 0.76553935, a: 0}
+  _muzzleFlashRange: 2
+  _muzzleFlashIntensity: 0.25
+  _muzzleFlashLightType: 0
+  _bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}

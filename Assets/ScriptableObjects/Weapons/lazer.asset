@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0a0215e9ec92d48b5ef2ba833c91b1, type: 3}
   m_Name: lazer
   m_EditorClassIdentifier: 
-  prefabName: 
-  rpm: 10000
-  bulletVelocity: 2000
-  bulletSizeScale: 2.02
-  bulletDamage: 50
-  bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
+  _prefabName: Lazer
+  _roundsPerSecond: 20
+  _bulletVelocity: 2500
+  _bulletSizeScale: 1
+  _bulletDamage: 20
+  _muzzleFlashColor: {r: 1, g: 0, b: 0, a: 0}
+  _muzzleFlashRange: 2
+  _muzzleFlashIntensity: 0.5
+  _muzzleFlashLightType: 0
+  _bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
