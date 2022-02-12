@@ -13,10 +13,12 @@ public class Weapon : ScriptableObject
     [SerializeField] private float _bulletVelocity;
     [Range(0.1f, 5.0f)]
     [SerializeField] private float _bulletSizeScale;
+    [SerializeField] private float _bulletLifeTime;
     [SerializeField] private float _bulletDamage;
     [SerializeField] private Color _muzzleFlashColor;
     [SerializeField] private float _muzzleFlashRange;
     [SerializeField] private float _muzzleFlashIntensity;
+    [SerializeField] private float _muzzleFlashLifeTime;
     [SerializeField] private LightType _muzzleFlashLightType;
 
     [SerializeField] private GameObject _bullet;
@@ -41,6 +43,12 @@ public class Weapon : ScriptableObject
         get => _bulletSizeScale;
         set => _bulletSizeScale = value;
     }
+        public float BulletLifeTime
+    {
+        get => _bulletLifeTime;
+        set => _bulletLifeTime = value;
+    }
+
     public float BulletDamage
     {
         get => _bulletDamage;
@@ -60,6 +68,11 @@ public class Weapon : ScriptableObject
     {
         get => _muzzleFlashIntensity;
         set => _muzzleFlashIntensity = value;
+    }
+    public float MuzzleFlashLifeTime
+    {
+        get => _muzzleFlashLifeTime;
+        set => _muzzleFlashLifeTime = value;
     }
     public LightType MuzzleFlashLightType
     {

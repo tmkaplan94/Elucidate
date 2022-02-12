@@ -48,7 +48,7 @@ public class WeaponFiring : MonoBehaviour
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.BulletVelocity);
         MuzzleFlash();
         _audio.Play();
-        Destroy(newBullet, 2.0f);
+        Destroy(newBullet, weaponType.BulletLifeTime);
     }
     
     // The MuzzleFlash method will create a muzzle flash object emitting a yellow light at the location the gun shoots briefly, then destroy itself. 
@@ -61,6 +61,6 @@ public class WeaponFiring : MonoBehaviour
         muzzleFlashLight.range = weaponType.MuzzleFlashRange;
         muzzleFlashLight.intensity = weaponType.MuzzleFlashIntensity;
         muzzleFlashLight.transform.position = firePoint.position;
-        Destroy(muzzle, 0.1f);
+        Destroy(muzzle, weaponType.MuzzleFlashLifeTime);
     }
 }

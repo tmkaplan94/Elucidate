@@ -16,9 +16,11 @@ MonoBehaviour:
   _roundsPerSecond: 3
   _bulletVelocity: 1500
   _bulletSizeScale: 1
+  _bulletLifeTime: 2
   _bulletDamage: 20
   _muzzleFlashColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0}
   _muzzleFlashRange: 2
   _muzzleFlashIntensity: 0.25
+  _muzzleFlashLifeTime: 0.1
   _muzzleFlashLightType: 0
   _bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
