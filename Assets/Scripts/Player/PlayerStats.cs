@@ -11,6 +11,7 @@
  * TODO: Changing damage and pickups will require a lot of change with this class as well.
  */
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerStats : Subject, IDamageable<float>
 {
@@ -21,6 +22,7 @@ public class PlayerStats : Subject, IDamageable<float>
     [SerializeField] private float _pickupRange;
     [SerializeField] private GameObject _currentWeapon;
     [SerializeField] private float _rotationSpeed;
+
     //[SerializeField] private GameObject currentItem;
     
     #region Properties
@@ -69,7 +71,7 @@ public class PlayerStats : Subject, IDamageable<float>
         _health -= damage;
         if (_health <= 0f)
         {
-            Kill();
+                Kill();
         }
         Notify((int)damage);
     }
