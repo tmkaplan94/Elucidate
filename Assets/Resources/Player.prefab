@@ -737,10 +737,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  maxHealth: 100
-  moveSpeed: 10
-  pickupRange: 10
-  currentWeapon: {fileID: 6828003175341134086, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
+  _maxHealth: 100
+  _moveSpeed: 10
+  _pickupRange: 10
+  _currentWeapon: {fileID: 6828003175341134086, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
+  _rotationSpeed: 10
 --- !u!114 &1811399681661353721
 MonoBehaviour:
   m_ObjectHideFlags: 0

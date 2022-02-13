@@ -16,18 +16,19 @@ public class PlayerStats : Subject, IDamageable<float>
 {
     // editor exposed fields
     [SerializeField] private float _health;
-    [SerializeField] private float maxHealth;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float pickupRange;
-    [SerializeField] private GameObject currentWeapon;
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _pickupRange;
+    [SerializeField] private GameObject _currentWeapon;
+    [SerializeField] private float _rotationSpeed;
     //[SerializeField] private GameObject currentItem;
     
     #region Properties
     
     public float MaxHealth
     {
-        get => maxHealth;
-        set => maxHealth = value;
+        get => _maxHealth;
+        set => _maxHealth = value;
     }
     public float Health
     {
@@ -36,25 +37,30 @@ public class PlayerStats : Subject, IDamageable<float>
     }
     public float MoveSpeed
     {
-        get => moveSpeed;
-        set => moveSpeed = value;
+        get => _moveSpeed;
+        set => _moveSpeed = value;
     }
     public float PickUpRange
     {
-        get => pickupRange;
-        set => pickupRange = value;
+        get => _pickupRange;
+        set => _pickupRange = value;
+    }
+    public float RotationSpeed
+    {
+        get => _rotationSpeed;
+        set => _rotationSpeed = value;
     }
     public GameObject CurrentWeapon
     {
-        get => currentWeapon;
-        set => currentWeapon = value;
+        get => _currentWeapon;
+        set => _currentWeapon = value;
     }
 
     #endregion
     
     private void Start()
     {
-        _health = maxHealth;
+        _health = _maxHealth;
     }
 
     // IDamagable method to decrement _health, calls Die() if _health reaches 0.

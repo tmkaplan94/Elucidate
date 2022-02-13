@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // private fields
     [SerializeField] private Camera _camera;
-    private Vector3 _lookDirection;
+    private Vector3 _lookTarget;
     private PlayerStats _stats;
     private Rigidbody _rigidbody;
     private Vector3 _position;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         // get input from player every frame
         _moveX = Input.GetAxisRaw("Horizontal");
         _moveZ = Input.GetAxisRaw("Vertical");
-        _lookDirection = GetLookAtTarget();   
+        _lookTarget = GetLookAtTarget();   
         }
     }
 
@@ -89,6 +89,9 @@ public class PlayerMovement : MonoBehaviour
     // Points the player transform in the direction of _lookDirection.
     private void Aim()
     {
-        transform.LookAt(_lookDirection);
+        Vector3 lookVec = _lookTarget - transform.position;
+        lookVec.y = 0f;
+        Quaternion lookRot = Quaternion.LookRotation(lookVec);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, _stats.RotationSpeed * Time.fixedDeltaTime);
     }
 }
