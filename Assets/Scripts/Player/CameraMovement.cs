@@ -23,8 +23,7 @@ public class CameraMovement : MonoBehaviour
 
 
     private void Start()
-    {
-        
+    {      
         if (!_view.IsMine)
         {
             Destroy(gameObject);

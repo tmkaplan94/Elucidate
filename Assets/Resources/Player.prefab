@@ -617,7 +617,6 @@ GameObject:
   - component: {fileID: 1811399681661353722}
   - component: {fileID: -4894384122771066231}
   - component: {fileID: 8161060602880937806}
-  - component: {fileID: -9029554910136566010}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -831,14 +830,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!81 &-9029554910136566010
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811399681661353713}
-  m_Enabled: 1
 --- !u!1 &3763415151935555902
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9149866683062831194}
   - component: {fileID: 2695909305648051332}
+  - component: {fileID: 4446880125038337965}
   m_Layer: 0
   m_Name: CameraRig
   m_TagString: Untagged
@@ -962,6 +954,14 @@ MonoBehaviour:
   _offZ: -5
   _cam: {fileID: 6477340870184921544}
   _view: {fileID: -4894384122771066231}
+--- !u!81 &4446880125038337965
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172458701927672457}
+  m_Enabled: 1
 --- !u!1 &9180390734654542929
 GameObject:
   m_ObjectHideFlags: 0
