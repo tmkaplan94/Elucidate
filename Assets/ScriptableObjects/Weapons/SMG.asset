@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: SMG
   m_EditorClassIdentifier: 
   _prefabName: SMG
-  _roundsPerSecond: 3
+  _roundsPerSecond: 10
   _bulletVelocity: 1000
   _bulletSizeScale: 1
   _bulletLifeTime: 2
   _bulletDamage: 10
-  _muzzleFlashColor: {r: 0.7924528, g: 0.76553935, b: 0.76553935, a: 0}
-  _muzzleFlashRange: 0.8
-  _muzzleFlashIntensity: 4
-  _muzzleFlashLifeTime: 0.1
-  _muzzleFlashLightType: 0
+  _muzzleFlashColor: {r: 0.21791564, g: 0.7830189, b: 0.7124857, a: 0}
+  _muzzleFlashRange: 12
+  _muzzleFlashIntensity: 3
+  _muzzleFlashLifeTime: 0.065
+  _muzzleFlashLightType: 2
   _bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}

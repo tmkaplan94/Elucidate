@@ -1,10 +1,11 @@
 /*
  * Author: Tyler Kaplan
- * Contributors:
+ * Contributors: Loc Trinh
  * Description: AudioManager configures and plays all sound at specified audio source.
  */
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -24,7 +25,7 @@ public class AudioManager : Singleton<AudioManager>
         }
         
         // Set source parameters based on AudioManager Sound.
-        source.clip = s.clip;
+        source.clip = s.clip[Random.Range(0, s.clip.Length)];
         source.outputAudioMixerGroup = s.group;
         source.volume = s.volume;
         source.pitch = s.pitch;

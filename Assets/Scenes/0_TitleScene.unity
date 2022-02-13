@@ -2667,7 +2667,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: MenuClick
-    clip: {fileID: 8300000, guid: 11f283bbe1a56ee408b11edae934708d, type: 3}
+    clip:
+    - {fileID: 8300000, guid: 11f283bbe1a56ee408b11edae934708d, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 0.3
     pitch: 0.67
@@ -2676,43 +2677,56 @@ MonoBehaviour:
     awake: 0
     loop: 0
   - name: PistolShoot
-    clip: {fileID: 8300000, guid: ce77f4433c74b8745864a3a0a972dee0, type: 3}
+    clip:
+    - {fileID: 8300000, guid: ce77f4433c74b8745864a3a0a972dee0, type: 3}
+    - {fileID: 8300000, guid: 6c1722e0b50c3a14a99d7c12cb4fdcc9, type: 3}
+    - {fileID: 8300000, guid: 73b167b44804caf49afc5a5afc65744b, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 0.3
     pitch: 0.67
-    spatial: 0
+    spatial: 1
     mute: 0
     awake: 0
     loop: 0
   - name: RocketShoot
-    clip: {fileID: 8300000, guid: 1d4daf42a4846484f91d7424b8ceecf0, type: 3}
+    clip:
+    - {fileID: 8300000, guid: 1d4daf42a4846484f91d7424b8ceecf0, type: 3}
+    - {fileID: 8300000, guid: 0b6edb3a0e6aecb4880f23121e8f3623, type: 3}
+    - {fileID: 8300000, guid: 09782ca49a3d4444db6eb1af70078cd1, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 0.3
     pitch: 0.67
-    spatial: 0
+    spatial: 1
     mute: 0
     awake: 0
     loop: 0
   - name: SMGShoot
-    clip: {fileID: 8300000, guid: 85b7d5f82e7898b45ad165357416b883, type: 3}
+    clip:
+    - {fileID: 8300000, guid: 85b7d5f82e7898b45ad165357416b883, type: 3}
+    - {fileID: 8300000, guid: 41aa6edfcf11bca4c942e642444cc41c, type: 3}
+    - {fileID: 8300000, guid: 77bc8c8a1771c6b429b361046a1ff47b, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 0.3
     pitch: 0.67
-    spatial: 0
+    spatial: 1
     mute: 0
     awake: 0
     loop: 0
   - name: SniperShoot
-    clip: {fileID: 8300000, guid: e77610238914ce1458b1c6c6619c8db3, type: 3}
+    clip:
+    - {fileID: 8300000, guid: e77610238914ce1458b1c6c6619c8db3, type: 3}
+    - {fileID: 8300000, guid: 17b2201bb2aafae4ab21669691cca655, type: 3}
+    - {fileID: 8300000, guid: 3485fba4d155db8479565f51562f01e2, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 0.3
     pitch: 0.67
-    spatial: 0
+    spatial: 1
     mute: 0
     awake: 0
     loop: 0
   - name: AmbientMusic
-    clip: {fileID: 8300000, guid: d14f069f53c37f34ba584bc6297aeb1b, type: 3}
+    clip:
+    - {fileID: 8300000, guid: d14f069f53c37f34ba584bc6297aeb1b, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 0.1
     pitch: 1
@@ -2721,7 +2735,8 @@ MonoBehaviour:
     awake: 1
     loop: 1
   - name: LaserShoot
-    clip: {fileID: 8300000, guid: 1ffa8692870bd6b41a07217327ee7e1a, type: 3}
+    clip:
+    - {fileID: 8300000, guid: 1ffa8692870bd6b41a07217327ee7e1a, type: 3}
     group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
     volume: 1
     pitch: 1

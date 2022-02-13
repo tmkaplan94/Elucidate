@@ -303,7 +303,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 758813409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.89, z: 2.46}
+  m_LocalPosition: {x: 0, y: 4.25, z: 3.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1811399681661353717}
@@ -327,7 +327,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -739,7 +739,7 @@ MonoBehaviour:
   _maxHealth: 100
   _moveSpeed: 10
   _pickupRange: 10
-  _currentWeapon: {fileID: 6828003175341134086, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
+  _currentWeapon: {fileID: 9219815917566379237}
   _rotationSpeed: 10
 --- !u!114 &1811399681661353721
 MonoBehaviour:
@@ -1436,5 +1436,10 @@ PrefabInstance:
 --- !u!4 &6890637889100259656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9120593721754186923, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
+  m_PrefabInstance: {fileID: 2392164620656432611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9219815917566379237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6828003175341134086, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
   m_PrefabInstance: {fileID: 2392164620656432611}
   m_PrefabAsset: {fileID: 0}

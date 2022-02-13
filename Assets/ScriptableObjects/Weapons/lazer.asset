@@ -19,8 +19,8 @@ MonoBehaviour:
   _bulletLifeTime: 2
   _bulletDamage: 20
   _muzzleFlashColor: {r: 1, g: 0, b: 0, a: 0}
-  _muzzleFlashRange: 1
-  _muzzleFlashIntensity: 4
-  _muzzleFlashLifeTime: 0.1
-  _muzzleFlashLightType: 0
+  _muzzleFlashRange: 12
+  _muzzleFlashIntensity: 3
+  _muzzleFlashLifeTime: 0.065
+  _muzzleFlashLightType: 2
   _bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
