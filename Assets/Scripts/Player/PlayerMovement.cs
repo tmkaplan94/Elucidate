@@ -14,7 +14,7 @@ using Photon.Pun;
 public class PlayerMovement : MonoBehaviour
 {
     // private fields
-    private Camera _camera;
+    [SerializeField] private Camera _camera;
     private Vector3 _lookDirection;
     private PlayerStats _stats;
     private Rigidbody _rigidbody;
@@ -26,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        // cache needed components
-        _camera = Camera.main;
         _stats = GetComponent<PlayerStats>();
         _rigidbody = GetComponent<Rigidbody>();
         _position = transform.position;
@@ -44,20 +42,17 @@ public class PlayerMovement : MonoBehaviour
         // get input from player every frame
         _moveX = Input.GetAxisRaw("Horizontal");
         _moveZ = Input.GetAxisRaw("Vertical");
-        _lookDirection = GetLookAtTarget();
-        
+        _lookDirection = GetLookAtTarget();   
         }
     }
 
     private void FixedUpdate()
     {
         if (_view.IsMine)
-        {
-        
-        // apply move and aim independent of framerate
-        Move();
-        Aim();
-        
+        {     
+            // apply move and aim independent of framerate
+            Move();
+            Aim();
         }
     }
 

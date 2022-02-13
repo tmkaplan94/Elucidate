@@ -10,7 +10,7 @@ public class SpawnPlayers : MonoBehaviour
     [SerializeField]
     Transform[] spawnPoints;
 
-    private void Start()
+    private void OnEnable()
     {
         PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[0].position, spawnPoints[0].rotation);
     }
