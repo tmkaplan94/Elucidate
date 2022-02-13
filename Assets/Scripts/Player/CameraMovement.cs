@@ -7,7 +7,6 @@
  * This will eventually be changed when multiplayer is added.
  */
 using UnityEngine;
-using Photon.Pun;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -17,17 +16,12 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float _height;
     [SerializeField] private float _offZ;
     [SerializeField] private Camera _cam;
-    [SerializeField]private PhotonView _view;
 
     private Vector3 offsetVec;
 
 
     private void Start()
     {      
-        if (!_view.IsMine)
-        {
-            Destroy(gameObject);
-        }
         offsetVec = new Vector3(_offX, _height, _offZ);
     }
 
