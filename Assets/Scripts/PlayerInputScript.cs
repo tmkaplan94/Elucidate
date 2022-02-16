@@ -49,10 +49,10 @@ public partial class @PlayerInputScript : IInputActionCollection2, IDisposable
                     ""name"": ""Shoot"",
                     ""type"": ""PassThrough"",
                     ""id"": ""9487da3b-cb08-42e6-b81c-030f507d0b95"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Aim"",

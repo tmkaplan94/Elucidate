@@ -26,12 +26,16 @@ public class PlayerInputHandler : MonoBehaviour
     {      
         _inputActions.Default.Interact.performed += _ => Interact();
         /*_inputActions.Default.Move.performed += ctx => Move(ctx.ReadValue<Vector3>());*/
-        _inputActions.Default.Shoot.performed += _ => Shoot();
+        //_inputActions.Default.Shoot.performed += _ => Shoot();
     }
     private void Update()
     {
-       rotateTarget = _playerMovement.GetLookAtTarget(_inputActions.Default.Aim.ReadValue<Vector2>());
-       movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
+        rotateTarget = _playerMovement.GetLookAtTarget(_inputActions.Default.Aim.ReadValue<Vector2>());
+        movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
+        if(_inputActions.Default.Shoot.ReadValue<float>() > 0f)
+        {
+            Shoot();
+        }
     }
     private void FixedUpdate()
     {
