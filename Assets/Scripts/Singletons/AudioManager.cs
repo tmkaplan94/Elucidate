@@ -45,7 +45,6 @@ public class AudioManager : Singleton<AudioManager>
         // Play AudioSource
         source.Play();
     }
-
     public void MuteAll()
     {
         foreach(Sound entry in sounds)
@@ -60,12 +59,4 @@ public class AudioManager : Singleton<AudioManager>
             }        
         }
     }
-
-    /*
-    public void ControlVolume(Sound s)
-    {
-        s.volume = 
-    }
-    */
-
 }

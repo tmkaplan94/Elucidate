@@ -69,8 +69,7 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
         {
             uiHealth.SetActive(true);
             SetHealthBar(_health);
-        }
-        
+        }   
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
