@@ -1,5 +1,17 @@
 # Elucidate
 
+CREATING A LOBBY:
+    When starting a game, fill in the lobby name, 
+    leaving it empty will also count as a lobby. Then simply
+    click create and you will be loaded into your lobby,
+    assuming the lobby name isn't already taken.
+
+JOINING A LOBBY:
+    When trying to join a lobby, fill in the lobby name and
+    click join, if the lobby exist, it will put you into the
+    game.
+
+
 HOW TO PLAY:
     Player Controls
         Movement 
