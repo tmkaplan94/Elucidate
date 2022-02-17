@@ -6,6 +6,7 @@
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.Audio;
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -44,5 +45,18 @@ public class AudioManager : Singleton<AudioManager>
         // Play AudioSource
         source.Play();
     }
-
+    public void MuteAll()
+    {
+        foreach(Sound entry in sounds)
+        {
+            if(!entry.mute )
+            {
+                entry.mute = true;
+            }
+            else if(entry.mute)
+            {
+                entry.mute = false;
+            }        
+        }
+    }
 }

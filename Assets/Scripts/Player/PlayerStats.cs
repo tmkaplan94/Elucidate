@@ -1,6 +1,6 @@
 /*
  * Author: Grant Reed
- * Contributors:
+ * Contributors: Loc Trinh
  * Description: This class holds all the information about a player.
  *
  * This includes health, move speed, current weapon, current items, etc.
@@ -13,16 +13,18 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerStats : Subject, IDamageable<float>
+public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunObservable
 {
     // editor exposed fields
+    [SerializeField] PhotonView _view;
+    [SerializeField] RectTransform _uihealthbar;
+    [SerializeField] GameObject uiHealth;
     [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _pickupRange;
     [SerializeField] private GameObject _currentWeapon;
     [SerializeField] private float _rotationSpeed;
-
     //[SerializeField] private GameObject currentItem;
     
     #region Properties
@@ -63,23 +65,56 @@ public class PlayerStats : Subject, IDamageable<float>
     private void Start()
     {
         _health = _maxHealth;
+        if(_view.IsMine)
+        {
+            uiHealth.SetActive(true);
+            SetHealthBar(_health);
+        }   
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            //stream.SendNext(IsFiring);
+            stream.SendNext(_health);
+        }
+        else
+        {
+            // Network player, receive data
+            //this.IsFiring = (bool)stream.ReceiveNext();
+            _health = (float)stream.ReceiveNext();
+        }
     }
 
     // IDamagable method to decrement _health, calls Die() if _health reaches 0.
     public void TakeDamage(float damage)
     {
-        _health -= damage;
-        if (_health <= 0f)
+        if(_view.IsMine)
         {
+            _health -= damage;
+            SetHealthBar(_health);
+            if (_health <= 0f)
+            {
                 Kill();
+            }
         }
-        Notify((int)damage);
     }
 
     // IDamageable method to die if _health has reached 0.
     public void Kill()
     {
-        Debug.Log("dead");
-        GameEventBus.Publish(GameEvent.LOSS);
+        PhotonNetwork.Destroy(gameObject);
+        if(_view.IsMine)
+        {
+            Debug.Log("dead");
+            GameEventBus.Publish(GameEvent.LOSS);
+        }
+    }
+
+    void SetHealthBar(float amount)
+    {
+        _uihealthbar.localScale = new Vector3(((float)amount/(float)MaxHealth), 1f, 1f);
     }
 }
