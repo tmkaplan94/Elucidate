@@ -1,6 +1,6 @@
 /*
  * Author: Tyler Kaplan
- * Contributors:
+ * Contributors: Loc Trinh
  * Description: Sound is a custom class used by the AudioManager.
  *
  * Sound has parameters for easy edit in AudioManager.
@@ -12,7 +12,7 @@ using UnityEngine.Audio;
 public class Sound
 {
     public string name;
-    public AudioClip clip;
+    public AudioClip[] clip;
     public AudioMixerGroup group;
     [Range(0, 1)] public float volume;
     [Range(0.1f, 3)] public float pitch;

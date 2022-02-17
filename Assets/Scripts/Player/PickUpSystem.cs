@@ -27,28 +27,34 @@ public class PickUpSystem : Subject
     
     // private fields
     private PlayerStats _stats;
-    private Transform _playerTransform;
 
     private void Start()
     {
         // cache needed components
         _stats = GetComponent<PlayerStats>();
-        _playerTransform = GetComponent<Transform>();
     }
-
-    // enables player to interact/pickup item or weapon if in range
-    private void OnTriggerStay(Collider other)
+    public GameObject Interacted()
     {
-        if (Input.GetButton("Interact"))
+        Collider[] items = Physics.OverlapBox(transform.position, new Vector3(_stats.PickUpRange, 0f, _stats.PickUpRange), transform.rotation, pickUpsLayer);
+        if(items.Length > 0)
         {
-            if (other.transform.CompareTag(WeaponTag))
+            foreach(Collider item in items)
             {
-                DropCurrentWeapon();
-                PickupWeapon(other.transform.parent.gameObject);
+                if (item.gameObject.CompareTag(WeaponTag))
+                {
+                    DropCurrentWeapon();
+                    PickupWeapon(item.gameObject);
+                    return item.gameObject;
+                }
+                else if(item.gameObject.CompareTag(ItemTag))
+                {
+                    return item.gameObject;
+                }   
             }
         }
+        return null;
     }
-    
+
     // notify the observer to display UI when in range of weapon
     private void OnTriggerEnter(Collider other)
     {

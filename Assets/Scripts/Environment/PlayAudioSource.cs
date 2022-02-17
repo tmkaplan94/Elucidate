@@ -12,7 +12,7 @@ public class PlayAudioSource : MonoBehaviour
     private AudioSource _audioSource;
     private GameObject _audioManager;
     
-    private void Start()
+    private void Awake()
     {
         // cache needed fields
         _audioManager = GameObject.Find("AudioManager");

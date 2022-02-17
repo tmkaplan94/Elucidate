@@ -1,39 +1,23 @@
 /*
- * Author: Grant Reed
+ * Author: Grant Reed, Loc Trinh
  * Contributors:
  * Description: Updates player health bar.
  */
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
 
-public class HealthSlider : Observer
+public class HealthSlider : MonoBehaviour
 {
-    // editor exposed fields
-    [SerializeField] private Slider slider;
-    [SerializeField] private PlayerStats stats;
+    [SerializeField] PhotonView _view;
+    [SerializeField]
+    private Slider healthSlider;
 
-    // subscribes to subject
-    private void OnEnable()
+    public void setHealth(float health)
     {
-        uiSubject._notify += WhenNotified;
-        UpdateValue();
-    }
-
-    // unsubscribes from subject
-    private void OnDisable()
-    {
-        uiSubject._notify -= WhenNotified;
-    }
-
-    // function to be called when notified
-    public override void WhenNotified(int value)
-    {
-        UpdateValue();
-    }
-
-    // updates health value when notified
-    private void UpdateValue()
-    {
-        slider.value = stats.Health;
+        if(_view.IsMine)
+        {
+            healthSlider.value = health;
+        }
     }
 }

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabName: Pistol
   _roundsPerSecond: 2
-  _bulletVelocity: 600
+  _bulletVelocity: 100
   _bulletSizeScale: 1
   _bulletLifeTime: 2
   _bulletDamage: 10
-  _muzzleFlashColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0}
-  _muzzleFlashRange: 0.8
-  _muzzleFlashIntensity: 4
-  _muzzleFlashLifeTime: 0.1
-  _muzzleFlashLightType: 0
+  _muzzleFlashColor: {r: 0.8301887, g: 0.7678762, b: 0.20754717, a: 0}
+  _muzzleFlashRange: 12
+  _muzzleFlashIntensity: 3
+  _muzzleFlashLifeTime: 0.065
+  _muzzleFlashLightType: 2
   _bullet: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}

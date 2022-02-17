@@ -6,37 +6,31 @@
  * Has basic firing functionality and muzzle flash for light effects.
  */
 using UnityEngine;
-//using Photon.Pun;
 
 public class WeaponFiring : MonoBehaviour
 {
     // editor exposed fields
     [SerializeField] private Transform firePoint;
     [SerializeField] private Weapon weaponType;
+    
 
     // private fields
     private PlayAudioSource _audio;
     private float _nextFireTime;
-    
+
     private void Start()
     {
         _audio = GetComponent<PlayAudioSource>();
         _nextFireTime = 0.0f;
     }
-
-    private void Update()
+    public void tryShoot()
     {
-        /*if (view.IsMine)
-        {*/
-        
-        if (Input.GetButton("Fire1") && Time.time >= _nextFireTime)
+        if (Time.time >= _nextFireTime)
         {
             Shoot();
             // sets the next time the player is able to shoot based on rounds per second.
             _nextFireTime = Time.time + 1.0f / weaponType.RoundsPerSecond;
         }
-        
-        //}
     }
 
     // shoots bullet
