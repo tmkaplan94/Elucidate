@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 345166826422975582}
   - component: {fileID: 5066731728045183542}
   - component: {fileID: 2337960763789447409}
-  - component: {fileID: 4271118591926529734}
   - component: {fileID: 1891632327897873722}
+  - component: {fileID: 5398131511307469691}
   m_Layer: 10
   m_Name: Unbreakable Wall
   m_TagString: Untagged
@@ -300,20 +300,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663951075270492265}
   m_Mesh: {fileID: 0}
---- !u!64 &4271118591926529734
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663951075270492265}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &1891632327897873722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,5 +312,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a05a873c15223f48b664418de76b68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currHealth: 1
   maxHealth: 1
+--- !u!65 &5398131511307469691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663951075270492265}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.5, y: 0.5, z: -0.5}
