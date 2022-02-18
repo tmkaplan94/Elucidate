@@ -26,7 +26,7 @@ public class MenuManager : Singleton<MenuManager>
         GameEventBus.Subscribe(GameEvent.PAUSE, ActivatePauseMenu);
         GameEventBus.Subscribe(GameEvent.RESUME, DeactivatePauseMenus);
         GameEventBus.Subscribe(GameEvent.WIN, ActivateWinMenu);
-        GameEvents.Subscribe(GameEvent.LOSS, ActivateLossMenu);
+        GameEvents.Loss += ActivateLossMenu;
     }
 
     private void Start()
@@ -41,7 +41,7 @@ public class MenuManager : Singleton<MenuManager>
         GameEventBus.Unsubscribe(GameEvent.PAUSE, ActivatePauseMenu);
         GameEventBus.Unsubscribe(GameEvent.RESUME, DeactivatePauseMenus);
         GameEventBus.Unsubscribe(GameEvent.WIN, ActivateWinMenu);
-        GameEvents.Unsubscribe(GameEvent.LOSS, ActivateLossMenu);
+        GameEvents.Loss -= ActivateLossMenu;
         GameEventBus.Unsubscribe(GameEvent.TITLE, SetDefaultMenus);
     }
 

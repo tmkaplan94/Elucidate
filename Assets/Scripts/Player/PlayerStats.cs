@@ -108,7 +108,8 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
         if (_view.IsMine)
         {
             Debug.Log("dead");
-            GameEvents.Publish(GameEvent.LOSS);
+         
+            GameEvents.Loss?.Invoke();
             PhotonNetwork.Destroy(gameObject);
         }
     }

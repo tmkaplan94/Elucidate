@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class GameEvents : DelegateEventBus<GameEvent>
-{  
+public class GameEvents 
+{
+    public static Action Loss;
 }

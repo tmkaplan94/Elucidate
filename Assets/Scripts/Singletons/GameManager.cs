@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
 {
     private static GameEvent _currentStatus;
     private int enemyCount = 0;
+
     public static GameEvent CurrentStatus()
     {
         return _currentStatus;
@@ -28,9 +29,10 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Subscribe(GameEvent.WIN, WinEvent);
         GameEventBus.Subscribe(GameEvent.ENEMYADDED, EnemyAddedEvent);
         GameEventBus.Subscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
-        GameEvents.Subscribe(GameEvent.LOSS, LossEvent);
+        GameEvents.Loss += LossEvent;
         GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
-        GameEvents.Subscribe(GameEvent.PLAYERKILLED, PlayerDeath);
+        //GameEvents.Subscribe(GameEvent.PLAYERKILLED, PlayerDeath);
+       
     }
 
     // initially set the game status
@@ -51,9 +53,9 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Unsubscribe(GameEvent.WIN, WinEvent);
         GameEventBus.Unsubscribe(GameEvent.ENEMYADDED, EnemyAddedEvent);
         GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
-        GameEvents.Unsubscribe(GameEvent.LOSS, LossEvent);
+        GameEvents.Loss -= LossEvent;
         GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
-        GameEvents.Unsubscribe(GameEvent.PLAYERKILLED, PlayerDeath);
+        //GameEvents.Unsubscribe(GameEvent.PLAYERKILLED, PlayerDeath);
     }
 
     // event functions update the current game status and dictate the behaviors that happen on event
