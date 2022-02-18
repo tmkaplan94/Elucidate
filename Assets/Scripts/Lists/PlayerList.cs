@@ -7,4 +7,4 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Players", menuName = "ScriptableObject/List/Players")]
 
-public class PlayerList : SOList<Player> { }
+public class PlayerList : SOList<PlayerStats> { }

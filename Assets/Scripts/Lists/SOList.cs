@@ -36,4 +36,9 @@ public abstract class SOList<T> : ScriptableObject
         }
     }
 
+    public int Length()
+    {
+        return Items.Count;
+    }
+
 }

@@ -26,9 +26,11 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
     [SerializeField] private GameObject _currentWeapon;
     [SerializeField] private float _rotationSpeed;
     //[SerializeField] private GameObject currentItem;
-    
+    [SerializeField] private PlayerList PlayerList;
+    private int _id;
+
     #region Properties
-    
+
     public float MaxHealth
     {
         get => _maxHealth;
@@ -71,7 +73,16 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
             SetHealthBar(_health);
         }   
     }
-
+    private void OnEnable()
+    {
+        _id = GetComponent<PhotonView>().ViewID;
+        PlayerList.Add(_id, this);
+    }
+    private void OnDisable()
+    {
+        if(PlayerList.Length() > 0)
+            PlayerList.Remove(_id);
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -101,15 +112,17 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
             }
         }
     }
-
+    
     // IDamageable method to die if _health has reached 0.
     public void Kill()
     {
         if (_view.IsMine)
         {
             Debug.Log("dead");
-         
-            GameEvents.Loss?.Invoke();
+            
+            PlayerList.Remove(_id);
+        
+            GameEvents.PlayerDeath?.Invoke();
             PhotonNetwork.Destroy(gameObject);
         }
     }

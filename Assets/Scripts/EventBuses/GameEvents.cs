@@ -5,5 +5,6 @@ using System;
 
 public class GameEvents 
 {
-    public static Action Loss;
+    //public static Action Loss;
+    public static Action PlayerDeath;
 }

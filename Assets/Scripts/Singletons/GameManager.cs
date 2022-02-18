@@ -11,8 +11,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     private static GameEvent _currentStatus;
-    private int enemyCount = 0;
 
+    private int enemyCount = 0;
+    [SerializeField] PlayerList players;
     public static GameEvent CurrentStatus()
     {
         return _currentStatus;
@@ -29,9 +30,8 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Subscribe(GameEvent.WIN, WinEvent);
         GameEventBus.Subscribe(GameEvent.ENEMYADDED, EnemyAddedEvent);
         GameEventBus.Subscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
-        GameEvents.Loss += LossEvent;
+        GameEvents.PlayerDeath += PlayerDeath;
         GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
-        //GameEvents.Subscribe(GameEvent.PLAYERKILLED, PlayerDeath);
        
     }
 
@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.Unsubscribe(GameEvent.WIN, WinEvent);
         GameEventBus.Unsubscribe(GameEvent.ENEMYADDED, EnemyAddedEvent);
         GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
-        GameEvents.Loss -= LossEvent;
+        GameEvents.PlayerDeath -= PlayerDeath;
         GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
         //GameEvents.Unsubscribe(GameEvent.PLAYERKILLED, PlayerDeath);
     }
@@ -62,7 +62,10 @@ public class GameManager : Singleton<GameManager>
     #region Private Event Functions
     private void PlayerDeath()
     {
-        
+        if(players.Length() <= 0)
+        {
+            print("Loc is dumb.");
+        }
     }
     private void TitleEvent()
     {
