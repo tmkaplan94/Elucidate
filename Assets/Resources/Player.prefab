@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de602cfe1ab6e144a0e96c59053f6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiSubject: {fileID: 1811399681661353721}
+  uiSubject: {fileID: 0}
   stats: {fileID: 1811399681661353723}
 --- !u!1 &758813409
 GameObject:
@@ -974,9 +974,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 1811399681661353720}
-  _pickUpSystem: {fileID: 1811399681661353721}
-  _fireWeapon: {fileID: -1806298163954839130}
-  _view: {fileID: 0}
 --- !u!114 &1811399681661353720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,6 +1004,7 @@ MonoBehaviour:
     m_Bits: 128
   hand: {fileID: 1811399680997931015}
   dropPoint: {fileID: 5452186857284662634}
+  playerInput: {fileID: -7932826621814145660}
 --- !u!114 &-1806298163954839130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,6 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 1811399681661353723}
+  playerInput: {fileID: -7932826621814145660}
 --- !u!114 &1135461966821377063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,7 +1493,7 @@ PrefabInstance:
     - target: {fileID: 4491567070949763373, guid: ef2cbd63f75c21d4dbaa31d70b44c152, type: 3}
       propertyPath: uiSubject
       value: 
-      objectReference: {fileID: 1811399681661353721}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef2cbd63f75c21d4dbaa31d70b44c152, type: 3}
 --- !u!224 &2701964019008713134 stripped

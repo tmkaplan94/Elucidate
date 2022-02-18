@@ -5,13 +5,16 @@ using Photon.Pun;
 public class PlayerInputHandler : MonoBehaviourPun
 {
     [SerializeField] PlayerMovement _playerMovement;
-    [SerializeField] PickUpSystem _pickUpSystem;
-    [SerializeField] FireWeapon _fireWeapon;
-    [SerializeField] PhotonView _view;
     private PlayerInputScript _inputActions;
     private Vector3 movementInput;
     private Vector3 rotateTarget;
 
+    public delegate void PlayerInput();
+    public event PlayerInput Shoot;
+    public event PlayerInput Interact;
+    public event PlayerInput CheckInteract;
+
+    #region
     private void Awake()
     {
         _inputActions = new PlayerInputScript();
@@ -26,40 +29,29 @@ public class PlayerInputHandler : MonoBehaviourPun
     }
     private void Start()
     {      
-        _inputActions.Default.Interact.performed += _ => Interact();
-        /*_inputActions.Default.Move.performed += ctx => Move(ctx.ReadValue<Vector3>());*/
-        //_inputActions.Default.Shoot.performed += _ => Shoot();
+        _inputActions.Default.Interact.performed += _ => InteractPressed();
+    }
+    #endregion
+    private void InteractPressed()
+    {
+        if(Interact != null)
+            Interact();
+        if(CheckInteract != null)
+            CheckInteract();
     }
     private void Update()
     {
         rotateTarget = _playerMovement.GetLookAtTarget(_inputActions.Default.Aim.ReadValue<Vector2>());
         movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
-        if(_inputActions.Default.Shoot.ReadValue<float>() > 0f)
+        if (_inputActions.Default.Shoot.ReadValue<float>() > 0f)
         {
-            photonView.RPC("Shoot", RpcTarget.All);
+            if (Shoot != null)
+                Shoot();
         }
     }
     private void FixedUpdate()
     {
         _playerMovement.Rotate(rotateTarget);
         _playerMovement.Move(movementInput);
-    }
-
-    [PunRPC]
-    private void Shoot()
-    {
-        _fireWeapon.Shoot();
-    }
-    private void Interact()
-    {
-        /********************* FIX THIS : HEAVY COUPLING HERE *********************/
-        GameObject itemPickedUp = _pickUpSystem.Interacted();
-        if (itemPickedUp)
-        {
-            if (itemPickedUp.CompareTag("Weapon"))
-            {
-                _fireWeapon.UpdateCurrentWeapon();
-            }
-        }
     }
 }
