@@ -976,6 +976,7 @@ MonoBehaviour:
   _playerMovement: {fileID: 1811399681661353720}
   _pickUpSystem: {fileID: 1811399681661353721}
   _fireWeapon: {fileID: -1806298163954839130}
+  _view: {fileID: 0}
 --- !u!114 &1811399681661353720
 MonoBehaviour:
   m_ObjectHideFlags: 0

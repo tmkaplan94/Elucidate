@@ -37,7 +37,7 @@ public class WeaponFiring : MonoBehaviour
     // shoots bullet
     private void Shoot()
     {
-        GameObject newBullet = PhotonNetwork.Instantiate(weaponType.Bullet.name, firePoint.position, firePoint.rotation);
+        GameObject newBullet = Instantiate(weaponType.Bullet, firePoint.position, firePoint.rotation);
         newBullet.transform.localScale *= weaponType.BulletSizeScale;
         newBullet.GetComponent<Bullet>().Damage = weaponType.BulletDamage;
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.BulletVelocity);

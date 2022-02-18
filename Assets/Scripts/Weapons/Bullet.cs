@@ -8,7 +8,7 @@ using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviourPun
 {
     private float damage;
     
@@ -22,16 +22,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
             other.GetComponent<IDamageable<float>>().TakeDamage(damage);
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(this.gameObject);
     }
     public void KillAfterTime(float lifetime)
     {
-        StartCoroutine(KillAfterLifeTime(lifetime));
-    }
-    private IEnumerator KillAfterLifeTime(float lifetime)
-    {
-        yield return new WaitForSecondsRealtime(lifetime);
-        PhotonNetwork.Destroy(gameObject);
-    }
-    
+        Destroy(this.gameObject, lifetime);
+    }  
 }

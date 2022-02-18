@@ -1,11 +1,13 @@
 
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviourPun
 {
     [SerializeField] PlayerMovement _playerMovement;
     [SerializeField] PickUpSystem _pickUpSystem;
     [SerializeField] FireWeapon _fireWeapon;
+    [SerializeField] PhotonView _view;
     private PlayerInputScript _inputActions;
     private Vector3 movementInput;
     private Vector3 rotateTarget;
@@ -34,7 +36,7 @@ public class PlayerInputHandler : MonoBehaviour
         movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
         if(_inputActions.Default.Shoot.ReadValue<float>() > 0f)
         {
-            Shoot();
+            photonView.RPC("Shoot", RpcTarget.All);
         }
     }
     private void FixedUpdate()
@@ -43,6 +45,7 @@ public class PlayerInputHandler : MonoBehaviour
         _playerMovement.Move(movementInput);
     }
 
+    [PunRPC]
     private void Shoot()
     {
         _fireWeapon.Shoot();

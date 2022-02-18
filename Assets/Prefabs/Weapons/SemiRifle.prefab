@@ -376,6 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4561364487663771274}
   weaponType: {fileID: 11400000, guid: e6d1097c4490ca044b41c0cdd48a6202, type: 2}
+  view: {fileID: 0}
 --- !u!108 &6670350458070380465
 Light:
   m_ObjectHideFlags: 0
