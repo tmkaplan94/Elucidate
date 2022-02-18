@@ -24,7 +24,7 @@ public class WeaponFiring : MonoBehaviour
         _audio = GetComponent<PlayAudioSource>();
         _nextFireTime = 0.0f;
     }
-    public void tryShoot()
+    public void TryShoot()
     {
         if (Time.time >= _nextFireTime)
         {

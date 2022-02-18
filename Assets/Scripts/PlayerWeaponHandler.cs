@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerFireWeapon : MonoBehaviourPun
+public class PlayerWeaponHandler : MonoBehaviourPun
 {
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private PlayerInputHandler playerInput;
@@ -23,23 +23,23 @@ public class PlayerFireWeapon : MonoBehaviourPun
         playerInput.CheckInteract -= UpdateCurrentWeapon;
     }
 
-    public void UpdateCurrentWeapon()
+    private void UpdateCurrentWeapon()
     {
         photonView.RPC("UpdateCurrentWeaponRPC", RpcTarget.All);
     }
 
     [PunRPC]
-    public void UpdateCurrentWeaponRPC()
+    private void UpdateCurrentWeaponRPC()
     {
         currentWeapon = _stats.CurrentWeapon.GetComponent<WeaponFiring>();
     }
-    public void Shoot()
+    private void Shoot()
     {
         photonView.RPC("ShootRPC", RpcTarget.All);
     }
     [PunRPC]
     private void ShootRPC()
     {
-        currentWeapon.tryShoot();
+        currentWeapon.TryShoot();
     }
 }

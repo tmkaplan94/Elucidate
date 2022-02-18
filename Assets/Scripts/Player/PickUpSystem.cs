@@ -17,9 +17,9 @@ public class PickUpSystem : MonoBehaviourPun
     // const tags and flags for the pickup system
     private const string ItemTag = "Item";
     private const string WeaponTag = "Weapon";
-    private const int NotifyInteractUIOff = 0;
-    private const int NotifyInteractUIOn = 1;
-    private const int NotifyWeaponUI = 3;
+
+    public delegate void TriggerUI(string objName);
+    public event TriggerUI TriggeredUI;
 
     // editor exposed fields
     [SerializeField] private LayerMask pickUpsLayer;
@@ -44,7 +44,7 @@ public class PickUpSystem : MonoBehaviourPun
         playerInput.Interact -= Interacted;
     }
 
-    public void Interacted()
+    private void Interacted()
     {
         photonView.RPC("InteractedRPC", RpcTarget.All);
     }
@@ -70,23 +70,24 @@ public class PickUpSystem : MonoBehaviourPun
     }
 
     // notify the observer to display UI when in range of weapon
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag(WeaponTag))
+        if (other.transform.CompareTag(WeaponTag) && photonView.IsMine)
         {
-            Notify(NotifyInteractUIOn);
+            TriggeredUI(other.transform.parent.name);
         }
+        
     }
     
     // notify the observer to turn off UI when leaving range of weapon
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag(WeaponTag))
+        if (other.transform.CompareTag(WeaponTag) && photonView.IsMine)
         {
-            Notify(NotifyInteractUIOff);
+            TriggeredUI(other.transform.parent.name);
         }
     }
-*/
+
     // picks up a new weapon
     private void PickupWeapon(GameObject newWeapon)
     {
@@ -101,10 +102,10 @@ public class PickUpSystem : MonoBehaviourPun
         newWeapon.transform.position = hand.position;
         newWeapon.transform.rotation = hand.rotation;
         newWeapon.GetComponent<WeaponFiring>().enabled = true;
-        /*if (_notify != null)
+        if(TriggeredUI != null && photonView.IsMine)
         {
-            Notify(NotifyWeaponUI);
-        }*/
+            TriggeredUI("");
+        }
     }
     
     // drops current weapon
@@ -119,6 +120,5 @@ public class PickUpSystem : MonoBehaviourPun
         {
             col.enabled = true;
         }
-        /*Notify(NotifyInteractUIOff);*/
     }
 }
