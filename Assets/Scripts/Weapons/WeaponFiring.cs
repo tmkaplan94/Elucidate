@@ -7,7 +7,6 @@
  */
 using UnityEngine;
 using Photon.Pun;
-using System.Collections;
 
 public class WeaponFiring : MonoBehaviour
 {
@@ -29,23 +28,22 @@ public class WeaponFiring : MonoBehaviour
     {
         if (Time.time >= _nextFireTime)
         {
-            StartCoroutine(Shoot());
+            Shoot();
             // sets the next time the player is able to shoot based on rounds per second.
             _nextFireTime = Time.time + 1.0f / weaponType.RoundsPerSecond;
         }
     }
 
     // shoots bullet
-    IEnumerator Shoot()
+    private void Shoot()
     {
         GameObject newBullet = PhotonNetwork.Instantiate(weaponType.Bullet.name, firePoint.position, firePoint.rotation);
         newBullet.transform.localScale *= weaponType.BulletSizeScale;
         newBullet.GetComponent<Bullet>().Damage = weaponType.BulletDamage;
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.BulletVelocity);
+        newBullet.GetComponent<Bullet>().KillAfterTime(weaponType.BulletLifeTime);
         MuzzleFlash();
         _audio.Play();
-        yield return new WaitForSecondsRealtime(weaponType.BulletLifeTime);
-        PhotonNetwork.Destroy(newBullet);
     }
 
     // The MuzzleFlash method will create a muzzle flash object emitting a yellow light at the location the gun shoots briefly, then destroy itself. 

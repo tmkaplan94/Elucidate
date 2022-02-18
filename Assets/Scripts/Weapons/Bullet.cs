@@ -4,9 +4,9 @@
  * Description: Damages IDamageable objects and destroys itself.
  */
 
-using System.Runtime.CompilerServices;
+using System.Collections;
 using UnityEngine;
-//using Photon.Pun;
+using Photon.Pun;
 
 public class Bullet : MonoBehaviour
 {
@@ -22,7 +22,16 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
             other.GetComponent<IDamageable<float>>().TakeDamage(damage);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
+    }
+    public void KillAfterTime(float lifetime)
+    {
+        StartCoroutine(KillAfterLifeTime(lifetime));
+    }
+    private IEnumerator KillAfterLifeTime(float lifetime)
+    {
+        yield return new WaitForSecondsRealtime(lifetime);
+        PhotonNetwork.Destroy(gameObject);
     }
     
 }
