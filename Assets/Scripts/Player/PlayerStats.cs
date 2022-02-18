@@ -105,11 +105,11 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
     // IDamageable method to die if _health has reached 0.
     public void Kill()
     {
-        PhotonNetwork.Destroy(gameObject);
-        if(_view.IsMine)
+        if (_view.IsMine)
         {
             Debug.Log("dead");
-            GameEventBus.Publish(GameEvent.LOSS);
+            GameEvents.Publish(GameEvent.LOSS);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
