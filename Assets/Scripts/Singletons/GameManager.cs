@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     {
         GameEventBus.Title += TitleEvent;
         GameEventBus.Countdown += CountdownEvent;
-        GameEventBus.Start += Start;
+        GameEventBus.Start += StartEvent;
         GameEventBus.Pause += PauseEvent;
         GameEventBus.Resume += ResumeEvent;
         GameEventBus.Win += WinEvent;
@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     {
         GameEventBus.Title -= TitleEvent;
         GameEventBus.Countdown -= CountdownEvent;
-        GameEventBus.Start -= Start;
+        GameEventBus.Start -= StartEvent;
         GameEventBus.Pause -= PauseEvent;
         GameEventBus.Resume -= ResumeEvent;
         GameEventBus.Win -= WinEvent;

@@ -1,6 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/*
+ * Authors: Grant Reed, Tyler
+ * Contributors:
+ * Description: GameManager controls and maintains the flow of the game.
+ *
+ * GameManager extends Singleton, which extends MonoBehavior.
+ */
 using System;
 
 public static class GameEventBus
