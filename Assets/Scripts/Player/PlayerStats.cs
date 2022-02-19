@@ -122,7 +122,7 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
             
             PlayerList.Remove(_id);
         
-            GameEvents.PlayerDeath?.Invoke();
+            GameEventBus.PlayerDeath?.Invoke();
             PhotonNetwork.Destroy(gameObject);
         }
     }

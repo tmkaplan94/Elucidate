@@ -17,15 +17,16 @@ public class CounterText : MonoBehaviour
     {
         _textMeshProText = GetComponent<TextMeshProUGUI>();
         _enemyCount = 0;
-        GameEventBus.Subscribe(GameEvent.ENEMYKILLED, SubtractCount);
-        GameEventBus.Subscribe(GameEvent.ENEMYADDED, AddCount);
+
+        GameEventBus.EnemyAdded += AddCount;
+        GameEventBus.EnemyKilled += SubtractCount;
     }
 
     // unsubscribe from enemy added/killed events
     private void OnDisable()
     {
-        GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, UpdateText);
-        GameEventBus.Unsubscribe(GameEvent.ENEMYADDED, UpdateText);
+        GameEventBus.EnemyAdded -= AddCount;
+        GameEventBus.EnemyKilled -= SubtractCount;
     }
 
     // add to enemy count
@@ -42,7 +43,7 @@ public class CounterText : MonoBehaviour
         UpdateText();
         if(_enemyCount <= 0)
         {
-            GameEventBus.Publish(GameEvent.WIN);
+            GameEventBus.Win?.Invoke();
         }
     }
 
