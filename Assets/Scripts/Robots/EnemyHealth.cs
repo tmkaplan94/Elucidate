@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealth : Subject, IDamageable <float>
+public class EnemyHealth : MonoBehaviour, IDamageable <float>
 {
     // editor exposed fields
     [SerializeField] private float maxHealth;

@@ -1,6 +1,6 @@
 /*
  * Author: Tyler Kaplan
- * Contributors:
+ * Contributors: Grant Reed, Loc Trinh
  * Description: AudioManager configures and plays all sound at specified audio source.
  */
 using UnityEngine;

@@ -1,8 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+/*
+ * Author: Grant Reed
+ * Contributors: 
+ * Description: Turns off conflicting components of players that are not the local player.
+ */
 public class PlayerNetworkStart : MonoBehaviour
 {
     [SerializeField] GameObject _cameraRig;

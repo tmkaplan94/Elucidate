@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
 
     // event functions update the current game status and dictate the behaviors that happen on event
     #region Private Event Functions
-
+    //loads the title scene, disconnects player from server, clears player list. Essentially resets the game.
     private void TitleEvent()
     {
         CurrentStatus = GameEvent.TITLE;
@@ -138,25 +138,29 @@ public class GameManager : Singleton<GameManager>
     
     private void PlayerDeathEvent(int id)
     {
+        //remove dead player from player list
         PlayerStats deadPlayer = players.GetItem(id);
+        PhotonView deadPlayerView = deadPlayer.gameObject.GetPhotonView();
         players.Remove(id);
+        //don't do anything if player id doesn't exist or if it is the last player in the scene.
         if (deadPlayer == null || players.Length() < 1)
             return;
-        if (!deadPlayer.gameObject.GetPhotonView().IsMine)
+        //if the player who died is the local player, call loss.
+        if (deadPlayerView.IsMine)
+        {
+            Debug.Log("loss " + id);
+            GameEventBus.Loss?.Invoke();
+        }
+        //if the player who died is not the local player and they are the last player in the game then call win.
+        else if (!deadPlayerView.IsMine && players.Length() < 2)
         {
              Debug.Log("win " + id);
              GameEventBus.Win?.Invoke();
-        }
-        else
-        {
-             Debug.Log("loss " + id);
-             GameEventBus.Loss?.Invoke();
         }  
     }
-
+    //Adds player to the players list.
     private void PlayerAddedEvent(int id, PlayerStats player)
     {
-
         players.Add(id, player);
         Debug.Log("player added " + id + "  " + players.Length());
     }

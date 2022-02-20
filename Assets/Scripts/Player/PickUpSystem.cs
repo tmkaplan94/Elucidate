@@ -69,25 +69,6 @@ public class PickUpSystem : MonoBehaviourPun
         }
     }
 
-    // notify the observer to display UI when in range of weapon
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag(WeaponTag) && photonView.IsMine)
-        {
-            TriggeredUI(other.transform.parent.name);
-
-        }
-    }
-    
-    // notify the observer to turn off UI when leaving range of weapon
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.CompareTag(WeaponTag) && photonView.IsMine)
-        {
-            TriggeredUI(other.transform.parent.name);
-        }
-    }
-
     // picks up a new weapon
     private void PickupWeapon(GameObject newWeapon)
     {
@@ -102,10 +83,6 @@ public class PickUpSystem : MonoBehaviourPun
         newWeapon.transform.position = hand.position;
         newWeapon.transform.rotation = hand.rotation;
         newWeapon.GetComponent<WeaponFiring>().enabled = true;
-        if(TriggeredUI != null && photonView.IsMine)
-        {
-            TriggeredUI("");
-        }
     }
     
     // drops current weapon
