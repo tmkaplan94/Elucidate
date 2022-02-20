@@ -1,11 +1,12 @@
 /*
  * Authors: Grant Reed, Tyler
  * Contributors:
- * Description: GameManager controls and maintains the flow of the game.
+ * Description: 
  *
- * GameManager extends Singleton, which extends MonoBehavior.
+ *
  */
 using System;
+using System.Collections.Generic;
 
 public static class GameEventBus
 {
@@ -20,9 +21,12 @@ public static class GameEventBus
     
     public static Action EnemyAdded;
     public static Action EnemyKilled;
-    public static Action PlayerDeath;
+    public static Action<int> PlayerDeath;
+    public static Action<int, PlayerStats> PlayerAdded;
+
 }
 
+//This enum Just allows the game manager to keep track of the current state of the game.
 public enum GameEvent
 {
     TITLE, COUNTDOWN, START, PAUSE, RESUME, WIN, LOSS, QUIT, ENEMYADDED, ENEMYKILLED, PLAYERDEATH

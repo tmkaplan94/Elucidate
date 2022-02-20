@@ -1,6 +1,6 @@
 /*
  * Author: Ryan Hipple, from Unite Austin 2017
- * Contributors: Tyler Kaplan
+ * Contributors: Tyler Kaplan, Grant Reed
  * Description: ScriptableObject list can provide more functionality than a regular list.
  *
  * Renamed from Hipple's RuntimeSet, classes can inherit from this to make a ScriptableObjectList of type T.
@@ -41,4 +41,13 @@ public abstract class SOList<T> : ScriptableObject
         return Items.Count;
     }
 
+    public T GetItem(int id)
+    {
+        T item;
+        if(!Items.TryGetValue(id, out item))
+        {
+            Debug.LogError("Player " + id + "Does not exist.");          
+        }
+        return item;
+    }
 }
