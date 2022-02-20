@@ -62,6 +62,7 @@ public class MenuManager : Singleton<MenuManager>
         _backgroundImage.color = new Color(r, g, b, 255);
     }
     
+    
     // toggles the proper menus on and off
     #region Public Menu Functions
 
@@ -93,6 +94,7 @@ public class MenuManager : Singleton<MenuManager>
 
     public void ActivatePauseMenu()
     {
+        // display pause menu
         _pauseMenu.SetActive(true);
         _pauseOptionsMenu.SetActive(false);
     }
@@ -107,6 +109,10 @@ public class MenuManager : Singleton<MenuManager>
     {
         _pauseMenu.SetActive(false);
         _pauseOptionsMenu.SetActive(false);
+    }
+    public void ResumeButtonClicked()
+    {
+        GameEventBus.Resume?.Invoke();
     }
 
     public void ActivateWinMenu()

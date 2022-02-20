@@ -75,8 +75,8 @@ public class PickUpSystem : MonoBehaviourPun
         if (other.transform.CompareTag(WeaponTag) && photonView.IsMine)
         {
             TriggeredUI(other.transform.parent.name);
+
         }
-        
     }
     
     // notify the observer to turn off UI when leaving range of weapon
