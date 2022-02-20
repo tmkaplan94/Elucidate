@@ -12,6 +12,7 @@ public class SpawnPlayers : MonoBehaviour
 
     private void OnEnable()
     {
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[0].position, spawnPoints[0].rotation);
+        int place = Random.Range(0, 5);
+        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[place].position, spawnPoints[place].rotation);
     }
 }
