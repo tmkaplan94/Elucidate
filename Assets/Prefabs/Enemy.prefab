@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8dc4ea5a707da47906a648e61eb0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: {fileID: 11400000, guid: 34584a8aab32b3e4fa48ef99a30be7d7, type: 2}
   stats: {fileID: 11400000, guid: 6ba2f5947fbbd5d47865c3a557426d41, type: 2}
 --- !u!114 &1273625718
 MonoBehaviour:
