@@ -34,10 +34,8 @@ public class PlayerInputHandler : MonoBehaviourPun
     #endregion
     private void InteractPressed()
     {
-        if(Interact != null)
-            Interact();
-        if(CheckInteract != null)
-            CheckInteract();
+        Interact?.Invoke();
+        CheckInteract?.Invoke();
     }
     private void Update()
     {
@@ -45,8 +43,7 @@ public class PlayerInputHandler : MonoBehaviourPun
         movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
         if (_inputActions.Default.Shoot.ReadValue<float>() > 0f)
         {
-            if (Shoot != null)
-                Shoot();
+            Shoot?.Invoke();
         }
     }
     private void FixedUpdate()

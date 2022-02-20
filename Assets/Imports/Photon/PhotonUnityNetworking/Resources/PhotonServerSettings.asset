@@ -45,6 +45,8 @@ MonoBehaviour:
   - InteractedRPC
   - ShootRPC
   - UpdateCurrentWeaponRPC
+  - KillRPC
+  - TakeDamageRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

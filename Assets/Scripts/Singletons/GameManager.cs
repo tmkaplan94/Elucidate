@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.EnemyAdded += EnemyAddedEvent;
         GameEventBus.EnemyKilled += EnemyKilledEvent;
         GameEventBus.PlayerDeath += PlayerDeathEvent;
+        GameEventBus.PlayerAdded += PlayerAddedEvent;
     }
 
     // initially set the game status
@@ -54,6 +55,7 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.EnemyAdded -= EnemyAddedEvent;
         GameEventBus.EnemyKilled -= EnemyKilledEvent;
         GameEventBus.PlayerDeath -= PlayerDeathEvent;
+        GameEventBus.PlayerAdded -= PlayerAddedEvent;
     }
 
     // event functions update the current game status and dictate the behaviors that happen on event
@@ -127,12 +129,20 @@ public class GameManager : Singleton<GameManager>
         }
     }
     
-    private void PlayerDeathEvent()
+    private void PlayerDeathEvent(int id)
     {
+        players.Remove(id);
         if (players.Length() <= 0)
         {
             Debug.Log("Loc is dumb.");
         }
+    }
+
+    private void PlayerAddedEvent(int id, PlayerStats player)
+    {
+
+        players.Add(id, player);
+        Debug.Log("player added " + id + "  " + players.Length());
     }
 
     #endregion

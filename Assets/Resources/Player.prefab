@@ -961,7 +961,6 @@ MonoBehaviour:
   _pickupRange: 5
   _currentWeapon: {fileID: 9219815917566379237}
   _rotationSpeed: 10
-  PlayerList: {fileID: 11400000, guid: 34584a8aab32b3e4fa48ef99a30be7d7, type: 2}
 --- !u!114 &-7932826621814145660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,7 +1069,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 0
   ObservedComponents:
-  - {fileID: 1811399681661353723}
   - {fileID: -1322684478327338151}
   sceneViewId: 0
   InstantiationId: 0
