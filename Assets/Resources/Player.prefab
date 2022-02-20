@@ -1034,6 +1034,8 @@ MonoBehaviour:
   _cameraRig: {fileID: 8172458701927672457}
   _view: {fileID: -4894384122771066231}
   _inputHandler: {fileID: -7932826621814145660}
+  playerUI: {fileID: 1194974480}
+  flashlight: {fileID: 758813409}
 --- !u!54 &1811399681661353722
 Rigidbody:
   m_ObjectHideFlags: 0

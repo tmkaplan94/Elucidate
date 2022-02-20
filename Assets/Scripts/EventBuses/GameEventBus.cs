@@ -23,6 +23,7 @@ public static class GameEventBus
     public static Action EnemyKilled;
     public static Action<int> PlayerDeath;
     public static Action<int, PlayerStats> PlayerAdded;
+    public static Action PlayerDisconnected;
 
 }
 

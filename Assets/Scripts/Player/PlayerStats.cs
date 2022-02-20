@@ -13,6 +13,7 @@
 using UnityEngine;
 using Photon.Pun;
 
+
 public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
 {
     // editor exposed fields
@@ -75,31 +76,33 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
     private void OnEnable()
     {
         _id = GetComponent<PhotonView>().ViewID;
-        GameEventBus.PlayerAdded(_id, this);
+        GameEventBus.PlayerAdded?.Invoke(_id, this);
     }
     private void OnDisable()
     {
-        GameEventBus.PlayerDeath(_id);
+
     }
 
     // IDamagable method to decrement _health, calls Die() if _health reaches 0.
     public void TakeDamage(float damage)
     {
-        if(_view.IsMine)
+        if (_view.IsMine)
         {
             photonView.RPC("TakeDamageRPC", RpcTarget.All, damage);
-            SetHealthBar();
-            if (_health <= 0f)
-            {
-                Kill();
-            }
+            SetHealthBar(); 
+        }
+        if (_health <= 0f)
+        {
+            photonView.RPC("KillRPC", RpcTarget.All);
         }
     }
-    
-    // IDamageable method to die if _health has reached 0.
-    private void Kill()
-    { 
-        PhotonNetwork.Destroy(gameObject);      
+    bool isdead = false;
+    // method to die if _health has reached 0.
+    [PunRPC]
+    private void KillRPC()
+    {
+        GameEventBus.PlayerDeath?.Invoke(_id);
+        Destroy(gameObject);      
     }
     [PunRPC]
     private void TakeDamageRPC(float amount)

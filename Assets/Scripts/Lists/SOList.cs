@@ -41,13 +41,18 @@ public abstract class SOList<T> : ScriptableObject
         return Items.Count;
     }
 
-    public T GetItem(int id)
+   public T GetItem(int id)
     {
         T item;
         if(!Items.TryGetValue(id, out item))
         {
-            Debug.LogError("Player " + id + "Does not exist.");          
+            Debug.Log("Player " + id + "Does not exist.");          
         }
         return item;
+    }
+
+    public void ClearAll()
+    {
+        Items.Clear();
     }
 }

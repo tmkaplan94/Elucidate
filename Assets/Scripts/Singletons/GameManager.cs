@@ -7,6 +7,7 @@
  */
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -64,7 +65,13 @@ public class GameManager : Singleton<GameManager>
     private void TitleEvent()
     {
         CurrentStatus = GameEvent.TITLE;
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
         SceneManager.LoadScene(0);
+        if (players.Length() > 0)
+            players.ClearAll();
         Debug.Log("Current game status: " + CurrentStatus);
     }
 
@@ -97,7 +104,7 @@ public class GameManager : Singleton<GameManager>
     private void WinEvent()
     {
         CurrentStatus = GameEvent.WIN;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4);
         Debug.Log("Current game status: " + CurrentStatus);
     }
     
@@ -131,7 +138,20 @@ public class GameManager : Singleton<GameManager>
     
     private void PlayerDeathEvent(int id)
     {
+        PlayerStats deadPlayer = players.GetItem(id);
         players.Remove(id);
+        if (deadPlayer == null)
+            return;
+        if (!deadPlayer.gameObject.GetPhotonView().IsMine)
+        {
+            Debug.Log("win " + id);
+            GameEventBus.Win?.Invoke();
+        }
+        else
+        {
+            Debug.Log("loss " + id);
+            GameEventBus.Loss?.Invoke();
+        }
         if (players.Length() <= 0)
         {
             Debug.Log("Loc is dumb.");
