@@ -80,7 +80,7 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
     }
     private void OnDisable()
     {
-
+        GameEventBus.PlayerDeath?.Invoke(_id);
     }
 
     // IDamagable method to decrement _health, calls Die() if _health reaches 0.
@@ -101,7 +101,7 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
     [PunRPC]
     private void KillRPC()
     {
-        GameEventBus.PlayerDeath?.Invoke(_id);
+        
         Destroy(gameObject);      
     }
     [PunRPC]

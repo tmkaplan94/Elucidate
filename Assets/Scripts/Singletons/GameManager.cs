@@ -140,22 +140,18 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerStats deadPlayer = players.GetItem(id);
         players.Remove(id);
-        if (deadPlayer == null)
+        if (deadPlayer == null || players.Length() < 1)
             return;
         if (!deadPlayer.gameObject.GetPhotonView().IsMine)
         {
-            Debug.Log("win " + id);
-            GameEventBus.Win?.Invoke();
+             Debug.Log("win " + id);
+             GameEventBus.Win?.Invoke();
         }
         else
         {
-            Debug.Log("loss " + id);
-            GameEventBus.Loss?.Invoke();
-        }
-        if (players.Length() <= 0)
-        {
-            Debug.Log("Loc is dumb.");
-        }
+             Debug.Log("loss " + id);
+             GameEventBus.Loss?.Invoke();
+        }  
     }
 
     private void PlayerAddedEvent(int id, PlayerStats player)

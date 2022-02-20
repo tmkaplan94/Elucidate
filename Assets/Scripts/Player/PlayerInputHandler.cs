@@ -29,14 +29,14 @@ public class PlayerInputHandler : MonoBehaviourPun
     private void OnEnable()
     {
         _inputActions.Enable();
-        GameEventBus.Resume += MenuUnPause; // Need this for when Resume is clicked
+        GameEventBus.Resume += DisableMovement; // Need this for when Resume is clicked
         _inputActions.Default.Interact.performed += _ => InteractPressed();
         _inputActions.Default.Pause.performed += _ => escapePressed();  // Need this for when Esc is pressed
     }
     private void OnDisable()
     {
         _inputActions.Disable();
-        GameEventBus.Resume -= MenuUnPause; 
+        GameEventBus.Resume -= DisableMovement; 
         _inputActions.Default.Interact.performed -= _ => InteractPressed();
         _inputActions.Default.Pause.performed -= _ => escapePressed();
     }
@@ -45,13 +45,11 @@ public class PlayerInputHandler : MonoBehaviourPun
     {
         if(!isPause)
         {
-            if(Interact != null)
-                Interact();
-            if(CheckInteract != null)
-                CheckInteract();
+            Interact?.Invoke();
+            CheckInteract?.Invoke();
         }
     }
-    private void MenuUnPause()
+    private void DisableMovement()
     {
         isPause = false;
     }
@@ -60,7 +58,7 @@ public class PlayerInputHandler : MonoBehaviourPun
         if(isPause)
         {
             GameEventBus.Resume?.Invoke();
-            MenuUnPause();
+            DisableMovement();
         }
         else{
             GameEventBus.Pause?.Invoke();
@@ -75,8 +73,7 @@ public class PlayerInputHandler : MonoBehaviourPun
             movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
             if (_inputActions.Default.Shoot.ReadValue<float>() > 0f)
             {
-                if (Shoot != null)
-                    Shoot();
+                Shoot?.Invoke();
             }
         }
     }
