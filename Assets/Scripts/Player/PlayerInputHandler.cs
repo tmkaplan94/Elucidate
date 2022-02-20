@@ -1,4 +1,9 @@
 
+/*
+ * Author: Grant Reed, Tyler Kaplan
+ * Contributors: Loc Trinh
+ * Description: PlayerInputHandler handles all player inputs in the network.
+ */
 using UnityEngine;
 using Photon.Pun;
 

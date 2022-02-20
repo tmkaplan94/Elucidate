@@ -2,8 +2,8 @@ using UnityEngine;
 using TMPro;
 
 /*
- * Author: Loc Trinh
- * Contributors: Grant Reed
+ * Author: Loc Trinh, Grant Reed
+ * Contributors:
  * Description: The UISystem is an Observer that will observe any object that it subscribes to. Then it will display UI based on
  *				that subject.
  */
