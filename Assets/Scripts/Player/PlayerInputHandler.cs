@@ -8,11 +8,13 @@ public class PlayerInputHandler : MonoBehaviourPun
     private PlayerInputScript _inputActions;
     private Vector3 movementInput;
     private Vector3 rotateTarget;
+    private bool isPause = false;
 
     public delegate void PlayerInput();
     public event PlayerInput Shoot;
     public event PlayerInput Interact;
     public event PlayerInput CheckInteract;
+    
 
     #region
     private void Awake()
@@ -21,37 +23,64 @@ public class PlayerInputHandler : MonoBehaviourPun
     }
     private void OnEnable()
     {
-        _inputActions.Enable();   
+        _inputActions.Enable();
+        GameEventBus.Resume += MenuUnPause; // Need this for when Resume is clicked
+        _inputActions.Default.Interact.performed += _ => InteractPressed();
+        _inputActions.Default.Pause.performed += _ => escapePressed();  // Need this for when Esc is pressed
     }
     private void OnDisable()
     {
         _inputActions.Disable();
-    }
-    private void Start()
-    {      
-        _inputActions.Default.Interact.performed += _ => InteractPressed();
+        GameEventBus.Resume -= MenuUnPause; 
+        _inputActions.Default.Interact.performed -= _ => InteractPressed();
+        _inputActions.Default.Pause.performed -= _ => escapePressed();
     }
     #endregion
     private void InteractPressed()
     {
-        if(Interact != null)
-            Interact();
-        if(CheckInteract != null)
-            CheckInteract();
+        if(!isPause)
+        {
+            if(Interact != null)
+                Interact();
+            if(CheckInteract != null)
+                CheckInteract();
+        }
+    }
+    private void MenuUnPause()
+    {
+        isPause = false;
+    }
+    private void escapePressed()
+    {
+        if(isPause)
+        {
+            GameEventBus.Resume?.Invoke();
+            MenuUnPause();
+        }
+        else{
+            GameEventBus.Pause?.Invoke();
+            isPause = true;
+        }
     }
     private void Update()
     {
-        rotateTarget = _playerMovement.GetLookAtTarget(_inputActions.Default.Aim.ReadValue<Vector2>());
-        movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
-        if (_inputActions.Default.Shoot.ReadValue<float>() > 0f)
+        if(!isPause)
         {
-            if (Shoot != null)
-                Shoot();
+            rotateTarget = _playerMovement.GetLookAtTarget(_inputActions.Default.Aim.ReadValue<Vector2>());
+            movementInput = _inputActions.Default.Move.ReadValue<Vector3>();
+            if (_inputActions.Default.Shoot.ReadValue<float>() > 0f)
+            {
+                if (Shoot != null)
+                    Shoot();
+            }
         }
     }
     private void FixedUpdate()
     {
-        _playerMovement.Rotate(rotateTarget);
-        _playerMovement.Move(movementInput);
+        if(!isPause)
+        {
+            _playerMovement.Rotate(rotateTarget);
+            _playerMovement.Move(movementInput);
+        }
     }
 }

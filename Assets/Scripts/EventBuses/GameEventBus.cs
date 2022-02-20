@@ -1,9 +1,8 @@
 /*
  * Authors: Grant Reed, Tyler
  * Contributors:
- * Description: GameManager controls and maintains the flow of the game.
+ * Description: GameEventBus controls the events of the game through the use of action delegates.
  *
- * GameManager extends Singleton, which extends MonoBehavior.
  */
 using System;
 

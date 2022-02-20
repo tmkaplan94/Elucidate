@@ -1,17 +1,17 @@
 /*
  * Author: Tyler Kaplan
- * Contributors: Grant Reed
+ * Contributors: Grant Reed, Loc Trinh
  * Description: GameManager controls and maintains the flow of the game.
  *
  * GameManager extends Singleton, which extends MonoBehavior.
  */
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerList players;
-    
     public static GameEvent CurrentStatus { get; private set; }
     public static int EnemyCount { get; private set; }
 
@@ -62,8 +62,13 @@ public class GameManager : Singleton<GameManager>
     private void TitleEvent()
     {
         CurrentStatus = GameEvent.TITLE;
+        // Check if connected to network. If connected, disconnect when go to title.
+        if(PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
         SceneManager.LoadScene(0);
-        Debug.Log("Current game status: " + CurrentStatus);
+        Debug.Log("Current game status: " + CurrentStatus); 
     }
 
     private void CountdownEvent()
@@ -86,7 +91,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Current game status: " + CurrentStatus);
     }
     
-    private void ResumeEvent()
+    public void ResumeEvent()
     {
         CurrentStatus = GameEvent.RESUME;
         Debug.Log("Current game status: " + CurrentStatus);
@@ -131,7 +136,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (players.Length() <= 0)
         {
-            Debug.Log("Loc is dumb.");
+            Debug.Log("Player Died!");
         }
     }
 
