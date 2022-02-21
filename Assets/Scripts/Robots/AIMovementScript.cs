@@ -1,6 +1,6 @@
 /*
  * Author: Brian Caballero
- * Contributors:
+ * Contributors: Grant Reed, Tyler Kaplan
  * Description: Deals with all enemy behaviors.
  */
 
@@ -49,40 +49,40 @@ public class AIMovementScript : MonoBehaviour
         _isWalking = false;
         
         // Set the walking mode, depending on the AIState.
-        switch (stats.currentState)
+        switch (stats.CurrentState)
         {
             case AIState.Wandering:
                 {
-                    stats.isConstantlyWalking = true;
-                    _isWalking = stats.isConstantlyWalking;
+                    stats.IsConstantlyWalking = true;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
             case AIState.Patrolling:
                 {
-                    stats.isConstantlyWalking = false;
-                    _isWalking = stats.isConstantlyWalking;
+                    stats.IsConstantlyWalking = false;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
             case AIState.Sprinting:
                 {
-                    stats.isConstantlyWalking = true;
-                    _isWalking = stats.isConstantlyWalking;
+                    stats.IsConstantlyWalking = true;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
             case AIState.RunNGun:
                 {
-                    stats.isConstantlyWalking = true;
-                    _isWalking = stats.isConstantlyWalking;
+                    stats.IsConstantlyWalking = true;
+                    _isWalking = stats.IsConstantlyWalking;
                     break;
                 }
 
             case AIState.Camping:
                 {
-                    stats.isConstantlyWalking = false;
-                    _navMeshAgent.stoppingDistance = stats.detectRadius - 5;
+                    stats.IsConstantlyWalking = false;
+                    _navMeshAgent.stoppingDistance = stats.DetectRadius - 5;
                     break;
                 }
         }
@@ -114,7 +114,7 @@ public class AIMovementScript : MonoBehaviour
             distance = Vector3.Distance(_target.position, transform.position);
         }
         
-        if (stats.currentState == AIState.RunNGun)
+        if (stats.CurrentState == AIState.RunNGun)
         {
             int randomShooting = Random.Range(1, 10);
             if (randomShooting > 5)
@@ -123,7 +123,7 @@ public class AIMovementScript : MonoBehaviour
             }
         }
         
-        if (distance <= stats.detectRadius)
+        if (distance <= stats.DetectRadius)
         {
             ActionChasing(distance);
         }
@@ -153,15 +153,15 @@ public class AIMovementScript : MonoBehaviour
         }
         if (_isRotatingRight == true)
         {
-            transform.Rotate(transform.up * Time.deltaTime * stats.rotationSpeed);
+            transform.Rotate(transform.up * Time.deltaTime * stats.RotationSpeed);
         }
         if (_isRotatingLeft == true)
         {
-            transform.Rotate(transform.up * Time.deltaTime * -stats.rotationSpeed);
+            transform.Rotate(transform.up * Time.deltaTime * -stats.RotationSpeed);
         }
         if (_isWalking == true)
         {
-            _rigidbody.transform.position += transform.forward * stats.movementSpeed;
+            _rigidbody.transform.position += transform.forward * stats.MovementSpeed;
         }
     }
     
@@ -176,7 +176,7 @@ public class AIMovementScript : MonoBehaviour
 
 
         _isWandering = true;
-        if (stats.isConstantlyWalking == true)
+        if (stats.IsConstantlyWalking == true)
         {
             yield return new WaitForSeconds(0);
             yield return new WaitForSeconds(walkTime);
@@ -217,6 +217,6 @@ public class AIMovementScript : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats.detectRadius);
+        Gizmos.DrawWireSphere(transform.position, stats.DetectRadius);
     }
 }

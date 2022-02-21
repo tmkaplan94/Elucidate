@@ -96,7 +96,6 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
             photonView.RPC("KillRPC", RpcTarget.All);
         }
     }
-    bool isdead = false;
     // method to die if _health has reached 0.
     [PunRPC]
     private void KillRPC()

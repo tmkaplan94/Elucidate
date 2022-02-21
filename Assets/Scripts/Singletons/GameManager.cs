@@ -8,11 +8,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerList players;
-    
     public static GameEvent CurrentStatus { get; private set; }
     public static int EnemyCount { get; private set; }
 
@@ -139,6 +139,7 @@ public class GameManager : Singleton<GameManager>
     private void PlayerDeathEvent(int id)
     {
         //remove dead player from player list
+        
         PlayerStats deadPlayer = players.GetItem(id);
         PhotonView deadPlayerView = deadPlayer.gameObject.GetPhotonView();
         players.Remove(id);

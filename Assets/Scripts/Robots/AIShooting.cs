@@ -28,7 +28,7 @@ public class AIShooting : MonoBehaviour
     // regulates shooting speed
     public void Fire()
     {
-        if (_shootingCount >= stats.shootingSpeed)
+        if (_shootingCount >= stats.ShootingSpeed)
         {
             Shoot();
             _shootingCount = 0;
@@ -41,6 +41,7 @@ public class AIShooting : MonoBehaviour
     {
         GameObject newBullet = Instantiate(bullet, _firePoint.position, _firePoint.rotation);
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * bulletSpeed);
+        newBullet.GetComponent<Bullet>().Damage = stats.BulletDamage;
         Destroy(newBullet, 2.0f);
         _audio.Play();
     }

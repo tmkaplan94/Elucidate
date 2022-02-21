@@ -21,8 +21,8 @@ public class Bullet : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-            other.GetComponent<IDamageable<float>>().TakeDamage(damage);
-            Destroy(this.gameObject);
+        other.GetComponent<IDamageable<float>>().TakeDamage(damage);
+        Destroy(this.gameObject);
     }
     public void KillAfterTime(float lifetime)
     {

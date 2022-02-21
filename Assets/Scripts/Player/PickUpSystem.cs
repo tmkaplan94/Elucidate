@@ -18,9 +18,6 @@ public class PickUpSystem : MonoBehaviourPun
     private const string ItemTag = "Item";
     private const string WeaponTag = "Weapon";
 
-    public delegate void TriggerUI(string objName);
-    public event TriggerUI TriggeredUI;
-
     // editor exposed fields
     [SerializeField] private LayerMask pickUpsLayer;
     [SerializeField] private Transform hand;
