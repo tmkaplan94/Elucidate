@@ -8,12 +8,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerList players;
     public static GameEvent CurrentStatus { get; private set; }
+    private enum Scenes {Title, Looading, Lobby, Level1, EndScene}
     public static int EnemyCount { get; private set; }
 
     // subscribe all event functions to game events
@@ -84,7 +84,7 @@ public class GameManager : Singleton<GameManager>
     private void StartEvent()
     {
         CurrentStatus = GameEvent.START;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         Debug.Log("Current game status: " + CurrentStatus);
     }
@@ -104,14 +104,14 @@ public class GameManager : Singleton<GameManager>
     private void WinEvent()
     {
         CurrentStatus = GameEvent.WIN;
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Debug.Log("Current game status: " + CurrentStatus);
     }
     
     private void LossEvent()
     {
         CurrentStatus = GameEvent.LOSS;
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Debug.Log("Current game status: " + CurrentStatus);
     }
 
