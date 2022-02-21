@@ -7,120 +7,162 @@
  */
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class GameManager : Singleton<GameManager>
 {
-    private static GameEvent _currentStatus;
-    private int enemyCount = 0;
-    public static GameEvent CurrentStatus()
-    {
-        return _currentStatus;
-    }
+    [SerializeField] private PlayerList players;
+    
+    public static GameEvent CurrentStatus { get; private set; }
+    public static int EnemyCount { get; private set; }
 
     // subscribe all event functions to game events
     private void OnEnable()
     {
-        GameEventBus.Subscribe(GameEvent.TITLE, TitleEvent);
-        GameEventBus.Subscribe(GameEvent.COUNTDOWN, CountdownEvent);
-        GameEventBus.Subscribe(GameEvent.START, StartEvent);
-        GameEventBus.Subscribe(GameEvent.PAUSE, PauseEvent);
-        GameEventBus.Subscribe(GameEvent.RESUME, ResumeEvent);
-        GameEventBus.Subscribe(GameEvent.WIN, WinEvent);
-        GameEventBus.Subscribe(GameEvent.ENEMYADDED, EnemyAddedEvent);
-        GameEventBus.Subscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
-        GameEventBus.Subscribe(GameEvent.LOSS, LossEvent);
-        GameEventBus.Subscribe(GameEvent.QUIT, QuitEvent);
+        GameEventBus.Title += TitleEvent;
+        GameEventBus.Countdown += CountdownEvent;
+        GameEventBus.Start += StartEvent;
+        GameEventBus.Pause += PauseEvent;
+        GameEventBus.Resume += ResumeEvent;
+        GameEventBus.Win += WinEvent;
+        GameEventBus.Loss += LossEvent;
+        GameEventBus.Quit += QuitEvent;
+        
+        GameEventBus.EnemyAdded += EnemyAddedEvent;
+        GameEventBus.EnemyKilled += EnemyKilledEvent;
+        GameEventBus.PlayerDeath += PlayerDeathEvent;
+        GameEventBus.PlayerAdded += PlayerAddedEvent;
     }
 
     // initially set the game status
     private void Start()
     {
-        _currentStatus = GameEvent.TITLE;
-        Debug.Log("Current game status: " + _currentStatus);
+        CurrentStatus = GameEvent.TITLE;
+        Debug.Log("Current game status: " + CurrentStatus);
     }
 
-    // unsubscribe all event functions fromk game events
+    // unsubscribe all event functions from game events
     private void OnDisable()
     {
-        GameEventBus.Unsubscribe(GameEvent.TITLE, TitleEvent);
-        GameEventBus.Unsubscribe(GameEvent.COUNTDOWN, CountdownEvent);
-        GameEventBus.Unsubscribe(GameEvent.START, StartEvent);
-        GameEventBus.Unsubscribe(GameEvent.PAUSE, PauseEvent);
-        GameEventBus.Unsubscribe(GameEvent.RESUME, ResumeEvent);
-        GameEventBus.Unsubscribe(GameEvent.WIN, WinEvent);
-        GameEventBus.Unsubscribe(GameEvent.ENEMYADDED, EnemyAddedEvent);
-        GameEventBus.Unsubscribe(GameEvent.ENEMYKILLED, EnemyKilledEvent);
-        GameEventBus.Unsubscribe(GameEvent.LOSS, LossEvent);
-        GameEventBus.Unsubscribe(GameEvent.QUIT, QuitEvent);
+        GameEventBus.Title -= TitleEvent;
+        GameEventBus.Countdown -= CountdownEvent;
+        GameEventBus.Start -= StartEvent;
+        GameEventBus.Pause -= PauseEvent;
+        GameEventBus.Resume -= ResumeEvent;
+        GameEventBus.Win -= WinEvent;
+        GameEventBus.Loss -= LossEvent;
+        GameEventBus.Quit -= QuitEvent;
+        
+        GameEventBus.EnemyAdded -= EnemyAddedEvent;
+        GameEventBus.EnemyKilled -= EnemyKilledEvent;
+        GameEventBus.PlayerDeath -= PlayerDeathEvent;
+        GameEventBus.PlayerAdded -= PlayerAddedEvent;
     }
 
     // event functions update the current game status and dictate the behaviors that happen on event
     #region Private Event Functions
-
+    //loads the title scene, disconnects player from server, clears player list. Essentially resets the game.
     private void TitleEvent()
     {
-        _currentStatus = GameEvent.TITLE;
-        SceneManager.LoadScene(0);
-        Debug.Log("Current game status: " + _currentStatus);
-    }
-
-    private void EnemyAddedEvent()
-    {
-        enemyCount++;
-    }
-    private void EnemyKilledEvent()
-    {
-        enemyCount--;
-        if(enemyCount <= 0)
+        CurrentStatus = GameEvent.TITLE;
+        if (PhotonNetwork.IsConnected)
         {
-            GameEventBus.Publish(GameEvent.WIN);
+            PhotonNetwork.Disconnect();
         }
+        SceneManager.LoadScene(0);
+        if (players.Length() > 0)
+            players.ClearAll();
+        Debug.Log("Current game status: " + CurrentStatus);
     }
 
     private void CountdownEvent()
     {
-        _currentStatus = GameEvent.COUNTDOWN;
-        Debug.Log("Current game status: " + _currentStatus);
+        CurrentStatus = GameEvent.COUNTDOWN;
+        Debug.Log("Current game status: " + CurrentStatus);
     }
     
     private void StartEvent()
     {
-        _currentStatus = GameEvent.START;
+        CurrentStatus = GameEvent.START;
         SceneManager.LoadScene(1);
 
-        Debug.Log("Current game status: " + _currentStatus);
+        Debug.Log("Current game status: " + CurrentStatus);
     }
 
     private void PauseEvent()
     {
-        _currentStatus = GameEvent.PAUSE;
-        Debug.Log("Current game status: " + _currentStatus);
+        CurrentStatus = GameEvent.PAUSE;
+        Debug.Log("Current game status: " + CurrentStatus);
     }
     
     private void ResumeEvent()
     {
-        _currentStatus = GameEvent.RESUME;
-        Debug.Log("Current game status: " + _currentStatus);
+        CurrentStatus = GameEvent.RESUME;
+        Debug.Log("Current game status: " + CurrentStatus);
     }
     
     private void WinEvent()
     {
-        _currentStatus = GameEvent.WIN;
-        SceneManager.LoadScene(2);
-        Debug.Log("Current game status: " + _currentStatus);
+        CurrentStatus = GameEvent.WIN;
+        SceneManager.LoadScene(4);
+        Debug.Log("Current game status: " + CurrentStatus);
     }
+    
     private void LossEvent()
     {
-        _currentStatus = GameEvent.LOSS;
-        SceneManager.LoadScene(2);
-        Debug.Log("Current game status: " + _currentStatus);
+        CurrentStatus = GameEvent.LOSS;
+        SceneManager.LoadScene(4);
+        Debug.Log("Current game status: " + CurrentStatus);
     }
 
     private void QuitEvent()
     {
-        _currentStatus = GameEvent.QUIT;
+        CurrentStatus = GameEvent.QUIT;
         Debug.Log("Quit successfully");
         Application.Quit();
+    }
+    
+    private void EnemyAddedEvent()
+    {
+        EnemyCount++;
+    }
+    
+    private void EnemyKilledEvent()
+    {
+        EnemyCount--;
+        if(EnemyCount <= 0)
+        {
+            GameEventBus.EnemyKilled?.Invoke();
+        }
+    }
+    
+    private void PlayerDeathEvent(int id)
+    {
+        //remove dead player from player list
+        PlayerStats deadPlayer = players.GetItem(id);
+        PhotonView deadPlayerView = deadPlayer.gameObject.GetPhotonView();
+        players.Remove(id);
+        //don't do anything if player id doesn't exist or if it is the last player in the scene.
+        if (deadPlayer == null || players.Length() < 1)
+            return;
+        //if the player who died is the local player, call loss.
+        if (deadPlayerView.IsMine)
+        {
+            Debug.Log("loss " + id);
+            GameEventBus.Loss?.Invoke();
+        }
+        //if the player who died is not the local player and they are the last player in the game then call win.
+        else if (!deadPlayerView.IsMine && players.Length() < 2)
+        {
+             Debug.Log("win " + id);
+             GameEventBus.Win?.Invoke();
+        }  
+    }
+    //Adds player to the players list.
+    private void PlayerAddedEvent(int id, PlayerStats player)
+    {
+        players.Add(id, player);
+        Debug.Log("player added " + id + "  " + players.Length());
     }
 
     #endregion

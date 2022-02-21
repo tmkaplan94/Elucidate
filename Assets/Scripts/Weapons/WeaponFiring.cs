@@ -6,6 +6,7 @@
  * Has basic firing functionality and muzzle flash for light effects.
  */
 using UnityEngine;
+using Photon.Pun;
 
 public class WeaponFiring : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class WeaponFiring : MonoBehaviour
         _audio = GetComponent<PlayAudioSource>();
         _nextFireTime = 0.0f;
     }
-    public void tryShoot()
+    public void TryShoot()
     {
         if (Time.time >= _nextFireTime)
         {
@@ -36,15 +37,15 @@ public class WeaponFiring : MonoBehaviour
     // shoots bullet
     private void Shoot()
     {
-        GameObject newBullet = /*PhotonNetwork.*/Instantiate(weaponType.Bullet, firePoint.position, firePoint.rotation);
+        GameObject newBullet = Instantiate(weaponType.Bullet, firePoint.position, firePoint.rotation);
         newBullet.transform.localScale *= weaponType.BulletSizeScale;
         newBullet.GetComponent<Bullet>().Damage = weaponType.BulletDamage;
         newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * weaponType.BulletVelocity);
+        newBullet.GetComponent<Bullet>().KillAfterTime(weaponType.BulletLifeTime);
         MuzzleFlash();
         _audio.Play();
-        Destroy(newBullet, weaponType.BulletLifeTime);
     }
-    
+
     // The MuzzleFlash method will create a muzzle flash object emitting a yellow light at the location the gun shoots briefly, then destroy itself. 
     private void MuzzleFlash()
     {

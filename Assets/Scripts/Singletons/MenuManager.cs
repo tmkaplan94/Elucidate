@@ -1,6 +1,6 @@
 /*
  * Author: Tyler Kaplan
- * Contributors:
+ * Contributors: Grant Reed, Loc Trinh
  * Description: AudioManager configures and plays all sound at specified audio source.
  */
 using UnityEngine;
@@ -21,12 +21,12 @@ public class MenuManager : Singleton<MenuManager>
     // subscribe to game events to display certain menus
     private void OnEnable()
     {
-        GameEventBus.Subscribe(GameEvent.TITLE, SetDefaultMenus);
-        GameEventBus.Subscribe(GameEvent.START, DeactivateTitleMenus);
-        GameEventBus.Subscribe(GameEvent.PAUSE, ActivatePauseMenu);
-        GameEventBus.Subscribe(GameEvent.RESUME, DeactivatePauseMenus);
-        GameEventBus.Subscribe(GameEvent.WIN, ActivateWinMenu);
-        GameEventBus.Subscribe(GameEvent.LOSS, ActivateLossMenu);
+        GameEventBus.Title += SetDefaultMenus;
+        GameEventBus.Start += DeactivateTitleMenus;
+        GameEventBus.Pause += ActivatePauseMenu;
+        GameEventBus.Resume += DeactivatePauseMenus;
+        GameEventBus.Win += ActivateWinMenu;
+        GameEventBus.Loss += ActivateLossMenu;
     }
 
     private void Start()
@@ -37,12 +37,12 @@ public class MenuManager : Singleton<MenuManager>
     // unsubscribe from game events that display certain menus
     private void OnDisable()
     {
-        GameEventBus.Unsubscribe(GameEvent.START, DeactivateTitleMenus);
-        GameEventBus.Unsubscribe(GameEvent.PAUSE, ActivatePauseMenu);
-        GameEventBus.Unsubscribe(GameEvent.RESUME, DeactivatePauseMenus);
-        GameEventBus.Unsubscribe(GameEvent.WIN, ActivateWinMenu);
-        GameEventBus.Unsubscribe(GameEvent.LOSS, ActivateLossMenu);
-        GameEventBus.Unsubscribe(GameEvent.TITLE, SetDefaultMenus);
+        GameEventBus.Title -= SetDefaultMenus;
+        GameEventBus.Start -= DeactivateTitleMenus;
+        GameEventBus.Pause -= ActivatePauseMenu;
+        GameEventBus.Resume -= DeactivatePauseMenus;
+        GameEventBus.Win -= ActivateWinMenu;
+        GameEventBus.Loss -= ActivateLossMenu;
     }
 
     // sets title scene menu on, and turns all others off
@@ -61,6 +61,7 @@ public class MenuManager : Singleton<MenuManager>
         float b = _backgroundImage.color.b;
         _backgroundImage.color = new Color(r, g, b, 255);
     }
+    
     
     // toggles the proper menus on and off
     #region Public Menu Functions
@@ -93,6 +94,7 @@ public class MenuManager : Singleton<MenuManager>
 
     public void ActivatePauseMenu()
     {
+        // display pause menu
         _pauseMenu.SetActive(true);
         _pauseOptionsMenu.SetActive(false);
     }
@@ -107,6 +109,10 @@ public class MenuManager : Singleton<MenuManager>
     {
         _pauseMenu.SetActive(false);
         _pauseOptionsMenu.SetActive(false);
+    }
+    public void ResumeButtonClicked()
+    {
+        GameEventBus.Resume?.Invoke();
     }
 
     public void ActivateWinMenu()
@@ -126,17 +132,17 @@ public class MenuManager : Singleton<MenuManager>
 
     public void PlayGame()
     {
-        GameEventBus.Publish(GameEvent.START);
+        GameEventBus.Start?.Invoke();
     }
 
     public void GoToTitle()
     {
-        GameEventBus.Publish(GameEvent.TITLE);
+        GameEventBus.Title?.Invoke();
     }
 
     public void QuitGame()
     {
-        GameEventBus.Publish(GameEvent.QUIT);
+        GameEventBus.Quit?.Invoke();
     }
 
     #endregion

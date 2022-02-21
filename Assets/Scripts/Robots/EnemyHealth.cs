@@ -1,12 +1,12 @@
 /*
  * Author: Brian Caballero
- * Contributors: Grant Reed
+ * Contributors: Grant Reed, Tyler Kaplan
  * Description: Displays and updates enemy health above their heads.
  */
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealth : Subject, IDamageable <float>
+public class EnemyHealth : MonoBehaviour, IDamageable <float>
 {
     // editor exposed fields
     [SerializeField] private float maxHealth;
@@ -20,7 +20,8 @@ public class EnemyHealth : Subject, IDamageable <float>
     {
         _currentHealth = maxHealth;
         healthSlider.value = CalculateHealth();
-        GameEventBus.Publish(GameEvent.ENEMYADDED);
+
+        GameEventBus.EnemyAdded?.Invoke();
     }
     
     private void Update()
@@ -51,7 +52,8 @@ public class EnemyHealth : Subject, IDamageable <float>
     // IDamageable method to die if _health has reached 0.
     public void Kill()
     {
-        GameEventBus.Publish(GameEvent.ENEMYKILLED);
+        GameEventBus.EnemyKilled?.Invoke();
+        
         Destroy(gameObject);
         Debug.Log("I died!");
     }
@@ -59,6 +61,11 @@ public class EnemyHealth : Subject, IDamageable <float>
     // Calculate and return health.
     private float CalculateHealth()
     {
-        return _currentHealth / maxHealth;
+        if (maxHealth != 0)
+        {
+            return _currentHealth / maxHealth;
+        }
+
+        return 0.0f;
     }
 }

@@ -671,6 +671,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797680345074638652}
     m_Modifications:
+    - target: {fileID: 5212571514934628771, guid: 249823a6a101f6c46b85588ce13ad225, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6516175396939845245, guid: 249823a6a101f6c46b85588ce13ad225, type: 3}
       propertyPath: m_Name
       value: SMG

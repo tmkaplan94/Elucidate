@@ -1,44 +1,37 @@
-
 using UnityEngine;
+using TMPro;
 
 /*
- * Author: Loc Trinh
- * Contributors: Grant Reed
+ * Author: Loc Trinh, Grant Reed
+ * Contributors:
  * Description: The UISystem is an Observer that will observe any object that it subscribes to. Then it will display UI based on
  *				that subject.
  */
 
-public class UIPickUpObserver : Observer
+public class UIPickUpObserver : MonoBehaviour
 {
-	[SerializeField]
-	private GameObject text;
+	[SerializeField] private GameObject textObj;
+	[SerializeField] private TMP_Text text;
+	[SerializeField] private PickUpSystem pickup;
 
-	//Defining event constants to check against when notified.
-	private const int notify_InteractUION = 1;
-	private const int notify_InteractUIOFF = 0;
 	void OnEnable()
 	{
-		// Subscribes WhenNotified function to delegate _notify
-		uiSubject._notify += WhenNotified;
+		pickup.TriggeredUI += ToggleUI;
 	}
 	void OnDisable()
 	{
-		// Unsubscrube WhenNotified function to delegate _notify
-		uiSubject._notify -= WhenNotified;
+		pickup.TriggeredUI -= ToggleUI;
 	}
 	// When WhenNotified is called, UI actions will happen
-	public override void WhenNotified(int val)
+	private void ToggleUI(string objName)
 	{
-		if (val == notify_InteractUION)
-		{
-			// turn on UI
-			text.SetActive(true);
-
-		}
-		if (val == notify_InteractUIOFF)
-		{
-			// turn off UI
-			text.SetActive(false);
-		}
+		print(objName);
+		if(textObj.activeInHierarchy)
+			textObj.SetActive(false);
+		else
+        {
+			text.text = "Pick up " + objName;
+			textObj.SetActive(true);
+        }
 	}
 }

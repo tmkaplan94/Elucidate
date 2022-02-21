@@ -13,7 +13,8 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunObservable
+
+public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
 {
     // editor exposed fields
     [SerializeField] PhotonView _view;
@@ -25,10 +26,11 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
     [SerializeField] private float _pickupRange;
     [SerializeField] private GameObject _currentWeapon;
     [SerializeField] private float _rotationSpeed;
-    //[SerializeField] private GameObject currentItem;
-    
+
+    private int _id;
+
     #region Properties
-    
+
     public float MaxHealth
     {
         get => _maxHealth;
@@ -68,53 +70,48 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>, IPunOb
         if(_view.IsMine)
         {
             uiHealth.SetActive(true);
-            SetHealthBar(_health);
+            SetHealthBar();
         }   
     }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void OnEnable()
     {
-        if (stream.IsWriting)
-        {
-            // We own this player: send the others our data
-            //stream.SendNext(IsFiring);
-            stream.SendNext(_health);
-        }
-        else
-        {
-            // Network player, receive data
-            //this.IsFiring = (bool)stream.ReceiveNext();
-            _health = (float)stream.ReceiveNext();
-        }
+        _id = GetComponent<PhotonView>().ViewID;
+        GameEventBus.PlayerAdded?.Invoke(_id, this);
+    }
+    private void OnDisable()
+    {
+        GameEventBus.PlayerDeath?.Invoke(_id);
     }
 
     // IDamagable method to decrement _health, calls Die() if _health reaches 0.
     public void TakeDamage(float damage)
     {
-        if(_view.IsMine)
+        if (_view.IsMine)
         {
-            _health -= damage;
-            SetHealthBar(_health);
-            if (_health <= 0f)
-            {
-                Kill();
-            }
+            photonView.RPC("TakeDamageRPC", RpcTarget.All, damage);
+            SetHealthBar(); 
+        }
+        if (_health <= 0f)
+        {
+            photonView.RPC("KillRPC", RpcTarget.All);
         }
     }
-
-    // IDamageable method to die if _health has reached 0.
-    public void Kill()
+    bool isdead = false;
+    // method to die if _health has reached 0.
+    [PunRPC]
+    private void KillRPC()
     {
-        PhotonNetwork.Destroy(gameObject);
-        if(_view.IsMine)
-        {
-            Debug.Log("dead");
-            GameEventBus.Publish(GameEvent.LOSS);
-        }
+        
+        Destroy(gameObject);      
+    }
+    [PunRPC]
+    private void TakeDamageRPC(float amount)
+    {
+        _health -= amount;
     }
 
-    void SetHealthBar(float amount)
+    void SetHealthBar()
     {
-        _uihealthbar.localScale = new Vector3(((float)amount/(float)MaxHealth), 1f, 1f);
+        _uihealthbar.localScale = new Vector3(((float)_health/(float)MaxHealth), 1f, 1f);
     }
 }

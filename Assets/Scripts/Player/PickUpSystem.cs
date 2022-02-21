@@ -10,20 +10,22 @@
  * Dependent on PlayerStats which is unnecessary, need to fix.
  */
 using UnityEngine;
+using Photon.Pun;
 
-public class PickUpSystem : Subject
+public class PickUpSystem : MonoBehaviourPun
 {
     // const tags and flags for the pickup system
     private const string ItemTag = "Item";
     private const string WeaponTag = "Weapon";
-    private const int NotifyInteractUIOff = 0;
-    private const int NotifyInteractUIOn = 1;
-    private const int NotifyWeaponUI = 3;
+
+    public delegate void TriggerUI(string objName);
+    public event TriggerUI TriggeredUI;
 
     // editor exposed fields
     [SerializeField] private LayerMask pickUpsLayer;
     [SerializeField] private Transform hand;
     [SerializeField] private Transform dropPoint;
+    [SerializeField] private PlayerInputHandler playerInput;
     
     // private fields
     private PlayerStats _stats;
@@ -33,7 +35,22 @@ public class PickUpSystem : Subject
         // cache needed components
         _stats = GetComponent<PlayerStats>();
     }
-    public GameObject Interacted()
+    private void OnEnable()
+    {
+        playerInput.Interact += Interacted;
+    }
+    private void OnDisable()
+    {
+        playerInput.Interact -= Interacted;
+    }
+
+    private void Interacted()
+    {
+        photonView.RPC("InteractedRPC", RpcTarget.All);
+    }
+    
+    [PunRPC]
+    private void InteractedRPC()
     {
         Collider[] items = Physics.OverlapBox(transform.position, new Vector3(_stats.PickUpRange, 0f, _stats.PickUpRange), transform.rotation, pickUpsLayer);
         if(items.Length > 0)
@@ -44,32 +61,11 @@ public class PickUpSystem : Subject
                 {
                     DropCurrentWeapon();
                     PickupWeapon(item.gameObject);
-                    return item.gameObject;
                 }
                 else if(item.gameObject.CompareTag(ItemTag))
                 {
-                    return item.gameObject;
                 }   
             }
-        }
-        return null;
-    }
-
-    // notify the observer to display UI when in range of weapon
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag(WeaponTag))
-        {
-            Notify(NotifyInteractUIOn);
-        }
-    }
-    
-    // notify the observer to turn off UI when leaving range of weapon
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.CompareTag(WeaponTag))
-        {
-            Notify(NotifyInteractUIOff);
         }
     }
 
@@ -87,10 +83,6 @@ public class PickUpSystem : Subject
         newWeapon.transform.position = hand.position;
         newWeapon.transform.rotation = hand.rotation;
         newWeapon.GetComponent<WeaponFiring>().enabled = true;
-        if (_notify != null)
-        {
-            Notify(NotifyWeaponUI);
-        }
     }
     
     // drops current weapon
@@ -105,6 +97,5 @@ public class PickUpSystem : Subject
         {
             col.enabled = true;
         }
-        Notify(NotifyInteractUIOff);
     }
 }

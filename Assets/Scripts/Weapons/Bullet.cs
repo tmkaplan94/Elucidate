@@ -4,11 +4,11 @@
  * Description: Damages IDamageable objects and destroys itself.
  */
 
-using System.Runtime.CompilerServices;
+using System.Collections;
 using UnityEngine;
-//using Photon.Pun;
+using Photon.Pun;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviourPun
 {
     private float damage;
     
@@ -22,7 +22,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
             other.GetComponent<IDamageable<float>>().TakeDamage(damage);
-            Destroy(gameObject);
+            Destroy(this.gameObject);
     }
-    
+    public void KillAfterTime(float lifetime)
+    {
+        Destroy(this.gameObject, lifetime);
+    }  
 }
