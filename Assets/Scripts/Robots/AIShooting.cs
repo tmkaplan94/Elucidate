@@ -1,6 +1,6 @@
 /*
  * Author: Brian Caballero
- * Contributors:
+ * Contributors: Grant Reed
  * Description: Deals with enemy shooting.
  */
 using UnityEngine;
