@@ -118,11 +118,13 @@ public class MenuManager : Singleton<MenuManager>
     public void ActivateWinMenu()
     {
         _winMenu.SetActive(true);
+        DeactivatePauseMenus();
     }
 
     public void ActivateLossMenu()
     {
         _lossMenu.SetActive(true);
+        DeactivatePauseMenus();
     }
 
     #endregion
