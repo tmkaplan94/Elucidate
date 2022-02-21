@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 278906525127565037}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,7 +550,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 278906525127565037}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
