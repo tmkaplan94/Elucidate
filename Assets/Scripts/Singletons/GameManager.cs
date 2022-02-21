@@ -139,7 +139,6 @@ public class GameManager : Singleton<GameManager>
     private void PlayerDeathEvent(int id)
     {
         //remove dead player from player list
-        
         PlayerStats deadPlayer = players.GetItem(id);
         PhotonView deadPlayerView = deadPlayer.gameObject.GetPhotonView();
         players.Remove(id);
