@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: -4561690584884219205}
   - component: {fileID: -8180760140137304122}
   - component: {fileID: 733270151371995960}
+  - component: {fileID: 2437325514559778455}
   m_Layer: 7
   m_Name: Laser
   m_TagString: Weapon
@@ -385,6 +386,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: LazerShoot
+--- !u!114 &2437325514559778455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610545050274475981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8843461da1a3943b195dbd7d653f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wepUI: {fileID: 0}
 --- !u!1 &2714578979122825598
 GameObject:
   m_ObjectHideFlags: 0
