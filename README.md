@@ -1,4 +1,5 @@
 # Elucidate
+This game is tested for 2 players, but it can hold more!
 
 CREATING A LOBBY:
     When starting a game, fill in the lobby name, 
@@ -30,7 +31,7 @@ HOW TO PLAY:
             Equip a new gun by pressing the SpaceBar while on top of the gun.
 
     Win Condition
-        Defeat all enemies, currently they are all AIs with different modes.
+        Be the last player standing in the battle arena.
         Use different guns to help you throughout the level!
 
 IMPORTANT NOTES:
