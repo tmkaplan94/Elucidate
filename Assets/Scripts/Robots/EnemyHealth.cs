@@ -12,13 +12,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable <float>
     [SerializeField] private float maxHealth;
     [SerializeField] private GameObject healthBarUI;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private AIStats stats;
     
     // private fields
     private float _currentHealth;
 
     private void Start()
     {
-        _currentHealth = maxHealth;
+        _currentHealth = stats.MaxHealth;
         healthSlider.value = CalculateHealth();
 
         GameEventBus.EnemyAdded?.Invoke();
@@ -49,8 +50,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable <float>
         }
     }
     
-    // IDamageable method to die if _health has reached 0.
-    public void Kill()
+    //  method to die if _health has reached 0.
+    private void Kill()
     {
         GameEventBus.EnemyKilled?.Invoke();
         

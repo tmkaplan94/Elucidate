@@ -19,3 +19,4 @@ MonoBehaviour:
   detectRadius: 5
   shootingSpeed: 30
   bulletDamage: 5
+  maxHealth: 30

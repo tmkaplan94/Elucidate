@@ -15,6 +15,7 @@ public class AIStats : ScriptableObject
     [SerializeField] private float detectRadius;
     [SerializeField] private float shootingSpeed;
     [SerializeField] private float bulletDamage;
+    [SerializeField] private float maxHealth;
 
 #region
     public AIState CurrentState
@@ -51,6 +52,11 @@ public class AIStats : ScriptableObject
     {
         get => bulletDamage;
         set => bulletDamage = value;
+    }
+    public float MaxHealth
+    {
+        get => maxHealth;
+        set => maxHealth = value;
     }
     #endregion
 }

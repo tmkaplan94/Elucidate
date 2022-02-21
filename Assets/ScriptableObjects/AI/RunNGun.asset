@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: RunNGun
   m_EditorClassIdentifier: 
   currentState: 3
-  movementSpeed: 0.28
+  movementSpeed: 0.2
   rotationSpeed: 100
   isConstantlyWalking: 1
   detectRadius: 10
   shootingSpeed: 30
   bulletDamage: 10
+  maxHealth: 80
