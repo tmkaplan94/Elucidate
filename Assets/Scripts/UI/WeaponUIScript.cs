@@ -11,6 +11,7 @@ using Photon.Pun;
 public class WeaponUIScript : MonoBehaviourPun
 {
     [SerializeField] GameObject wepUI;
+
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
@@ -25,5 +26,9 @@ public class WeaponUIScript : MonoBehaviourPun
         {
             wepUI.SetActive(false);
         }
+    }
+    public void TurnOffUI()
+    {
+        wepUI.SetActive(false);
     }
 }
