@@ -4,14 +4,13 @@
  * Description: ScriptableObject list can provide more functionality than a regular list.
  *
  * Renamed from Hipple's RuntimeSet, classes can inherit from this to make a ScriptableObjectList of type T.
- * Need to implement more functionality in the future, like unique identifiers for items, tags, etc.
- * Maybe attach specific SpecialLists to specific MonoBehavior Managers in the future.
+ * Added functionality includes Length(), GetItem(), ClearAll(), etc.
  */
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class SOList<T> : ScriptableObject
+public abstract class SOList<T> : ScriptableObject where T : Component
 {
     // list of T items with unique int identifiers
     public readonly Dictionary<int, T> Items = new Dictionary<int, T>();
@@ -22,7 +21,6 @@ public abstract class SOList<T> : ScriptableObject
         if (!Items.ContainsKey(id))
         {
             Items.Add(id, item);
-            //Debug.Log("I was added to the list of players!");
         }
     }
 
@@ -32,25 +30,39 @@ public abstract class SOList<T> : ScriptableObject
         if (Items.ContainsKey(id))
         {
             Items.Remove(id);
-            //Debug.Log("I was removed from list of players!");
         }
     }
 
+    // returns how many items are in dictionary
     public int Length()
     {
         return Items.Count;
     }
 
-   public T GetItem(int id)
+    // returns a specific script component based on the gameobject's unique ID
+    public T GetItem(int id)
     {
-        T item;
-        if(!Items.TryGetValue(id, out item))
+        if (!Items.TryGetValue(id, out T item))
         {
-            Debug.Log("Player " + id + "Does not exist.");          
+            Debug.Log("Player " + id + "Does not exist.");
         }
+
         return item;
     }
 
+    // returns all the transforms of the items in the dictionary
+    public List<Transform> GetAllTransforms()
+    {
+        List<Transform> transforms = new List<Transform>();
+        foreach (var item in Items)
+        {
+            transforms.Add(item.Value.gameObject.transform);
+        }
+
+        return transforms;
+    }
+
+    // clears all items from the dictionary
     public void ClearAll()
     {
         Items.Clear();

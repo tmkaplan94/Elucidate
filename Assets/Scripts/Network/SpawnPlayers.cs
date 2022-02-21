@@ -5,10 +5,8 @@ using Photon.Pun;
 
 public class SpawnPlayers : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject playerPrefab;
-    [SerializeField]
-    Transform[] spawnPoints;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] Transform[] spawnPoints;
 
     private void OnEnable()
     {

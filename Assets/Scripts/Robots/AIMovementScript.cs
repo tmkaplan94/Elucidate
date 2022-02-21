@@ -3,9 +3,13 @@
  * Contributors:
  * Description: Deals with all enemy behaviors.
  */
+
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -13,6 +17,7 @@ using UnityEngine.AI;
 public class AIMovementScript : MonoBehaviour
 {
     // editor exposed fields
+    [SerializeField] private PlayerList players;
     [SerializeField] private AIStats stats;
     
     // private fields
@@ -24,13 +29,17 @@ public class AIMovementScript : MonoBehaviour
     private bool _isRotatingLeft;
     private bool _isRotatingRight;
     private bool _isWalking;
+    private float targetDistance;
+    private float currentDistance;
 
     private void Start()
     {
+        targetDistance = Mathf.Infinity;
+        currentDistance = Mathf.Infinity;
+        
         // cache needed components
         _rigidbody = GetComponent<Rigidbody>();
         _shooting = GetComponent<AIShooting>();
-        _target = GameObject.Find("Player").transform;
         _navMeshAgent = GetComponent<NavMeshAgent>();
         
         // initialize booleans
@@ -80,10 +89,31 @@ public class AIMovementScript : MonoBehaviour
 
     }
     
+    // Check if any player is in range
+    private void Update()
+    {
+        List<Transform> targetTransforms = players.GetAllTransforms();
+        
+        foreach (Transform t in targetTransforms)
+        {
+            currentDistance = Vector3.Distance(t.position, transform.position);
+            if (currentDistance < targetDistance)
+            {
+                targetDistance = currentDistance;
+                _target = t;
+            }
+        }
+    }
+
     // Check if player is in range to shoot, otherwise wander
     private void FixedUpdate()
     {
-        float distance = Vector3.Distance(_target.position, transform.position);
+        float distance = Mathf.Infinity;
+        if (_target != null)
+        {
+            distance = Vector3.Distance(_target.position, transform.position);
+        }
+        
         if (stats.currentState == AIState.RunNGun)
         {
             int randomShooting = Random.Range(1, 10);
@@ -92,6 +122,7 @@ public class AIMovementScript : MonoBehaviour
                 _shooting.Fire();
             }
         }
+        
         if (distance <= stats.detectRadius)
         {
             ActionChasing(distance);

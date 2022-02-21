@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 1273625718}
   - component: {fileID: 3245764331577839740}
   - component: {fileID: 2196805194677131307}
+  - component: {fileID: -1115406790180159497}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Player
@@ -404,6 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8dc4ea5a707da47906a648e61eb0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players: {fileID: 11400000, guid: 34584a8aab32b3e4fa48ef99a30be7d7, type: 2}
   stats: {fileID: 11400000, guid: 6ba2f5947fbbd5d47865c3a557426d41, type: 2}
 --- !u!114 &1273625718
 MonoBehaviour:
@@ -529,6 +531,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: LaserShoot
+--- !u!114 &-1115406790180159497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827883863963763980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1827883864838009758
 GameObject:
   m_ObjectHideFlags: 0
