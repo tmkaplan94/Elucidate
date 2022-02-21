@@ -1,11 +1,19 @@
 # Elucidate
 This game is tested for 2 players, but it can hold more!
 
+Quick Notes:
+    The game has networked multiplayer, not local. To test
+    the networked multiplayer start the application multiple
+    times on your computer then switch between windows. The 
+    game can be played single player, but the win conditions 
+    are different since it is meant to be player vs. player.
+
 CREATING A LOBBY:
-    When starting a game, fill in the lobby name, 
-    leaving it empty will also count as a lobby. Then simply
-    click create and you will be loaded into your lobby,
-    assuming the lobby name isn't already taken.
+    When starting a game, fill in the lobby name. Then simply
+    click create and you will be loaded into the game,
+    assuming the lobby name isn't already taken. Note, that
+    the game starts immediately since there is no actual lobby yet.
+    other players can join your game however.
 
 JOINING A LOBBY:
     When trying to join a lobby, fill in the lobby name and
@@ -30,9 +38,15 @@ HOW TO PLAY:
         Picking Up Items
             Equip a new gun by pressing the SpaceBar while on top of the gun.
 
+	Pause
+	    Press escape to toggle the pause menu. Be warned, this will not 
+	    actually pause the game, just prevent you from moving!
+
     Win Condition
         Be the last player standing in the battle arena.
         Use different guns to help you throughout the level!
+	If playing in Singleplayer you must find and kill all 
+	of the enemy in the level AI to win.
 
 IMPORTANT NOTES:
     AI Modes:
@@ -59,3 +73,13 @@ IMPORTANT NOTES:
             lowest movement speed with the highest detection radius, making it a sniper.
 
 HAVE FUN!
+
+Known Bugs:
+	The pause menu persists through scene changes if it is active when a new scene is loaded.
+
+	Some audio options do not work.
+	
+	players will continually shoot when the user clicks off screen.
+
+	some collisions and possibly pausing the game can cause the player to character to aim
+	slightly away from the cursor.
