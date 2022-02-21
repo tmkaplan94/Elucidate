@@ -7,6 +7,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class RoomManagement : MonoBehaviourPunCallbacks
 {
@@ -27,6 +28,6 @@ public class RoomManagement : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        GameEventBus.Start?.Invoke();
+        PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex +1);
     }
 }

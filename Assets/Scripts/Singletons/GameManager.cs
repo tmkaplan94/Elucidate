@@ -142,7 +142,8 @@ public class GameManager : Singleton<GameManager>
         PlayerStats deadPlayer = players.GetItem(id);
         PhotonView deadPlayerView = deadPlayer.gameObject.GetPhotonView();
         players.Remove(id);
-        if (!isMultiplayer)
+        //in singleplayer game, only lose if player dies and there are enemies remaining.
+        if (!isMultiplayer && EnemyCount > 0)
         {
             GameEventBus.Loss?.Invoke();
         }
