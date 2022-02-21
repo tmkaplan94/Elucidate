@@ -80,6 +80,7 @@ public class PickUpSystem : MonoBehaviourPun
         newWeapon.transform.position = hand.position;
         newWeapon.transform.rotation = hand.rotation;
         newWeapon.GetComponent<WeaponFiring>().enabled = true;
+        newWeapon.GetComponent<WeaponUIScript>().TurnOffUI();
     }
     
     // drops current weapon
