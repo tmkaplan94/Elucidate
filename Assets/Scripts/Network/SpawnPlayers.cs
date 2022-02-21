@@ -2,25 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class SpawnPlayers : MonoBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] Transform[] spawnPoints;
+    [SerializeField]
+    private GameObject playerPrefab;
+    [SerializeField]
+    Transform[] spawnPoints;
+    [SerializeField]
+    Mesh[] hats;
+
+    int numPlayers;
+    Player[] allPlayers;
+    GameObject myCurrChar;
 
     private void OnEnable()
     {
-        for (int i = 0; i < spawnPoints.Length; i++)
+        allPlayers = PhotonNetwork.PlayerList;
+
+        foreach (Player p in allPlayers)
         {
-            if (PhotonNetwork.IsMasterClient)
+            if (p != PhotonNetwork.LocalPlayer)
             {
-                PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[0].position, spawnPoints[0].rotation);
+               numPlayers ++; 
             }
         }
+        myCurrChar = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[numPlayers].position, spawnPoints[numPlayers].rotation);
+        setHat();
     }
 
-    private int ChooseSpawn()
+    private void setHat()
     {
-        return Random.Range(0, spawnPoints.Length);
+        int numHats = Random.Range(0, 7);
+        myCurrChar.transform.Find("Hat_Cap").GetComponent<MeshFilter>().sharedMesh = hats[numHats];
     }
 }
