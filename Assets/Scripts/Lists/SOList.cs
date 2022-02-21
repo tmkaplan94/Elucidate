@@ -7,7 +7,6 @@
  * Added functionality includes Length(), GetItem(), ClearAll(), etc.
  */
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public abstract class SOList<T> : ScriptableObject where T : Component

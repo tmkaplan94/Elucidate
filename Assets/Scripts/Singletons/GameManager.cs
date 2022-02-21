@@ -12,6 +12,7 @@ using Photon.Pun;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerList players;
+    [SerializeField] private RobotList robots;
     public static GameEvent CurrentStatus { get; private set; }
     private bool isMultiplayer = false;
     public static int EnemyCount { get; private set; }
