@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerList players;
     public static GameEvent CurrentStatus { get; private set; }
-    private enum Scenes {Title, Looading, Lobby, Level1, EndScene}
+    private bool isMultiplayer = false;
     public static int EnemyCount { get; private set; }
 
     // subscribe all event functions to game events
@@ -142,6 +142,10 @@ public class GameManager : Singleton<GameManager>
         PlayerStats deadPlayer = players.GetItem(id);
         PhotonView deadPlayerView = deadPlayer.gameObject.GetPhotonView();
         players.Remove(id);
+        if (!isMultiplayer)
+        {
+            GameEventBus.Loss?.Invoke();
+        }
         //don't do anything if player id doesn't exist or if it is the last player in the scene.
         if (deadPlayer == null || players.Length() < 1)
             return;
@@ -162,6 +166,10 @@ public class GameManager : Singleton<GameManager>
     private void PlayerAddedEvent(int id, PlayerStats player)
     {
         players.Add(id, player);
+        if(players.Length() > 1)
+        {
+            isMultiplayer = true;
+        }
         Debug.Log("player added " + id + "  " + players.Length());
     }
 
