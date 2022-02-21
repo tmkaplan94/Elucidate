@@ -18,3 +18,4 @@ MonoBehaviour:
   isConstantlyWalking: 0
   detectRadius: 35
   shootingSpeed: 30
+  bulletDamage: 20
