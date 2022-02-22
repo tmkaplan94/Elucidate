@@ -2,7 +2,7 @@
  * Author: Grant Reed
  * Contributors:
  * Description: This class allows players to join a room in the network. It does not really manage or 
- *              maintain any rooms yet, since there is no reason to yet.
+ *              maintain any rooms, since there is no reason to yet.
  */
 using UnityEngine;
 using UnityEngine.UI;

@@ -5,7 +5,9 @@ using Photon.Realtime;
 /*
  * Author: Alex Pham
  * Contributors: Grant Reed
- * Description: 
+ * Description: This class takes an array of spawn points and instantiates player prefabs at those spawn points 
+ *              based on the number of players in the server.
+ *              As an added bonus, it adds random hats to players.
  */
 public class SpawnPlayers : MonoBehaviour
 {
@@ -29,6 +31,10 @@ public class SpawnPlayers : MonoBehaviour
             if (p != PhotonNetwork.LocalPlayer)
             {
                numPlayers ++; 
+               if(numPlayers >= spawnPoints.Length)
+                {
+                    numPlayers = 0;
+                }
             }
         }
         myCurrChar = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[numPlayers].position, spawnPoints[numPlayers].rotation);
