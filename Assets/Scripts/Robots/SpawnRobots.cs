@@ -1,8 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Grant Reed, Tyler Kaplan
+ * Contributors: 
+ * Description: 
+ */
+
 using UnityEngine;
 using Photon.Pun;
-
 public class SpawnRobots : MonoBehaviour
 {
     [SerializeField]

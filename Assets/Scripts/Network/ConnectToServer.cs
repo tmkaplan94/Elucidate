@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/*
+ * Author: Grant Reed
+ * Contributors: 
+ * Description: 
+ */
 using Photon.Pun;
-using UnityEngine.SceneManagement;
+
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
     void Start()

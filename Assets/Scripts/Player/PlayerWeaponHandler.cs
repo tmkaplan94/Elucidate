@@ -1,6 +1,11 @@
 using Photon.Pun;
 using UnityEngine;
 
+/*
+ * Author: Grant Reed
+ * Contributors: 
+ * Description: 
+ */
 public class PlayerWeaponHandler : MonoBehaviourPun
 {
     [SerializeField] private PlayerStats _stats;

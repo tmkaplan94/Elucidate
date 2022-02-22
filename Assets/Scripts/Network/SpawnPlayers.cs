@@ -2,6 +2,11 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+/*
+ * Author: Alex Pham
+ * Contributors: Grant Reed
+ * Description: 
+ */
 public class SpawnPlayers : MonoBehaviour
 {
     [SerializeField]

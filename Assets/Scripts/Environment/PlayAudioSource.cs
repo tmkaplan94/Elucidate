@@ -1,6 +1,6 @@
 /*
  * Author: Tyler Kaplan
- * Contributors: 
+ * Contributors: Grant Reed
  * Description: Sends named audio with source to AudioManager to configure and play.
  */
 using UnityEngine;
