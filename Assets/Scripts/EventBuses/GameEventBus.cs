@@ -1,12 +1,11 @@
 /*
  * Authors: Grant Reed, Tyler
  * Contributors:
- * Description: 
+ * Description: This class holds public actions for all of the events that happen in the game.
  *
  *
  */
 using System;
-using System.Collections.Generic;
 
 public static class GameEventBus
 {
