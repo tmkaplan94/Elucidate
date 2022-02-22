@@ -4,7 +4,9 @@ using UnityEngine;
 /*
  * Author: Grant Reed
  * Contributors: 
- * Description: 
+ * Description: This class ensures that the player's current weapon is up to date with player stats and handles
+ *              weapon firing by calling the currrent weapon's shoot function.
+ *              It listens to playerinputhandler's events and behaves appropriately.
  */
 public class PlayerWeaponHandler : MonoBehaviourPun
 {

@@ -2,7 +2,10 @@
 /*
  * Author: Grant Reed, Tyler Kaplan
  * Contributors: Loc Trinh
- * Description: PlayerInputHandler handles all player inputs in the network.
+ * Description: PlayerInputHandler invokes events based on the player's input. It calls the movement functions
+ *              in the playerMovement script to make its player actually move.
+ *              It is turned off by playernetworkstart.cs if this player is not the local player.
+ *              It also prevents the player from moving when this player pauses their game.
  */
 using UnityEngine;
 using Photon.Pun;

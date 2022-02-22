@@ -5,9 +5,7 @@
  *
  * Weapons and items can be picked up from the game world.
  * Doing so drops whatever the player is currently holding to the ground.
- * Items and Weapons are the only interactable objects currently
- * Has a lot of repeat code, need to convert it to templates to make things simpler.
- * Dependent on PlayerStats which is unnecessary, need to fix.
+ * Weapons are the only interactable objects currently
  */
 using UnityEngine;
 using Photon.Pun;
@@ -46,6 +44,7 @@ public class PickUpSystem : MonoBehaviourPun
         photonView.RPC("InteractedRPC", RpcTarget.All);
     }
     
+    //checks if there is an object to pickup within the range of the player and then calls pickup functions if so.
     [PunRPC]
     private void InteractedRPC()
     {

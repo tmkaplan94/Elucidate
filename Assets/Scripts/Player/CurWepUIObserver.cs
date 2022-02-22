@@ -4,7 +4,7 @@ using TMPro;
  * Author: Grant Reed
  * Contributors: Loc Trinh
  * Description: Updates UI for the current weapon of the player.
- *              listens to PickUpSystem.notify.
+ *              It listens to the checkinput game event and gets its weapon information from player stats
  */
 public class CurWepUIObserver : MonoBehaviour
 {

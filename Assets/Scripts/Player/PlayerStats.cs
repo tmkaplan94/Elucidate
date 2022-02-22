@@ -1,18 +1,16 @@
 /*
  * Author: Grant Reed
  * Contributors: Loc Trinh
- * Description: This class holds all the information about a player.
+ * Description: This class holds all the information about a player. It also calls player added and remove events
+ *              on enable and disable respectively.
  *
  * This includes health, move speed, current weapon, current items, etc.
  * This class has getters and setters for each of its adjustable fields in game.
  * This is how player states are actually changed in game.
  * There is a lot of communication between this class and many other classes about the player in game.
- *        
- * TODO: Changing damage and pickups will require a lot of change with this class as well.
  */
 using UnityEngine;
 using Photon.Pun;
-
 
 public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
 {
@@ -83,7 +81,7 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
         GameEventBus.PlayerDeath?.Invoke(_id);
     }
 
-    // IDamagable method to decrement _health, calls Die() if _health reaches 0.
+    // IDamagable method to decrement _health, calls KillRPC() if _health reaches 0.
     public void TakeDamage(float damage)
     {
         if (_view.IsMine)
