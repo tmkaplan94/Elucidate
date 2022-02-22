@@ -75,7 +75,6 @@ IMPORTANT NOTES:
 HAVE FUN!
 
 Known Bugs:
-	The pause menu persists through scene changes if it is active when a new scene is loaded.
 
 	Some audio options do not work.
 	
