@@ -5,5 +5,5 @@
  */
 public enum AIState
 {
-    Wandering, Patrolling, Sprinting, RunNGun, Camping
+    Wandering, Patrolling, Sprinting, RunNGun, Camping, Chasing
 }

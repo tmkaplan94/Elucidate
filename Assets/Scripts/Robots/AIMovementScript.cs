@@ -18,7 +18,7 @@ public class AIMovementScript : MonoBehaviour
     // editor exposed fields
     [SerializeField] private PlayerList players;
     [SerializeField] private AIStats stats;
-    
+
     // private fields
     private Rigidbody _rigidbody;
     private AIShooting _shooting;
@@ -30,69 +30,34 @@ public class AIMovementScript : MonoBehaviour
     private bool _isWalking;
     private float targetDistance;
     private float currentDistance;
-
+    [SerializeField] private AIState defaultState;
+    [SerializeField] private AIState currentState;
     private void Start()
     {
         targetDistance = Mathf.Infinity;
         currentDistance = Mathf.Infinity;
-        
+        defaultState = stats.CurrentState;
+
         // cache needed components
         _rigidbody = GetComponent<Rigidbody>();
         _shooting = GetComponent<AIShooting>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        
+
         // initialize booleans
         _isWandering = false;
         _isRotatingLeft = false;
         _isRotatingRight = false;
         _isWalking = false;
-        
-        // Set the walking mode, depending on the AIState.
-        switch (stats.CurrentState)
-        {
-            case AIState.Wandering:
-                {
-                    stats.IsConstantlyWalking = true;
-                    _isWalking = stats.IsConstantlyWalking;
-                    break;
-                }
 
-            case AIState.Patrolling:
-                {
-                    stats.IsConstantlyWalking = false;
-                    _isWalking = stats.IsConstantlyWalking;
-                    break;
-                }
-
-            case AIState.Sprinting:
-                {
-                    stats.IsConstantlyWalking = true;
-                    _isWalking = stats.IsConstantlyWalking;
-                    break;
-                }
-
-            case AIState.RunNGun:
-                {
-                    stats.IsConstantlyWalking = true;
-                    _isWalking = stats.IsConstantlyWalking;
-                    break;
-                }
-
-            case AIState.Camping:
-                {
-                    stats.IsConstantlyWalking = false;
-                    _navMeshAgent.stoppingDistance = stats.DetectRadius - 5;
-                    break;
-                }
-        }
-
+        // Set the default walking mode, depending on the default AIState.
+        _isWalking = stats.IsConstantlyWalking;
     }
-    
-    // Check if any player is in range
+
+    // Get the closest player in the scene.
     private void Update()
     {
         List<Transform> targetTransforms = players.GetAllTransforms();
-        
+        targetDistance = Mathf.Infinity;
         foreach (Transform t in targetTransforms)
         {
             currentDistance = Vector3.Distance(t.position, transform.position);
@@ -107,42 +72,55 @@ public class AIMovementScript : MonoBehaviour
     // Check if player is in range to shoot, otherwise wander
     private void FixedUpdate()
     {
-        float distance = Mathf.Infinity;
-        if (_target != null)
+        if (targetDistance <= stats.DetectRadius)
         {
-            distance = Vector3.Distance(_target.position, transform.position);
-        }
-        
-        if (stats.CurrentState == AIState.RunNGun)
-        {
-            int randomShooting = Random.Range(1, 10);
-            if (randomShooting > 5)
-            {
-                _shooting.Fire();
-            }
-        }
-        
-        if (distance <= stats.DetectRadius)
-        {
-            ActionChasing(distance);
+            currentState = AIState.Chasing;
         }
         else
         {
-            ActionWandering();
+            currentState = defaultState;
+        }
+        PerformActions();
+    }
+
+    private void PerformActions()
+    {
+        switch (currentState)
+        {
+            case AIState.RunNGun:
+                {
+                    int randomShooting = Random.Range(1, 10);
+                    if (randomShooting > 5)
+                    {
+                        _shooting.Fire();
+                    }
+                    ActionWandering();
+                    break;
+                }
+            case AIState.Chasing:
+                {
+                    ActionChasing();
+                    break;
+                }
+            default:
+                {
+                    ActionWandering();
+                    break;
+                }
         }
     }
-    
+
     // Chasing player that is in range shoot once close enough
-    private void ActionChasing(float distance)
+    private void ActionChasing()
     {
         _navMeshAgent.SetDestination(_target.position);
-        if (distance <= _navMeshAgent.stoppingDistance)
+        if (targetDistance <= _navMeshAgent.stoppingDistance)
         {
             FaceTarget();
             _shooting.Fire();
         }
     }
-    
+
     // mindlessly wander, time and degrees of turns are random
     private void ActionWandering()
     {
@@ -163,12 +141,12 @@ public class AIMovementScript : MonoBehaviour
             _rigidbody.transform.position += transform.forward * stats.MovementSpeed;
         }
     }
-    
+
     // Works with function above.
     private IEnumerator Wander()
     {
         int rotationTime = Random.Range(1, 3);
-        int rotationWait =  Random.Range(1, 3);
+        int rotationWait = Random.Range(1, 3);
         int rotationDirection = Random.Range(1, 3);
         int walkWait = Random.Range(1, 3);
         int walkTime = Random.Range(1, 3);
@@ -203,7 +181,7 @@ public class AIMovementScript : MonoBehaviour
         }
         _isWandering = false;
     }
-    
+
     // Face target to aim properly
     private void FaceTarget()
     {
@@ -211,7 +189,7 @@ public class AIMovementScript : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
-    
+
     // Used only to see/test range of AI
     private void OnDrawGizmosSelected()
     {
