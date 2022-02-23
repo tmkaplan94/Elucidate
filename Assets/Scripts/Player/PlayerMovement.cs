@@ -1,7 +1,9 @@
 /*
  * Author: Grant Reed
  * Contributors: Loc Trinh
- * Description: This class takes input from the player and adjusts the player game object accordingly.
+ * Description: This class defines the movement behavior of a player based on player stats. 
+ *              The actual movement functions (Move, Aim) are public and called by playerinputhandler.
+ * 
  * 
  * The player can move on the xz plane and rotates along the y axis toward the mouse position.
  * Currently, a ray is sent from the camera to the xz plane to determine the mouse position in world space.
