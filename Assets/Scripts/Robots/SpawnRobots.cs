@@ -1,7 +1,7 @@
 /*
  * Author: Grant Reed, Tyler Kaplan
  * Contributors: 
- * Description: 
+ * Description: Spawn robots when a level loads. one random robot per spawnpoint given to it.
  */
 
 using UnityEngine;
