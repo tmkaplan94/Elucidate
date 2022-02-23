@@ -1,9 +1,11 @@
 /*
  * Author: Grant Reed
- * Contributors:
- * Description: This class defines the movement behavior of a player based on player stats. 
- *              The actualy movement functions (Move, Aim) are public and called by playerinputhandler.
+ * Contributors: Loc Trinh
+ * Description: This class takes input from the player and adjusts the player game object accordingly.
  * 
+ * The player can move on the xz plane and rotates along the y axis toward the mouse position.
+ * Currently, a ray is sent from the camera to the xz plane to determine the mouse position in world space.
+ * The rigidbody movePosition function is used for movement and the Transform look-at function is used for player aim.
  */
 using UnityEngine;
 
@@ -16,6 +18,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector3 _position;
     private float _moveSpeed;
+
+    Animator _animator;
+
+    void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
 
     private void Start()
@@ -39,6 +48,13 @@ public class PlayerMovement : MonoBehaviour
             movementInput *= _moveSpeed * Time.deltaTime;
             _rigidbody.MovePosition(_rigidbody.position + movementInput);
         }
+        
+        // Animating
+        float Z = Vector3.Dot(movementInput.normalized, transform.forward);
+        float X = Vector3.Dot(movementInput.normalized, transform.right);
+
+        _animator.SetFloat("Z", Z, 0.1f, Time.deltaTime);
+        _animator.SetFloat("X", X, 0.1f, Time.deltaTime); 
     }
 
     // Cast a ray from camera to the ground at the position of the mouse in screen space.
