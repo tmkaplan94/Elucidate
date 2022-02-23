@@ -53,7 +53,7 @@ public class AIMovementScript : MonoBehaviour
         _isWalking = stats.IsConstantlyWalking;
     }
 
-    // Get the closest player in the scene.
+    // Get the closest player in the scene's distance from current postion.
     private void Update()
     {
         List<Transform> targetTransforms = players.GetAllTransforms();
@@ -69,7 +69,7 @@ public class AIMovementScript : MonoBehaviour
         }
     }
 
-    // Check if player is in range to shoot, otherwise wander
+    // Change state of ai if player is in range.
     private void FixedUpdate()
     {
         if (targetDistance <= stats.DetectRadius)
@@ -82,7 +82,7 @@ public class AIMovementScript : MonoBehaviour
         }
         PerformActions();
     }
-
+    //Do actions based on ai state
     private void PerformActions()
     {
         switch (currentState)
