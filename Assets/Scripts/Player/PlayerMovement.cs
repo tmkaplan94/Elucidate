@@ -50,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
             movementInput *= _moveSpeed * Time.deltaTime;
             _rigidbody.MovePosition(_rigidbody.position + movementInput);
         }
-        
         // Animating
-        float Z = Vector3.Dot(movementInput.normalized, transform.forward);
-        float X = Vector3.Dot(movementInput.normalized, transform.right);
+            float Z = Vector3.Dot(movementInput.normalized, transform.forward);
+            float X = Vector3.Dot(movementInput.normalized, transform.right);
 
-        _animator.SetFloat("Z", Z, 0.1f, Time.deltaTime);
-        _animator.SetFloat("X", X, 0.1f, Time.deltaTime); 
+            _animator.SetFloat("X", X, 0.1f, Time.deltaTime);
+            _animator.SetFloat("Z", Z, 0.1f, Time.deltaTime);
+        
     }
 
     // Cast a ray from camera to the ground at the position of the mouse in screen space.
