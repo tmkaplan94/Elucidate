@@ -6,7 +6,6 @@
  * Has basic firing functionality and muzzle flash for light effects.
  */
 using UnityEngine;
-using Photon.Pun;
 
 public class WeaponFiring : MonoBehaviour
 {

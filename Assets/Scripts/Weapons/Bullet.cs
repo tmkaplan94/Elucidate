@@ -1,31 +1,24 @@
 /*
  * Author: Grant Reed
- * Contributors:
+ * Contributors: Tyler Kaplan
  * Description: Damages IDamageable objects and destroys itself.
  */
 
-using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
 public class Bullet : MonoBehaviourPun
 {
-    private float damage;
-    
     // properties
-    public float Damage
-    {
-        get => damage;
-        set => damage = value;
-    }
+    public float Damage { get; set; }
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<IDamageable<float>>().TakeDamage(damage);
-        Destroy(this.gameObject);
+        other.GetComponent<IDamageable<float>>().TakeDamage(Damage);
+        Destroy(gameObject);
     }
     public void KillAfterTime(float lifetime)
     {
-        Destroy(this.gameObject, lifetime);
+        Destroy(gameObject, lifetime);
     }  
 }

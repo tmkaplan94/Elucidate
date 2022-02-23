@@ -1,7 +1,3 @@
-using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
-
 /*
  * Author: Alex Pham
  * Contributors: Grant Reed
@@ -9,18 +5,22 @@ using Photon.Realtime;
  *              based on the number of players in the server.
  *              As an added bonus, it adds random hats to players.
  */
+using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+
 public class SpawnPlayers : MonoBehaviour
 {
     [SerializeField]
     private GameObject playerPrefab;
     [SerializeField]
-    Transform[] spawnPoints;
+    private Transform[] spawnPoints;
     [SerializeField]
-    Mesh[] hats;
+    private Mesh[] hats;
 
-    int numPlayers;
-    Player[] allPlayers;
-    GameObject myCurrChar;
+    private int numPlayers;
+    private Player[] allPlayers;
+    private GameObject myCurrChar;
 
     private void OnEnable()
     {
@@ -32,16 +32,16 @@ public class SpawnPlayers : MonoBehaviour
             {
                numPlayers ++; 
                if(numPlayers >= spawnPoints.Length)
-                {
+               {
                     numPlayers = 0;
-                }
+               }
             }
         }
         myCurrChar = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[numPlayers].position, spawnPoints[numPlayers].rotation);
-        setHat();
+        SetHat();
     }
 
-    private void setHat()
+    private void SetHat()
     {
         int numHats = Random.Range(0, 7);
         myCurrChar.transform.Find("Hat_Cap").GetComponent<MeshFilter>().sharedMesh = hats[numHats];

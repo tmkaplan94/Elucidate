@@ -18,6 +18,8 @@ public class AIMovementScript : MonoBehaviour
     // editor exposed fields
     [SerializeField] private PlayerList players;
     [SerializeField] private AIStats stats;
+    [SerializeField] private AIState defaultState;
+    [SerializeField] private AIState currentState;
 
     // private fields
     private Rigidbody _rigidbody;
@@ -28,14 +30,13 @@ public class AIMovementScript : MonoBehaviour
     private bool _isRotatingLeft;
     private bool _isRotatingRight;
     private bool _isWalking;
-    private float targetDistance;
-    private float currentDistance;
-    [SerializeField] private AIState defaultState;
-    [SerializeField] private AIState currentState;
+    private float _targetDistance;
+    private float _currentDistance;
+
     private void Start()
     {
-        targetDistance = Mathf.Infinity;
-        currentDistance = Mathf.Infinity;
+        _targetDistance = Mathf.Infinity;
+        _currentDistance = Mathf.Infinity;
         defaultState = stats.CurrentState;
 
         // cache needed components
@@ -57,13 +58,13 @@ public class AIMovementScript : MonoBehaviour
     private void Update()
     {
         List<Transform> targetTransforms = players.GetAllTransforms();
-        targetDistance = Mathf.Infinity;
+        _targetDistance = Mathf.Infinity;
         foreach (Transform t in targetTransforms)
         {
-            currentDistance = Vector3.Distance(t.position, transform.position);
-            if (currentDistance < targetDistance)
+            _currentDistance = Vector3.Distance(t.position, transform.position);
+            if (_currentDistance < _targetDistance)
             {
-                targetDistance = currentDistance;
+                _targetDistance = _currentDistance;
                 _target = t;
             }
         }
@@ -72,7 +73,7 @@ public class AIMovementScript : MonoBehaviour
     // Change state of ai if player is in range.
     private void FixedUpdate()
     {
-        if (targetDistance <= stats.DetectRadius)
+        if (_targetDistance <= stats.DetectRadius)
         {
             currentState = AIState.Chasing;
         }
@@ -114,7 +115,7 @@ public class AIMovementScript : MonoBehaviour
     private void ActionChasing()
     {
         _navMeshAgent.SetDestination(_target.position);
-        if (targetDistance <= _navMeshAgent.stoppingDistance)
+        if (_targetDistance <= _navMeshAgent.stoppingDistance)
         {
             FaceTarget();
             _shooting.Fire();

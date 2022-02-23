@@ -9,7 +9,7 @@ using Photon.Pun;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-    void Start()
+    public void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
     }

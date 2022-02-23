@@ -1,9 +1,7 @@
 /*
- * Authors: Grant Reed, Tyler
+ * Authors: Grant Reed, Tyler Kaplan
  * Contributors:
  * Description: This class holds public actions for all of the events that happen in the game.
- *
- *
  */
 using System;
 

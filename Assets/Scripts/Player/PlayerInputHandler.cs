@@ -1,7 +1,7 @@
 
 /*
- * Author: Grant Reed, Tyler Kaplan
- * Contributors: Loc Trinh
+ * Author: Grant Reed
+ * Contributors: Loc Trinh, Tyler Kaplan
  * Description: PlayerInputHandler invokes events based on the player's input. It calls the movement functions
  *              in the playerMovement script to make its player actually move.
  *              It is turned off by playernetworkstart.cs if this player is not the local player.
@@ -16,58 +16,29 @@ public class PlayerInputHandler : MonoBehaviourPun
     private PlayerInputScript _inputActions;
     private Vector3 movementInput;
     private Vector3 rotateTarget;
-    private bool isPause = false;
+    private bool isPause;
 
     public delegate void PlayerInput();
     public event PlayerInput Shoot;
     public event PlayerInput Interact;
     public event PlayerInput CheckInteract;
-    
 
-    #region
-    private void Awake()
-    {
-        _inputActions = new PlayerInputScript();
-    }
+    #region Unity Functions
+    
     private void OnEnable()
     {
         _inputActions.Enable();
         GameEventBus.Resume += DisableMovement; // Need this for when Resume is clicked
         _inputActions.Default.Interact.performed += _ => InteractPressed();
-        _inputActions.Default.Pause.performed += _ => escapePressed();  // Need this for when Esc is pressed
+        _inputActions.Default.Pause.performed += _ => EscapePressed();  // Need this for when Esc is pressed
     }
-    private void OnDisable()
+    
+    private void Awake()
     {
-        _inputActions.Disable();
-        GameEventBus.Resume -= DisableMovement; 
-        _inputActions.Default.Interact.performed -= _ => InteractPressed();
-        _inputActions.Default.Pause.performed -= _ => escapePressed();
-    }
-    #endregion
-    private void InteractPressed()
-    {
-        if(!isPause)
-        {
-            Interact?.Invoke();
-            CheckInteract?.Invoke();
-        }
-    }
-    private void DisableMovement()
-    {
+        _inputActions = new PlayerInputScript();
         isPause = false;
     }
-    private void escapePressed()
-    {
-        if(isPause)
-        {
-            GameEventBus.Resume?.Invoke();
-            DisableMovement();
-        }
-        else{
-            GameEventBus.Pause?.Invoke();
-            isPause = true;
-        }
-    }
+    
     private void Update()
     {
         if(!isPause)
@@ -88,4 +59,42 @@ public class PlayerInputHandler : MonoBehaviourPun
             _playerMovement.Move(movementInput);
         }
     }
+
+    private void OnDisable()
+    {
+        _inputActions.Disable();
+        GameEventBus.Resume -= DisableMovement; 
+        _inputActions.Default.Interact.performed -= _ => InteractPressed();
+        _inputActions.Default.Pause.performed -= _ => EscapePressed();
+    }
+
+    #endregion
+    
+    private void InteractPressed()
+    {
+        if(!isPause)
+        {
+            Interact?.Invoke();
+            CheckInteract?.Invoke();
+        }
+    }
+    
+    private void DisableMovement()
+    {
+        isPause = false;
+    }
+    
+    private void EscapePressed()
+    {
+        if(isPause)
+        {
+            GameEventBus.Resume?.Invoke();
+            DisableMovement();
+        }
+        else{
+            GameEventBus.Pause?.Invoke();
+            isPause = true;
+        }
+    }
+
 }

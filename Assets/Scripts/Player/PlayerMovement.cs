@@ -23,11 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     Animator _animator;
 
-    void Awake()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
     }
-
 
     private void Start()
     {

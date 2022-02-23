@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerList players;
     public static GameEvent CurrentStatus { get; private set; }
-    private bool isMultiplayer = false;
+    private bool _isMultiplayer;
     public static int EnemyCount { get; private set; }
 
     // subscribe all event functions to game events
@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         CurrentStatus = GameEvent.TITLE;
+        _isMultiplayer = false;
         Debug.Log("Current game status: " + CurrentStatus);
     }
 
@@ -144,7 +145,7 @@ public class GameManager : Singleton<GameManager>
         PhotonView deadPlayerView = deadPlayer.gameObject.GetPhotonView();
         players.Remove(id);
         //in singleplayer game, only lose if player dies and there are enemies remaining.
-        if (!isMultiplayer && EnemyCount > 0)
+        if (!_isMultiplayer && EnemyCount > 0)
         {
             GameEventBus.Loss?.Invoke();
         }
@@ -170,7 +171,7 @@ public class GameManager : Singleton<GameManager>
         players.Add(id, player);
         if(players.Length() > 1)
         {
-            isMultiplayer = true;
+            _isMultiplayer = true;
         }
         Debug.Log("player added " + id + "  " + players.Length());
     }

@@ -12,7 +12,7 @@ using UnityEngine;
 public abstract class SOList<T> : ScriptableObject where T : Component
 {
     // list of T items with unique int identifiers
-    public readonly Dictionary<int, T> Items = new Dictionary<int, T>();
+    private readonly Dictionary<int, T> Items = new Dictionary<int, T>();
 
     // if item is not in list, it gets added
     public void Add(int id, T item)
