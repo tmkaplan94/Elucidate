@@ -3,8 +3,7 @@
  * Contributors: 
  * Description: Small script that handles pickup UI for each weapon by turning on or off its Canvas.
  */
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using Photon.Pun;
 

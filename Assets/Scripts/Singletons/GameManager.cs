@@ -122,6 +122,7 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
     
+    //These two are just used for singleplayer games.
     private void EnemyAddedEvent()
     {
         EnemyCount++;
