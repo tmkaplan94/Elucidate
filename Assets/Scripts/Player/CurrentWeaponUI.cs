@@ -6,7 +6,7 @@ using TMPro;
  * Description: Updates UI for the current weapon of the player.
  *              It listens to the checkinput game event and gets its weapon information from player stats
  */
-public class CurWepUIObserver : MonoBehaviour
+public class CurrentWeaponUI : MonoBehaviour
 {
     //gets information from playerstats
     [SerializeField] private PlayerStats stats;
