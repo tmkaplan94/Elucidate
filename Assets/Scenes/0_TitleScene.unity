@@ -4115,6 +4115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 860896265}
   - component: {fileID: 860896266}
+  - component: {fileID: 860896268}
   m_Layer: 5
   m_Name: SFXSlider
   m_TagString: Untagged
@@ -4195,6 +4196,102 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!82 &860896268
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860896264}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &903345100
 GameObject:
   m_ObjectHideFlags: 0
@@ -5122,6 +5219,7 @@ GameObject:
   - component: {fileID: 992260576}
   - component: {fileID: 992260578}
   - component: {fileID: 992260579}
+  - component: {fileID: 992260580}
   m_Layer: 0
   m_Name: Global Speakers
   m_TagString: Untagged
@@ -5264,6 +5362,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20da7b4b541df434ba963926a749f043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &992260580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992260575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907421db3fa093342b1ced25059c966a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 0}
+  mixer: {fileID: 0}
+  exposedParameter: 
 --- !u!1 &995674460
 GameObject:
   m_ObjectHideFlags: 0
@@ -6771,6 +6884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1482760386}
   - component: {fileID: 1482760387}
+  - component: {fileID: 1482760388}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -6851,10 +6965,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 992260576}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_volume
-        m_Mode: 0
+      - m_Target: {fileID: 1482760388}
+        m_TargetAssemblyTypeName: UsingExposedParameter, Assembly-CSharp
+        m_MethodName: Set
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6863,6 +6977,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1482760388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482760385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907421db3fa093342b1ced25059c966a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 1482760387}
+  mixer: {fileID: 24100000, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
+  exposedParameter: musicVolume
 --- !u!1 &1520399297
 GameObject:
   m_ObjectHideFlags: 0
@@ -6947,6 +7076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1563201455}
   - component: {fileID: 1563201456}
+  - component: {fileID: 1563201457}
   m_Layer: 5
   m_Name: MasterSlider
   m_TagString: Untagged
@@ -7027,10 +7157,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 992260576}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_volume
-        m_Mode: 0
+      - m_Target: {fileID: 1563201457}
+        m_TargetAssemblyTypeName: UsingExposedParameter, Assembly-CSharp
+        m_MethodName: Set
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7063,6 +7193,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1563201457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563201454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907421db3fa093342b1ced25059c966a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 1563201456}
+  mixer: {fileID: 24100000, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
+  exposedParameter: masterVolume
 --- !u!1 &1596829417
 GameObject:
   m_ObjectHideFlags: 0
@@ -7484,6 +7629,7 @@ GameObject:
   - component: {fileID: 1756293367}
   - component: {fileID: 1756293369}
   - component: {fileID: 1756293368}
+  - component: {fileID: 1756293370}
   m_Layer: 5
   m_Name: ClickSounds
   m_TagString: Untagged
@@ -7619,6 +7765,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1756293370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756293366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a77af0ef57206946a89274f003d2a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSounds: {fileID: 0}
 --- !u!1 &1826471633
 GameObject:
   m_ObjectHideFlags: 0
@@ -8481,6 +8640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2065450102}
   - component: {fileID: 2065450103}
+  - component: {fileID: 2065450104}
   m_Layer: 5
   m_Name: SFXSlider
   m_TagString: Untagged
@@ -8560,7 +8720,34 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2065450104}
+        m_TargetAssemblyTypeName: UsingExposedParameter, Assembly-CSharp
+        m_MethodName: Set
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2065450104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065450101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907421db3fa093342b1ced25059c966a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 2065450103}
+  mixer: {fileID: 24100000, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
+  exposedParameter: sfxVolume
 --- !u!1 &2090148072
 GameObject:
   m_ObjectHideFlags: 0
