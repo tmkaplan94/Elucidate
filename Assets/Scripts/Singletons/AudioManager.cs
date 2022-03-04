@@ -44,18 +44,5 @@ public class AudioManager : Singleton<AudioManager>
         // Play AudioSource
         source.Play();
     }
-    public void MuteAll()
-    {
-        foreach(Sound entry in sounds)
-        {
-            if(!entry.mute )
-            {
-                entry.mute = true;
-            }
-            else if(entry.mute)
-            {
-                entry.mute = false;
-            }        
-        }
-    }
+
 }
