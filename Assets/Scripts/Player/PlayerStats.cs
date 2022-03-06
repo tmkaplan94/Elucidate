@@ -97,8 +97,7 @@ public class PlayerStats : MonoBehaviourPunCallbacks, IDamageable<float>
     // method to die if _health has reached 0.
     [PunRPC]
     private void KillRPC()
-    {
-        
+    { 
         Destroy(gameObject);      
     }
     [PunRPC]

@@ -11,11 +11,13 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 {
     public void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
+        PhotonNetwork.NickName = "Player";
         PhotonNetwork.JoinLobby();
     }
 

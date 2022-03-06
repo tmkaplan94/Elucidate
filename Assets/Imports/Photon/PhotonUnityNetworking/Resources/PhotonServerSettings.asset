@@ -47,6 +47,8 @@ MonoBehaviour:
   - UpdateCurrentWeaponRPC
   - KillRPC
   - TakeDamageRPC
+  - ChangePlayerNameRPC
+  - LoadLevelRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

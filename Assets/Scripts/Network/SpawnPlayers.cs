@@ -13,37 +13,22 @@ public class SpawnPlayers : MonoBehaviour
 {
     [SerializeField]
     private GameObject playerPrefab;
-    [SerializeField]
-    private Transform[] spawnPoints;
-    [SerializeField]
-    private Mesh[] hats;
-
-    private int numPlayers;
-    private Player[] allPlayers;
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Mesh[] hats;
     private GameObject myCurrChar;
+    
 
-    private void OnEnable()
+    private void Start()
     {
-        allPlayers = PhotonNetwork.PlayerList;
-
-        foreach (Player p in allPlayers)
-        {
-            if (p != PhotonNetwork.LocalPlayer)
-            {
-               numPlayers ++; 
-               if(numPlayers >= spawnPoints.Length)
-               {
-                    numPlayers = 0;
-               }
-            }
-        }
-        myCurrChar = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[numPlayers].position, spawnPoints[numPlayers].rotation);
+        int spawnIndex = Random.Range(0, spawnPoints.Length);
+        Transform spawnPoint = spawnPoints[spawnIndex];
+        myCurrChar = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
         SetHat();
     }
 
     private void SetHat()
     {
-        int numHats = Random.Range(0, 7);
+        int numHats = Random.Range(0, hats.Length);
         myCurrChar.transform.Find("Hat_Cap").GetComponent<MeshFilter>().sharedMesh = hats[numHats];
     }
 }

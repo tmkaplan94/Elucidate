@@ -132,9 +132,9 @@ public class GameManager : Singleton<GameManager>
     private void EnemyKilledEvent()
     {
         EnemyCount--;
-        if(EnemyCount <= 0)
+        if(EnemyCount <= 0 && !_isMultiplayer)
         {
-            GameEventBus.EnemyKilled?.Invoke();
+            GameEventBus.Win?.Invoke();
         }
     }
     
