@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1553297472043015722}
   - component: {fileID: 5911106076088626786}
   - component: {fileID: 62005406249681961}
+  - component: {fileID: 6208455698332369100}
   m_Layer: 0
   m_Name: Robot A
   m_TagString: Untagged
@@ -112,3 +113,16 @@ MonoBehaviour:
   robotType: 0
   robotStats: {fileID: 11400000, guid: 4b77eea9b4bb1db459b35dd1e54e65b9, type: 2}
   robotStates: 00000000
+--- !u!114 &6208455698332369100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8694501414273607311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72873ca5f58edd24ab978e26f84fcba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUI: {fileID: 6945784494278188513, guid: 059f7b7f1e1cd3b41a321567b4b973ce, type: 3}
