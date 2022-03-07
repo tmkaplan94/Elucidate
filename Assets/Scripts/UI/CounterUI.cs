@@ -1,6 +1,6 @@
 /*
  * Author: Loc Trinh
- * Contributors: 
+ * Contributors: Grant Reed
  * Description: Small script that handles counter UI for remaining players/AIs.
  */
 
@@ -17,19 +17,20 @@ public class CounterUI : MonoBehaviour
     void Awake()
     {
         _counterText = GetComponent<TextMeshProUGUI>();
-        _counterText.text = "AI Remaining: " + GameManager.EnemyCount.ToString();
     }
 
     void OnEnable()
     {
         GameEventBus.EnemyKilled += counter;
         GameEventBus.PlayerAdded += counterSet;
+        GameEventBus.EnemyAdded += counter;
     }
 
     void OnDisable()
     {
         GameEventBus.EnemyKilled -= counter;
         GameEventBus.PlayerAdded -= counterSet;
+        GameEventBus.EnemyAdded -= counter;
     }
 
     private void counter()
