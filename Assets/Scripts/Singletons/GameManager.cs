@@ -1,6 +1,6 @@
 /*
  * Author: Tyler Kaplan
- * Contributors: Grant Reed
+ * Contributors: Grant Reed, Loc Trinh
  * Description: GameManager controls and maintains the flow of the game.
  *
  * GameManager extends Singleton, which extends MonoBehavior.
@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerList players;
     public static GameEvent CurrentStatus { get; private set; }
-    private bool _isMultiplayer;
+    public static bool _isMultiplayer { get; private set; }
     public static int EnemyCount { get; private set; }
 
     // subscribe all event functions to game events
