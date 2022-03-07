@@ -12,14 +12,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable <float>
     [SerializeField] private float maxHealth;
     [SerializeField] private GameObject healthBarUI;
     [SerializeField] private Slider healthSlider;
-    [SerializeField] private AIStats stats;
+    [SerializeField] private RobotStats stats;
     
     // private fields
     private float _currentHealth;
 
     private void Start()
     {
-        _currentHealth = stats.MaxHealth;
+        _currentHealth = maxHealth;
         healthSlider.value = CalculateHealth();
 
         GameEventBus.EnemyAdded?.Invoke();

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IRobotState
 {
-    public void Handle();
+    public void Handle(RobotController robotController);
 }
