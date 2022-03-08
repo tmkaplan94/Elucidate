@@ -139,16 +139,16 @@ public class RobotController : MonoBehaviour
         {
             if (_currentDistance <= robotStats.AttackRadius)
             {
-                CurrentState = GetComponent<RobotAttackState>();
+                CurrentState = _attackState;
                 _isShooting = true;
                 return;
             }
             
-            CurrentState = GetComponent<RobotApproachState>();
+            CurrentState = _approachState;
         }
         else
         {
-            CurrentState = GetComponent<RobotWanderState>();
+            CurrentState = _wanderState;
         }
     }
     
@@ -195,7 +195,7 @@ public class RobotController : MonoBehaviour
             _fleeTimer--;
             if (_fleeTimer <= 0)
             {
-                CurrentState = GetComponent<RobotWanderState>();
+                CurrentState = _wanderState;
                 _fleeTimer = robotStats.FleeCooldown;
                 _isFleeing = false;
             }
