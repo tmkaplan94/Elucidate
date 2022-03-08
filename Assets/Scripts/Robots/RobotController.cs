@@ -3,28 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(PlayAudioSource))]
 public class RobotController : MonoBehaviour
 {
     [SerializeField] private PlayerList players;
-    [SerializeField] private RobotType robotType;
+    public RobotType robotType;
     public RobotStats robotStats;
-
-    public IRobotState CurrentState { get; set; }
     
+    public IRobotState CurrentState { get; set; }
+    public bool CanFire { get; set; }
+    public Transform FirePoint { get; set; }
+    public PlayAudioSource Audio { get; set; }
+
     private NavMeshAgent _navMeshAgent;
     private Transform _transform;
     private List<Transform> _targetTransforms;
     private Transform _currentTarget;
     private float _targetDistance;
     private float _currentDistance;
-    private Transform _firePoint;
-    private PlayAudioSource _audio;
     private bool _isShooting;
-    private float _shootingTimer;
+    private int _shootingTimer;
     private bool _isFleeing;
     private int _fleeTimer;
 
@@ -46,9 +46,9 @@ public class RobotController : MonoBehaviour
         // initialize needed variables
         _currentDistance = Mathf.Infinity;
         _fleeTimer = robotStats.FleeCooldown;
-        _shootingTimer = robotStats.ShootingCooldown;
-        _firePoint = transform.GetChild(3).GetChild(0).transform;
-        _audio = gameObject.GetComponent<PlayAudioSource>();
+        _shootingTimer = 0;
+        FirePoint = transform.GetChild(2).GetChild(0).transform;
+        Audio = gameObject.GetComponent<PlayAudioSource>();
 
         // cache needed components
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -80,7 +80,7 @@ public class RobotController : MonoBehaviour
             case RobotType.Maniac:
                 gameObject.AddComponent<RobotWanderState>();
                 gameObject.AddComponent<RobotApproachState>();
-                gameObject.AddComponent<RobotFleeState>();
+                gameObject.AddComponent<RobotAttackState>();
                 break;
         }
     }
@@ -110,8 +110,8 @@ public class RobotController : MonoBehaviour
         {
             if (_currentDistance <= robotStats.AttackRadius)
             {
-                CurrentState = GetComponent<RobotFleeState>();
-                _isFleeing = true;
+                CurrentState = GetComponent<RobotAttackState>();
+                _isShooting = true;
                 return;
             }
             
@@ -131,9 +131,15 @@ public class RobotController : MonoBehaviour
             _shootingTimer--;
             if (_shootingTimer <= 0)
             {
-                Shoot();
+                CanFire = true;
             }
         }
+    }
+
+    // public function to reset shooting timer back to the set cooldown
+    public void ResetShootingTimer()
+    {
+        _shootingTimer = robotStats.ShootingCooldown;
     }
 
     // if fleeing, decrement timer; if timer hits zero, go back to wandering state
@@ -182,12 +188,6 @@ public class RobotController : MonoBehaviour
         }
     }
 
-    // instantiate bullet prefab with a direction, force, and damage amount
-    public void Shoot()
-    {
-        
-    }
-    
     // used to see/test radius of robots
     private void OnDrawGizmosSelected()
     {

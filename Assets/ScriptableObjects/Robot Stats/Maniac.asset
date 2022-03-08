@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Maniac
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 50
   movementSpeed: 0.2
   approachRadius: 15
-  attackRadius: 5
-  shootingSpeed: 0
-  bulletDamage: 0
-  fleeCooldownSecs: 5
+  attackRadius: 10
+  bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
+  bulletSpeed: 1000
+  bulletDamage: 5
+  shootingCooldown: 40
+  fleeCooldown: 0
