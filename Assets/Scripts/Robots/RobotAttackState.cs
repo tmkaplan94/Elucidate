@@ -73,17 +73,21 @@ public class RobotAttackState : MonoBehaviour, IRobotState
     // strafe around target while attacking
     private void CircleStrafe()
     {
+        // get rotation values from robot stats in editor
         Vector3 rotatePosition = _robotController.Target.position;
-        float degreesPerSecond = _robotController.robotStats.RotationSpeed * Time.deltaTime;
-        
-        // chooses either 0 or 1 to decide direction to rotate in
-        int direction = Random.Range(0,2);
-        if (direction == 0)
-        {
-            degreesPerSecond *= -1;
-        }
+        int minRotationDegrees = _robotController.robotStats.rotationSpeed.minValue;
+        int maxRotationDegrees = _robotController.robotStats.rotationSpeed.maxValue;
+        int degreesPerSecond = Random.Range(minRotationDegrees, maxRotationDegrees);
 
-        _robotController.Transform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond);
+        // // chooses either 0 or 1 to decide direction to rotate in
+        // int direction = Random.Range(0,2);
+        // if (direction == 0)
+        // {
+        //     degreesPerSecond *= -1;
+        // }
+
+        // perform rotation while looking at target (strafe)
+        _robotController.Transform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond * Time.deltaTime);
         _robotController.FaceTarget();
     }
     

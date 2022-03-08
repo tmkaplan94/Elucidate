@@ -21,4 +21,7 @@ MonoBehaviour:
   bulletDamage: 5
   shootingCooldown: 40
   fleeCooldown: 0
-  rotationSpeed: 40
+  rotationSpeed:
+    currentValue: 0
+    minValue: 30
+    maxValue: 50
