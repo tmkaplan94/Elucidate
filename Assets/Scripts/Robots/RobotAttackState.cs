@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RobotAttackState : MonoBehaviour, IRobotState
 {
@@ -24,12 +25,11 @@ public class RobotAttackState : MonoBehaviour, IRobotState
         switch (_robotController.robotType)
         {
             case RobotType.Maniac:
-                _robotController.NavMeshAgent.SetDestination(_robotController.Target.position);
-                _robotController.FaceTarget();
+                Chase();
                 Fire();
                 break;
             case RobotType.CircleStrafer:
-                // do something
+                CircleStrafe();
                 Fire();
                 break;
             case RobotType.SideStrafer:
@@ -62,4 +62,29 @@ public class RobotAttackState : MonoBehaviour, IRobotState
             _robotController.CanFire = false;
         }
     }
+    
+    // continue to chase and shoot target
+    private void Chase()
+    {
+        _robotController.NavMeshAgent.SetDestination(_robotController.Target.position);
+        _robotController.FaceTarget();
+    }
+    
+    // strafe around target while attacking
+    private void CircleStrafe()
+    {
+        Vector3 rotatePosition = _robotController.Target.position;
+        float degreesPerSecond = _robotController.robotStats.RotationSpeed * Time.deltaTime;
+        
+        // chooses either 0 or 1 to decide direction to rotate in
+        int direction = Random.Range(0,2);
+        if (direction == 0)
+        {
+            degreesPerSecond *= -1;
+        }
+
+        _robotController.Transform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond);
+        _robotController.FaceTarget();
+    }
+    
 }

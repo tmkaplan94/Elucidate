@@ -82,6 +82,16 @@ public class RobotController : MonoBehaviour
                 gameObject.AddComponent<RobotApproachState>();
                 gameObject.AddComponent<RobotAttackState>();
                 break;
+            case RobotType.CircleStrafer:
+                gameObject.AddComponent<RobotWanderState>();
+                gameObject.AddComponent<RobotApproachState>();
+                gameObject.AddComponent<RobotAttackState>();
+                break;
+            case RobotType.SideStrafer:
+                gameObject.AddComponent<RobotWanderState>();
+                gameObject.AddComponent<RobotApproachState>();
+                gameObject.AddComponent<RobotAttackState>();
+                break;
         }
     }
 
