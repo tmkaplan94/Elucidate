@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RobotWanderState : MonoBehaviour, IRobotState
 {
@@ -12,6 +14,7 @@ public class RobotWanderState : MonoBehaviour, IRobotState
     private bool _isRotatingLeft;
     private bool _isRotatingRight;
     
+
     // "handle" the state behavior
     public void Handle(RobotController robotController)
     {
@@ -20,11 +23,11 @@ public class RobotWanderState : MonoBehaviour, IRobotState
         {
             _robotController = robotController;
         }
-        
-        // initiate wandering
+
         StartCoroutine(Wander());
+        Move();
     }
-    
+
     // gets random values to use for move()
     private IEnumerator Wander()
     {
@@ -38,6 +41,7 @@ public class RobotWanderState : MonoBehaviour, IRobotState
         // determine if robot is moving
         if (_robotController.robotStats.IsConstantlyWalking)
         {
+            _isWalking = true;
             yield return new WaitForSeconds(0);
             yield return new WaitForSeconds(walkTime);
         }
@@ -63,9 +67,6 @@ public class RobotWanderState : MonoBehaviour, IRobotState
             yield return new WaitForSeconds(rotationTime);
             _isRotatingLeft = false;
         }
-        
-        // initiate movement
-        Move();
     }
 
     // perform movement using values captures in wander()
@@ -73,15 +74,15 @@ public class RobotWanderState : MonoBehaviour, IRobotState
     {
         if (_isRotatingRight)
         {
-            _robotController.Transform.Rotate(transform.up * Time.deltaTime * _robotController.robotStats.RotationSpeed);
+            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * _robotController.robotStats.RotationSpeed);
         }
         if (_isRotatingLeft)
         {
-            transform.Rotate(transform.up * Time.deltaTime * -_robotController.robotStats.RotationSpeed);
+            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * -_robotController.robotStats.RotationSpeed);
         }
         if (_isWalking)
         {
-            _robotController.Transform.position += transform.forward * _robotController.robotStats.MovementSpeed;
+            _robotController.Transform.position += _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
         }
     }
 

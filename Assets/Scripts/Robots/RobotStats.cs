@@ -11,7 +11,8 @@ public class RobotStats : ScriptableObject
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private bool isConstantlyWalking;
-    [SerializeField] private float detectRadius;
+    [SerializeField] private float approachRadius;
+    [SerializeField] private float attackRadius;
     [SerializeField] private float shootingSpeed;
     [SerializeField] private float bulletDamage;
     [SerializeField] private float maxHealth;
@@ -21,7 +22,8 @@ public class RobotStats : ScriptableObject
     public float MovementSpeed => movementSpeed;
     public float RotationSpeed => rotationSpeed;
     public bool IsConstantlyWalking => isConstantlyWalking;
-    public float DetectRadius => detectRadius;
+    public float ApproachRadius => approachRadius;
+    public float AttackRadius => attackRadius;
     public float ShootingSpeed => shootingSpeed;
     public float BulletDamage => bulletDamage;
     public float MaxHealth => maxHealth;

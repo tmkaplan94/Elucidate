@@ -40,20 +40,23 @@ public class RobotController : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _transform = GetComponent<Transform>();
 
-        // set the default state and execute
+        // set the default state
         CurrentState = GetComponent<RobotWanderState>();
-        CurrentState.Handle(this);
     }
 
     private void Update()
     {
         LocateTarget();
     }
-    
+
+    private void FixedUpdate()
+    {
+        CurrentState.Handle(this);
+    }
+
     public void Transition(IRobotState state)
     {
         CurrentState = state;
-        CurrentState.Handle(this);
     }
 
     // adds the states specified in the editor as components
@@ -100,6 +103,15 @@ public class RobotController : MonoBehaviour
         }
     }
     
+    // check if target is in detection radius
+    private void CheckDetectionRadius()
+    {
+        if (_currentDistance <= robotStats.ApproachRadius)
+        {
+            
+        }
+    }
+
     // face the current target
     private void FaceTarget()
     {
