@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class RobotController : MonoBehaviour
 {
     [SerializeField] private PlayerList players;
     [SerializeField] private RobotType robotType;
     public RobotStats robotStats;
-    [SerializeField] private RobotState[] robotStates;
+    //[SerializeField] private RobotState[] robotStates;
     
     public IRobotState CurrentState { get; set; }
     
@@ -23,6 +24,10 @@ public class RobotController : MonoBehaviour
     #region Properties
 
     public Transform Transform => _transform;
+    public NavMeshAgent NavMeshAgent => _navMeshAgent;
+    public Transform Target => _currentTarget;
+    public float TargetDistance => _targetDistance;
+    public float CurrentDistance => _currentDistance;
 
     #endregion
 
@@ -47,6 +52,7 @@ public class RobotController : MonoBehaviour
     private void Update()
     {
         LocateTarget();
+        CheckApproachRadius();
     }
 
     private void FixedUpdate()
@@ -62,29 +68,28 @@ public class RobotController : MonoBehaviour
     // adds the states specified in the editor as components
     private void AddStatesAsComponents()
     {
-        // OPTION A: add IRobotStates based on robotStates
-        foreach (RobotState s in robotStates)
-        {
-            switch (s)
-            {
-                case RobotState.Wandering:
-                    gameObject.AddComponent<RobotWanderState>();
-                    break;
-                // case RobotState.etc:
-                //      gameObject.AddComponent<etc>();
-                //      break;
-            }
-        }
-        
-        // // OPTION B: add IRobotStates based on robotType
-        // switch (robotType)
+        // // OPTION A: add IRobotStates based on robotStates
+        // foreach (RobotState s in robotStates)
         // {
-        //     case RobotType.A:
-        //         gameObject.AddComponent<RobotWanderState>();
-        //         // etc
-        //         // etc
-        //         break;
+        //     switch (s)
+        //     {
+        //         case RobotState.Wander:
+        //             gameObject.AddComponent<RobotWanderState>();
+        //             break;
+        //         case RobotState.Approach:
+        //             gameObject.AddComponent<RobotApproachState>();
+        //             break;
+        //     }
         // }
+        
+        // OPTION B: add IRobotStates based on robotType
+        switch (robotType)
+        {
+            case RobotType.Maniac:
+                gameObject.AddComponent<RobotWanderState>();
+                gameObject.AddComponent<RobotApproachState>();
+                break;
+        }
     }
 
     // locate the nearest target by calculating the distance to the nearest player Transform
@@ -104,16 +109,20 @@ public class RobotController : MonoBehaviour
     }
     
     // check if target is in detection radius
-    private void CheckDetectionRadius()
+    public void CheckApproachRadius()
     {
         if (_currentDistance <= robotStats.ApproachRadius)
         {
-            
+            CurrentState = GetComponent<RobotApproachState>();
+        }
+        else
+        {
+            CurrentState = GetComponent<RobotWanderState>();
         }
     }
 
     // face the current target
-    private void FaceTarget()
+    public void FaceTarget()
     {
         if (_currentTarget)
         {
@@ -127,4 +136,11 @@ public class RobotController : MonoBehaviour
         }
     }
 
+    // used to see/test range of robots
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, robotStats.ApproachRadius);
+    }
+    
 }

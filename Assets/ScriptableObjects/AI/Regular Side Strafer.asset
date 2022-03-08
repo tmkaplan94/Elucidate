@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Regular Side Strafer
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  rotationSpeed: 0
-  isConstantlyWalking: 0
-  approachRadius: 0
-  attackRadius: 0
-  shootingSpeed: 0
-  bulletDamage: 0
-  maxHealth: 0
+  movementSpeed: 0.15
+  rotationSpeed: 100
+  isConstantlyWalking: 1
+  approachRadius: 18
+  attackRadius: 9
+  shootingSpeed: 30
+  bulletDamage: 10
+  maxHealth: 100

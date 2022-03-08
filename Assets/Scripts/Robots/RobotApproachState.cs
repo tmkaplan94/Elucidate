@@ -7,6 +7,7 @@ public class RobotApproachState : MonoBehaviour, IRobotState
     // the unique controller for this robot
     private RobotController _robotController;
     
+    // "handle" the state behavior
     public void Handle(RobotController robotController)
     {
         // set the controller for this robot if not already set
@@ -14,6 +15,16 @@ public class RobotApproachState : MonoBehaviour, IRobotState
         {
             _robotController = robotController;
         }
+        
+        Approach();
     }
 
+    // sets destination to target position using NavMeshAgent
+    private void Approach()
+    {
+        _robotController.NavMeshAgent.SetDestination(_robotController.Target.position);
+        _robotController.FaceTarget();
+        _robotController.Transform.position += _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
+    }
+    
 }

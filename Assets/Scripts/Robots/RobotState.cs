@@ -5,5 +5,5 @@
  */
 public enum RobotState
 {
-    Wandering, Patrolling, Sprinting, RunNGun, Camping, Chasing
+    Wander, Approach, Attack, Flee, CircleStafe, SideStrafe
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum RobotType
 {
-    A, B, C, D, E
+    Maniac, RegCircleStrafer, RegSideStrafer, MiniCircleStrafer, MiniSideStrafer
 }
