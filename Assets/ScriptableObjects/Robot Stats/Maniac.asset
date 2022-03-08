@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
-  m_Name: Regular Side Strafer
+  m_Name: Maniac
   m_EditorClassIdentifier: 
-  movementSpeed: 0.15
-  rotationSpeed: 100
-  isConstantlyWalking: 1
-  approachRadius: 18
-  attackRadius: 9
-  shootingSpeed: 30
-  bulletDamage: 10
   maxHealth: 100
+  movementSpeed: 0.2
+  approachRadius: 15
+  attackRadius: 5
+  shootingSpeed: 0
+  bulletDamage: 0
+  fleeCooldownSecs: 5

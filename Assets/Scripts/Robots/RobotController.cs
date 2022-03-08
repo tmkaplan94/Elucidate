@@ -10,8 +10,7 @@ public class RobotController : MonoBehaviour
     [SerializeField] private PlayerList players;
     [SerializeField] private RobotType robotType;
     public RobotStats robotStats;
-    //[SerializeField] private RobotState[] robotStates;
-    
+
     public IRobotState CurrentState { get; set; }
     
     private NavMeshAgent _navMeshAgent;
@@ -20,14 +19,14 @@ public class RobotController : MonoBehaviour
     private Transform _currentTarget;
     private float _targetDistance;
     private float _currentDistance;
+    private bool _isFleeing;
+    private int _fleeTimer;
 
     #region Properties
 
     public Transform Transform => _transform;
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public Transform Target => _currentTarget;
-    public float TargetDistance => _targetDistance;
-    public float CurrentDistance => _currentDistance;
 
     #endregion
 
@@ -38,8 +37,9 @@ public class RobotController : MonoBehaviour
 
     private void Start()
     {
-        // initialize distance to infinity
+        // initialize needed variables
         _currentDistance = Mathf.Infinity;
+        _fleeTimer = robotStats.FleeCooldown;
         
         // cache needed components
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -52,7 +52,8 @@ public class RobotController : MonoBehaviour
     private void Update()
     {
         LocateTarget();
-        CheckApproachRadius();
+        CheckRadius();
+        CheckIfFleeing();
     }
 
     private void FixedUpdate()
@@ -60,34 +61,16 @@ public class RobotController : MonoBehaviour
         CurrentState.Handle(this);
     }
 
-    public void Transition(IRobotState state)
-    {
-        CurrentState = state;
-    }
-
     // adds the states specified in the editor as components
     private void AddStatesAsComponents()
     {
-        // // OPTION A: add IRobotStates based on robotStates
-        // foreach (RobotState s in robotStates)
-        // {
-        //     switch (s)
-        //     {
-        //         case RobotState.Wander:
-        //             gameObject.AddComponent<RobotWanderState>();
-        //             break;
-        //         case RobotState.Approach:
-        //             gameObject.AddComponent<RobotApproachState>();
-        //             break;
-        //     }
-        // }
-        
-        // OPTION B: add IRobotStates based on robotType
+        // add IRobotStates based on robotType
         switch (robotType)
         {
             case RobotType.Maniac:
                 gameObject.AddComponent<RobotWanderState>();
                 gameObject.AddComponent<RobotApproachState>();
+                gameObject.AddComponent<RobotFleeState>();
                 break;
         }
     }
@@ -108,16 +91,40 @@ public class RobotController : MonoBehaviour
         }
     }
     
-    // check if target is in detection radius
-    public void CheckApproachRadius()
+    // check if target is in approach and attack radius
+    private void CheckRadius()
     {
+        if (_isFleeing) { return; }
+        
         if (_currentDistance <= robotStats.ApproachRadius)
         {
+            if (_currentDistance <= robotStats.AttackRadius)
+            {
+                CurrentState = GetComponent<RobotFleeState>();
+                _isFleeing = true;
+                return;
+            }
+            
             CurrentState = GetComponent<RobotApproachState>();
         }
         else
         {
             CurrentState = GetComponent<RobotWanderState>();
+        }
+    }
+
+    // if fleeing, decrement timer; if timer hits zero, go back to wandering state
+    private void CheckIfFleeing()
+    {
+        if (_isFleeing)
+        {
+            _fleeTimer--;
+            if (_fleeTimer <= 0)
+            {
+                CurrentState = GetComponent<RobotWanderState>();
+                _fleeTimer = robotStats.FleeCooldown;
+                _isFleeing = false;
+            }
         }
     }
 
@@ -135,12 +142,29 @@ public class RobotController : MonoBehaviour
             Debug.LogWarning("There is no current target yet FaceTarget() has been called.");
         }
     }
+    
+    // face away from the current target
+    public void FaceAway()
+    {
+        if (_currentTarget)
+        {
+            Vector3 direction = (_currentTarget.position - _transform.position).normalized;
+            direction *= -1;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+        else
+        {
+            Debug.LogWarning("There is no current target yet FaceAway() has been called.");
+        }
+    }
 
-    // used to see/test range of robots
+    // used to see/test radius of robots
     private void OnDrawGizmosSelected()
     {
+        float radius = robotStats.AttackRadius;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, robotStats.ApproachRadius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
     
 }

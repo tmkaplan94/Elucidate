@@ -8,25 +8,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RobotStats", menuName = "ScriptableObject/RobotStats")]
 public class RobotStats : ScriptableObject
 {
+    [SerializeField] private float maxHealth;
     [SerializeField] private float movementSpeed;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private bool isConstantlyWalking;
     [SerializeField] private float approachRadius;
     [SerializeField] private float attackRadius;
     [SerializeField] private float shootingSpeed;
     [SerializeField] private float bulletDamage;
-    [SerializeField] private float maxHealth;
+    [SerializeField] private int fleeCooldownSecs;
 
     #region Properties
 
+    public float MaxHealth => maxHealth;
     public float MovementSpeed => movementSpeed;
-    public float RotationSpeed => rotationSpeed;
-    public bool IsConstantlyWalking => isConstantlyWalking;
     public float ApproachRadius => approachRadius;
     public float AttackRadius => attackRadius;
     public float ShootingSpeed => shootingSpeed;
     public float BulletDamage => bulletDamage;
-    public float MaxHealth => maxHealth;
+    public int FleeCooldown => fleeCooldownSecs * 20;
 
     #endregion
 }

@@ -10,10 +10,8 @@ public class RobotWanderState : MonoBehaviour, IRobotState
     private RobotController _robotController;
     
     // bools to determine how to wander
-    private bool _isWalking;
     private bool _isRotatingLeft;
     private bool _isRotatingRight;
-    
 
     // "handle" the state behavior
     public void Handle(RobotController robotController)
@@ -38,21 +36,10 @@ public class RobotWanderState : MonoBehaviour, IRobotState
         int walkWait = Random.Range(1, 3);
         int walkTime = Random.Range(1, 3);
         
-        // determine if robot is moving
-        if (_robotController.robotStats.IsConstantlyWalking)
-        {
-            _isWalking = true;
-            yield return new WaitForSeconds(0);
-            yield return new WaitForSeconds(walkTime);
-        }
-        else
-        {
-            yield return new WaitForSeconds(walkWait);
-            _isWalking = true;
-            yield return new WaitForSeconds(walkTime);
-            _isWalking = false;
-        }
-    
+        // determine how long to walk for
+        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(walkTime);
+
         // determine if robot is rotating
         yield return new WaitForSeconds(rotationWait);
         if (rotationDirection == 1)
@@ -74,16 +61,15 @@ public class RobotWanderState : MonoBehaviour, IRobotState
     {
         if (_isRotatingRight)
         {
-            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * _robotController.robotStats.RotationSpeed);
+            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * 100);
         }
         if (_isRotatingLeft)
         {
-            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * -_robotController.robotStats.RotationSpeed);
+            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * -100);
         }
-        if (_isWalking)
-        {
-            _robotController.Transform.position += _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
-        }
+
+        Vector3 translation = _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
+        _robotController.Transform.position += translation;
     }
 
 }
