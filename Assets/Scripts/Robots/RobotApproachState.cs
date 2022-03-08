@@ -22,7 +22,6 @@ public class RobotApproachState : MonoBehaviour, IRobotState
     // sets destination to target position using NavMeshAgent
     private void Approach()
     {
-        _robotController.NavMeshAgent.SetDestination(_robotController.Target.position);
         _robotController.FaceTarget();
         _robotController.Transform.position += _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
     }
