@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Maniac
   m_EditorClassIdentifier: 
-  movementSpeed: 0.2
-  rotationSpeed: 100
-  isConstantlyWalking: 1
-  detectRadius: 10
-  shootingSpeed: 30
-  bulletDamage: 10
-  maxHealth: 80
+  movementSpeed: 0
+  rotationSpeed: 0
+  isConstantlyWalking: 0
+  approachRadius: 0
+  attackRadius: 0
+  shootingSpeed: 0
+  bulletDamage: 0
+  maxHealth: 0

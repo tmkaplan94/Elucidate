@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
-  m_Name: Patroller
+  m_Name: Regular Circle Strafer
   m_EditorClassIdentifier: 
   movementSpeed: 0.14
   rotationSpeed: 100
-  isConstantlyWalking: 0
-  detectRadius: 17
+  isConstantlyWalking: 1
+  approachRadius: 18
+  attackRadius: 9
   shootingSpeed: 30
-  bulletDamage: 20
-  maxHealth: 150
+  bulletDamage: 10
+  maxHealth: 120

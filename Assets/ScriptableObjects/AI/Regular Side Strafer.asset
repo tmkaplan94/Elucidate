@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
-  m_Name: Sniper
+  m_Name: Regular Side Strafer
   m_EditorClassIdentifier: 
-  movementSpeed: 0.06
-  rotationSpeed: 100
+  movementSpeed: 0
+  rotationSpeed: 0
   isConstantlyWalking: 0
-  detectRadius: 35
-  shootingSpeed: 30
-  bulletDamage: 20
-  maxHealth: 100
+  approachRadius: 0
+  attackRadius: 0
+  shootingSpeed: 0
+  bulletDamage: 0
+  maxHealth: 0
