@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(PlayAudioSource))]
 public class RobotController : MonoBehaviour
 {
     [SerializeField] private PlayerList players;
@@ -19,6 +21,10 @@ public class RobotController : MonoBehaviour
     private Transform _currentTarget;
     private float _targetDistance;
     private float _currentDistance;
+    private Transform _firePoint;
+    private PlayAudioSource _audio;
+    private bool _isShooting;
+    private float _shootingTimer;
     private bool _isFleeing;
     private int _fleeTimer;
 
@@ -40,7 +46,10 @@ public class RobotController : MonoBehaviour
         // initialize needed variables
         _currentDistance = Mathf.Infinity;
         _fleeTimer = robotStats.FleeCooldown;
-        
+        _shootingTimer = robotStats.ShootingCooldown;
+        _firePoint = transform.GetChild(3).GetChild(0).transform;
+        _audio = gameObject.GetComponent<PlayAudioSource>();
+
         // cache needed components
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _transform = GetComponent<Transform>();
@@ -53,6 +62,7 @@ public class RobotController : MonoBehaviour
     {
         LocateTarget();
         CheckRadius();
+        CheckIfShooting();
         CheckIfFleeing();
     }
 
@@ -112,6 +122,19 @@ public class RobotController : MonoBehaviour
             CurrentState = GetComponent<RobotWanderState>();
         }
     }
+    
+    // if shot, decrement timer; if timer hits zero, can shoot again
+    private void CheckIfShooting()
+    {
+        if (_isShooting)
+        {
+            _shootingTimer--;
+            if (_shootingTimer <= 0)
+            {
+                Shoot();
+            }
+        }
+    }
 
     // if fleeing, decrement timer; if timer hits zero, go back to wandering state
     private void CheckIfFleeing()
@@ -159,6 +182,12 @@ public class RobotController : MonoBehaviour
         }
     }
 
+    // instantiate bullet prefab with a direction, force, and damage amount
+    public void Shoot()
+    {
+        
+    }
+    
     // used to see/test radius of robots
     private void OnDrawGizmosSelected()
     {
