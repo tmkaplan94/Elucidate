@@ -14,7 +14,7 @@ public class RobotStats : ScriptableObject
     [SerializeField] private float attackRadius;
     [SerializeField] private float shootingSpeed;
     [SerializeField] private float bulletDamage;
-    [SerializeField] private int fleeCooldownSecs;
+    [SerializeField] private int fleeCooldown;
 
     #region Properties
 
@@ -24,7 +24,7 @@ public class RobotStats : ScriptableObject
     public float AttackRadius => attackRadius;
     public float ShootingSpeed => shootingSpeed;
     public float BulletDamage => bulletDamage;
-    public int FleeCooldown => fleeCooldownSecs * 20;
+    public int FleeCooldown => fleeCooldown;
 
     #endregion
 }
