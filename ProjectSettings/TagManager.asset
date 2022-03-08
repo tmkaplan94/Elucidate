@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Weapon
   - Enemy
+  - Firepoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemies
   - Water
   - UI
   - Players

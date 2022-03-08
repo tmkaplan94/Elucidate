@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum RobotType
 {
-    Maniac, CircleStrafer, SideStrafer
+    Chaser, Tactical, Strafer, Chicken, Collider
 }

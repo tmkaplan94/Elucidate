@@ -8,15 +8,25 @@ using UnityEngine.AI;
 [RequireComponent(typeof(PlayAudioSource))]
 public class RobotController : MonoBehaviour
 {
+    // public/serialized fields
     [SerializeField] private PlayerList players;
     public RobotType robotType;
     public RobotStats robotStats;
     
+    // robot states
+    private IRobotState _wanderState;
+    private IRobotState _approachState;
+    private IRobotState _attackState;
+    private IRobotState _fleeState;
+
+    // properties
     public IRobotState CurrentState { get; set; }
     public bool CanFire { get; set; }
-    public Transform FirePoint { get; set; }
-    public PlayAudioSource Audio { get; set; }
+    public bool CanZigZag { get; set; }
+    public Transform FirePoint { get; private set; }
+    public PlayAudioSource Audio { get; private set; }
 
+    // private components/variables
     private NavMeshAgent _navMeshAgent;
     private Transform _transform;
     private List<Transform> _targetTransforms;
@@ -27,12 +37,14 @@ public class RobotController : MonoBehaviour
     private int _shootingTimer;
     private bool _isFleeing;
     private int _fleeTimer;
+    private int _zigZagTimer;
 
     #region Properties
 
     public Transform Transform => _transform;
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public Transform Target => _currentTarget;
+    public float TargetDistance => _currentDistance;
 
     #endregion
 
@@ -47,15 +59,16 @@ public class RobotController : MonoBehaviour
         _currentDistance = Mathf.Infinity;
         _fleeTimer = robotStats.FleeCooldown;
         _shootingTimer = 0;
+        _zigZagTimer = 0;
         FirePoint = transform.GetChild(2).GetChild(0).transform;
         Audio = gameObject.GetComponent<PlayAudioSource>();
 
-        // cache needed components
+        // cache other needed components
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _transform = GetComponent<Transform>();
 
         // set the default state
-        CurrentState = GetComponent<RobotWanderState>();
+        CurrentState = _wanderState;
     }
 
     private void Update()
@@ -64,6 +77,7 @@ public class RobotController : MonoBehaviour
         CheckRadius();
         CheckIfShooting();
         CheckIfFleeing();
+        CheckIfZigZagTime();
     }
 
     private void FixedUpdate()
@@ -74,23 +88,28 @@ public class RobotController : MonoBehaviour
     // adds the states specified in the editor as components
     private void AddStatesAsComponents()
     {
-        // add IRobotStates based on robotType
+        // add IRobotStates common to all robot types
+        _wanderState = gameObject.AddComponent<RobotWanderState>();
+        _approachState = gameObject.AddComponent<RobotApproachState>();
+        
+        // add additional IRobotStates based on robot type
         switch (robotType)
         {
-            case RobotType.Maniac:
-                gameObject.AddComponent<RobotWanderState>();
-                gameObject.AddComponent<RobotApproachState>();
-                gameObject.AddComponent<RobotAttackState>();
+            case RobotType.Chaser:
+                _attackState = gameObject.AddComponent<RobotAttackState>();
                 break;
-            case RobotType.CircleStrafer:
-                gameObject.AddComponent<RobotWanderState>();
-                gameObject.AddComponent<RobotApproachState>();
-                gameObject.AddComponent<RobotAttackState>();
+            case RobotType.Tactical:
+                _attackState = gameObject.AddComponent<RobotFleeState>();
+                _fleeState = gameObject.AddComponent<RobotAttackState>();
                 break;
-            case RobotType.SideStrafer:
-                gameObject.AddComponent<RobotWanderState>();
-                gameObject.AddComponent<RobotApproachState>();
-                gameObject.AddComponent<RobotAttackState>();
+            case RobotType.Strafer:
+                _attackState = gameObject.AddComponent<RobotFleeState>();
+                break;
+            case RobotType.Chicken:
+                _fleeState = gameObject.AddComponent<RobotAttackState>();
+                break;
+            case RobotType.Collider:
+                _fleeState = gameObject.AddComponent<RobotAttackState>();
                 break;
         }
     }
@@ -150,6 +169,22 @@ public class RobotController : MonoBehaviour
     public void ResetShootingTimer()
     {
         _shootingTimer = robotStats.ShootingCooldown;
+    }
+    
+    //if zig-zagging, decrement timer; if timer hits zero, change direction
+    private void CheckIfZigZagTime()
+    {
+        _zigZagTimer--;
+        if (_zigZagTimer <= 0)
+        {
+            CanZigZag = true;
+        }
+    }
+    
+    // public function to reset zigzag timer back to the set cooldown
+    public void ResetZigZagTimer()
+    {
+        _zigZagTimer = robotStats.ZigZagCooldown;
     }
 
     // if fleeing, decrement timer; if timer hits zero, go back to wandering state

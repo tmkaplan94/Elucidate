@@ -24,17 +24,20 @@ public class RobotAttackState : MonoBehaviour, IRobotState
     {
         switch (_robotController.robotType)
         {
-            case RobotType.Maniac:
-                Chase();
-                Fire();
+            case RobotType.Chaser:
+                
                 break;
-            case RobotType.CircleStrafer:
-                CircleStrafe();
-                Fire();
+            case RobotType.Tactical:
+
                 break;
-            case RobotType.SideStrafer:
-                // do something
-                Fire();
+            case RobotType.Strafer:
+
+                break;
+            case RobotType.Chicken:
+
+                break;
+            case RobotType.Collider:
+
                 break;
         }
     }
@@ -63,15 +66,15 @@ public class RobotAttackState : MonoBehaviour, IRobotState
         }
     }
     
-    // continue to chase and shoot target
+    // continue to chase target
     private void Chase()
     {
         _robotController.NavMeshAgent.SetDestination(_robotController.Target.position);
         _robotController.FaceTarget();
     }
-    
+
     // strafe around target while attacking
-    private void CircleStrafe()
+    private void Strafe()
     {
         // get rotation values from robot stats in editor
         Vector3 rotatePosition = _robotController.Target.position;
@@ -90,5 +93,5 @@ public class RobotAttackState : MonoBehaviour, IRobotState
         _robotController.Transform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond * Time.deltaTime);
         _robotController.FaceTarget();
     }
-    
+
 }
