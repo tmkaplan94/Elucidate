@@ -25,7 +25,8 @@ public class RobotAttackState : MonoBehaviour, IRobotState
         switch (_robotController.Type)
         {
             case RobotType.Chaser:
-                
+                Chase();
+                Fire();
                 break;
             case RobotType.Tactical:
 
@@ -48,8 +49,8 @@ public class RobotAttackState : MonoBehaviour, IRobotState
         if (_robotController.CanFire)
         {
             // get new position and rotation for new bullet
-            Vector3 newPosition = _robotController.Stats.FirePoint.position;
-            Quaternion newRotation = _robotController.Stats.FirePoint.rotation;
+            Vector3 newPosition = _robotController.FirePoint.position;
+            Quaternion newRotation = _robotController.FirePoint.rotation;
             
             // instantiate new bullet
             GameObject newBullet = Instantiate(_robotController.Stats.BulletPrefab, newPosition, newRotation);

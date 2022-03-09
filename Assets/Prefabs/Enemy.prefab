@@ -300,8 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: {fileID: 0}
-  robotType: 0
-  robotStats: {fileID: 0}
+  type: 0
+  stats: {fileID: 0}
 --- !u!114 &1827883863963763973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72873ca5f58edd24ab978e26f84fcba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthUI: {fileID: 0}
+  healthUI: {fileID: 6945784494278188513, guid: 059f7b7f1e1cd3b41a321567b4b973ce, type: 3}
 --- !u!82 &3245764331577839740
 AudioSource:
   m_ObjectHideFlags: 0

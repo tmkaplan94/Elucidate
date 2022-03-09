@@ -41,6 +41,7 @@ public class RobotController : MonoBehaviour
     public float TargetDistance { get; private set; }
     public NavMeshAgent NavMeshAgent { get; private set; }
     public PlayAudioSource Audio { get; private set; }
+    public Transform FirePoint { get; private set; }
     
     public bool CanFire { get; set; }
     public bool StrafeDirection { get; set; }
@@ -61,6 +62,7 @@ public class RobotController : MonoBehaviour
         MyTransform = GetComponent<Transform>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Audio = gameObject.GetComponent<PlayAudioSource>();
+        FirePoint = transform.GetChild(2).GetChild(0).transform;
 
         // set the default state
         CurrentState = _wanderState;
@@ -208,7 +210,7 @@ public class RobotController : MonoBehaviour
     {
         if (TargetTransform)
         {
-            Vector3 direction = (TargetTransform.position - TargetTransform.position).normalized;
+            Vector3 direction = (TargetTransform.position - MyTransform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             MyTransform.rotation = Quaternion.Slerp(MyTransform.rotation, lookRotation, Time.deltaTime * 5f);
         }
@@ -223,7 +225,7 @@ public class RobotController : MonoBehaviour
     {
         if (TargetTransform)
         {
-            Vector3 direction = (TargetTransform.position - TargetTransform.position).normalized;
+            Vector3 direction = (TargetTransform.position - MyTransform.position).normalized;
             direction *= -1;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             MyTransform.rotation = Quaternion.Slerp(MyTransform.rotation, lookRotation, Time.deltaTime * 5f);
