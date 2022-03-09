@@ -13,18 +13,19 @@ public class RobotController : MonoBehaviour
     [SerializeField] private RobotType type;
     [SerializeField] private RobotStats stats;
     
+    // public fields
+    public IRobotState _wanderState;
+    public IRobotState _approachState;
+    public IRobotState _attackState;
+    public IRobotState _fleeState;
+    public bool _isFleeing;
+    
     // private fields
     //private IRobotState _currentState;
-    private IRobotState _wanderState;
-    private IRobotState _approachState;
-    private IRobotState _attackState;
-    private IRobotState _fleeState;
-    
     private List<Transform> _targetTransforms;
     private bool _isShooting;
     private int _shootingTimer;
     private int _attackTimer;
-    private bool _isFleeing;
     private int _fleeingTimer;
     private bool _isStrafing;
     private int _strafingTimer;
@@ -35,7 +36,7 @@ public class RobotController : MonoBehaviour
     public RobotType Type => type;
     public RobotStats Stats => stats;
     
-    public IRobotState CurrentState { get; private set; }
+    public IRobotState CurrentState { get; set; }
     public Transform MyTransform { get; private set; }
     public Transform TargetTransform { get; private set; }
     public float CurrentDistance { get; private set; }
