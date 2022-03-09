@@ -1886,6 +1886,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _crosshair: {fileID: 351479211}
   _cursor: {fileID: 2125739832}
+  _unclicked: {fileID: 21300000, guid: 2ed24799fe7cbc9448ef1bd7d9312a7d, type: 3}
+  _clicked: {fileID: 21300000, guid: d39ae07a4bb409e438e0a8f8edbf068f, type: 3}
+  _scale: {fileID: 351479212}
+  _scaleAmountBefore: 0.35
+  _scaleAmountAfter: 0.3
 --- !u!114 &351479214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11041,6 +11046,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _crosshair: {fileID: 351479211}
   _cursor: {fileID: 2125739832}
+  _unclicked: {fileID: 21300000, guid: d6d46cf9315f6d94a8aa9401c55790d1, type: 3}
+  _clicked: {fileID: 21300000, guid: 2b88bd16afca13a44918b045d49879cf, type: 3}
+  _scale: {fileID: 2125739836}
+  _scaleAmountBefore: 0.35
+  _scaleAmountAfter: 0.3
 --- !u!114 &2125739834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11088,7 +11098,7 @@ RectTransform:
   m_GameObject: {fileID: 2125739832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.9871944}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.9871944}
   m_Children: []
   m_Father: {fileID: 1023336213}
   m_RootOrder: 0
