@@ -64,9 +64,8 @@ public class RobotAttackState : MonoBehaviour, IRobotState
             // play audio
             _robotController.Audio.Play();
             
-            // reset shooting timer and bool
+            // reset shooting timer
             _robotController.ResetShootingTimer();
-            _robotController.CanFire = false;
         }
     }
     

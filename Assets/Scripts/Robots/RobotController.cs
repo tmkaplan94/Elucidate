@@ -25,7 +25,7 @@ public class RobotController : MonoBehaviour
     // private fields
     //private IRobotState _currentState;
     private List<Transform> _targetTransforms;
-    private bool _isShooting;
+    private bool _isAttacking;
     private int _shootingTimer;
     private int _tacticalTimer;
     private bool _isFleeing;
@@ -47,9 +47,8 @@ public class RobotController : MonoBehaviour
     public NavMeshAgent NavMeshAgent { get; private set; }
     public PlayAudioSource Audio { get; private set; }
     public Transform FirePoint { get; private set; }
-    
-    public bool CanFire { get; set; }
-    public bool StrafeDirection { get; set; }
+    public bool CanFire { get; private set; }
+    public bool StrafeDirection { get; private set; }
     
     #endregion
     
@@ -64,11 +63,12 @@ public class RobotController : MonoBehaviour
         // initialize needed variables
         CurrentDistance = Mathf.Infinity;
         _isFleeing = false;
-        _isShooting = false;
+        _isAttacking = false;
         _isStrafing = false;
         _shootingTimer = 0;
+        CanFire = true;
         _fleeingTimer = Stats.FleeingCooldown;
-
+        
         ResetTacticalTimer();
 
 
@@ -86,8 +86,8 @@ public class RobotController : MonoBehaviour
     private void Update()
     {
         LocateTarget();
-        CheckRadius();
-        CheckIfShooting();
+        CheckRadii();
+        CheckIfAttacking();
         CheckIfFleeing();
         CheckIfStrafing();
     }
@@ -144,7 +144,7 @@ public class RobotController : MonoBehaviour
     }
     
     // check if target is in approach and attack radius
-    private void CheckRadius()
+    private void CheckRadii()
     {
         if (_isFleeing) { return; }
         
@@ -160,7 +160,7 @@ public class RobotController : MonoBehaviour
                 }
                 
                 CurrentState = _attackState;
-                _isShooting = true;
+                _isAttacking = true;
                 return;
             }
             
@@ -173,17 +173,17 @@ public class RobotController : MonoBehaviour
     }
     
     // if shot, decrement timer; if timer hits zero, can shoot again
-    private void CheckIfShooting()
+    private void CheckIfAttacking()
     {
-        if (_isShooting)
+        if (_isAttacking)
         {
             if (type == RobotType.Tactical)
             {
                 _tacticalTimer--;
             }
-            _shootingTimer--;
             
-            if (_shootingTimer <= 0)
+            _shootingTimer++;
+            if (_shootingTimer >= Stats.ShootingSpeed)
             {
                 CanFire = true;
             }
@@ -200,7 +200,8 @@ public class RobotController : MonoBehaviour
     // public function to reset shooting timer back to the set cooldown
     public void ResetShootingTimer()
     {
-        _shootingTimer = Stats.ShootingCooldown;
+        _shootingTimer = 0;
+        CanFire = false;
     }
     
     // calculate a new random value for the tactical timer
