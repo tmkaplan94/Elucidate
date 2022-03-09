@@ -60,7 +60,7 @@ public class RobotController : MonoBehaviour
         CurrentDistance = Mathf.Infinity;
         _shootingTimer = 0;
         _fleeingTimer = Stats.FleeingCooldown;
-        _attackTimer = Stats.AttackCooldown;
+        _attackTimer = Stats.TacticalCooldown;
 
         // cache needed components
         MyTransform = GetComponent<Transform>();
@@ -173,7 +173,7 @@ public class RobotController : MonoBehaviour
             {
                 CurrentState = _fleeState;
                 _isFleeing = true;
-                _attackTimer = Stats.AttackCooldown;
+                _attackTimer = Stats.TacticalCooldown;
             }
         }
     }

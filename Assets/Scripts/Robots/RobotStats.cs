@@ -5,7 +5,7 @@
  */
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RobotStats", menuName = "ScriptableObject/RobotStats")]
+[CreateAssetMenu(fileName = "RobotStats", menuName = "ScriptableObject/Stats")]
 public class RobotStats : ScriptableObject
 { 
     [SerializeField] private float maxHealth;
@@ -16,7 +16,7 @@ public class RobotStats : ScriptableObject
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
-    [SerializeField] private int attackCooldown;
+    [SerializeField] private int tacticalCooldown;
     [SerializeField] private int shootingCooldown;
     [SerializeField] private int fleeingCooldown;
     [SerializeField] private int strafingCooldown;
@@ -34,7 +34,7 @@ public class RobotStats : ScriptableObject
     public GameObject BulletPrefab => bulletPrefab;
     public float BulletSpeed => bulletSpeed;
     public float BulletDamage => bulletDamage;
-    public int AttackCooldown => attackCooldown;
+    public int TacticalCooldown => tacticalCooldown;
     public int ShootingCooldown => shootingCooldown;
     public int FleeingCooldown => fleeingCooldown;
     public int StrafingCooldown => strafingCooldown;
