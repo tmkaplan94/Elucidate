@@ -6,7 +6,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ColliderStats", menuName = "ScriptableObject/RobotStats")]
-public class ColliderStats : MonoBehaviour
+public class ColliderStats : RobotStats
 {
     [SerializeField] private float maxHealth;
     public float MaxHealth => maxHealth;

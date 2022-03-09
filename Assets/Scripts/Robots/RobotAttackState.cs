@@ -22,7 +22,7 @@ public class RobotAttackState : MonoBehaviour, IRobotState
     // choose attack style based on robot type
     private void Attack()
     {
-        switch (_robotController.robotType)
+        switch (_robotController.Type)
         {
             case RobotType.Chaser:
                 
@@ -48,13 +48,13 @@ public class RobotAttackState : MonoBehaviour, IRobotState
         if (_robotController.CanFire)
         {
             // get new position and rotation for new bullet
-            Vector3 newPosition = _robotController.FirePoint.position;
-            Quaternion newRotation = _robotController.FirePoint.rotation;
+            Vector3 newPosition = _robotController.Stats.FirePoint.position;
+            Quaternion newRotation = _robotController.Stats.FirePoint.rotation;
             
             // instantiate new bullet
-            GameObject newBullet = Instantiate(_robotController.robotStats.BulletPrefab, newPosition, newRotation);
-            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * _robotController.robotStats.BulletSpeed);
-            newBullet.GetComponent<Bullet>().Damage = _robotController.robotStats.BulletDamage;
+            GameObject newBullet = Instantiate(_robotController.Stats.BulletPrefab, newPosition, newRotation);
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * _robotController.Stats.BulletSpeed);
+            newBullet.GetComponent<Bullet>().Damage = _robotController.Stats.BulletDamage;
             Destroy(newBullet, 2.0f);
             
             // play audio
@@ -69,7 +69,7 @@ public class RobotAttackState : MonoBehaviour, IRobotState
     // continue to chase target
     private void Chase()
     {
-        _robotController.NavMeshAgent.SetDestination(_robotController.Target.position);
+        _robotController.NavMeshAgent.SetDestination(_robotController.TargetTransform.position);
         _robotController.FaceTarget();
     }
 
@@ -77,9 +77,9 @@ public class RobotAttackState : MonoBehaviour, IRobotState
     private void Strafe()
     {
         // get rotation values from robot stats in editor
-        Vector3 rotatePosition = _robotController.Target.position;
-        int minRotationDegrees = _robotController.robotStats.rotationSpeed.minValue;
-        int maxRotationDegrees = _robotController.robotStats.rotationSpeed.maxValue;
+        Vector3 rotatePosition = _robotController.TargetTransform.position;
+        int minRotationDegrees = _robotController.Stats.strafingSpeed.minValue;
+        int maxRotationDegrees = _robotController.Stats.strafingSpeed.maxValue;
         int degreesPerSecond = Random.Range(minRotationDegrees, maxRotationDegrees);
 
         // // chooses either 0 or 1 to decide direction to rotate in
@@ -90,7 +90,7 @@ public class RobotAttackState : MonoBehaviour, IRobotState
         // }
 
         // perform rotation while looking at target (strafe)
-        _robotController.Transform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond * Time.deltaTime);
+        _robotController.MyTransform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond * Time.deltaTime);
         _robotController.FaceTarget();
     }
 

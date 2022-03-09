@@ -6,7 +6,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TacticalStats", menuName = "ScriptableObject/RobotStats")]
-public class TacticalStats : MonoBehaviour
+public class TacticalStats : RobotStats
 {
     [SerializeField] private float maxHealth;
     public float MaxHealth => maxHealth;
@@ -22,6 +22,9 @@ public class TacticalStats : MonoBehaviour
          
     [SerializeField] private GameObject bulletPrefab;
     public GameObject BulletPrefab => bulletPrefab;
+    
+    [SerializeField] private Transform firepoint;
+    public Transform FirePoint => firepoint;
          
     [SerializeField] private float bulletSpeed;
     public float BulletSpeed => bulletSpeed;

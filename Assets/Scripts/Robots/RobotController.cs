@@ -8,46 +8,45 @@ using UnityEngine.AI;
 [RequireComponent(typeof(PlayAudioSource))]
 public class RobotController : MonoBehaviour
 {
-    // public/serialized fields
+    // serialized fields
     [SerializeField] private PlayerList players;
-    public RobotType robotType;
-    public RobotStats robotStats;
+    [SerializeField] private RobotType type;
+    [SerializeField] private RobotStats stats;
     
-    // robot states
+    // private fields
+    //private IRobotState _currentState;
     private IRobotState _wanderState;
     private IRobotState _approachState;
     private IRobotState _attackState;
     private IRobotState _fleeState;
-
-    // properties
-    public IRobotState CurrentState { get; set; }
-    public bool CanFire { get; set; }
-    public bool CanZigZag { get; set; }
-    public Transform FirePoint { get; private set; }
-    public PlayAudioSource Audio { get; private set; }
-
-    // private components/variables
-    private NavMeshAgent _navMeshAgent;
-    private Transform _transform;
+    
     private List<Transform> _targetTransforms;
-    private Transform _currentTarget;
-    private float _targetDistance;
-    private float _currentDistance;
     private bool _isShooting;
     private int _shootingTimer;
     private bool _isFleeing;
-    private int _fleeTimer;
-    private int _zigZagTimer;
-
+    private int _fleeingTimer;
+    private bool _isStrafing;
+    private int _strafingTimer;
+    
+    // properties
     #region Properties
-
-    public Transform Transform => _transform;
-    public NavMeshAgent NavMeshAgent => _navMeshAgent;
-    public Transform Target => _currentTarget;
-    public float TargetDistance => _currentDistance;
-
+    
+    public RobotType Type => type;
+    public RobotStats Stats => stats;
+    
+    public IRobotState CurrentState { get; private set; }
+    public Transform MyTransform { get; private set; }
+    public Transform TargetTransform { get; private set; }
+    public float CurrentDistance { get; private set; }
+    public float TargetDistance { get; private set; }
+    public NavMeshAgent NavMeshAgent { get; private set; }
+    public PlayAudioSource Audio { get; private set; }
+    
+    public bool CanFire { get; set; }
+    public bool StrafeDirection { get; set; }
+    
     #endregion
-
+    
     private void Awake()
     {
         AddStatesAsComponents();
@@ -56,16 +55,12 @@ public class RobotController : MonoBehaviour
     private void Start()
     {
         // initialize needed variables
-        _currentDistance = Mathf.Infinity;
-        _fleeTimer = robotStats.FleeCooldown;
-        _shootingTimer = 0;
-        _zigZagTimer = 0;
-        FirePoint = transform.GetChild(2).GetChild(0).transform;
-        Audio = gameObject.GetComponent<PlayAudioSource>();
+        CurrentDistance = Mathf.Infinity;
 
-        // cache other needed components
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _transform = GetComponent<Transform>();
+        // cache needed components
+        MyTransform = GetComponent<Transform>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        Audio = gameObject.GetComponent<PlayAudioSource>();
 
         // set the default state
         CurrentState = _wanderState;
@@ -77,7 +72,7 @@ public class RobotController : MonoBehaviour
         CheckRadius();
         CheckIfShooting();
         CheckIfFleeing();
-        CheckIfZigZagTime();
+        CheckIfStrafing();
     }
 
     private void FixedUpdate()
@@ -93,7 +88,7 @@ public class RobotController : MonoBehaviour
         _approachState = gameObject.AddComponent<RobotApproachState>();
         
         // add additional IRobotStates based on robot type
-        switch (robotType)
+        switch (type)
         {
             case RobotType.Chaser:
                 _attackState = gameObject.AddComponent<RobotAttackState>();
@@ -118,14 +113,14 @@ public class RobotController : MonoBehaviour
     private void LocateTarget()
     {
         _targetTransforms = players.GetAllTransforms();
-        _targetDistance = Mathf.Infinity;
+        TargetDistance = Mathf.Infinity;
         foreach (Transform t in _targetTransforms)
         {
-            _currentDistance = Vector3.Distance(t.position, transform.position);
-            if (_currentDistance < _targetDistance)
+            CurrentDistance = Vector3.Distance(t.position, transform.position);
+            if (CurrentDistance < TargetDistance)
             {
-                _targetDistance = _currentDistance;
-                _currentTarget = t;
+                TargetDistance = CurrentDistance;
+                TargetTransform = t;
             }
         }
     }
@@ -135,9 +130,9 @@ public class RobotController : MonoBehaviour
     {
         if (_isFleeing) { return; }
         
-        if (_currentDistance <= robotStats.ApproachRadius)
+        if (CurrentDistance <= stats.ApproachRadius)
         {
-            if (_currentDistance <= robotStats.AttackRadius)
+            if (CurrentDistance <= stats.AttackRadius)
             {
                 CurrentState = _attackState;
                 _isShooting = true;
@@ -168,23 +163,7 @@ public class RobotController : MonoBehaviour
     // public function to reset shooting timer back to the set cooldown
     public void ResetShootingTimer()
     {
-        _shootingTimer = robotStats.ShootingCooldown;
-    }
-    
-    //if zig-zagging, decrement timer; if timer hits zero, change direction
-    private void CheckIfZigZagTime()
-    {
-        _zigZagTimer--;
-        if (_zigZagTimer <= 0)
-        {
-            CanZigZag = true;
-        }
-    }
-    
-    // public function to reset zigzag timer back to the set cooldown
-    public void ResetZigZagTimer()
-    {
-        _zigZagTimer = robotStats.ZigZagCooldown;
+        _shootingTimer = stats.ShootingCooldown;
     }
 
     // if fleeing, decrement timer; if timer hits zero, go back to wandering state
@@ -192,24 +171,46 @@ public class RobotController : MonoBehaviour
     {
         if (_isFleeing)
         {
-            _fleeTimer--;
-            if (_fleeTimer <= 0)
+            _fleeingTimer--;
+            if (_fleeingTimer <= 0)
             {
                 CurrentState = _wanderState;
-                _fleeTimer = robotStats.FleeCooldown;
+                _fleeingTimer = stats.FleeingCooldown;
                 _isFleeing = false;
             }
         }
+    }
+    
+    // public function to reset fleeing timer back to the set cooldown
+    public void ResetFleeingTimer()
+    {
+        _fleeingTimer = Stats.FleeingCooldown;
+    }
+    
+    //if strafing, decrement timer; if timer hits zero, change direction
+    private void CheckIfStrafing()
+    {
+        _strafingTimer--;
+        if (_strafingTimer <= 0)
+        {
+            StrafeDirection = true;
+        }
+    }
+    
+    // public function to reset strafing timer back to the set cooldown
+    public void ResetStrafingTimer()
+    {
+        _strafingTimer = stats.StrafingCooldown;
     }
 
     // face the current target
     public void FaceTarget()
     {
-        if (_currentTarget)
+        if (TargetTransform)
         {
-            Vector3 direction = (_currentTarget.position - _transform.position).normalized;
+            Vector3 direction = (TargetTransform.position - TargetTransform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * 5f);
+            MyTransform.rotation = Quaternion.Slerp(MyTransform.rotation, lookRotation, Time.deltaTime * 5f);
         }
         else
         {
@@ -220,12 +221,12 @@ public class RobotController : MonoBehaviour
     // face away from the current target
     public void FaceAway()
     {
-        if (_currentTarget)
+        if (TargetTransform)
         {
-            Vector3 direction = (_currentTarget.position - _transform.position).normalized;
+            Vector3 direction = (TargetTransform.position - TargetTransform.position).normalized;
             direction *= -1;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.deltaTime * 5f);
+            MyTransform.rotation = Quaternion.Slerp(MyTransform.rotation, lookRotation, Time.deltaTime * 5f);
         }
         else
         {
@@ -236,7 +237,7 @@ public class RobotController : MonoBehaviour
     // used to see/test radius of robots
     private void OnDrawGizmosSelected()
     {
-        float radius = robotStats.AttackRadius;
+        float radius = stats.AttackRadius;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
