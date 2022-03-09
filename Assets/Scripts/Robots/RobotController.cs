@@ -3,9 +3,12 @@
  * Contributors: Brian Caballero, Grant Reed
  * Description: Acts as the brain/state context for each robot
  */
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(PlayAudioSource))]
@@ -372,6 +375,25 @@ public class RobotController : MonoBehaviour
         }
     }
 
+    // when collider robot hits player
+    private void OnCollisionEnter(Collision other)
+    {
+        // deal damage to players and push back using force
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<IDamageable<float>>().TakeDamage(Stats.CollisionDamage);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(MyTransform.forward * Stats.CollisionForce, ForceMode.Impulse);
+        }
+        
+        // play sound ideally
+        Audio.Play();
+        
+        // then flee
+        ResetFleeingTimer();
+        CurrentState = _fleeState;
+        _isFleeing = true;
+    }
+    
     // used to see/test radius of robots
     private void OnDrawGizmosSelected()
     {
@@ -379,5 +401,4 @@ public class RobotController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
-    
 }

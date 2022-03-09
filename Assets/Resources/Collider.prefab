@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collider
       objectReference: {fileID: 0}
+    - target: {fileID: 2196805194677131307, guid: 42f84bf37222ec843806665bc11a78b6, type: 3}
+      propertyPath: _name
+      value: Collision
+      objectReference: {fileID: 0}
     - target: {fileID: 5220750002314005649, guid: 42f84bf37222ec843806665bc11a78b6, type: 3}
       propertyPath: type
       value: 4

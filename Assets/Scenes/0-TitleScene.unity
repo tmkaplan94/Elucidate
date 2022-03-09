@@ -4302,6 +4302,16 @@ MonoBehaviour:
     mute: 0
     awake: 0
     loop: 0
+  - name: Collision
+    clip:
+    - {fileID: 8300000, guid: d79bc649ac6aa5f4e84032d4d653f8c0, type: 3}
+    group: {fileID: -9189734422103660437, guid: 437db2e8ab9b5314a9aca8a74366df65, type: 2}
+    volume: 1
+    pitch: 1
+    spatial: 1
+    mute: 0
+    awake: 0
+    loop: 0
 --- !u!4 &815692358
 Transform:
   m_ObjectHideFlags: 0

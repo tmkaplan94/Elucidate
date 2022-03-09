@@ -13,17 +13,26 @@ MonoBehaviour:
   m_Name: Collider
   m_EditorClassIdentifier: 
   maxHealth: 50
-  movementSpeed: 0.2
-  approachRadius: 16
-  attackRadius: 8
+  movementSpeed: 0.25
+  approachRadius: 10
+  attackRadius: 0
   collisionDamage: 10
+  collisionForce: 6
   bulletPrefab: {fileID: 0}
   bulletSpeed: 0
   bulletDamage: 0
-  tacticalCooldown: 0
-  shootingCooldown: 0
-  fleeingCooldown: 200
-  strafingCooldown: 0
+  shootingSpeed:
+    minValue: 200
+    maxValue: 200
+  tacticalTimer:
+    minValue: 400
+    maxValue: 400
+  fleeingTimer:
+    minValue: 501
+    maxValue: 702
+  strafingTimer:
+    minValue: 200
+    maxValue: 200
   strafingSpeed:
-    minValue: 0
-    maxValue: 0
+    minValue: 20
+    maxValue: 20

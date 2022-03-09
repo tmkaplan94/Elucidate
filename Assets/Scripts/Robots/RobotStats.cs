@@ -13,6 +13,7 @@ public class RobotStats : ScriptableObject
     [SerializeField] private float approachRadius;
     [SerializeField] private float attackRadius;
     [SerializeField] private float collisionDamage;
+    [SerializeField] private int collisionForce;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
@@ -29,6 +30,7 @@ public class RobotStats : ScriptableObject
     public float ApproachRadius => approachRadius;
     public float AttackRadius => attackRadius;
     public float CollisionDamage => collisionDamage;
+    public int CollisionForce => collisionForce;
     public GameObject BulletPrefab => bulletPrefab;
     public float BulletSpeed => bulletSpeed;
     public float BulletDamage => bulletDamage;
