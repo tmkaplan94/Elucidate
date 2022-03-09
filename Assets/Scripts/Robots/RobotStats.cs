@@ -1,26 +1,28 @@
 /*
  * Author: Brian Caballero
  * Contributors: Grant Reed, Tyler Kaplan
- * Description: Enables designer to create new AIStats ScriptableObject.
+ * Description: Enables designer to create new SO stats for robots.
  */
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "RobotStats", menuName = "ScriptableObject/RobotStats")]
 public class RobotStats : ScriptableObject
-{
+{ 
     [SerializeField] private float maxHealth;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float approachRadius;
     [SerializeField] private float attackRadius;
-    [SerializeField] private float strafeRadius;
+    [SerializeField] private float collisionDamage;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
     [SerializeField] private int shootingCooldown;
-    [SerializeField] private int fleeCooldown;
-    [SerializeField] private int zigZagCooldown;
+    [SerializeField] private int fleeingCooldown;
+    [SerializeField] private int strafingCooldown;
     
     [RangedIntMinMax(1,360)]
-    public RangedInt rotationSpeed;
+    public RangedInt strafingSpeed;
 
     #region Properties
 
@@ -28,13 +30,15 @@ public class RobotStats : ScriptableObject
     public float MovementSpeed => movementSpeed;
     public float ApproachRadius => approachRadius;
     public float AttackRadius => attackRadius;
-    public float StrafeRadius => strafeRadius;
+    public float CollisionDamage => collisionDamage;
     public GameObject BulletPrefab => bulletPrefab;
+    public Transform FirePoint => firePoint;
     public float BulletSpeed => bulletSpeed;
     public float BulletDamage => bulletDamage;
     public int ShootingCooldown => shootingCooldown;
-    public int FleeCooldown => fleeCooldown;
-    public int ZigZagCooldown => zigZagCooldown;
+    public int FleeingCooldown => fleeingCooldown;
+    public int StrafingCooldown => strafingCooldown;
 
     #endregion
+
 }

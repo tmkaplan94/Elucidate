@@ -23,7 +23,8 @@ public class RobotApproachState : MonoBehaviour, IRobotState
     private void Approach()
     {
         _robotController.FaceTarget();
-        _robotController.Transform.position += _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
+        Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
+        _robotController.MyTransform.position += translation;
     }
     
 }

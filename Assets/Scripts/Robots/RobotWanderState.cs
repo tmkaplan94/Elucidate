@@ -61,15 +61,15 @@ public class RobotWanderState : MonoBehaviour, IRobotState
     {
         if (_isRotatingRight)
         {
-            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * 100);
+            _robotController.MyTransform.Rotate(_robotController.MyTransform.up * Time.deltaTime * 100);
         }
         if (_isRotatingLeft)
         {
-            _robotController.Transform.Rotate(_robotController.Transform.up * Time.deltaTime * -100);
+            _robotController.MyTransform.Rotate(_robotController.MyTransform.up * Time.deltaTime * -100);
         }
 
-        Vector3 translation = _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
-        _robotController.Transform.position += translation;
+        Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
+        _robotController.MyTransform.position += translation;
     }
 
 }

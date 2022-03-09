@@ -20,7 +20,7 @@ public class RobotHealth : MonoBehaviour, IDamageable <float>
     private void Start()
     {
         _robotController = GetComponent<RobotController>();
-        _currentHealth = _robotController.robotStats.MaxHealth;
+        _currentHealth = _robotController.Stats.MaxHealth;
         _healthSlider = healthUI.GetComponentInChildren<Slider>();
         _healthSlider.value = CalculateHealth();
 
@@ -31,14 +31,14 @@ public class RobotHealth : MonoBehaviour, IDamageable <float>
     {
         
         _healthSlider.value = CalculateHealth();
-        if (_currentHealth < _robotController.robotStats.MaxHealth)
+        if (_currentHealth < _robotController.Stats.MaxHealth)
         {
             healthUI.SetActive(true);
         }
         
-        if (_currentHealth > _robotController.robotStats.MaxHealth)
+        if (_currentHealth > _robotController.Stats.MaxHealth)
         {
-            _currentHealth = _robotController.robotStats.MaxHealth;
+            _currentHealth = _robotController.Stats.MaxHealth;
         }
     }
 
@@ -64,9 +64,9 @@ public class RobotHealth : MonoBehaviour, IDamageable <float>
     // Calculate and return health.
     private float CalculateHealth()
     {
-        if (_robotController.robotStats.MaxHealth != 0)
+        if (_robotController.Stats.MaxHealth != 0)
         {
-            return _currentHealth / _robotController.robotStats.MaxHealth;
+            return _currentHealth / _robotController.Stats.MaxHealth;
         }
 
         return 0.0f;

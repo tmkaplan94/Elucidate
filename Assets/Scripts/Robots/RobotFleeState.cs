@@ -23,6 +23,7 @@ public class RobotFleeState : MonoBehaviour, IRobotState
     private void Flee()
     {
         _robotController.FaceAway();
-        _robotController.Transform.position += _robotController.Transform.forward * _robotController.robotStats.MovementSpeed;
+        Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
+        _robotController.MyTransform.position += translation;
     }
 }
