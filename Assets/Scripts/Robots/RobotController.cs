@@ -65,10 +65,10 @@ public class RobotController : MonoBehaviour
         _isFleeing = false;
         _isAttacking = false;
         _isStrafing = false;
-        _shootingTimer = 0;
-        CanFire = true;
         _fleeingTimer = Stats.FleeingCooldown;
         
+        ResetShootingTimer();
+        CanFire = true;
         ResetTacticalTimer();
 
 
@@ -183,7 +183,7 @@ public class RobotController : MonoBehaviour
             }
             
             _shootingTimer++;
-            if (_shootingTimer >= Stats.ShootingSpeed)
+            if (_shootingTimer >= 500)
             {
                 CanFire = true;
             }
@@ -197,10 +197,13 @@ public class RobotController : MonoBehaviour
         }
     }
 
-    // public function to reset shooting timer back to the set cooldown
+    // calculate a new random value for the shooting timer and reset CanFire to false
     public void ResetShootingTimer()
     {
-        _shootingTimer = 0;
+        int shootingSpeedMin = Stats.shootingSpeed.minValue;
+        int shootingSpeedMax = Stats.shootingSpeed.maxValue;
+        _shootingTimer = Random.Range(shootingSpeedMin, shootingSpeedMax);
+
         CanFire = false;
     }
     
