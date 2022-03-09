@@ -27,7 +27,7 @@ public class RobotController : MonoBehaviour
     private List<Transform> _targetTransforms;
     private bool _isShooting;
     private int _shootingTimer;
-    private int _attackTimer;
+    private int _tacticalTimer;
     private bool _isFleeing;
     private int _fleeingTimer;
     private bool _isStrafing;
@@ -68,7 +68,9 @@ public class RobotController : MonoBehaviour
         _isStrafing = false;
         _shootingTimer = 0;
         _fleeingTimer = Stats.FleeingCooldown;
-        _attackTimer = Stats.TacticalCooldown;
+
+        ResetTacticalTimer();
+
 
         // cache needed components
         MyTransform = GetComponent<Transform>();
@@ -177,7 +179,7 @@ public class RobotController : MonoBehaviour
         {
             if (type == RobotType.Tactical)
             {
-                _attackTimer--;
+                _tacticalTimer--;
             }
             _shootingTimer--;
             
@@ -186,11 +188,11 @@ public class RobotController : MonoBehaviour
                 CanFire = true;
             }
 
-            if (type == RobotType.Tactical && _attackTimer <= 0)
+            if (type == RobotType.Tactical && _tacticalTimer <= 0)
             {
                 CurrentState = _fleeState;
                 _isFleeing = true;
-                _attackTimer = Stats.TacticalCooldown;
+                ResetTacticalTimer();
             }
         }
     }
@@ -199,6 +201,14 @@ public class RobotController : MonoBehaviour
     public void ResetShootingTimer()
     {
         _shootingTimer = Stats.ShootingCooldown;
+    }
+    
+    // calculate a new random value for the tactical timer
+    private void ResetTacticalTimer()
+    {
+        int attackSpeedMin = Stats.tacticalTimer.minValue;
+        int attackSpeedMax = Stats.tacticalTimer.maxValue;
+        _tacticalTimer = Random.Range(attackSpeedMin, attackSpeedMax);
     }
 
     // if fleeing, decrement timer; if timer hits zero, go back to wandering state

@@ -9,7 +9,6 @@
  * Strafer strafes in circles around target while in range and fires weapon.
  */
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class RobotAttackState : MonoBehaviour, IRobotState
 {
