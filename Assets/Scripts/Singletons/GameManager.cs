@@ -85,6 +85,7 @@ public class GameManager : Singleton<GameManager>
     private void StartEvent()
     {
         CurrentStatus = GameEvent.START;
+        EnemyCount = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         Debug.Log("Current game status: " + CurrentStatus);
@@ -106,6 +107,7 @@ public class GameManager : Singleton<GameManager>
     {
         CurrentStatus = GameEvent.WIN;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameEventBus.Cursor?.Invoke();
         Debug.Log("Current game status: " + CurrentStatus);
     }
     
@@ -113,6 +115,7 @@ public class GameManager : Singleton<GameManager>
     {
         CurrentStatus = GameEvent.LOSS;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameEventBus.Cursor?.Invoke();
         Debug.Log("Current game status: " + CurrentStatus);
     }
 

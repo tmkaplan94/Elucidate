@@ -106,5 +106,6 @@ public class RoomManagement : MonoBehaviourPunCallbacks
     public void OnClickStart()
     {
         PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        GameEventBus.Crosshair?.Invoke();
     }
 }

@@ -1,6 +1,6 @@
 /*
  * Authors: Grant Reed, Tyler Kaplan
- * Contributors:
+ * Contributors: Loc Trinh
  * Description: This class holds public actions for all of the events that happen in the game.
  */
 using System;
@@ -21,6 +21,8 @@ public static class GameEventBus
     public static Action<int> PlayerDeath;
     public static Action<int, PlayerStats> PlayerAdded;
     public static Action PlayerDisconnected;
+    public static Action Cursor;
+    public static Action Crosshair;
 
 }
 
