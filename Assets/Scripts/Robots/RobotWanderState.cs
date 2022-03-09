@@ -63,7 +63,7 @@ public class RobotWanderState : MonoBehaviour, IRobotState
         {
             _robotController.MyTransform.Rotate(_robotController.MyTransform.up * Time.deltaTime * 100);
         }
-        if (_isRotatingLeft)
+        else if (_isRotatingLeft)
         {
             _robotController.MyTransform.Rotate(_robotController.MyTransform.up * Time.deltaTime * -100);
         }

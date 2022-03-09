@@ -58,6 +58,9 @@ public class RobotController : MonoBehaviour
     {
         // initialize needed variables
         CurrentDistance = Mathf.Infinity;
+        _isFleeing = false;
+        _isShooting = false;
+        _isStrafing = false;
         _shootingTimer = 0;
         _fleeingTimer = Stats.FleeingCooldown;
         _attackTimer = Stats.TacticalCooldown;
@@ -140,7 +143,7 @@ public class RobotController : MonoBehaviour
         {
             if (CurrentDistance <= stats.AttackRadius)
             {
-                if (type == RobotType.Chicken)
+                if (Type == RobotType.Chicken)
                 {
                     CurrentState = _fleeState;
                     _isFleeing = true;
