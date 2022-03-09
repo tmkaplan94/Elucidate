@@ -1,6 +1,6 @@
 /*
  * Author: Tyler Kaplan
- * Contributors: Grant Reed
+ * Contributors: Grant Reed, Loc Trinh
  * Description: GameManager controls and maintains the flow of the game.
  *
  * GameManager extends Singleton, which extends MonoBehavior.
