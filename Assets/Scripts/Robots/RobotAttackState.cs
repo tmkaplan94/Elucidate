@@ -8,7 +8,11 @@
  * Tactical chases robot while firing for a period of time, then flees for a period of time. (currently abstracted)
  * Strafer strafes in circles around target while in range and fires weapon.
  */
+
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class RobotAttackState : MonoBehaviour, IRobotState
 {
@@ -81,19 +85,9 @@ public class RobotAttackState : MonoBehaviour, IRobotState
     {
         // get rotation values from robot stats in editor
         Vector3 rotatePosition = _robotController.TargetTransform.position;
-        int minRotationDegrees = _robotController.Stats.strafingSpeed.minValue;
-        int maxRotationDegrees = _robotController.Stats.strafingSpeed.maxValue;
-        int degreesPerSecond = Random.Range(minRotationDegrees, maxRotationDegrees);
-
-        // // chooses either 0 or 1 to decide direction to rotate in
-        // int direction = Random.Range(0,2);
-        // if (direction == 0)
-        // {
-        //     degreesPerSecond *= -1;
-        // }
-
-        // perform rotation while looking at target (strafe)
-        _robotController.MyTransform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond * Time.deltaTime);
+        float degreesPerSecond = (_robotController.StrafingSpeed * _robotController.StrafingDirection * Time.deltaTime);
+            
+        _robotController.MyTransform.RotateAround(rotatePosition, Vector3.up, degreesPerSecond);
         _robotController.FaceTarget();
     }
 

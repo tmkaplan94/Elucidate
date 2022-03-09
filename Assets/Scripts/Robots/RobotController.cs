@@ -15,15 +15,12 @@ public class RobotController : MonoBehaviour
     [SerializeField] private PlayerList players;
     [SerializeField] private RobotType type;
     [SerializeField] private RobotStats stats;
-    
-    // public fields
-    public IRobotState _wanderState;
-    public IRobotState _approachState;
-    public IRobotState _attackState;
-    public IRobotState _fleeState;
-    
+
     // private fields
-    //private IRobotState _currentState;
+    private IRobotState _wanderState;
+    private IRobotState _approachState;
+    private IRobotState _attackState;
+    private IRobotState _fleeState;
     private List<Transform> _targetTransforms;
     private bool _isAttacking;
     private int _shootingTimer;
@@ -32,7 +29,7 @@ public class RobotController : MonoBehaviour
     private int _fleeingTimer;
     private bool _isStrafing;
     private int _strafingTimer;
-    
+
     // properties
     #region Properties
     
@@ -48,8 +45,9 @@ public class RobotController : MonoBehaviour
     public PlayAudioSource Audio { get; private set; }
     public Transform FirePoint { get; private set; }
     public bool CanFire { get; private set; }
-    public bool StrafeDirection { get; private set; }
-    
+    public int StrafingDirection { get; private set; }
+    public int StrafingSpeed { get; set; }
+
     #endregion
     
     // adds and stores the necessary states (per robot) as components
@@ -61,14 +59,11 @@ public class RobotController : MonoBehaviour
     private void Start()
     {
         // initialize and reset needed variables
-        CurrentDistance = Mathf.Infinity;
-        _isStrafing = false;
-
-        ResetShootingTimer();
-        CanFire = true;
-        ResetFleeingTimer();
-        ResetTacticalTimer();
-
+        InitializeLocateTargetValues();
+        InitializeShootingValues();
+        InitializeFleeingValues();
+        InitializeTacticalValues();
+        InitializeStrafingValues();
 
         // cache needed components
         MyTransform = GetComponent<Transform>();
@@ -124,7 +119,13 @@ public class RobotController : MonoBehaviour
                 break;
         }
     }
-
+    
+    // initialize current distance to infinity
+    private void InitializeLocateTargetValues()
+    {
+        CurrentDistance = Mathf.Infinity;
+    }
+    
     // locate the nearest target by calculating the distance to the nearest player Transform
     private void LocateTarget()
     {
@@ -140,7 +141,7 @@ public class RobotController : MonoBehaviour
             }
         }
     }
-    
+
     // check if target is in approach and attack radius
     private void CheckRadii()
     {
@@ -179,6 +180,11 @@ public class RobotController : MonoBehaviour
             {
                 _tacticalTimer--;
             }
+
+            if (type == RobotType.Strafer)
+            {
+                _isStrafing = true;
+            }
             
             _shootingTimer++;
             if (_shootingTimer >= 500)
@@ -194,6 +200,13 @@ public class RobotController : MonoBehaviour
             }
         }
     }
+    
+    // initialize shooting values
+    private void InitializeShootingValues()
+    {
+        ResetShootingTimer();
+        CanFire = true;
+    }
 
     // calculate a new random value for the shooting timer and reset CanFire to false
     public void ResetShootingTimer()
@@ -205,8 +218,14 @@ public class RobotController : MonoBehaviour
         CanFire = false;
     }
     
+    // initialize tactical timer
+    private void InitializeTacticalValues()
+    {
+        ResetTacticalTimer();
+    }
+    
     // calculate a new random value for the tactical timer
-    private void ResetTacticalTimer()
+    public void ResetTacticalTimer()
     {
         int attackSpeedMin = Stats.tacticalTimer.minValue;
         int attackSpeedMax = Stats.tacticalTimer.maxValue;
@@ -227,30 +246,88 @@ public class RobotController : MonoBehaviour
         }
     }
     
+    // initialize fleeing values
+    private void InitializeFleeingValues()
+    {
+        int fleeingTimerMin = Stats.fleeingTimer.minValue;
+        int fleeingTimerMax = Stats.fleeingTimer.maxValue;
+        _fleeingTimer = Random.Range(fleeingTimerMin, fleeingTimerMax);
+        
+        _isFleeing = false;
+    }
+    
     // public function to reset fleeing timer back to the set cooldown
     public void ResetFleeingTimer()
     {
         int fleeingTimerMin = Stats.fleeingTimer.minValue;
         int fleeingTimerMax = Stats.fleeingTimer.maxValue;
         _fleeingTimer = Random.Range(fleeingTimerMin, fleeingTimerMax);
-
-        _isFleeing = false;
     }
     
     //if strafing, decrement timer; if timer hits zero, change direction
     private void CheckIfStrafing()
     {
-        _strafingTimer--;
-        if (_strafingTimer <= 0)
+        if (_isStrafing)
         {
-            StrafeDirection = true;
+            _strafingTimer--;
+            if (_strafingTimer <= 0)
+            {
+                ChangeStrafingDirection();
+                ChangeStrafingSpeed();
+                ResetStrafingTimer();
+            }
         }
+    }
+    
+    // initialize a random per robot strafing speed and direction, and initialize strafing values
+    private void InitializeStrafingValues()
+    {
+        // get a random strafing direction
+        int randomValue = Random.Range(0, 2);
+        if (randomValue == 1)
+        {
+            StrafingDirection = 1;
+        }
+        else if (randomValue == 0)
+        {
+            StrafingDirection = -1;
+        }
+        
+        // get a random strafing speed within range
+        int minRotationDegrees = Stats.strafingSpeed.minValue;
+        int maxRotationDegrees = Stats.strafingSpeed.maxValue;
+        StrafingSpeed = Random.Range(minRotationDegrees, maxRotationDegrees);
+        
+        // initialize strafing values
+        _isStrafing = false;
+        ResetStrafingTimer();
+    }
+    
+    // change strafing direction
+    private void ChangeStrafingDirection()
+    {
+        if (StrafingDirection == -1)
+        {
+            StrafingDirection = 1;
+        }
+        else if (StrafingDirection == 1)
+        {
+            StrafingDirection = -1;
+        }
+    }
+    
+    // change strafing speed
+    private void ChangeStrafingSpeed()
+    {
+        int minRotationDegrees = Stats.strafingSpeed.minValue;
+        int maxRotationDegrees = Stats.strafingSpeed.maxValue;
+        StrafingSpeed = Random.Range(minRotationDegrees, maxRotationDegrees);
     }
     
     // public function to reset strafing timer back to the set cooldown
     public void ResetStrafingTimer()
     {
-        _strafingTimer = Stats.StrafingCooldown;
+        _strafingTimer = Stats.StrafingTimer;
     }
 
     // face the current target
