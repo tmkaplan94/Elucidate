@@ -13,17 +13,25 @@ MonoBehaviour:
   m_Name: Chicken
   m_EditorClassIdentifier: 
   maxHealth: 50
-  movementSpeed: 0.2
-  approachRadius: 16
-  attackRadius: 8
+  movementSpeed: 0.1
+  approachRadius: 15
+  attackRadius: 5
   collisionDamage: 0
   bulletPrefab: {fileID: 0}
   bulletSpeed: 0
   bulletDamage: 0
-  tacticalCooldown: 0
-  shootingCooldown: 0
-  fleeingCooldown: 300
-  strafingCooldown: 0
+  shootingSpeed:
+    minValue: 0
+    maxValue: 0
+  tacticalTimer:
+    minValue: 0
+    maxValue: 0
+  fleeingTimer:
+    minValue: 0
+    maxValue: 0
+  strafingTimer:
+    minValue: 0
+    maxValue: 0
   strafingSpeed:
     minValue: 0
     maxValue: 0

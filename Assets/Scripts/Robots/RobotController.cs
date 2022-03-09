@@ -145,28 +145,33 @@ public class RobotController : MonoBehaviour
     // check if target is in approach and attack radius
     private void CheckRadii()
     {
+        // don't do anything if I'm fleeing
         if (_isFleeing) { return; }
         
         if (CurrentDistance <= stats.ApproachRadius)
         {
             if (CurrentDistance <= stats.AttackRadius)
             {
+                // if I'm a chicken, flee instead of attacking
                 if (Type == RobotType.Chicken)
                 {
                     CurrentState = _fleeState;
                     _isFleeing = true;
                     return;
                 }
-                
+
+                // attack if within range
                 CurrentState = _attackState;
                 _isAttacking = true;
                 return;
             }
             
+            // approach if within range
             CurrentState = _approachState;
         }
         else
         {
+            // otherwise, keep wandering
             CurrentState = _wanderState;
         }
     }

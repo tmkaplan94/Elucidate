@@ -15,14 +15,14 @@ MonoBehaviour:
   maxHealth: 50
   movementSpeed: 0.2
   approachRadius: 16
-  attackRadius: 8
+  attackRadius: 10
   collisionDamage: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
   bulletSpeed: 1000
-  bulletDamage: 0
+  bulletDamage: 10
   shootingSpeed:
-    minValue: 296
-    maxValue: 329
+    minValue: 345
+    maxValue: 378
   tacticalTimer:
     minValue: 400
     maxValue: 400
@@ -30,8 +30,8 @@ MonoBehaviour:
     minValue: 0
     maxValue: 0
   strafingTimer:
-    minValue: 200
-    maxValue: 398
+    minValue: 302
+    maxValue: 500
   strafingSpeed:
     minValue: 40
-    maxValue: 60
+    maxValue: 70

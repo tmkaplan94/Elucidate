@@ -30,6 +30,9 @@ public class RobotApproachState : MonoBehaviour, IRobotState
     private void Approach()
     {
         _robotController.NavMeshAgent.SetDestination(_robotController.TargetTransform.position);
+        _robotController.FaceTarget();
+        Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
+        _robotController.MyTransform.position += translation;
     }
 
 }
