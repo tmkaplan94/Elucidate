@@ -15,6 +15,7 @@ MonoBehaviour:
   _prefabName: SemiRifle
   _roundsPerSecond: 5
   _bulletVelocity: 2500
+  _ammo: 25
   _bulletSizeScale: 1
   _bulletLifeTime: 2
   _bulletDamage: 30

@@ -12,7 +12,7 @@ using TMPro;
 public class CounterUI : MonoBehaviour
 {
     private TextMeshProUGUI _counterText;
-    [SerializeField] private GameObject UIvisible;
+    [SerializeField] private GameObject UIVisible;
 
     void Awake()
     {
@@ -42,7 +42,7 @@ public class CounterUI : MonoBehaviour
     {
         if(GameManager._isMultiplayer)
         {
-            UIvisible.SetActive(false);
+            UIVisible.SetActive(false);
         }
     }
 }

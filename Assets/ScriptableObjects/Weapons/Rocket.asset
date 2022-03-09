@@ -15,6 +15,7 @@ MonoBehaviour:
   _prefabName: Rocket
   _roundsPerSecond: 1
   _bulletVelocity: 2000
+  _ammo: 1
   _bulletSizeScale: 5
   _bulletLifeTime: 2
   _bulletDamage: 100

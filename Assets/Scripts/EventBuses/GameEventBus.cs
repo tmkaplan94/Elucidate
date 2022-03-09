@@ -23,6 +23,8 @@ public static class GameEventBus
     public static Action PlayerDisconnected;
     public static Action Cursor;
     public static Action Crosshair;
+    public static Action Shoot;
+    public static Action Reload;
 
 }
 

@@ -15,6 +15,7 @@ MonoBehaviour:
   _prefabName: Lazer
   _roundsPerSecond: 20
   _bulletVelocity: 2500
+  _ammo: 100
   _bulletSizeScale: 1
   _bulletLifeTime: 2
   _bulletDamage: 20

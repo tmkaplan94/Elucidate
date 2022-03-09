@@ -1,7 +1,7 @@
 /*
  * Author: Loc Trinh
  * Contributors: 
- * Description: Small script that handles custom cursor UI and some special interactions.
+ * Description: Simple script that handles custom cursor UI and some special interactions.
  */
 
 using System.Collections;
@@ -42,15 +42,17 @@ public class CursorUI : MonoBehaviour
 
     void Start()
     {
+        // Keeps cursor bounded within game window.
         Cursor.lockState = CursorLockMode.Confined;
         _image = GetComponent<Image>();
     }
     void Update()
     {
+        // Turns off system cursor and replace it with custom cursor by creating an image sprite that follows cursor position.
         Cursor.visible = false;
         Vector2 cursorPos = Input.mousePosition;
         transform.position = cursorPos;
-
+        // There will be some special interactions when player clicks their mouse.
         if(Input.GetMouseButtonDown(0) && _cursor.activeSelf)
         {
             _image.sprite = _clicked;

@@ -11,6 +11,7 @@ public class Weapon : ScriptableObject
     [SerializeField] private string _prefabName;
     [SerializeField] private float _roundsPerSecond;
     [SerializeField] private float _bulletVelocity;
+    [SerializeField] private float _ammo;
     [Range(0.1f, 5.0f)]
     [SerializeField] private float _bulletSizeScale;
     [SerializeField] private float _bulletLifeTime;
@@ -37,6 +38,11 @@ public class Weapon : ScriptableObject
     {
         get => _bulletVelocity;
         set => _bulletVelocity = value;
+    }
+    public float Ammo
+    {
+        get => _ammo;
+        set => _ammo = value;
     }
     public float BulletSizeScale
     {

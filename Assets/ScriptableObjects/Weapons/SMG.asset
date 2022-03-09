@@ -15,6 +15,7 @@ MonoBehaviour:
   _prefabName: SMG
   _roundsPerSecond: 10
   _bulletVelocity: 1000
+  _ammo: 35
   _bulletSizeScale: 1
   _bulletLifeTime: 2
   _bulletDamage: 10

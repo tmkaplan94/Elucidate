@@ -15,6 +15,7 @@ MonoBehaviour:
   _prefabName: Pistol
   _roundsPerSecond: 2
   _bulletVelocity: 700
+  _ammo: 12
   _bulletSizeScale: 1
   _bulletLifeTime: 2
   _bulletDamage: 10

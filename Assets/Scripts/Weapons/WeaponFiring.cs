@@ -6,6 +6,8 @@
  * Has basic firing functionality and muzzle flash for light effects.
  */
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 
 public class WeaponFiring : MonoBehaviour
 {
@@ -17,16 +19,35 @@ public class WeaponFiring : MonoBehaviour
     // private fields
     private PlayAudioSource _audio;
     private float _nextFireTime;
+    private float _reloadTime = 2.0f;
+    private bool isReloading = false;
+    public static float _magazineSize{get ; private set;}
+    public static float _magazineCurrent{get ; private set;}
+
+    private void OnEnable()
+    {
+        isReloading = false;
+    }
 
     private void Start()
     {
         _audio = GetComponent<PlayAudioSource>();
         _nextFireTime = 0.0f;
+        _magazineSize = weaponType.Ammo;
+        _magazineCurrent = _magazineSize;
     }
     public void TryShoot()
     {
+        if(isReloading)
+            return;
+        if(_magazineCurrent <= 0)
+            {
+                StartCoroutine(Reload());
+                return;
+            }
         if (Time.time >= _nextFireTime)
         {
+            Debug.Log("Before Shoot; Ammo = " + _magazineCurrent);
             Shoot();
             // sets the next time the player is able to shoot based on rounds per second.
             _nextFireTime = Time.time + 1.0f / weaponType.RoundsPerSecond;
@@ -36,6 +57,8 @@ public class WeaponFiring : MonoBehaviour
     // shoots bullet
     private void Shoot()
     {
+        _magazineCurrent--;
+        GameEventBus.Shoot?.Invoke();
         GameObject newBullet = Instantiate(weaponType.Bullet, firePoint.position, firePoint.rotation);
         newBullet.transform.localScale *= weaponType.BulletSizeScale;
         newBullet.GetComponent<Bullet>().Damage = weaponType.BulletDamage;
@@ -56,5 +79,15 @@ public class WeaponFiring : MonoBehaviour
         muzzleFlashLight.intensity = weaponType.MuzzleFlashIntensity;
         muzzleFlashLight.transform.position = firePoint.position;
         Destroy(muzzle, weaponType.MuzzleFlashLifeTime);
+    }
+
+    private IEnumerator Reload()
+    {
+        isReloading = true;
+        Debug.Log("Reloading...");
+        yield return new WaitForSeconds(_reloadTime);
+        _magazineCurrent = _magazineSize;
+        GameEventBus.Reload?.Invoke();
+        isReloading = false;
     }
 }
