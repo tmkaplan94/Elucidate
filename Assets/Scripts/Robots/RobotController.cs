@@ -327,7 +327,9 @@ public class RobotController : MonoBehaviour
     // public function to reset strafing timer back to the set cooldown
     public void ResetStrafingTimer()
     {
-        _strafingTimer = Stats.StrafingTimer;
+        int strafingTimerMin = Stats.strafingTimer.minValue;
+        int strafingTimerMax = Stats.strafingTimer.maxValue;
+        _strafingTimer = Random.Range(strafingTimerMin, strafingTimerMax);
     }
 
     // face the current target
