@@ -60,15 +60,13 @@ public class RobotController : MonoBehaviour
 
     private void Start()
     {
-        // initialize needed variables
+        // initialize and reset needed variables
         CurrentDistance = Mathf.Infinity;
-        _isFleeing = false;
-        _isAttacking = false;
         _isStrafing = false;
-        _fleeingTimer = Stats.FleeingCooldown;
-        
+
         ResetShootingTimer();
         CanFire = true;
+        ResetFleeingTimer();
         ResetTacticalTimer();
 
 
@@ -223,8 +221,7 @@ public class RobotController : MonoBehaviour
             _fleeingTimer--;
             if (_fleeingTimer <= 0)
             {
-                CurrentState = _wanderState;
-                _fleeingTimer = Stats.FleeingCooldown;
+                ResetFleeingTimer();
                 _isFleeing = false;
             }
         }
@@ -233,7 +230,11 @@ public class RobotController : MonoBehaviour
     // public function to reset fleeing timer back to the set cooldown
     public void ResetFleeingTimer()
     {
-        _fleeingTimer = Stats.FleeingCooldown;
+        int fleeingTimerMin = Stats.fleeingTimer.minValue;
+        int fleeingTimerMax = Stats.fleeingTimer.maxValue;
+        _fleeingTimer = Random.Range(fleeingTimerMin, fleeingTimerMax);
+
+        _isFleeing = false;
     }
     
     //if strafing, decrement timer; if timer hits zero, change direction
