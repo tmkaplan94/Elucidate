@@ -1,6 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/*
+ * Author: Tyler Kaplan
+ * Contributors: 
+ * Description: Interface for robot states.
+ *
+ * Takes this.robotController
+ */
 
 public interface IRobotState
 {

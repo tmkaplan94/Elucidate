@@ -1,5 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Tyler Kaplan
+ * Contributors: Brian Caballero
+ * Description: Attack state for robots.
+ *
+ * Attacks in 3 different ways, based on robot type.
+ * Chaser constantly chases and fires weapon.
+ * Tactical chases robot while firing for a period of time, then flees for a period of time. (currently abstracted)
+ * Strafer strafes in circles around target while in range and fires weapon.
+ */
 using UnityEngine;
 using Random = UnityEngine.Random;
 

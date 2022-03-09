@@ -1,5 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Tyler Kaplan
+ * Contributors: Brian Caballero
+ * Description: Flee state for robots.
+ *
+ * Flees away from target for a period of time.
+ * Flees by facing away from target, then moving forward.
+ */
 using UnityEngine;
 
 public class RobotFleeState : MonoBehaviour, IRobotState
@@ -19,10 +25,11 @@ public class RobotFleeState : MonoBehaviour, IRobotState
         Flee();
     }
     
-    // sets destination to target position using NavMeshAgent
+    // flees away from target for a period of time
     private void Flee()
     {
         _robotController.FaceAway();
+        // probably causing a problem
         Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
         _robotController.MyTransform.position += translation;
     }

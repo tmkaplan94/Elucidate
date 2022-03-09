@@ -1,6 +1,12 @@
-using System;
+/*
+ * Author: Tyler Kaplan, Brian Caballero
+ * Contributors: 
+ * Description: Wander state for robots.
+ *
+ * Uses coroutines to determine times to wander.
+ * Moves robot based on times determined from wander.
+ */
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

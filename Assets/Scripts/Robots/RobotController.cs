@@ -1,5 +1,8 @@
-using System;
-using System.Collections;
+/*
+ * Author: Tyler Kaplan
+ * Contributors: Brian Caballero, Grant Reed
+ * Description: Acts as the brain/state context for each robot
+ */
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,7 +21,6 @@ public class RobotController : MonoBehaviour
     public IRobotState _approachState;
     public IRobotState _attackState;
     public IRobotState _fleeState;
-    public bool _isFleeing;
     
     // private fields
     //private IRobotState _currentState;
@@ -26,6 +28,7 @@ public class RobotController : MonoBehaviour
     private bool _isShooting;
     private int _shootingTimer;
     private int _attackTimer;
+    private bool _isFleeing;
     private int _fleeingTimer;
     private bool _isStrafing;
     private int _strafingTimer;
@@ -50,6 +53,7 @@ public class RobotController : MonoBehaviour
     
     #endregion
     
+    // adds and stores the necessary states (per robot) as components
     private void Awake()
     {
         AddStatesAsComponents();
@@ -72,10 +76,11 @@ public class RobotController : MonoBehaviour
         Audio = gameObject.GetComponent<PlayAudioSource>();
         FirePoint = transform.GetChild(3).GetChild(0).transform;
 
-        // set the default state
+        // set the default state to wander
         CurrentState = _wanderState;
     }
 
+    // constantly search for new targets, checking radius, and determining necessary behavior
     private void Update()
     {
         LocateTarget();
@@ -85,12 +90,13 @@ public class RobotController : MonoBehaviour
         CheckIfStrafing();
     }
 
+    // "handle" the current state's behavior
     private void FixedUpdate()
     {
         CurrentState.Handle(this);
     }
 
-    // adds the states specified in the editor as components
+    // adds the needed states as components
     private void AddStatesAsComponents()
     {
         // add IRobotStates common to all robot types
@@ -266,7 +272,7 @@ public class RobotController : MonoBehaviour
     // used to see/test radius of robots
     private void OnDrawGizmosSelected()
     {
-        float radius = stats.AttackRadius;
+        float radius = stats.ApproachRadius;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
     }

@@ -15,6 +15,7 @@ public class RobotHealth : MonoBehaviour, IDamageable <float>
     private float _currentHealth;
     private Slider _healthSlider;
 
+    // gets needed values, abstracted away from designer
     private void Start()
     {
         _robotController = GetComponent<RobotController>();

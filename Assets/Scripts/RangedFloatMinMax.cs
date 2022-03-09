@@ -7,6 +7,7 @@ using System;
 
 public class RangedFloatMinMax : Attribute
 {
+    // used to override default values set in RangedFloatDrawer.cs
     public RangedFloatMinMax(float min, float max)
     {
         Min = min;

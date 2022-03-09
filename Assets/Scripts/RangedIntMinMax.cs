@@ -7,6 +7,7 @@ using System;
 
 public class RangedIntMinMax : Attribute
 {
+    // used to override default values set in RangedIntDrawer.cs
     public RangedIntMinMax(int min, int max)
     {
         Min = min;

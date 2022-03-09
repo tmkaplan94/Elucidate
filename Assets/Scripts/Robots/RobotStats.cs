@@ -16,13 +16,11 @@ public class RobotStats : ScriptableObject
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
-    [SerializeField] private int tacticalCooldown;
     [SerializeField] private int shootingCooldown;
+    [SerializeField] private int tacticalCooldown;
     [SerializeField] private int fleeingCooldown;
     [SerializeField] private int strafingCooldown;
-    
-    [RangedIntMinMax(1,360)]
-    public RangedInt strafingSpeed;
+    [RangedIntMinMax(20,200)] public RangedInt strafingSpeed;   // degrees per second
 
     #region Properties
 

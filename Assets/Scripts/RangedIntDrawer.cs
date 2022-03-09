@@ -20,6 +20,7 @@ public class RangedIntDrawer : PropertyDrawer {
         float minValue = minProp.intValue;
         float maxValue = maxProp.intValue;
 
+        // default values, unless overridden
         int rangeMin = 0;
         int rangeMax = 1;
 
@@ -46,6 +47,7 @@ public class RangedIntDrawer : PropertyDrawer {
         EditorGUI.MinMaxSlider(position, ref minValue, ref maxValue, rangeMin, rangeMax);
         if (EditorGUI.EndChangeCheck())
         {
+            // must cast to an int, EditorGUI.MinMaxSlider requires floats
             minProp.intValue = (int)minValue;
             maxProp.intValue = (int)maxValue;
         }

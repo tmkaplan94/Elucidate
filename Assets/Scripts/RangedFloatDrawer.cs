@@ -20,6 +20,7 @@ public class RangedFloatDrawer : PropertyDrawer {
         float minValue = minProp.floatValue;
         float maxValue = maxProp.floatValue;
 
+        // default values, unless overridden
         float rangeMin = 0;
         float rangeMax = 1;
 

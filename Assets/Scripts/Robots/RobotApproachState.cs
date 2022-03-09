@@ -1,6 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+/*
+ * Author: Tyler Kaplan
+ * Contributors: Brian Caballero
+ * Description: Approach state for robots.
+ *
+ * Approaches targeted players based on approach radius in robot stats.
+ * Approaches by facing target, then moving forward.
+ */
 using UnityEngine;
 
 public class RobotApproachState : MonoBehaviour, IRobotState
@@ -24,18 +29,9 @@ public class RobotApproachState : MonoBehaviour, IRobotState
     private void Approach()
     {
         _robotController.FaceTarget();
+        // probably causing a problem
         Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
         _robotController.MyTransform.position += translation;
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (_robotController.Type == RobotType.Collider)
-        {
-            float damage = _robotController.Stats.CollisionDamage;
-            other.gameObject.GetComponent<IDamageable<float>>().TakeDamage(damage);
-            _robotController.CurrentState = _robotController._fleeState;
-            _robotController._isFleeing = true;
-        }
-    }
 }
