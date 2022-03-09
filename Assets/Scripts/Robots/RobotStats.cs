@@ -5,7 +5,7 @@
  */
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RobotStats", menuName = "ScriptableObject/Stats")]
+[CreateAssetMenu(fileName = "RobotStats", menuName = "ScriptableObject/Stats/Robot")]
 public class RobotStats : ScriptableObject
 { 
     [SerializeField] private float maxHealth;

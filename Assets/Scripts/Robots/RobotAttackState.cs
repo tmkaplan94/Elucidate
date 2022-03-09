@@ -36,12 +36,6 @@ public class RobotAttackState : MonoBehaviour, IRobotState
                 Strafe();
                 Fire();
                 break;
-            case RobotType.Chicken:
-
-                break;
-            case RobotType.Collider:
-    
-                break;
         }
     }
     

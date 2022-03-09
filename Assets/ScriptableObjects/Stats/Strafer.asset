@@ -25,5 +25,5 @@ MonoBehaviour:
   fleeingCooldown: 0
   strafingCooldown: 0
   strafingSpeed:
-    minValue: 0
-    maxValue: 0
+    minValue: 36
+    maxValue: 79

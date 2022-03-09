@@ -140,6 +140,13 @@ public class RobotController : MonoBehaviour
         {
             if (CurrentDistance <= stats.AttackRadius)
             {
+                if (type == RobotType.Chicken)
+                {
+                    CurrentState = _fleeState;
+                    _isFleeing = true;
+                    return;
+                }
+                
                 CurrentState = _attackState;
                 _isShooting = true;
                 return;
@@ -181,7 +188,7 @@ public class RobotController : MonoBehaviour
     // public function to reset shooting timer back to the set cooldown
     public void ResetShootingTimer()
     {
-        _shootingTimer = stats.ShootingCooldown;
+        _shootingTimer = Stats.ShootingCooldown;
     }
 
     // if fleeing, decrement timer; if timer hits zero, go back to wandering state
@@ -193,7 +200,7 @@ public class RobotController : MonoBehaviour
             if (_fleeingTimer <= 0)
             {
                 CurrentState = _wanderState;
-                _fleeingTimer = stats.FleeingCooldown;
+                _fleeingTimer = Stats.FleeingCooldown;
                 _isFleeing = false;
             }
         }
@@ -218,7 +225,7 @@ public class RobotController : MonoBehaviour
     // public function to reset strafing timer back to the set cooldown
     public void ResetStrafingTimer()
     {
-        _strafingTimer = stats.StrafingCooldown;
+        _strafingTimer = Stats.StrafingCooldown;
     }
 
     // face the current target
