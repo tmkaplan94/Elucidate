@@ -62,7 +62,7 @@ public class RobotController : MonoBehaviour
         MyTransform = GetComponent<Transform>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Audio = gameObject.GetComponent<PlayAudioSource>();
-        FirePoint = transform.GetChild(2).GetChild(0).transform;
+        FirePoint = transform.GetChild(3).GetChild(0).transform;
 
         // set the default state
         CurrentState = _wanderState;

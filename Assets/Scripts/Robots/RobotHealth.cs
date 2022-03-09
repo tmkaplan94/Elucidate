@@ -9,19 +9,18 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RobotController))]
 public class RobotHealth : MonoBehaviour, IDamageable <float>
 {
-    // editor exposed fields
-    [SerializeField] private GameObject healthUI;
-
     // private fields
     private RobotController _robotController;
+    private GameObject _healthUI;
     private float _currentHealth;
     private Slider _healthSlider;
 
     private void Start()
     {
         _robotController = GetComponent<RobotController>();
+        _healthUI = transform.GetChild(0).gameObject;
         _currentHealth = _robotController.Stats.MaxHealth;
-        _healthSlider = healthUI.GetComponentInChildren<Slider>();
+        _healthSlider = _healthUI.transform.GetChild(0).GetComponent<Slider>();
         _healthSlider.value = CalculateHealth();
 
         GameEventBus.EnemyAdded?.Invoke();
@@ -33,7 +32,7 @@ public class RobotHealth : MonoBehaviour, IDamageable <float>
         _healthSlider.value = CalculateHealth();
         if (_currentHealth < _robotController.Stats.MaxHealth)
         {
-            healthUI.SetActive(true);
+            _healthUI.SetActive(true);
         }
         
         if (_currentHealth > _robotController.Stats.MaxHealth)
