@@ -148,11 +148,19 @@ public class RobotController : MonoBehaviour
         // don't do anything if I'm fleeing
         if (_isFleeing) { return; }
         
+        // if within approach radius
         if (CurrentDistance <= stats.ApproachRadius)
         {
+            // approach
+            CurrentState = _approachState;
+            
+            // keep approaching but don't attack
+            if (Type == RobotType.Collider) { return; }
+
+            // if within attack radius
             if (CurrentDistance <= stats.AttackRadius)
             {
-                // if I'm a chicken, flee instead of attacking
+                // flee instead of attacking
                 if (Type == RobotType.Chicken)
                 {
                     CurrentState = _fleeState;
@@ -160,18 +168,14 @@ public class RobotController : MonoBehaviour
                     return;
                 }
 
-                // attack if within range
+                // attack
                 CurrentState = _attackState;
                 _isAttacking = true;
-                return;
             }
-            
-            // approach if within range
-            CurrentState = _approachState;
         }
         else
         {
-            // otherwise, keep wandering
+            // if not within approach radius, keep wandering
             CurrentState = _wanderState;
         }
     }

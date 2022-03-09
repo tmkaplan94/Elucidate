@@ -21,17 +21,17 @@ MonoBehaviour:
   bulletSpeed: 1000
   bulletDamage: 10
   shootingSpeed:
-    minValue: 345
-    maxValue: 378
+    minValue: 310
+    maxValue: 396
   tacticalTimer:
     minValue: 400
     maxValue: 400
   fleeingTimer:
-    minValue: 0
-    maxValue: 0
+    minValue: 200
+    maxValue: 200
   strafingTimer:
     minValue: 302
-    maxValue: 500
+    maxValue: 518
   strafingSpeed:
-    minValue: 40
-    maxValue: 70
+    minValue: 30
+    maxValue: 60

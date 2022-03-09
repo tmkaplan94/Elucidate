@@ -24,14 +24,14 @@ MonoBehaviour:
     minValue: 347
     maxValue: 429
   tacticalTimer:
-    minValue: 525
+    minValue: 597
     maxValue: 824
   fleeingTimer:
-    minValue: 200
-    maxValue: 299
+    minValue: 256
+    maxValue: 451
   strafingTimer:
-    minValue: 0
-    maxValue: 0
+    minValue: 200
+    maxValue: 200
   strafingSpeed:
     minValue: 20
     maxValue: 20
