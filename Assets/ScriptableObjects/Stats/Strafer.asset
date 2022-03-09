@@ -19,17 +19,19 @@ MonoBehaviour:
   collisionDamage: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
   bulletSpeed: 1000
-  bulletDamage: 5
+  bulletDamage: 0
   shootingSpeed:
-    minValue: 258
-    maxValue: 299
+    minValue: 296
+    maxValue: 329
   tacticalTimer:
-    minValue: 0
-    maxValue: 0
+    minValue: 400
+    maxValue: 400
   fleeingTimer:
     minValue: 0
     maxValue: 0
+  strafingTimer:
+    minValue: 200
+    maxValue: 398
   strafingSpeed:
     minValue: 40
     maxValue: 60
-  directionTimer: 100

@@ -29,7 +29,6 @@ public class RobotFleeState : MonoBehaviour, IRobotState
     private void Flee()
     {
         _robotController.FaceAway();
-        // probably causing a problem
         Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
         _robotController.MyTransform.position += translation;
     }

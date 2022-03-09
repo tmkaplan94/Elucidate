@@ -7,6 +7,7 @@
  * Approaches by facing target, then moving forward.
  */
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RobotApproachState : MonoBehaviour, IRobotState
 {
@@ -28,10 +29,7 @@ public class RobotApproachState : MonoBehaviour, IRobotState
     // sets destination to target position using NavMeshAgent
     private void Approach()
     {
-        _robotController.FaceTarget();
-        // probably causing a problem
-        Vector3 translation = _robotController.MyTransform.forward * _robotController.Stats.MovementSpeed;
-        _robotController.MyTransform.position += translation;
+        _robotController.NavMeshAgent.SetDestination(_robotController.TargetTransform.position);
     }
 
 }
