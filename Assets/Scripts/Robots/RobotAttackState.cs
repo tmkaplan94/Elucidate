@@ -29,7 +29,8 @@ public class RobotAttackState : MonoBehaviour, IRobotState
                 Fire();
                 break;
             case RobotType.Tactical:
-
+                Chase();
+                Fire();
                 break;
             case RobotType.Strafer:
 

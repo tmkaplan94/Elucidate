@@ -23,6 +23,7 @@ public class RobotController : MonoBehaviour
     private List<Transform> _targetTransforms;
     private bool _isShooting;
     private int _shootingTimer;
+    private int _attackTimer;
     private bool _isFleeing;
     private int _fleeingTimer;
     private bool _isStrafing;
@@ -57,6 +58,9 @@ public class RobotController : MonoBehaviour
     {
         // initialize needed variables
         CurrentDistance = Mathf.Infinity;
+        _shootingTimer = 0;
+        _fleeingTimer = Stats.FleeingCooldown;
+        _attackTimer = Stats.AttackCooldown;
 
         // cache needed components
         MyTransform = GetComponent<Transform>();
@@ -96,17 +100,17 @@ public class RobotController : MonoBehaviour
                 _attackState = gameObject.AddComponent<RobotAttackState>();
                 break;
             case RobotType.Tactical:
-                _attackState = gameObject.AddComponent<RobotFleeState>();
-                _fleeState = gameObject.AddComponent<RobotAttackState>();
+                _attackState = gameObject.AddComponent<RobotAttackState>();
+                _fleeState = gameObject.AddComponent<RobotFleeState>();
                 break;
             case RobotType.Strafer:
-                _attackState = gameObject.AddComponent<RobotFleeState>();
+                _attackState = gameObject.AddComponent<RobotAttackState>();
                 break;
             case RobotType.Chicken:
-                _fleeState = gameObject.AddComponent<RobotAttackState>();
+                _fleeState = gameObject.AddComponent<RobotFleeState>();
                 break;
             case RobotType.Collider:
-                _fleeState = gameObject.AddComponent<RobotAttackState>();
+                _fleeState = gameObject.AddComponent<RobotFleeState>();
                 break;
         }
     }
@@ -154,10 +158,22 @@ public class RobotController : MonoBehaviour
     {
         if (_isShooting)
         {
+            if (type == RobotType.Tactical)
+            {
+                _attackTimer--;
+            }
             _shootingTimer--;
+            
             if (_shootingTimer <= 0)
             {
                 CanFire = true;
+            }
+
+            if (type == RobotType.Tactical && _attackTimer <= 0)
+            {
+                CurrentState = _fleeState;
+                _isFleeing = true;
+                _attackTimer = Stats.AttackCooldown;
             }
         }
     }
