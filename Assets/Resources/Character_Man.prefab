@@ -2623,6 +2623,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2981832424009366602, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 6519325635730334676}
     - target: {fileID: 5055307704382847451, guid: 3f10913518e0cfe43a8b9acc1bfd51c0, type: 3}
       propertyPath: m_IsKinematic
       value: 1

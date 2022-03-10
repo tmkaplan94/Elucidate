@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8843461da1a3943b195dbd7d653f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wepUI: {fileID: 3848220793492377766}
+  wepUI: {fileID: 3848220794385967825}
 --- !u!1 &3296829301041226582
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,12 +840,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 866098512424820808}
     m_Modifications:
+    - target: {fileID: 1953489527908279720, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
+      propertyPath: _wep
+      value: 
+      objectReference: {fileID: 8618517167746909990}
     - target: {fileID: 7296021700353291803, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
       propertyPath: m_text
       value: 'Pick up
 
 
         Rocket'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296021701491698620, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7296021701491698621, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -953,13 +961,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: db78e799869a1784dbb5a2e6a7a28d5b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
---- !u!1 &3848220793492377766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7296021701529375179, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
-  m_PrefabInstance: {fileID: 5775599858929992045}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3848220793492377769 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7296021701529375172, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
+  m_PrefabInstance: {fileID: 5775599858929992045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3848220794385967825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7296021701491698620, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
   m_PrefabInstance: {fileID: 5775599858929992045}
   m_PrefabAsset: {fileID: 0}

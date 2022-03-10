@@ -8,8 +8,9 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class WeaponFiring : MonoBehaviour
+public class WeaponFiring : MonoBehaviourPun
 {
     // editor exposed fields
     [SerializeField] private Transform firePoint;
@@ -21,12 +22,21 @@ public class WeaponFiring : MonoBehaviour
     private float _nextFireTime;
     private float _reloadTime = 2.0f;
     private bool isReloading = false;
-    public static float _magazineSize{get ; private set;}
-    public static float _magazineCurrent{get ; private set;}
+    private float _magazineSize;
+    private float _magazineCurrent;
 
+    public float MagazineSize
+    {
+        get => _magazineSize;
+        set => _magazineSize = value;
+    }
+    public float MagazineCurrent
+    {
+        get => _magazineCurrent;
+        set => _magazineCurrent = value;
+    }
     private void OnEnable()
     {
-        Debug.Log("ENABLED");
         isReloading = false;
         _magazineSize = weaponType.Ammo;
         _magazineCurrent = _magazineSize;
@@ -38,6 +48,7 @@ public class WeaponFiring : MonoBehaviour
         _audio = GetComponent<PlayAudioSource>();
         _nextFireTime = 0.0f;
     }
+
     public void TryShoot()
     {
         if(isReloading)
@@ -85,11 +96,14 @@ public class WeaponFiring : MonoBehaviour
 
     private IEnumerator Reload()
     {
-        isReloading = true;
-        GameEventBus.Reloading?.Invoke();
-        yield return new WaitForSeconds(_reloadTime);
-        _magazineCurrent = _magazineSize;
-        GameEventBus.Reloaded?.Invoke();
-        isReloading = false;
+        if(photonView.IsMine)
+        {
+            isReloading = true;
+            GameEventBus.Reloading?.Invoke();
+            yield return new WaitForSeconds(_reloadTime); // Wait for duration of _reloadTime before refilling magazine.
+            _magazineCurrent = _magazineSize;
+            GameEventBus.Reloaded?.Invoke();
+            isReloading = false;
+        }
     }
 }

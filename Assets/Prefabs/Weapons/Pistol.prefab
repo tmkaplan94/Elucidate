@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8843461da1a3943b195dbd7d653f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wepUI: {fileID: 6286186969731549225}
+  wepUI: {fileID: 6286186970449113694}
 --- !u!1 &6870077819018999733
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,9 +676,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9120593721754186923}
     m_Modifications:
+    - target: {fileID: 1953489527908279720, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
+      propertyPath: _wep
+      value: 
+      objectReference: {fileID: 363881290730738629}
     - target: {fileID: 7296021700353291803, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
       propertyPath: m_text
       value: "Pick up\n\n  Pistol"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296021701491698620, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7296021701491698621, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -774,7 +782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7296021701529375179, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7296021701620547603, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
       propertyPath: m_Name
@@ -786,13 +794,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 1ca3959547bf7a94bbb17d708a75ef8e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
---- !u!1 &6286186969731549225 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7296021701529375179, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
-  m_PrefabInstance: {fileID: 3638249524964284898}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6286186969731549222 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7296021701529375172, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
+  m_PrefabInstance: {fileID: 3638249524964284898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6286186970449113694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7296021701491698620, guid: f1233c0ca4392aa4bb6bf81b3b051702, type: 3}
   m_PrefabInstance: {fileID: 3638249524964284898}
   m_PrefabAsset: {fileID: 0}
