@@ -51,6 +51,7 @@ public class WeaponFiring : MonoBehaviourPun
 
     public void TryShoot()
     {
+        // BUG
         if(isReloading)
             return;
         if(_magazineCurrent <= 0)

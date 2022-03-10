@@ -43,7 +43,6 @@ public class CursorUI : MonoBehaviour
     void Start()
     {
         // Keeps cursor bounded within game window.
-        Cursor.lockState = CursorLockMode.Confined;
         _image = GetComponent<Image>();
     }
     void Update()
