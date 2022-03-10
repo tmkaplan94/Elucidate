@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Chaser
   m_EditorClassIdentifier: 
   maxHealth: 60
-  movementSpeed: 0.15
+  movementSpeed: 0.2
   approachRadius: 16
   attackRadius: 14
   collisionDamage: 0
+  collisionForce: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
   bulletSpeed: 1000
   bulletDamage: 5
   shootingSpeed:
-    minValue: 309
-    maxValue: 401
+    minValue: 415
+    maxValue: 442
   tacticalTimer:
     minValue: 400
     maxValue: 400
