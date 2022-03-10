@@ -24,7 +24,8 @@ public static class GameEventBus
     public static Action Cursor;
     public static Action Crosshair;
     public static Action Shoot;
-    public static Action Reload;
+    public static Action Reloaded;
+    public static Action Reloading;
 
 }
 

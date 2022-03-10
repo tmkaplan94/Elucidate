@@ -26,15 +26,17 @@ public class WeaponFiring : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("ENABLED");
         isReloading = false;
+        _magazineSize = weaponType.Ammo;
+        _magazineCurrent = _magazineSize;
+        GameEventBus.Reloaded?.Invoke();
     }
 
     private void Start()
     {
         _audio = GetComponent<PlayAudioSource>();
         _nextFireTime = 0.0f;
-        _magazineSize = weaponType.Ammo;
-        _magazineCurrent = _magazineSize;
     }
     public void TryShoot()
     {
@@ -84,10 +86,10 @@ public class WeaponFiring : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
-        Debug.Log("Reloading...");
+        GameEventBus.Reloading?.Invoke();
         yield return new WaitForSeconds(_reloadTime);
         _magazineCurrent = _magazineSize;
-        GameEventBus.Reload?.Invoke();
+        GameEventBus.Reloaded?.Invoke();
         isReloading = false;
     }
 }

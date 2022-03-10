@@ -15,13 +15,13 @@ public class AmmoUI : MonoBehaviour
     private void OnEnable()
     {
         GameEventBus.Shoot += AmmoDepreciate;
-        GameEventBus.Reload += AmmoRefill;
+        GameEventBus.Reloaded += AmmoRefill;
     }
     
     private void OnDisable()
     {
         GameEventBus.Shoot -= AmmoDepreciate;
-        GameEventBus.Reload -= AmmoRefill;
+        GameEventBus.Reloaded -= AmmoRefill;
     }
     private void AmmoDepreciate()
     {
