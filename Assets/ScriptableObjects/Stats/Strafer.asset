@@ -17,6 +17,7 @@ MonoBehaviour:
   approachRadius: 16
   attackRadius: 10
   collisionDamage: 0
+  collisionForce: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
   bulletSpeed: 1000
   bulletDamage: 10
@@ -31,7 +32,7 @@ MonoBehaviour:
     maxValue: 200
   strafingTimer:
     minValue: 302
-    maxValue: 518
+    maxValue: 493
   strafingSpeed:
-    minValue: 30
+    minValue: 40
     maxValue: 60
