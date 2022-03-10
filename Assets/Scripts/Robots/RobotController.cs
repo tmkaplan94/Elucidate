@@ -91,7 +91,7 @@ public class RobotController : MonoBehaviour
     // "handle" the current state's behavior
     private void FixedUpdate()
     {
-        CurrentState.Handle(this);
+        CurrentState?.Handle(this);
     }
 
     // adds the needed states as components
