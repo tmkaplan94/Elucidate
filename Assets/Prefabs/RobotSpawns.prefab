@@ -390,11 +390,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   robotPrefabs:
-  - {fileID: 7432756187606534334, guid: 6806d8cab09e8ff42a5cd390762265d9, type: 3}
-  - {fileID: 57134194298960349, guid: 12479e9bc1b4d60489fe248b53a0701d, type: 3}
-  - {fileID: 987592815362429176, guid: 0b8350296494c294c8b71c0ec1b00856, type: 3}
-  - {fileID: 8999451845454960573, guid: ff185e45c22e60143867739d5cabedf4, type: 3}
-  - {fileID: 6157016410898368049, guid: 50314109962a0054c9e733d4d690cb0d, type: 3}
+  - {fileID: 3038660027934738015, guid: 0c16b3c3cab71924688cf5f4c0b23376, type: 3}
+  - {fileID: 760585708172832488, guid: e60d81e91c8f04846b4edb9c4304a061, type: 3}
+  - {fileID: 8304268980076311811, guid: c998d0d1d4c6c154599ba539a06b8908, type: 3}
+  - {fileID: 4562458754799760511, guid: da66a58eeac26cf4aa826fdfaaf6ee0e, type: 3}
+  - {fileID: 7033876074682086051, guid: eca87eed9e71f7c4d9037d07fb6da803, type: 3}
   spawnPoints:
   - {fileID: 8668172867841061848}
   - {fileID: 8668172867524663978}
