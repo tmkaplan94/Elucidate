@@ -35,12 +35,16 @@ public class WeaponFiring : MonoBehaviourPun
         get => _magazineCurrent;
         set => _magazineCurrent = value;
     }
+    public delegate void ReloadingMag();
+    public event ReloadingMag _reloading;
+    public event ReloadingMag _reloaded;
+    public event ReloadingMag _shoot;
     private void OnEnable()
     {
         isReloading = false;
         _magazineSize = weaponType.Ammo;
         _magazineCurrent = _magazineSize;
-        GameEventBus.Reloaded?.Invoke();
+        _reloaded?.Invoke();
     }
 
     private void Start()
@@ -51,7 +55,7 @@ public class WeaponFiring : MonoBehaviourPun
 
     public void TryShoot()
     {
-        // BUG
+        /*
         if(isReloading)
             return;
         if(_magazineCurrent <= 0)
@@ -59,20 +63,30 @@ public class WeaponFiring : MonoBehaviourPun
                 StartCoroutine(Reload());
                 return;
             }
+        */
         if (Time.time >= _nextFireTime)
         {
+            if(isReloading)
+            {
+                isReloading = false;
+                //_reloaded?.Invoke();
+            }
+
             Debug.Log("Before Shoot; Ammo = " + _magazineCurrent);
             Shoot();
             // sets the next time the player is able to shoot based on rounds per second.
             _nextFireTime = Time.time + 1.0f / weaponType.RoundsPerSecond;
+            isReloading = false;
         }
+        if(_magazineCurrent <= 0 && !isReloading)
+            Reload();
     }
 
     // shoots bullet
     private void Shoot()
     {
         _magazineCurrent--;
-        GameEventBus.Shoot?.Invoke();
+        //_shoot?.Invoke();
         GameObject newBullet = Instantiate(weaponType.Bullet, firePoint.position, firePoint.rotation);
         newBullet.transform.localScale *= weaponType.BulletSizeScale;
         newBullet.GetComponent<Bullet>().Damage = weaponType.BulletDamage;
@@ -95,16 +109,11 @@ public class WeaponFiring : MonoBehaviourPun
         Destroy(muzzle, weaponType.MuzzleFlashLifeTime);
     }
 
-    private IEnumerator Reload()
+    private void Reload()
     {
-        if(photonView.IsMine)
-        {
-            isReloading = true;
-            GameEventBus.Reloading?.Invoke();
-            yield return new WaitForSeconds(_reloadTime); // Wait for duration of _reloadTime before refilling magazine.
-            _magazineCurrent = _magazineSize;
-            GameEventBus.Reloaded?.Invoke();
-            isReloading = false;
-        }
+        isReloading = true;
+        //_reloading?.Invoke();
+        _nextFireTime = Time.time + _reloadTime;
+        _magazineCurrent = _magazineSize;
     }
 }

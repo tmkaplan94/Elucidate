@@ -15,18 +15,18 @@ public class AmmoUI : MonoBehaviourPun
     {
         _reloadUI = _stats.CurrentWeapon.transform.Find("WepUICanvas/Reloading...").gameObject;
         _reloadUI.SetActive(false);
-        GameEventBus.Shoot += AmmoDepreciate;
-        GameEventBus.Reloaded += AmmoRefill;
-        GameEventBus.Reloading += currentlyReloading;
-        GameEventBus.Reloaded += finishedReloading;
+        _wep._shoot += AmmoDepreciate;
+        _wep._reloaded += AmmoRefill;
+        _wep._reloading += currentlyReloading;
+        _wep._reloaded += finishedReloading;
     }
     
     private void OnDisable()
     {
-        GameEventBus.Shoot -= AmmoDepreciate;
-        GameEventBus.Reloaded -= AmmoRefill;
-        GameEventBus.Reloading -= currentlyReloading;
-        GameEventBus.Reloaded -= finishedReloading;
+        _wep._shoot -= AmmoDepreciate;
+        _wep._reloaded -= AmmoRefill;
+        _wep._reloading -= currentlyReloading;
+        _wep._reloaded -= finishedReloading;
     }
     private void AmmoDepreciate()
     {
@@ -39,15 +39,12 @@ public class AmmoUI : MonoBehaviourPun
     }
     private void currentlyReloading()
     {
-        //GameObject _reloadUI = _stats.CurrentWeapon.transform.Find("WepUICanvas/Reloading...").gameObject;
         _reloadUI.SetActive(true);
     }
 
     private void finishedReloading()
     {
-        //GameObject _reloadUI = _stats.CurrentWeapon.transform.Find("WepUICanvas/Reloading...").gameObject;
         _reloadUI.SetActive(false);
-        
     }
 
 }
