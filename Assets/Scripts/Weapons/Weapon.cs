@@ -39,11 +39,6 @@ public class Weapon : ScriptableObject
         get => _bulletVelocity;
         set => _bulletVelocity = value;
     }
-    public float Ammo
-    {
-        get => _ammo;
-        set => _ammo = value;
-    }
     public float BulletSizeScale
     {
         get => _bulletSizeScale;

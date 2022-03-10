@@ -105,8 +105,9 @@ public class RoomManagement : MonoBehaviourPunCallbacks
 
     public void OnClickStart()
     {
-        PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         photonView.RPC("ChangeCrosshairRPC", RpcTarget.All);
+        PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
     [PunRPC]
     private void ChangeCrosshairRPC()

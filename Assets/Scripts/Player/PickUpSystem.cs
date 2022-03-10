@@ -80,15 +80,6 @@ public class PickUpSystem : MonoBehaviourPun
         newWeapon.transform.rotation = hand.rotation;
         newWeapon.GetComponent<WeaponFiring>().enabled = true;
         newWeapon.GetComponent<WeaponUIScript>().TurnOffUI();
-        
-        // Check if client side; if it is, then only show the ammo ui for that person, not the others on network.
-        // Must find the specific AmmoUI gameobject in the prefab of the newWeapon about to be picked up, then SetActive(true) to display
-        // JUST that weapon after picking it up.
-        if(photonView.IsMine)
-        {
-            GameObject _ammo = newWeapon.transform.Find("WepUICanvas/AmmoUI").gameObject;
-            _ammo.SetActive(true);
-        }
     }
     
     // drops current weapon
@@ -102,13 +93,6 @@ public class PickUpSystem : MonoBehaviourPun
         foreach (BoxCollider col in cols)
         {
             col.enabled = true;
-        }
-        // Check if client side; if it is, then only turn off the ammo ui for that person, not the others on network.
-        // Must find the specific AmmoUI gameobject in the prefab of the current weapon, then SetActive(false) to turn off display JUST that weapon.
-        if(photonView.IsMine)
-        {
-            GameObject _ammo = _stats.CurrentWeapon.transform.Find("WepUICanvas/AmmoUI").gameObject;
-            _ammo.SetActive(false);
         }
     }
 }
