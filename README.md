@@ -45,32 +45,36 @@ HOW TO PLAY:
     Win Condition
         Be the last player standing in the battle arena.
         Use different guns to help you throughout the level!
-	If playing in Singleplayer you must find and kill all 
-	of the enemy in the level AI to win.
+	
+        If playing in Singleplayer you must find and kill all 
+	    of the enemy in the level AI to win.
 
 IMPORTANT NOTES:
     AI Modes:
-        Wandering
+        Chaser
             This is our original/default AI that has a normal movement speed, 
-            detection radius, and behavioral focus (always walking forward).
+            detection radius, and behavioral focus. When this AI spots you,
+            they will chase you until the end of time!
 
-        Patrolling
-            The goal of this AI was to have a higher passive perception. 
-            Therefore, they have a wider detection radius and will stop walking 
-            forward to turn, giving the illusion of patrolling an area.
+        Tactical
+            The goal of this AI was very similar to Chaser, except for the fact 
+            that it will stop chasing you at some point. It's a bit smarter and 
+            takes its time to try and get you.
 
-        Sprinting
-            For this AI, we wanted to have a very proactive AI who is looking for 
-            action, so we gave them the highest movement speed with the lowest 
-            detection radius.
+        Strafer
+            This AI knows that staying still is gonna get it killed, therefore when
+            the target is in range, it will strafe and circle them, changing direction
+            and speed at random times and values.
 
-        Run N Gunning
-            This AI is faster than most and has the default detection radius, but
-            has a special behavior: it will randomly shoot.
+        Collider
+            For this AI, we wanted to have a different approach compared to all the
+            other enemy robots we have made so far. This AI is a small droid that 
+            is covered in spiked, they will charge full speed ahead at you, causing
+            damage, then leaving to get another charge in later.
 
-        Camping
-            We decided to take Sprinting AI and flip it on its head. This AI has the
-            lowest movement speed with the highest detection radius, making it a sniper.
+        Chicken
+            Lastly, we decided to have a small droid that would be scared of the player,
+            running away the moment they get too close.
 
 HAVE FUN!
 
