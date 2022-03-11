@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class MenuManager : Singleton<MenuManager>
 {
     // canvas items needed to control different menus
+    [SerializeField] private GameObject _BGVidOutput;
+    [SerializeField] private GameObject _BGImage;
     [SerializeField] private Image _backgroundImage;
     [SerializeField] private GameObject _titleMenu;
     [SerializeField] private GameObject _mainMenu;
@@ -55,6 +57,8 @@ public class MenuManager : Singleton<MenuManager>
         _pauseOptionsMenu.SetActive(false);
         _winMenu.SetActive(false);
         _lossMenu.SetActive(false);
+        _BGImage.SetActive(true);
+        _BGVidOutput.SetActive(true);
         
         float r = _backgroundImage.color.r;
         float g = _backgroundImage.color.g;
@@ -85,6 +89,8 @@ public class MenuManager : Singleton<MenuManager>
         _titleMenu.SetActive(false);
         _mainMenu.SetActive(false);
         _mainOptionsMenu.SetActive(false);
+        _BGImage.SetActive(false);
+        _BGVidOutput.SetActive(false);
         
         float r = _backgroundImage.color.r;
         float g = _backgroundImage.color.g;
