@@ -17,21 +17,22 @@ MonoBehaviour:
   approachRadius: 20
   attackRadius: 8
   collisionDamage: 0
+  collisionForce: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
   bulletSpeed: 1000
   bulletDamage: 15
   shootingSpeed:
-    minValue: 347
-    maxValue: 429
-  tacticalTimer:
-    minValue: 597
-    maxValue: 824
-  fleeingTimer:
-    minValue: 256
-    maxValue: 451
-  strafingTimer:
     minValue: 200
     maxValue: 200
+  tacticalDuration:
+    minValue: 40
+    maxValue: 40
+  fleeingDuration:
+    minValue: 20
+    maxValue: 20
+  strafingReset:
+    minValue: 20
+    maxValue: 20
   strafingSpeed:
     minValue: 20
     maxValue: 20

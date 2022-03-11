@@ -72,7 +72,7 @@ public class RobotController : MonoBehaviour
         MyTransform = GetComponent<Transform>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Audio = gameObject.GetComponent<PlayAudioSource>();
-        FirePoint = transform.GetChild(3).GetChild(0).transform;
+        FirePoint = transform.GetChild(1).GetChild(0).transform;
 
         // set the default state to wander
         CurrentState = _wanderState;
@@ -239,8 +239,8 @@ public class RobotController : MonoBehaviour
     // calculate a new random value for the tactical timer
     public void ResetTacticalTimer()
     {
-        int attackSpeedMin = Stats.tacticalTimer.minValue;
-        int attackSpeedMax = Stats.tacticalTimer.maxValue;
+        int attackSpeedMin = Stats.tacticalDuration.minValue * 10;
+        int attackSpeedMax = Stats.tacticalDuration.maxValue * 10;
         _tacticalTimer = Random.Range(attackSpeedMin, attackSpeedMax);
     }
 
@@ -261,18 +261,15 @@ public class RobotController : MonoBehaviour
     // initialize fleeing values
     private void InitializeFleeingValues()
     {
-        int fleeingTimerMin = Stats.fleeingTimer.minValue;
-        int fleeingTimerMax = Stats.fleeingTimer.maxValue;
-        _fleeingTimer = Random.Range(fleeingTimerMin, fleeingTimerMax);
-        
+        ResetFleeingTimer();
         _isFleeing = false;
     }
     
     // public function to reset fleeing timer back to the set cooldown
     public void ResetFleeingTimer()
     {
-        int fleeingTimerMin = Stats.fleeingTimer.minValue;
-        int fleeingTimerMax = Stats.fleeingTimer.maxValue;
+        int fleeingTimerMin = Stats.fleeingDuration.minValue * 10;
+        int fleeingTimerMax = Stats.fleeingDuration.maxValue * 10;
         _fleeingTimer = Random.Range(fleeingTimerMin, fleeingTimerMax);
     }
     
@@ -306,9 +303,7 @@ public class RobotController : MonoBehaviour
         }
         
         // get a random strafing speed within range
-        int minRotationDegrees = Stats.strafingSpeed.minValue;
-        int maxRotationDegrees = Stats.strafingSpeed.maxValue;
-        StrafingSpeed = Random.Range(minRotationDegrees, maxRotationDegrees);
+        ChangeStrafingSpeed();
         
         // initialize strafing values
         _isStrafing = false;
@@ -328,7 +323,7 @@ public class RobotController : MonoBehaviour
         }
     }
     
-    // change strafing speed
+    // change strafing speed in degrees per second
     private void ChangeStrafingSpeed()
     {
         int minRotationDegrees = Stats.strafingSpeed.minValue;
@@ -339,8 +334,8 @@ public class RobotController : MonoBehaviour
     // public function to reset strafing timer back to the set cooldown
     public void ResetStrafingTimer()
     {
-        int strafingTimerMin = Stats.strafingTimer.minValue;
-        int strafingTimerMax = Stats.strafingTimer.maxValue;
+        int strafingTimerMin = Stats.strafingReset.minValue * 10;
+        int strafingTimerMax = Stats.strafingReset.maxValue * 10;
         _strafingTimer = Random.Range(strafingTimerMin, strafingTimerMax);
     }
 
@@ -378,20 +373,23 @@ public class RobotController : MonoBehaviour
     // when collider robot hits player
     private void OnCollisionEnter(Collision other)
     {
-        // deal damage to players and push back using force
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<IDamageable<float>>().TakeDamage(Stats.CollisionDamage);
-            other.gameObject.GetComponent<Rigidbody>().AddForce(MyTransform.forward * Stats.CollisionForce, ForceMode.Impulse);
-        }
-        
-        // play sound ideally
+        // play sound when collide with anything
         Audio.Play();
         
-        // then flee
-        ResetFleeingTimer();
-        CurrentState = _fleeState;
-        _isFleeing = true;
+        // if collided with player
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // deal damage
+            other.gameObject.GetComponent<IDamageable<float>>().TakeDamage(Stats.CollisionDamage);
+            
+            // cant apply force in opposite direction, throws off aiming
+            //other.gameObject.GetComponent<Rigidbody>().AddForce(MyTransform.forward * Stats.CollisionForce, ForceMode.Impulse);
+            
+            // then flee
+            ResetFleeingTimer();
+            CurrentState = _fleeState;
+            _isFleeing = true;
+        }
     }
     
     // used to see/test radius of robots
