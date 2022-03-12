@@ -1,6 +1,6 @@
 /*
- * Author: Grant Reed, Tyler Kaplan
- * Contributors: 
+ * Author: Grant Reed
+ * Contributors: Tyler Kaplan
  * Description: Spawn robots when a level loads. one random robot per spawnpoint given to it.
  */
 

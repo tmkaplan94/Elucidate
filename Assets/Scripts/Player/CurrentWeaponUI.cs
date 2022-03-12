@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+
 /*
  * Author: Grant Reed
  * Contributors: Loc Trinh
