@@ -1,0 +1,756 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1689999140229679789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689999140229679790}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1689999140229679790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689999140229679789}
+  m_LocalRotation: {x: -0, y: 0.68707395, z: -0, w: 0.7265875}
+  m_LocalPosition: {x: -65.22, y: 0, z: -59.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 86.798, z: 0}
+--- !u!1 &1689999140882076103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689999140882076104}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1689999140882076104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689999140882076103}
+  m_LocalRotation: {x: -0, y: -0.69254225, z: -0, w: -0.7213774}
+  m_LocalPosition: {x: 23.55, y: 0, z: 40.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: -272.337, z: 0}
+--- !u!1 &1689999140944742469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689999140944742470}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1689999140944742470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689999140944742469}
+  m_LocalRotation: {x: -0, y: 0.73530906, z: -0, w: -0.677732}
+  m_LocalPosition: {x: -32.03, y: 0, z: -60.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 265.333, z: 0}
+--- !u!1 &1689999141253876574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689999141253876575}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1689999141253876575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689999141253876574}
+  m_LocalRotation: {x: -0, y: 0.73530906, z: -0, w: -0.677732}
+  m_LocalPosition: {x: -45.24, y: 0, z: -61.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 265.333, z: 0}
+--- !u!1 &1689999141463967587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689999141463967588}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1689999141463967588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689999141463967587}
+  m_LocalRotation: {x: -0, y: 0.7642141, z: -0, w: -0.64496267}
+  m_LocalPosition: {x: 38.04, y: 0, z: 35.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: -459.674, z: 0}
+--- !u!1 &1689999141590100171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689999141590100172}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (20)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1689999141590100172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689999141590100171}
+  m_LocalRotation: {x: -0, y: -0.69254225, z: -0, w: -0.7213774}
+  m_LocalPosition: {x: 23.86, y: 0, z: 33.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: -272.337, z: 0}
+--- !u!1 &8016297452278404514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297452278404515}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297452278404515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297452278404514}
+  m_LocalRotation: {x: -0, y: -0.75850594, z: -0, w: -0.65166616}
+  m_LocalPosition: {x: 50.41, y: 0, z: -14.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: -261.335, z: 0}
+--- !u!1 &8016297452303294523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297452303294520}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297452303294520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297452303294523}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: 44.1, y: 0, z: -82.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297452333745629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297452333745626}
+  - component: {fileID: 8016297452333745627}
+  m_Layer: 0
+  m_Name: RobotSpawns 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297452333745626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297452333745629}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8016297453365876746}
+  - {fileID: 8016297453648687480}
+  - {fileID: 8016297453077307893}
+  - {fileID: 8016297453818173006}
+  - {fileID: 8016297453474478940}
+  - {fileID: 8016297453330690621}
+  - {fileID: 8016297453733932166}
+  - {fileID: 8016297452864068980}
+  - {fileID: 8016297454063294158}
+  - {fileID: 8016297452771022216}
+  - {fileID: 8016297452303294520}
+  - {fileID: 8016297452462114428}
+  - {fileID: 8016297453502273949}
+  - {fileID: 8016297453488147185}
+  - {fileID: 8016297452278404515}
+  - {fileID: 8016297453917801685}
+  - {fileID: 1689999140229679790}
+  - {fileID: 1689999140944742470}
+  - {fileID: 1689999141253876575}
+  - {fileID: 1689999140882076104}
+  - {fileID: 1689999141590100172}
+  - {fileID: 1689999141463967588}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8016297452333745627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297452333745629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc35b9ef3ab260d4dbde8d30d18c5b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotPrefabs:
+  - {fileID: 6671794752095363390, guid: 30de059d24f381646ae17d46ae9115c8, type: 3}
+  - {fileID: 441345729244702154, guid: 79c68161f2842f0499f48600b3e94d34, type: 3}
+  - {fileID: 5975497953750068815, guid: b84104eac5b63fd4f98f0e90ca5a9c6c, type: 3}
+  - {fileID: 6853829396219990668, guid: f38f7c90063aa164982b5b376b45dc64, type: 3}
+  - {fileID: 1393100669534445818, guid: 84152bcc3237a174fb7a6f4975539ff1, type: 3}
+  spawnPoints:
+  - {fileID: 8016297453365876746}
+  - {fileID: 8016297453648687480}
+  - {fileID: 8016297453077307893}
+  - {fileID: 8016297453818173006}
+  - {fileID: 8016297453474478940}
+  - {fileID: 8016297453330690621}
+  - {fileID: 8016297453733932166}
+  - {fileID: 8016297452864068980}
+  - {fileID: 8016297454063294158}
+  - {fileID: 8016297452771022216}
+  - {fileID: 8016297452303294520}
+  - {fileID: 8016297452462114428}
+  - {fileID: 8016297453502273949}
+  - {fileID: 8016297453488147185}
+  - {fileID: 8016297452278404515}
+  - {fileID: 8016297453917801685}
+  - {fileID: 1689999140229679790}
+  - {fileID: 1689999140944742470}
+  - {fileID: 1689999141253876575}
+  - {fileID: 1689999140882076104}
+  - {fileID: 1689999141590100172}
+  - {fileID: 1689999141463967588}
+--- !u!1 &8016297452462114431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297452462114428}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297452462114428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297452462114431}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: 10, y: 0, z: -14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297452771022219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297452771022216}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297452771022216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297452771022219}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: 80.3, y: 0, z: 19.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297452864068983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297452864068980}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297452864068980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297452864068983}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: -37.3, y: 0, z: 68}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453077307892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453077307893}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453077307893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453077307892}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: -45.3, y: 0, z: -43.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453330690620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453330690621}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453330690621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453330690620}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: 45.91, y: 0, z: -24.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453365876749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453365876746}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453365876746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453365876749}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -89.7, y: 0, z: -0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8016297453474478943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453474478940}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453474478940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453474478943}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: 38.9, y: 0, z: 21.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453488147184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453488147185}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453488147185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453488147184}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: -73.1, y: 0, z: 64}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453502273948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453502273949}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453502273949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453502273948}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: -24.1, y: 0, z: -85.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453648687483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453648687480}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453648687480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453648687483}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -54.1, y: 0, z: -72.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8016297453733932217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453733932166}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453733932166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453733932217}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: 2.2, y: 0, z: -40}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453818172993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453818173006}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453818173006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453818172993}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: -17, y: 0, z: 12.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}
+--- !u!1 &8016297453917801684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297453917801685}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297453917801685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297453917801684}
+  m_LocalRotation: {x: -0, y: -0.58113456, z: -0, w: 0.8138075}
+  m_LocalPosition: {x: -60.05, y: 0, z: -12.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: -71.061, z: 0}
+--- !u!1 &8016297454063294145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8016297454063294158}
+  m_Layer: 0
+  m_Name: RobotSpawnPoint (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8016297454063294158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016297454063294145}
+  m_LocalRotation: {x: -0, y: -0.9999343, z: -0, w: 0.011464371}
+  m_LocalPosition: {x: 56.7, y: 0, z: 58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8016297452333745626}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: -178.686, z: 0}

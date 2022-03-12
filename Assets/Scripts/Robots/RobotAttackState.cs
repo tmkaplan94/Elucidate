@@ -13,6 +13,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Photon.Pun;
 
 public class RobotAttackState : MonoBehaviour, IRobotState
 {

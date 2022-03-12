@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   movementSpeed: 0.2
-  approachRadius: 10
+  approachRadius: 13
   attackRadius: 0
-  collisionDamage: 10
+  collisionDamage: 15
   collisionForce: 0
   bulletPrefab: {fileID: 0}
   bulletSpeed: 0

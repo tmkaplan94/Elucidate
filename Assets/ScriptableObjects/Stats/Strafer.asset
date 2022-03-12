@@ -16,10 +16,10 @@ MonoBehaviour:
   movementSpeed: 0.2
   approachRadius: 16
   attackRadius: 10
-  collisionDamage: 0
+  collisionDamage: 5
   collisionForce: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
-  bulletSpeed: 1000
+  bulletSpeed: 2000
   bulletDamage: 10
   shootingSpeed:
     minValue: 200

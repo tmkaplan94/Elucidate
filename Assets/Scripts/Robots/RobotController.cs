@@ -139,6 +139,7 @@ public class RobotController : MonoBehaviour
             CurrentDistance = Vector3.Distance(t.position, transform.position);
             if (CurrentDistance < TargetDistance)
             {
+                print("Current Targit is " + t.gameObject.GetComponent<Photon.Pun.PhotonView>().ViewID);
                 TargetDistance = CurrentDistance;
                 TargetTransform = t;
             }
@@ -152,7 +153,7 @@ public class RobotController : MonoBehaviour
         if (_isFleeing) { return; }
         
         // if within approach radius
-        if (CurrentDistance <= stats.ApproachRadius)
+        if (TargetDistance <= stats.ApproachRadius)
         {
             // approach
             CurrentState = _approachState;
@@ -161,7 +162,7 @@ public class RobotController : MonoBehaviour
             if (Type == RobotType.Collider) { return; }
 
             // if within attack radius
-            if (CurrentDistance <= stats.AttackRadius)
+            if (TargetDistance <= stats.AttackRadius)
             {
                 // flee instead of attacking
                 if (Type == RobotType.Chicken)
@@ -198,8 +199,8 @@ public class RobotController : MonoBehaviour
                 _isStrafing = true;
             }
             
-            _shootingTimer++;
-            if (_shootingTimer >= 500)
+            _shootingTimer--;
+            if (_shootingTimer <= 0)
             {
                 CanFire = true;
             }
@@ -216,6 +217,7 @@ public class RobotController : MonoBehaviour
     // initialize shooting values
     private void InitializeShootingValues()
     {
+        _shootingTimer = 250;
         ResetShootingTimer();
         CanFire = true;
     }
@@ -223,10 +225,10 @@ public class RobotController : MonoBehaviour
     // calculate a new random value for the shooting timer and reset CanFire to false
     public void ResetShootingTimer()
     {
-        int shootingSpeedMin = Stats.shootingSpeed.minValue;
+        /*int shootingSpeedMin = Stats.shootingSpeed.minValue;
         int shootingSpeedMax = Stats.shootingSpeed.maxValue;
-        _shootingTimer = Random.Range(shootingSpeedMin, shootingSpeedMax);
-
+        _shootingTimer = Random.Range(shootingSpeedMin, shootingSpeedMax);*/
+        _shootingTimer = 100;
         CanFire = false;
     }
     

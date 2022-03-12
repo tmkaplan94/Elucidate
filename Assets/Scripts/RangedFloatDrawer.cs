@@ -3,6 +3,7 @@
  * Contributors: Tyler Kaplan
  * Description: Customizable editor slider
  */
+#if UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 using UnityEditor;
@@ -54,3 +55,4 @@ public class RangedFloatDrawer : PropertyDrawer {
         EditorGUI.EndProperty();
     }
 }
+#endif
