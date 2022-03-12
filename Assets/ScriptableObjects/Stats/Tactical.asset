@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Tactical
   m_EditorClassIdentifier: 
-  maxHealth: 80
+  maxHealth: 100
   movementSpeed: 0.2
   approachRadius: 20
   attackRadius: 8

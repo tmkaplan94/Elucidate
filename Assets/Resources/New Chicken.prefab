@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 3941341933740796023}
   m_Layer: 0
   m_Name: Firepoint
-  m_TagString: Untagged
+  m_TagString: Firepoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1058,9 +1058,9 @@ GameObject:
   - component: {fileID: 5975497953750068808}
   - component: {fileID: 5975497953750068809}
   - component: {fileID: 5975497953750068814}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: New Chicken
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1130,10 +1130,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.5
+  m_Height: 4
+  m_Direction: 2
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!82 &5975497953750068805
 AudioSource:
   m_ObjectHideFlags: 0
