@@ -114,6 +114,6 @@ public class RoomManagement : MonoBehaviourPunCallbacks
     private void InitializeGameRPC()
     {
         GameEventBus.Crosshair?.Invoke();
-        GameManager.SetRandomSeed();
+        GameManager.SetRandomSeed((int)Time.time);
     }
 }

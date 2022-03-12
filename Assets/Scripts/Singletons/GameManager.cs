@@ -62,9 +62,9 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.PlayerAdded -= PlayerAddedEvent;
     }
 
-    public static void SetRandomSeed()
+    public static void SetRandomSeed(int seed)
     {
-        RandomSeed = (int)Time.time;
+        RandomSeed = seed;
     }
     // event functions update the current game status and dictate the behaviors that happen on event
     #region Private Event Functions
