@@ -105,13 +105,15 @@ public class RoomManagement : MonoBehaviourPunCallbacks
 
     public void OnClickStart()
     {
-        photonView.RPC("ChangeCrosshairRPC", RpcTarget.All);
+        photonView.RPC("InitializeGameRPC", RpcTarget.All);
+        
         PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         
     }
     [PunRPC]
-    private void ChangeCrosshairRPC()
+    private void InitializeGameRPC()
     {
         GameEventBus.Crosshair?.Invoke();
+        GameManager.SetRandomSeed();
     }
 }

@@ -15,6 +15,8 @@ public class GameManager : Singleton<GameManager>
     public static GameEvent CurrentStatus { get; private set; }
     public static bool _isMultiplayer { get; private set; }
     public static int EnemyCount { get; private set; }
+    public static int RandomSeed { get; private set; }
+   
 
     // subscribe all event functions to game events
     private void OnEnable()
@@ -60,6 +62,10 @@ public class GameManager : Singleton<GameManager>
         GameEventBus.PlayerAdded -= PlayerAddedEvent;
     }
 
+    public static void SetRandomSeed()
+    {
+        RandomSeed = (int)Time.time;
+    }
     // event functions update the current game status and dictate the behaviors that happen on event
     #region Private Event Functions
     //loads the title scene, disconnects player from server, clears player list. Essentially resets the game.

@@ -67,6 +67,7 @@ public class RobotController : MonoBehaviour
         InitializeFleeingValues();
         InitializeTacticalValues();
         InitializeStrafingValues();
+        Random.InitState(GameManager.RandomSeed);
 
         // cache needed components
         MyTransform = GetComponent<Transform>();
@@ -225,10 +226,10 @@ public class RobotController : MonoBehaviour
     // calculate a new random value for the shooting timer and reset CanFire to false
     public void ResetShootingTimer()
     {
-        /*int shootingSpeedMin = Stats.shootingSpeed.minValue;
+        int shootingSpeedMin = Stats.shootingSpeed.minValue;
         int shootingSpeedMax = Stats.shootingSpeed.maxValue;
-        _shootingTimer = Random.Range(shootingSpeedMin, shootingSpeedMax);*/
-        _shootingTimer = 100;
+        _shootingTimer = Random.Range(shootingSpeedMin, shootingSpeedMax);
+       
         CanFire = false;
     }
     
