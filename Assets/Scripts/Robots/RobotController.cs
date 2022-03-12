@@ -371,7 +371,7 @@ public class RobotController : MonoBehaviour
     }
 
     // when collider robot hits player
-    private void OnCollisionEnter(Collision other)
+    private void  OnTriggerEnter(Collider other)
     {
         // play sound when collide with anything
         Audio.Play();
