@@ -17,11 +17,11 @@ public class RobotStats : ScriptableObject
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
-    [RangedIntMinMax(200,460)] public RangedInt shootingSpeed;   // measured in (500 - input) frames
-    [RangedIntMinMax(40,100)] public RangedInt tacticalDuration; // times 10, measured in frames
-    [RangedIntMinMax(20,100)] public RangedInt fleeingDuration;  // times 10, measured in frames
-    [RangedIntMinMax(20,80)] public RangedInt strafingReset;     // times 10, measured in frames
-    [RangedIntMinMax(20,100)] public RangedInt strafingSpeed;    // measured in degrees per second
+    [SerializeField] private int shootingSpeed;   // measured in (500 - input) frames
+    [SerializeField] private int tacticalDuration; // times 10, measured in frames
+    [SerializeField] private int fleeingDuration;  // times 10, measured in frames
+    [SerializeField] private int strafingReset;     // times 10, measured in frames
+    [SerializeField] private int strafingSpeed;    // measured in degrees per second
 
     #region Properties
 
@@ -34,6 +34,11 @@ public class RobotStats : ScriptableObject
     public GameObject BulletPrefab => bulletPrefab;
     public float BulletSpeed => bulletSpeed;
     public float BulletDamage => bulletDamage;
+    public int ShootingSpeed => shootingSpeed;
+    public int TacticalDuration => tacticalDuration;
+    public int FleeingDuration => fleeingDuration;
+    public int StrafingReset => strafingReset;
+    public int StrafingSpeed => strafingSpeed;
 
     #endregion
 

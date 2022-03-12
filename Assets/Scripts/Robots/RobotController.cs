@@ -241,9 +241,7 @@ public class RobotController : MonoBehaviour
     // calculate a new random value for the tactical timer
     public void ResetTacticalTimer()
     {
-        int attackSpeedMin = Stats.tacticalDuration.minValue * 10;
-        int attackSpeedMax = Stats.tacticalDuration.maxValue * 10;
-        _tacticalTimer = Random.Range(attackSpeedMin, attackSpeedMax);
+        _tacticalTimer = Stats.TacticalDuration;
     }
 
     // if fleeing, decrement timer; if timer hits zero, go back to wandering state
@@ -270,9 +268,7 @@ public class RobotController : MonoBehaviour
     // public function to reset fleeing timer back to the set cooldown
     public void ResetFleeingTimer()
     {
-        int fleeingTimerMin = Stats.fleeingDuration.minValue * 10;
-        int fleeingTimerMax = Stats.fleeingDuration.maxValue * 10;
-        _fleeingTimer = Random.Range(fleeingTimerMin, fleeingTimerMax);
+        _fleeingTimer = stats.FleeingDuration;
     }
     
     //if strafing, decrement timer; if timer hits zero, change direction
@@ -328,17 +324,13 @@ public class RobotController : MonoBehaviour
     // change strafing speed in degrees per second
     private void ChangeStrafingSpeed()
     {
-        int minRotationDegrees = Stats.strafingSpeed.minValue;
-        int maxRotationDegrees = Stats.strafingSpeed.maxValue;
-        StrafingSpeed = Random.Range(minRotationDegrees, maxRotationDegrees);
+        StrafingSpeed = Stats.StrafingSpeed;
     }
     
     // public function to reset strafing timer back to the set cooldown
     public void ResetStrafingTimer()
     {
-        int strafingTimerMin = Stats.strafingReset.minValue * 10;
-        int strafingTimerMax = Stats.strafingReset.maxValue * 10;
-        _strafingTimer = Random.Range(strafingTimerMin, strafingTimerMax);
+        _strafingTimer = Stats.StrafingReset;
     }
 
     // face the current target

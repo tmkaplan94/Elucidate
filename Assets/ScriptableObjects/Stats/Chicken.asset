@@ -21,18 +21,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   bulletSpeed: 0
   bulletDamage: 0
-  shootingSpeed:
-    minValue: 200
-    maxValue: 200
-  tacticalDuration:
-    minValue: 40
-    maxValue: 40
-  fleeingDuration:
-    minValue: 20
-    maxValue: 20
-  strafingReset:
-    minValue: 20
-    maxValue: 20
-  strafingSpeed:
-    minValue: 20
-    maxValue: 20
+  shootingSpeed: 0
+  tacticalDuration: 150
+  fleeingDuration: 150
+  strafingReset: 100
+  strafingSpeed: 100
