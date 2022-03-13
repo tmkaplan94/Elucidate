@@ -12,13 +12,11 @@ CREATING A LOBBY:
     When starting a game, fill in the lobby name. Then simply
     click create and you will be loaded into the game,
     assuming the lobby name isn't already taken. Note, that
-    the game starts immediately since there is no actual lobby yet.
-    other players can join your game however.
+    once in a lobby, only the host client can start the game!
 
 JOINING A LOBBY:
     When trying to join a lobby, fill in the lobby name and
-    click join, if the lobby exist, it will put you into the
-    game.
+    click join, if the lobby exists, you will join the lobby.
 
 
 HOW TO PLAY:
@@ -40,14 +38,15 @@ HOW TO PLAY:
 
 	Pause
 	    Press escape to toggle the pause menu. Be warned, this will not 
-	    actually pause the game, just prevent you from moving!
+	    actually pause the game, just prevent you from moving! Currently,
+	    the options menu does not work, but the other buttons do.
 
     Win Condition
-        Be the last player standing in the battle arena.
+        Be the last human player standing in the battle arena.
         Use different guns to help you throughout the level!
 	
         If playing in Singleplayer you must find and kill all 
-	    of the enemy in the level AI to win.
+	of the enemy AI in the level to win.
 
 IMPORTANT NOTES:
     AI Modes:
@@ -86,3 +85,11 @@ Known Bugs:
 
 	some collisions and possibly pausing the game can cause the player to character to aim
 	slightly away from the cursor.
+
+	Upon disconnecting from a game, an error message occurs, but the game remains running appropriately.
+
+	If a player plays a multiplayer game in which the game ends due to all but one player 
+        disconnecting without dying(ie. the leave option in the pause menu) and then any player 
+        attempts to play a single player game, the game will crash on win or loss condition.
+	This does not occur in multiplayer and since the game is meant to be multiplayer, this bug
+	was no the highest priority.

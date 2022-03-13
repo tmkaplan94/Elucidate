@@ -68,6 +68,8 @@ public class GameManager : Singleton<GameManager>
         CurrentStatus = GameEvent.TITLE;
         if (PhotonNetwork.IsConnected)
         {
+            if(!PhotonNetwork.InRoom)
+                PhotonNetwork.CurrentRoom.IsOpen = true;
             PhotonNetwork.Disconnect();
         }
         SceneManager.LoadScene(0);
