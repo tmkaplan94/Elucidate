@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
     // Points the player transform in the direction of _lookDirection.
     public void Rotate(Vector3 target)
     {
+        if (!_stats)
+            return;
         Vector3 lookVec = target - transform.position;
         lookVec.y = 0f;
         Quaternion lookRot = Quaternion.LookRotation(lookVec);

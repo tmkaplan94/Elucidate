@@ -47,6 +47,7 @@ public class PlayerWeaponHandler : MonoBehaviourPun
     [PunRPC]
     private void ShootRPC()
     {
-        currentWeapon.TryShoot();
+        if(currentWeapon)
+            currentWeapon.TryShoot();
     }
 }
