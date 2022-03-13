@@ -1,6 +1,6 @@
 /*
  * Author: Richard Fine, from Unite 2016
- * Contributors: Tyler Kaplan
+ * Contributors: Tyler Kaplan, Grant Reed
  * Description: Customizable editor slider
  */
 #if UNITY_EDITOR

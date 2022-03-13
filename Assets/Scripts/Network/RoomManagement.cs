@@ -1,8 +1,8 @@
 /*
  * Author: Grant Reed
  * Contributors:
- * Description: This class allows players to join a room in the network. It does not really manage or 
- *              maintain any rooms, since there is no reason to yet.
+ * Description: This class allows players to join a room in the network and allows
+ *          the host to start games once they are ready.
  */
 
 using System.Collections.Generic;
@@ -107,7 +107,6 @@ public class RoomManagement : MonoBehaviourPunCallbacks
     {
         photonView.RPC("ChangeCrosshairRPC", RpcTarget.All);
         PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
-        
     }
     [PunRPC]
     private void ChangeCrosshairRPC()
