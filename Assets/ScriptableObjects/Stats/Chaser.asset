@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Chaser
   m_EditorClassIdentifier: 
-  maxHealth: 200
-  movementSpeed: 0.2
+  maxHealth: 100
+  movementSpeed: 0.25
   approachRadius: 16
   attackRadius: 14
   collisionDamage: 5
   collisionForce: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
-  bulletSpeed: 1000
+  bulletSpeed: 2000
   bulletDamage: 10
-  shootingSpeed: 100
-  tacticalDuration: 150
-  fleeingDuration: 150
+  shootingSpeed: 200
+  tacticalDuration: 300
+  fleeingDuration: 100
   strafingReset: 100
   strafingSpeed: 100

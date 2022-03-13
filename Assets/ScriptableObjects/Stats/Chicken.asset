@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chicken
   m_EditorClassIdentifier: 
   maxHealth: 50
-  movementSpeed: 0.25
+  movementSpeed: 0.3
   approachRadius: 10
   attackRadius: 5
   collisionDamage: 1
@@ -22,7 +22,7 @@ MonoBehaviour:
   bulletSpeed: 0
   bulletDamage: 0
   shootingSpeed: 0
-  tacticalDuration: 150
-  fleeingDuration: 150
-  strafingReset: 100
-  strafingSpeed: 100
+  tacticalDuration: 0
+  fleeingDuration: 200
+  strafingReset: 0
+  strafingSpeed: 0

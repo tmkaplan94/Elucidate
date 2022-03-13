@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Collider
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  movementSpeed: 0.2
+  maxHealth: 200
+  movementSpeed: 0.25
   approachRadius: 13
   attackRadius: 0
-  collisionDamage: 15
+  collisionDamage: 20
   collisionForce: 0
   bulletPrefab: {fileID: 0}
   bulletSpeed: 0
@@ -24,5 +24,5 @@ MonoBehaviour:
   shootingSpeed: 0
   tacticalDuration: 0
   fleeingDuration: 100
-  strafingReset: 0
+  strafingReset: 100
   strafingSpeed: 100

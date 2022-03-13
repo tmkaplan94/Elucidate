@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5b41f232d259245bc0050d60abda61, type: 3}
   m_Name: Tactical
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 100
   movementSpeed: 0.2
   approachRadius: 20
   attackRadius: 8
   collisionDamage: 5
   collisionForce: 0
   bulletPrefab: {fileID: 7365817378627978914, guid: 3ae84f4934658f141b96853e2413af64, type: 3}
-  bulletSpeed: 1500
+  bulletSpeed: 2000
   bulletDamage: 15
-  shootingSpeed: 100
-  tacticalDuration: 100
-  fleeingDuration: 100
+  shootingSpeed: 300
+  tacticalDuration: 500
+  fleeingDuration: 250
   strafingReset: 0
   strafingSpeed: 0

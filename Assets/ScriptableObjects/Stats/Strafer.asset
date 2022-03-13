@@ -22,7 +22,7 @@ MonoBehaviour:
   bulletSpeed: 2000
   bulletDamage: 10
   shootingSpeed: 300
-  tacticalDuration: 100
-  fleeingDuration: 100
+  tacticalDuration: 400
+  fleeingDuration: 150
   strafingReset: 100
   strafingSpeed: 100
