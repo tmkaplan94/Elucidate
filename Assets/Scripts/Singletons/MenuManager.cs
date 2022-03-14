@@ -14,9 +14,7 @@ public class MenuManager : Singleton<MenuManager>
     [SerializeField] private Image _backgroundImage;
     [SerializeField] private GameObject _titleMenu;
     [SerializeField] private GameObject _mainMenu;
-    [SerializeField] private GameObject _mainOptionsMenu;
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private GameObject _pauseOptionsMenu;
     [SerializeField] private GameObject _winMenu;
     [SerializeField] private GameObject _lossMenu;
 
@@ -52,9 +50,7 @@ public class MenuManager : Singleton<MenuManager>
     {
         _titleMenu.SetActive(true);
         _mainMenu.SetActive(false);
-        _mainOptionsMenu.SetActive(false);
         _pauseMenu.SetActive(false);
-        _pauseOptionsMenu.SetActive(false);
         _winMenu.SetActive(false);
         _lossMenu.SetActive(false);
         _BGImage.SetActive(true);
@@ -74,21 +70,12 @@ public class MenuManager : Singleton<MenuManager>
     {
         _titleMenu.SetActive(false);
         _mainMenu.SetActive(true);
-        _mainOptionsMenu.SetActive(false);
-    }
-    
-    public void ActivateMainOptionsMenu()
-    {
-        _titleMenu.SetActive(false);
-        _mainMenu.SetActive(false);
-        _mainOptionsMenu.SetActive(true);
     }
 
     public void DeactivateTitleMenus()
     {
         _titleMenu.SetActive(false);
         _mainMenu.SetActive(false);
-        _mainOptionsMenu.SetActive(false);
         _BGImage.SetActive(false);
         _BGVidOutput.SetActive(false);
         
@@ -102,19 +89,11 @@ public class MenuManager : Singleton<MenuManager>
     {
         // display pause menu
         _pauseMenu.SetActive(true);
-        _pauseOptionsMenu.SetActive(false);
-    }
-
-    public void ActivatePauseOptionsMenu()
-    {
-        _pauseMenu.SetActive(false);
-        _pauseOptionsMenu.SetActive(true);
     }
 
     public void DeactivatePauseMenus()
     {
         _pauseMenu.SetActive(false);
-        _pauseOptionsMenu.SetActive(false);
     }
     public void ResumeButtonClicked()
     {
